@@ -21,6 +21,7 @@ class MainViewController: UITabBarController {
         super.viewDidLoad()
         
         self.tabBar.isHidden = true
+        self.additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: 56, right: 0)
         
         var vcs = [UIViewController]()
         var navController = BaseNavigationController(rootViewController: recommendsViewController)
@@ -42,10 +43,10 @@ class MainViewController: UITabBarController {
         tabbarView.selectedIndex = 0
         self.view.addSubview(tabbarView)
         
-        tabbarView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -56).isActive = true
-        tabbarView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        tabbarView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tabbarView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tabbarView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabbarView.heightAnchor.constraint(equalToConstant: 56 + (UIApplication.appDelegate().window?.safeAreaInsets.bottom ?? 0)).isActive = true
         
         self.view.layoutIfNeeded()
         
