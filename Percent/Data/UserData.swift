@@ -80,9 +80,9 @@ class MyData: UserData {
     
     var cherry_quantity: Int {
         get {
-            return rawData["cherry_quantity"] as? Int ?? 0
+            return Int(rawData["cherry_quantity"] as? String ?? "") ?? 0
         } set {
-            rawData["cherry_quantity"] = newValue
+            rawData["cherry_quantity"] = "\(newValue)"
         }
     }
     

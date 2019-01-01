@@ -15,6 +15,7 @@ class BaseViewController: UIViewController {
     let navigationView: UIVisualEffectView
     
     var leftNavigationItemView: UIButton?
+    var cherriesButton = CherryButton()
     
     private var navigationViewHidden = false
     var isNavigationViewHidden: Bool {
@@ -22,6 +23,12 @@ class BaseViewController: UIViewController {
     }
     
     internal var navigationViewBottmAnchor: NSLayoutConstraint!
+    
+    internal var showCherriesOnNavigation: Bool = false {
+        didSet {
+            cherriesButton.isHidden = !showCherriesOnNavigation
+        }
+    }
     
     init(navigationViewEffect effect: UIVisualEffect? = nil) {
         navigationView = UIVisualEffectView(effect: effect)
@@ -34,6 +41,11 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.receiveCherryNotification(_:)), name: NotificationName.Cherry.Increased, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.receiveCherryNotification(_:)), name: NotificationName.Cherry.Decreased, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.receiveCherryNotification(_:)), name: NotificationName.Cherry.Changed, object: nil)
+        
         
         self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
@@ -63,6 +75,16 @@ class BaseViewController: UIViewController {
         self.additionalSafeAreaInsets = UIEdgeInsets(top: kHeightNavigationView, left: 0, bottom: 0, right: 0)
         
         navigationView.layer.zPosition = 10000
+        
+        cherriesButton.translatesAutoresizingMaskIntoConstraints = false
+        cherriesButton.isHidden = !showCherriesOnNavigation
+        navigationView.contentView.addSubview(cherriesButton)
+        
+        cherriesButton.bottomAnchor.constraint(equalTo: navigationView.contentView.bottomAnchor).isActive = true
+        cherriesButton.trailingAnchor.constraint(equalTo: navigationView.contentView.trailingAnchor, constant: -6).isActive = true
+        cherriesButton.heightAnchor.constraint(equalToConstant: kHeightNavigationView).isActive = true
+        
+        cherriesButton.amount = MyData.shared.cherry_quantity
     }
     
     override func viewDidLayoutSubviews() {
@@ -127,6 +149,10 @@ class BaseViewController: UIViewController {
         }
     }
     
+    internal func loadNavigationItems() {
+        
+    }
+    
     func setNavigationViewHidden(_ hidden: Bool, animated: Bool) {
         navigationViewHidden = hidden
         
@@ -150,4 +176,26 @@ class BaseViewController: UIViewController {
     func scrollToTop(animated: Bool = true) {}
     
     @objc func receiveReloadNotification(_ notification: Notification) {}
+    
+    @objc private func receiveCherryNotification(_ notification: Notification) {
+        guard let value = notification.object as? Int else { return }
+        
+        switch notification.name {
+        case NotificationName.Cherry.Increased:
+            cherriesButton.amount += value
+            break
+            
+        case NotificationName.Cherry.Decreased:
+            cherriesButton.amount -= value
+            break
+            
+        case NotificationName.Cherry.Changed:
+            cherriesButton.amount = value
+            break
+            
+        default: break
+        }
+        
+        navigationView.layoutIfNeeded()
+    }
 }

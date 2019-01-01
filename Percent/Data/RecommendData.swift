@@ -45,7 +45,7 @@ class RecommendData: BaseData {
         return rawData["job"] as? String
     }
     
-    var mem_idx: Int? {
+    var mem_idx: Int {
         return rawData["mem_idx"] as? Int ?? -1
     }
     
