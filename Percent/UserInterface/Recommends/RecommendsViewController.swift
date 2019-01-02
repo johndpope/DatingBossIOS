@@ -8,10 +8,7 @@
 
 import UIKit
 
-class RecommendsViewController: BaseViewController {
-    private let buttonProfile = ProfileButton(cornerRadius: 20)
-    private let buttonCherries = UIButton(type: .custom)
-    
+class RecommendsViewController: BaseMainViewController {
     private let buttonMore = UIButton(type: .custom)
     private let collectionView: UICollectionView
     
@@ -32,6 +29,8 @@ class RecommendsViewController: BaseViewController {
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         
         super.init(navigationViewEffect: effect)
+        
+        showCherriesOnNavigation = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,8 +41,6 @@ class RecommendsViewController: BaseViewController {
         super.viewDidLoad()
         
         self.title = "추천"
-        
-        loadNavigationItem()
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -139,32 +136,6 @@ class RecommendsViewController: BaseViewController {
         reloadData()
     }
     
-    override func pressedButton(_ sender: UIButton) {
-        super.pressedButton(sender)
-        
-        switch sender {
-        case buttonProfile:
-            break
-        default:
-            break
-        }
-    }
-    
-    func loadNavigationItem() {
-        buttonProfile.member_idx = MyData.shared.mem_idx
-        buttonProfile.imageName = MyData.shared.picture_name
-        buttonProfile.translatesAutoresizingMaskIntoConstraints = false
-        buttonProfile.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-        self.navigationView.contentView.addSubview(buttonProfile)
-        
-        buttonProfile.reloadData()
-        
-        buttonProfile.bottomAnchor.constraint(equalTo: self.navigationView.contentView.bottomAnchor).isActive = true
-        buttonProfile.leadingAnchor.constraint(equalTo: self.navigationView.contentView.leadingAnchor, constant: 6 * QUtils.optimizeRatio()).isActive = true
-        buttonProfile.widthAnchor.constraint(equalToConstant: 60 * QUtils.optimizeRatio()).isActive = true
-        buttonProfile.heightAnchor.constraint(equalToConstant: kHeightNavigationView).isActive = true
-    }
-    
     private func reloadData() {
         loadingQueue.sync {
             self.collectionView.reloadData()
@@ -185,8 +156,7 @@ class RecommendsViewController: BaseViewController {
 extension RecommendsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let data = collectionData[indexPath.row]
-        
-        guard let mem_idx = data.mem_idx else { return }
+        let mem_idx = data.mem_idx
         
         LoadingIndicatorManager.shared.showIndicatorView()
         

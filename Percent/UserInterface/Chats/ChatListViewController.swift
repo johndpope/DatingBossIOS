@@ -8,10 +8,7 @@
 
 import UIKit
 
-class ChatListViewController: BaseViewController {
-    private let buttonProfile = ProfileButton()
-    private let buttonCherries = UIButton(type: .custom)
-    
+class ChatListViewController: BaseMainViewController {
     private let headerView = ChatListSegmentView()
     
     private let theTableView = UITableView()
@@ -55,21 +52,6 @@ class ChatListViewController: BaseViewController {
         loadNavigationItems()
         
         reloadData()
-    }
-    
-    override func loadNavigationItems() {
-        buttonProfile.member_idx = MyData.shared.mem_idx
-        buttonProfile.imageName = MyData.shared.picture_name
-        buttonProfile.translatesAutoresizingMaskIntoConstraints = false
-        buttonProfile.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-        self.navigationView.contentView.addSubview(buttonProfile)
-        
-        buttonProfile.reloadData()
-        
-        buttonProfile.bottomAnchor.constraint(equalTo: self.navigationView.contentView.bottomAnchor).isActive = true
-        buttonProfile.leadingAnchor.constraint(equalTo: self.navigationView.contentView.leadingAnchor, constant: 6 * QUtils.optimizeRatio()).isActive = true
-        buttonProfile.widthAnchor.constraint(equalToConstant: 60 * QUtils.optimizeRatio()).isActive = true
-        buttonProfile.heightAnchor.constraint(equalToConstant: kHeightNavigationView).isActive = true
     }
     
     private func reloadData() {

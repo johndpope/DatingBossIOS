@@ -8,10 +8,20 @@
 
 import UIKit
 
-class CategoryViewController: BaseViewController {
+class CategoryViewController: BaseMainViewController {
     private let theTableView = UITableView()
     
     private var tableData = [CategoryData]()
+    
+    override init(navigationViewEffect effect: UIVisualEffect? = nil) {
+        super.init(navigationViewEffect: effect)
+        
+        showCherriesOnNavigation = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
+    }
     
     override func viewDidLoad() {
         self.title = "카테고리"
@@ -69,6 +79,11 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
                 alertController.addAction(UIAlertAction(title: kStringConfirm, style: .cancel, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
                 return
+            }
+            
+            if let cherry_quantity = responseData["cherry_quantity"] as? Int {
+                MyData.shared.cherry_quantity = cherry_quantity
+                NotificationCenter.default.post(name: NotificationName.Cherry.Changed, object: cherry_quantity)
             }
             
             let userData = UserData()

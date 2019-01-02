@@ -123,6 +123,8 @@ class BaseViewController: UIViewController {
             }
         }
         
+        loadNavigationItems()
+        
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = self.title
