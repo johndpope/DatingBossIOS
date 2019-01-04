@@ -30,32 +30,6 @@
 		1C858DB121C781FE00900481 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C858DAF21C781FE00900481 /* loading.json */; };
 		1C858DB221C781FE00900481 /* preloader.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C858DB021C781FE00900481 /* preloader.json */; };
 		1C858DB521C7877800900481 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DB421C7877800900481 /* LoginViewController.swift */; };
-		1C858DD821C78D4D00900481 /* QUrlReachablility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DB721C78D4D00900481 /* QUrlReachablility.swift */; };
-		1C858DD921C78D4D00900481 /* QUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DB821C78D4D00900481 /* QUtils.swift */; };
-		1C858DDA21C78D4D00900481 /* QImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DB921C78D4D00900481 /* QImageMaker.swift */; };
-		1C858DDB21C78D4D00900481 /* QHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DBA21C78D4D00900481 /* QHttpClient.swift */; };
-		1C858DE821C78D4D00900481 /* QDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DD521C78D4D00900481 /* QDataManager.swift */; };
-		1C858DE921C78D4D00900481 /* SBJson.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C858DD621C78D4D00900481 /* SBJson.zip */; };
-		1C858DEA21C78D4D00900481 /* QTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DD721C78D4D00900481 /* QTextAttributes.swift */; };
-		1C858E0921C78D8100900481 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DF021C78D8100900481 /* NSObject+SBJson.m */; };
-		1C858E0A21C78D8100900481 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DF921C78D8100900481 /* SBJsonStreamParser.m */; };
-		1C858E0B21C78D8100900481 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DFA21C78D8100900481 /* SBJsonParser.m */; };
-		1C858E0C21C78D8100900481 /* SBJsonStreamParserAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DFB21C78D8100900481 /* SBJsonStreamParserAccumulator.m */; };
-		1C858E0D21C78D8100900481 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DFC21C78D8100900481 /* SBJsonUTF8Stream.m */; };
-		1C858E0E21C78D8100900481 /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DFD21C78D8100900481 /* SBJsonStreamParserState.m */; };
-		1C858E0F21C78D8100900481 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DFF21C78D8100900481 /* SBJsonWriter.m */; };
-		1C858E1021C78D8100900481 /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E0021C78D8100900481 /* SBJsonStreamWriter.m */; };
-		1C858E1121C78D8100900481 /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E0121C78D8100900481 /* SBJsonStreamParserAdapter.m */; };
-		1C858E1221C78D8100900481 /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E0221C78D8100900481 /* SBJsonStreamWriterAccumulator.m */; };
-		1C858E1321C78D8100900481 /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E0521C78D8100900481 /* SBJsonStreamWriterState.m */; };
-		1C858E1421C78D8100900481 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E0621C78D8100900481 /* SBJsonTokeniser.m */; };
-		1C858E2021C78DE800900481 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E1721C78DE800900481 /* Date.swift */; };
-		1C858E2221C78DE800900481 /* Others.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E1921C78DE800900481 /* Others.swift */; };
-		1C858E2321C78DE800900481 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E1A21C78DE800900481 /* Image.swift */; };
-		1C858E2421C78DE800900481 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E1B21C78DE800900481 /* Application.swift */; };
-		1C858E2621C78DE800900481 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E1D21C78DE800900481 /* Strings.swift */; };
-		1C858E2721C78DE800900481 /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E1E21C78DE800900481 /* Defines.swift */; };
-		1C858E2821C78DE800900481 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E1F21C78DE800900481 /* Urls.swift */; };
 		1C858E2C21C870F100900481 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E2B21C870F100900481 /* MainViewController.swift */; };
 		1C858E2E21C870FE00900481 /* MainTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E2D21C870FE00900481 /* MainTabbarView.swift */; };
 		1C858E3921C872C900900481 /* img_tab_3_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C858E2F21C872C800900481 /* img_tab_3_nor@3x.png */; };
@@ -135,46 +109,7 @@
 		1C858DAF21C781FE00900481 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		1C858DB021C781FE00900481 /* preloader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = preloader.json; sourceTree = "<group>"; };
 		1C858DB421C7877800900481 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		1C858DB721C78D4D00900481 /* QUrlReachablility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QUrlReachablility.swift; sourceTree = "<group>"; };
-		1C858DB821C78D4D00900481 /* QUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QUtils.swift; sourceTree = "<group>"; };
-		1C858DB921C78D4D00900481 /* QImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImageMaker.swift; sourceTree = "<group>"; };
-		1C858DBA21C78D4D00900481 /* QHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QHttpClient.swift; sourceTree = "<group>"; };
-		1C858DD521C78D4D00900481 /* QDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDataManager.swift; sourceTree = "<group>"; };
-		1C858DD621C78D4D00900481 /* SBJson.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = SBJson.zip; sourceTree = "<group>"; };
-		1C858DD721C78D4D00900481 /* QTextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextAttributes.swift; sourceTree = "<group>"; };
 		1C858DEB21C78D6200900481 /* Percent-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Percent-Bridging-Header.h"; sourceTree = "<group>"; };
-		1C858DF021C78D8100900481 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
-		1C858DF121C78D8100900481 /* SBJsonStreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserState.h; sourceTree = "<group>"; };
-		1C858DF221C78D8100900481 /* SBJsonUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonUTF8Stream.h; sourceTree = "<group>"; };
-		1C858DF321C78D8100900481 /* SBJsonStreamWriterAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterAccumulator.h; sourceTree = "<group>"; };
-		1C858DF421C78D8100900481 /* SBJsonStreamParserAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAdapter.h; sourceTree = "<group>"; };
-		1C858DF521C78D8100900481 /* SBJsonStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriter.h; sourceTree = "<group>"; };
-		1C858DF621C78D8100900481 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		1C858DF721C78D8100900481 /* SBJsonStreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterState.h; sourceTree = "<group>"; };
-		1C858DF821C78D8100900481 /* SBJsonTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonTokeniser.h; sourceTree = "<group>"; };
-		1C858DF921C78D8100900481 /* SBJsonStreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParser.m; sourceTree = "<group>"; };
-		1C858DFA21C78D8100900481 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
-		1C858DFB21C78D8100900481 /* SBJsonStreamParserAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAccumulator.m; sourceTree = "<group>"; };
-		1C858DFC21C78D8100900481 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
-		1C858DFD21C78D8100900481 /* SBJsonStreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserState.m; sourceTree = "<group>"; };
-		1C858DFE21C78D8100900481 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
-		1C858DFF21C78D8100900481 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		1C858E0021C78D8100900481 /* SBJsonStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriter.m; sourceTree = "<group>"; };
-		1C858E0121C78D8100900481 /* SBJsonStreamParserAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAdapter.m; sourceTree = "<group>"; };
-		1C858E0221C78D8100900481 /* SBJsonStreamWriterAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterAccumulator.m; sourceTree = "<group>"; };
-		1C858E0321C78D8100900481 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		1C858E0421C78D8100900481 /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParser.h; sourceTree = "<group>"; };
-		1C858E0521C78D8100900481 /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
-		1C858E0621C78D8100900481 /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
-		1C858E0721C78D8100900481 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
-		1C858E0821C78D8100900481 /* SBJsonStreamParserAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAccumulator.h; sourceTree = "<group>"; };
-		1C858E1721C78DE800900481 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		1C858E1921C78DE800900481 /* Others.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Others.swift; sourceTree = "<group>"; };
-		1C858E1A21C78DE800900481 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		1C858E1B21C78DE800900481 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		1C858E1D21C78DE800900481 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		1C858E1E21C78DE800900481 /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
-		1C858E1F21C78DE800900481 /* Urls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
 		1C858E2B21C870F100900481 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1C858E2D21C870FE00900481 /* MainTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarView.swift; sourceTree = "<group>"; };
 		1C858E2F21C872C800900481 /* img_tab_3_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_3_nor@3x.png"; sourceTree = "<group>"; };
@@ -301,8 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				1C858D8A21C7733D00900481 /* AppDelegate.swift */,
-				1C858E1521C78DD300900481 /* Constants */,
-				1C858DB621C78D4D00900481 /* QKit */,
 				1C03840F21D001D40024C3B3 /* Data */,
 				1C858D9C21C780CC00900481 /* UserInterface */,
 				1C858D9121C7733F00900481 /* Assets.xcassets */,
@@ -319,7 +252,6 @@
 			children = (
 				1C858D9D21C780CC00900481 /* _Base */,
 				1C858DAA21C7817000900481 /* _Common */,
-				1CE69AB921D9B7A300B9FE4A /* Signup */,
 				1C858DB321C7876600900481 /* Login */,
 				1C858E2A21C870D900900481 /* Main */,
 				1C858E4821C8E8DE00900481 /* Recommends */,
@@ -427,75 +359,6 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		1C858DB621C78D4D00900481 /* QKit */ = {
-			isa = PBXGroup;
-			children = (
-				1C858DEF21C78D8100900481 /* SBJson */,
-				1C858DD521C78D4D00900481 /* QDataManager.swift */,
-				1C858DB721C78D4D00900481 /* QUrlReachablility.swift */,
-				1C858DB821C78D4D00900481 /* QUtils.swift */,
-				1C858DB921C78D4D00900481 /* QImageMaker.swift */,
-				1C858DBA21C78D4D00900481 /* QHttpClient.swift */,
-				1C858DD621C78D4D00900481 /* SBJson.zip */,
-				1C858DD721C78D4D00900481 /* QTextAttributes.swift */,
-			);
-			path = QKit;
-			sourceTree = "<group>";
-		};
-		1C858DEF21C78D8100900481 /* SBJson */ = {
-			isa = PBXGroup;
-			children = (
-				1C858DF021C78D8100900481 /* NSObject+SBJson.m */,
-				1C858DF121C78D8100900481 /* SBJsonStreamParserState.h */,
-				1C858DF221C78D8100900481 /* SBJsonUTF8Stream.h */,
-				1C858DF321C78D8100900481 /* SBJsonStreamWriterAccumulator.h */,
-				1C858DF421C78D8100900481 /* SBJsonStreamParserAdapter.h */,
-				1C858DF521C78D8100900481 /* SBJsonStreamWriter.h */,
-				1C858DF621C78D8100900481 /* SBJsonWriter.h */,
-				1C858DF721C78D8100900481 /* SBJsonStreamWriterState.h */,
-				1C858DF821C78D8100900481 /* SBJsonTokeniser.h */,
-				1C858DF921C78D8100900481 /* SBJsonStreamParser.m */,
-				1C858DFA21C78D8100900481 /* SBJsonParser.m */,
-				1C858DFB21C78D8100900481 /* SBJsonStreamParserAccumulator.m */,
-				1C858DFC21C78D8100900481 /* SBJsonUTF8Stream.m */,
-				1C858DFD21C78D8100900481 /* SBJsonStreamParserState.m */,
-				1C858DFE21C78D8100900481 /* NSObject+SBJson.h */,
-				1C858DFF21C78D8100900481 /* SBJsonWriter.m */,
-				1C858E0021C78D8100900481 /* SBJsonStreamWriter.m */,
-				1C858E0121C78D8100900481 /* SBJsonStreamParserAdapter.m */,
-				1C858E0221C78D8100900481 /* SBJsonStreamWriterAccumulator.m */,
-				1C858E0321C78D8100900481 /* SBJsonParser.h */,
-				1C858E0421C78D8100900481 /* SBJsonStreamParser.h */,
-				1C858E0521C78D8100900481 /* SBJsonStreamWriterState.m */,
-				1C858E0621C78D8100900481 /* SBJsonTokeniser.m */,
-				1C858E0721C78D8100900481 /* SBJson.h */,
-				1C858E0821C78D8100900481 /* SBJsonStreamParserAccumulator.h */,
-			);
-			path = SBJson;
-			sourceTree = "<group>";
-		};
-		1C858E1521C78DD300900481 /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				1C858E1621C78DE800900481 /* Extensions */,
-				1C858E1E21C78DE800900481 /* Defines.swift */,
-				1C858E1D21C78DE800900481 /* Strings.swift */,
-				1C858E1F21C78DE800900481 /* Urls.swift */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
-		1C858E1621C78DE800900481 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				1C858E1B21C78DE800900481 /* Application.swift */,
-				1C858E1721C78DE800900481 /* Date.swift */,
-				1C858E1A21C78DE800900481 /* Image.swift */,
-				1C858E1921C78DE800900481 /* Others.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		1C858E2921C8708900900481 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -552,13 +415,6 @@
 				1CE69AEE21DA458F00B9FE4A /* RecommendsCollectionViewCell.swift */,
 			);
 			path = Recommends;
-			sourceTree = "<group>";
-		};
-		1CE69AB921D9B7A300B9FE4A /* Signup */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Signup;
 			sourceTree = "<group>";
 		};
 		1CE69ABA21D9B7EE00B9FE4A /* Settings */ = {
@@ -658,7 +514,6 @@
 				1CE69AB621D8EEC100B9FE4A /* img_profile_6@3x.png in Resources */,
 				1C858E3E21C872C900900481 /* img_tab_2_nor@3x.png in Resources */,
 				1CE69AB121D8EEC100B9FE4A /* img_profile_2@3x.png in Resources */,
-				1C858DE921C78D4D00900481 /* SBJson.zip in Resources */,
 				1C858DA521C780D500900481 /* img_login_lock@3x.png in Resources */,
 				1C858DA421C780D500900481 /* img_login_background@3x.png in Resources */,
 				1C858E3F21C872C900900481 /* img_tab_1_sel@3x.png in Resources */,
@@ -750,65 +605,40 @@
 				1C03842021D1EBE70024C3B3 /* UserPictureCollectionViewCell.swift in Sources */,
 				1CE69AAA21D896D600B9FE4A /* UserProfileStatsView.swift in Sources */,
 				1CE69AF021DA458F00B9FE4A /* RecommendsCollectionViewCell.swift in Sources */,
-				1C858E2021C78DE800900481 /* Date.swift in Sources */,
 				1CE69AE321DA43B900B9FE4A /* CategoryViewController.swift in Sources */,
-				1C858E2221C78DE800900481 /* Others.swift in Sources */,
 				1CE69AED21DA457A00B9FE4A /* SearchResultsViewController.swift in Sources */,
-				1C858E1321C78D8100900481 /* SBJsonStreamWriterState.m in Sources */,
 				1CE69AEC21DA457A00B9FE4A /* ChoiceViewController.swift in Sources */,
-				1C858DE821C78D4D00900481 /* QDataManager.swift in Sources */,
 				1CE69AFF21DBCC3000B9FE4A /* ChatData.swift in Sources */,
 				1CE69AE721DA43D000B9FE4A /* FavouriteViewController.swift in Sources */,
-				1C858E1021C78D8100900481 /* SBJsonStreamWriter.m in Sources */,
-				1C858E0921C78D8100900481 /* NSObject+SBJson.m in Sources */,
 				1C858DB521C7877800900481 /* LoginViewController.swift in Sources */,
-				1C858E0A21C78D8100900481 /* SBJsonStreamParser.m in Sources */,
-				1C858E2721C78DE800900481 /* Defines.swift in Sources */,
 				1CE69AF921DBA47E00B9FE4A /* CherryButton.swift in Sources */,
-				1C858E2421C78DE800900481 /* Application.swift in Sources */,
 				1CE69ACD21D9B8F100B9FE4A /* ChatViewController.swift in Sources */,
-				1C858E1121C78D8100900481 /* SBJsonStreamParserAdapter.m in Sources */,
 				1CC9B60421DC6DD4008C22B8 /* BaseMainViewController.swift in Sources */,
 				1C03841721D090F20024C3B3 /* RecommendData.swift in Sources */,
 				1CE69AF521DB5CBB00B9FE4A /* ChatListViewController.swift in Sources */,
-				1C858E1221C78D8100900481 /* SBJsonStreamWriterAccumulator.m in Sources */,
-				1C858E0B21C78D8100900481 /* SBJsonParser.m in Sources */,
 				1C03841121D002090024C3B3 /* BaseData.swift in Sources */,
-				1C858E1421C78D8100900481 /* SBJsonTokeniser.m in Sources */,
 				1CE69AF121DA458F00B9FE4A /* RecommendsViewController.swift in Sources */,
 				1C858DAD21C7818E00900481 /* LoadingIndicatorView.swift in Sources */,
-				1C858DD821C78D4D00900481 /* QUrlReachablility.swift in Sources */,
-				1C858DD921C78D4D00900481 /* QUtils.swift in Sources */,
-				1C858E0D21C78D8100900481 /* SBJsonUTF8Stream.m in Sources */,
 				1C03841E21D1DC1C0024C3B3 /* PictureData.swift in Sources */,
 				1C03841921D09B220024C3B3 /* CircleIndicatorView.swift in Sources */,
-				1C858DDB21C78D4D00900481 /* QHttpClient.swift in Sources */,
 				1C03841C21D1CDE80024C3B3 /* UserProfileViewController.swift in Sources */,
 				1CC9B5F221DC52B8008C22B8 /* MyPageViewController.swift in Sources */,
-				1C858DEA21C78D4D00900481 /* QTextAttributes.swift in Sources */,
 				1CE69AE621DA43D000B9FE4A /* FavouriteCollectionViewCell.swift in Sources */,
-				1C858E2321C78DE800900481 /* Image.swift in Sources */,
 				1CE69AF421DB5CBB00B9FE4A /* ChatListTableViewCell.swift in Sources */,
 				1C858E5221C8F15F00900481 /* BaseNavigationController.swift in Sources */,
 				1C858E5421C8F6EF00900481 /* ProfileButton.swift in Sources */,
 				1C858E2C21C870F100900481 /* MainViewController.swift in Sources */,
 				1CE69AFD21DBCBF300B9FE4A /* ChatListData.swift in Sources */,
 				1C03841321D0025F0024C3B3 /* UserData.swift in Sources */,
-				1C858E2621C78DE800900481 /* Strings.swift in Sources */,
-				1C858DDA21C78D4D00900481 /* QImageMaker.swift in Sources */,
 				1C858D8B21C7733D00900481 /* AppDelegate.swift in Sources */,
 				1CE69AEB21DA457A00B9FE4A /* SearchConditionViewController.swift in Sources */,
-				1C858E0E21C78D8100900481 /* SBJsonStreamParserState.m in Sources */,
 				1C858E2E21C870FE00900481 /* MainTabbarView.swift in Sources */,
 				1CE69AF721DB71B200B9FE4A /* CategoryData.swift in Sources */,
-				1C858E0C21C78D8100900481 /* SBJsonStreamParserAccumulator.m in Sources */,
 				1CE69AB821D91C6A00B9FE4A /* UserProfileTableViewCell.swift in Sources */,
 				1CE69AA021D5AF6200B9FE4A /* BarIndicatorView.swift in Sources */,
 				1C858DA921C7813100900481 /* BaseViewController.swift in Sources */,
 				1CC9B60221DC537F008C22B8 /* MyPageTableViewCell.swift in Sources */,
 				1CE69ACF21D9B8FE00B9FE4A /* ChatTableViewCell.swift in Sources */,
-				1C858E0F21C78D8100900481 /* SBJsonWriter.m in Sources */,
-				1C858E2821C78DE800900481 /* Urls.swift in Sources */,
 				1CE69AFB21DBC08900B9FE4A /* ChatListSegmentView.swift in Sources */,
 				1CE69AE221DA43B900B9FE4A /* CategoryTableViewCell.swift in Sources */,
 			);
