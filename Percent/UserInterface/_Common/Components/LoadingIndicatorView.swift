@@ -51,7 +51,7 @@ private class LoadingIndicatorView: UIView {
         self.backgroundColor = .clear
         
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
-        indicatorView.setAnimation(named: "loading")
+        indicatorView.setAnimation(named: "loader")
         self.addSubview(indicatorView)
         
         indicatorView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

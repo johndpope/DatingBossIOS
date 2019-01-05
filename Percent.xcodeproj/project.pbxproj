@@ -27,8 +27,6 @@
 		1C858DA621C780D500900481 /* img_login_mail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C858DA221C780D500900481 /* img_login_mail@3x.png */; };
 		1C858DA921C7813100900481 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DA821C7813100900481 /* BaseViewController.swift */; };
 		1C858DAD21C7818E00900481 /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DAC21C7818E00900481 /* LoadingIndicatorView.swift */; };
-		1C858DB121C781FE00900481 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C858DAF21C781FE00900481 /* loading.json */; };
-		1C858DB221C781FE00900481 /* preloader.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C858DB021C781FE00900481 /* preloader.json */; };
 		1C858DB521C7877800900481 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858DB421C7877800900481 /* LoginViewController.swift */; };
 		1C858E2C21C870F100900481 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E2B21C870F100900481 /* MainViewController.swift */; };
 		1C858E2E21C870FE00900481 /* MainTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E2D21C870FE00900481 /* MainTabbarView.swift */; };
@@ -45,6 +43,33 @@
 		1C858E5221C8F15F00900481 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E5121C8F15E00900481 /* BaseNavigationController.swift */; };
 		1C858E5421C8F6EF00900481 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E5321C8F6EF00900481 /* ProfileButton.swift */; };
 		1C858E5621C9036200900481 /* img_cherry@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C858E5521C9036100900481 /* img_cherry@3x.png */; };
+		1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F721DF44E300B37EAE /* QTextAttributes.swift */; };
+		1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F821DF44E300B37EAE /* QDataManager.swift */; };
+		1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F921DF44E300B37EAE /* QImageMaker.swift */; };
+		1CB5430021DF44E300B37EAE /* QUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542FA21DF44E300B37EAE /* QUtils.swift */; };
+		1CB5430121DF44E300B37EAE /* QUrlReachablility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542FB21DF44E300B37EAE /* QUrlReachablility.swift */; };
+		1CB5430221DF44E300B37EAE /* QHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542FC21DF44E300B37EAE /* QHttpClient.swift */; };
+		1CB5430721DF472B00B37EAE /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5430421DF472A00B37EAE /* Strings.swift */; };
+		1CB5430821DF472B00B37EAE /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5430521DF472A00B37EAE /* Defines.swift */; };
+		1CB5430921DF472B00B37EAE /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5430621DF472A00B37EAE /* Urls.swift */; };
+		1CB5430F21DF473300B37EAE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5430B21DF473200B37EAE /* Date.swift */; };
+		1CB5431021DF473300B37EAE /* Others.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5430C21DF473200B37EAE /* Others.swift */; };
+		1CB5431121DF473300B37EAE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5430D21DF473200B37EAE /* Image.swift */; };
+		1CB5431221DF473300B37EAE /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5430E21DF473200B37EAE /* Application.swift */; };
+		1CB5432E21DF473B00B37EAE /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5431421DF473A00B37EAE /* NSObject+SBJson.m */; };
+		1CB5432F21DF473B00B37EAE /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5431D21DF473A00B37EAE /* SBJsonStreamParser.m */; };
+		1CB5433021DF473B00B37EAE /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5431E21DF473A00B37EAE /* SBJsonParser.m */; };
+		1CB5433121DF473B00B37EAE /* SBJsonStreamParserAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5431F21DF473A00B37EAE /* SBJsonStreamParserAccumulator.m */; };
+		1CB5433221DF473B00B37EAE /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5432021DF473A00B37EAE /* SBJsonUTF8Stream.m */; };
+		1CB5433321DF473B00B37EAE /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5432121DF473A00B37EAE /* SBJsonStreamParserState.m */; };
+		1CB5433421DF473B00B37EAE /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5432321DF473A00B37EAE /* SBJsonWriter.m */; };
+		1CB5433521DF473B00B37EAE /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5432421DF473A00B37EAE /* SBJsonStreamWriter.m */; };
+		1CB5433621DF473B00B37EAE /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5432521DF473A00B37EAE /* SBJsonStreamParserAdapter.m */; };
+		1CB5433721DF473B00B37EAE /* SBJson.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1CB5432621DF473A00B37EAE /* SBJson.zip */; };
+		1CB5433821DF473B00B37EAE /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5432721DF473A00B37EAE /* SBJsonStreamWriterAccumulator.m */; };
+		1CB5433921DF473B00B37EAE /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5432A21DF473A00B37EAE /* SBJsonStreamWriterState.m */; };
+		1CB5433A21DF473B00B37EAE /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5432B21DF473A00B37EAE /* SBJsonTokeniser.m */; };
+		1CB5433D21DF4D4800B37EAE /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CB5433C21DF4D4800B37EAE /* loader.json */; };
 		1CC9B5F221DC52B8008C22B8 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9B5F121DC52B8008C22B8 /* MyPageViewController.swift */; };
 		1CC9B60221DC537F008C22B8 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9B60121DC537F008C22B8 /* MyPageTableViewCell.swift */; };
 		1CC9B60421DC6DD4008C22B8 /* BaseMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9B60321DC6DD4008C22B8 /* BaseMainViewController.swift */; };
@@ -106,8 +131,6 @@
 		1C858DA221C780D500900481 /* img_login_mail@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_login_mail@3x.png"; sourceTree = "<group>"; };
 		1C858DA821C7813100900481 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1C858DAC21C7818E00900481 /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
-		1C858DAF21C781FE00900481 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		1C858DB021C781FE00900481 /* preloader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = preloader.json; sourceTree = "<group>"; };
 		1C858DB421C7877800900481 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1C858DEB21C78D6200900481 /* Percent-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Percent-Bridging-Header.h"; sourceTree = "<group>"; };
 		1C858E2B21C870F100900481 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +148,46 @@
 		1C858E5121C8F15E00900481 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		1C858E5321C8F6EF00900481 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		1C858E5521C9036100900481 /* img_cherry@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_cherry@3x.png"; sourceTree = "<group>"; };
+		1CB542F721DF44E300B37EAE /* QTextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextAttributes.swift; sourceTree = "<group>"; };
+		1CB542F821DF44E300B37EAE /* QDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDataManager.swift; sourceTree = "<group>"; };
+		1CB542F921DF44E300B37EAE /* QImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImageMaker.swift; sourceTree = "<group>"; };
+		1CB542FA21DF44E300B37EAE /* QUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QUtils.swift; sourceTree = "<group>"; };
+		1CB542FB21DF44E300B37EAE /* QUrlReachablility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QUrlReachablility.swift; sourceTree = "<group>"; };
+		1CB542FC21DF44E300B37EAE /* QHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QHttpClient.swift; sourceTree = "<group>"; };
+		1CB5430421DF472A00B37EAE /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		1CB5430521DF472A00B37EAE /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
+		1CB5430621DF472A00B37EAE /* Urls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
+		1CB5430B21DF473200B37EAE /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		1CB5430C21DF473200B37EAE /* Others.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Others.swift; sourceTree = "<group>"; };
+		1CB5430D21DF473200B37EAE /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		1CB5430E21DF473200B37EAE /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		1CB5431421DF473A00B37EAE /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
+		1CB5431521DF473A00B37EAE /* SBJsonStreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserState.h; sourceTree = "<group>"; };
+		1CB5431621DF473A00B37EAE /* SBJsonUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonUTF8Stream.h; sourceTree = "<group>"; };
+		1CB5431721DF473A00B37EAE /* SBJsonStreamWriterAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterAccumulator.h; sourceTree = "<group>"; };
+		1CB5431821DF473A00B37EAE /* SBJsonStreamParserAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAdapter.h; sourceTree = "<group>"; };
+		1CB5431921DF473A00B37EAE /* SBJsonStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriter.h; sourceTree = "<group>"; };
+		1CB5431A21DF473A00B37EAE /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		1CB5431B21DF473A00B37EAE /* SBJsonStreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterState.h; sourceTree = "<group>"; };
+		1CB5431C21DF473A00B37EAE /* SBJsonTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonTokeniser.h; sourceTree = "<group>"; };
+		1CB5431D21DF473A00B37EAE /* SBJsonStreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParser.m; sourceTree = "<group>"; };
+		1CB5431E21DF473A00B37EAE /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		1CB5431F21DF473A00B37EAE /* SBJsonStreamParserAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAccumulator.m; sourceTree = "<group>"; };
+		1CB5432021DF473A00B37EAE /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
+		1CB5432121DF473A00B37EAE /* SBJsonStreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserState.m; sourceTree = "<group>"; };
+		1CB5432221DF473A00B37EAE /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
+		1CB5432321DF473A00B37EAE /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		1CB5432421DF473A00B37EAE /* SBJsonStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriter.m; sourceTree = "<group>"; };
+		1CB5432521DF473A00B37EAE /* SBJsonStreamParserAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAdapter.m; sourceTree = "<group>"; };
+		1CB5432621DF473A00B37EAE /* SBJson.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = SBJson.zip; sourceTree = "<group>"; };
+		1CB5432721DF473A00B37EAE /* SBJsonStreamWriterAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterAccumulator.m; sourceTree = "<group>"; };
+		1CB5432821DF473A00B37EAE /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		1CB5432921DF473A00B37EAE /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParser.h; sourceTree = "<group>"; };
+		1CB5432A21DF473A00B37EAE /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
+		1CB5432B21DF473A00B37EAE /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
+		1CB5432C21DF473A00B37EAE /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
+		1CB5432D21DF473A00B37EAE /* SBJsonStreamParserAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAccumulator.h; sourceTree = "<group>"; };
+		1CB5433C21DF4D4800B37EAE /* loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader.json; sourceTree = "<group>"; };
 		1CC9B5F121DC52B8008C22B8 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		1CC9B60121DC537F008C22B8 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		1CC9B60321DC6DD4008C22B8 /* BaseMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMainViewController.swift; sourceTree = "<group>"; };
@@ -236,7 +299,10 @@
 			isa = PBXGroup;
 			children = (
 				1C858D8A21C7733D00900481 /* AppDelegate.swift */,
+				1CB5430321DF472A00B37EAE /* Constants */,
+				1CB5430A21DF473200B37EAE /* Extensions */,
 				1C03840F21D001D40024C3B3 /* Data */,
+				1CB542F621DF44BF00B37EAE /* QKits */,
 				1C858D9C21C780CC00900481 /* UserInterface */,
 				1C858D9121C7733F00900481 /* Assets.xcassets */,
 				1C858D9E21C780D500900481 /* Resources */,
@@ -279,7 +345,7 @@
 		1C858D9E21C780D500900481 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1C858DAE21C781FE00900481 /* Animatiions */,
+				1CB5433B21DF4D4800B37EAE /* Animations */,
 				1C858DA721C780DD00900481 /* Images */,
 			);
 			path = Resources;
@@ -340,15 +406,6 @@
 				1CE69A9F21D5AF6200B9FE4A /* BarIndicatorView.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		1C858DAE21C781FE00900481 /* Animatiions */ = {
-			isa = PBXGroup;
-			children = (
-				1C858DAF21C781FE00900481 /* loading.json */,
-				1C858DB021C781FE00900481 /* preloader.json */,
-			);
-			path = Animatiions;
 			sourceTree = "<group>";
 		};
 		1C858DB321C7876600900481 /* Login */ = {
@@ -415,6 +472,82 @@
 				1CE69AEE21DA458F00B9FE4A /* RecommendsCollectionViewCell.swift */,
 			);
 			path = Recommends;
+			sourceTree = "<group>";
+		};
+		1CB542F621DF44BF00B37EAE /* QKits */ = {
+			isa = PBXGroup;
+			children = (
+				1CB5431321DF473A00B37EAE /* SBJson */,
+				1CB542F821DF44E300B37EAE /* QDataManager.swift */,
+				1CB542FC21DF44E300B37EAE /* QHttpClient.swift */,
+				1CB542F921DF44E300B37EAE /* QImageMaker.swift */,
+				1CB542F721DF44E300B37EAE /* QTextAttributes.swift */,
+				1CB542FB21DF44E300B37EAE /* QUrlReachablility.swift */,
+				1CB542FA21DF44E300B37EAE /* QUtils.swift */,
+			);
+			path = QKits;
+			sourceTree = "<group>";
+		};
+		1CB5430321DF472A00B37EAE /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				1CB5430421DF472A00B37EAE /* Strings.swift */,
+				1CB5430521DF472A00B37EAE /* Defines.swift */,
+				1CB5430621DF472A00B37EAE /* Urls.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		1CB5430A21DF473200B37EAE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1CB5430B21DF473200B37EAE /* Date.swift */,
+				1CB5430C21DF473200B37EAE /* Others.swift */,
+				1CB5430D21DF473200B37EAE /* Image.swift */,
+				1CB5430E21DF473200B37EAE /* Application.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1CB5431321DF473A00B37EAE /* SBJson */ = {
+			isa = PBXGroup;
+			children = (
+				1CB5431421DF473A00B37EAE /* NSObject+SBJson.m */,
+				1CB5431521DF473A00B37EAE /* SBJsonStreamParserState.h */,
+				1CB5431621DF473A00B37EAE /* SBJsonUTF8Stream.h */,
+				1CB5431721DF473A00B37EAE /* SBJsonStreamWriterAccumulator.h */,
+				1CB5431821DF473A00B37EAE /* SBJsonStreamParserAdapter.h */,
+				1CB5431921DF473A00B37EAE /* SBJsonStreamWriter.h */,
+				1CB5431A21DF473A00B37EAE /* SBJsonWriter.h */,
+				1CB5431B21DF473A00B37EAE /* SBJsonStreamWriterState.h */,
+				1CB5431C21DF473A00B37EAE /* SBJsonTokeniser.h */,
+				1CB5431D21DF473A00B37EAE /* SBJsonStreamParser.m */,
+				1CB5431E21DF473A00B37EAE /* SBJsonParser.m */,
+				1CB5431F21DF473A00B37EAE /* SBJsonStreamParserAccumulator.m */,
+				1CB5432021DF473A00B37EAE /* SBJsonUTF8Stream.m */,
+				1CB5432121DF473A00B37EAE /* SBJsonStreamParserState.m */,
+				1CB5432221DF473A00B37EAE /* NSObject+SBJson.h */,
+				1CB5432321DF473A00B37EAE /* SBJsonWriter.m */,
+				1CB5432421DF473A00B37EAE /* SBJsonStreamWriter.m */,
+				1CB5432521DF473A00B37EAE /* SBJsonStreamParserAdapter.m */,
+				1CB5432621DF473A00B37EAE /* SBJson.zip */,
+				1CB5432721DF473A00B37EAE /* SBJsonStreamWriterAccumulator.m */,
+				1CB5432821DF473A00B37EAE /* SBJsonParser.h */,
+				1CB5432921DF473A00B37EAE /* SBJsonStreamParser.h */,
+				1CB5432A21DF473A00B37EAE /* SBJsonStreamWriterState.m */,
+				1CB5432B21DF473A00B37EAE /* SBJsonTokeniser.m */,
+				1CB5432C21DF473A00B37EAE /* SBJson.h */,
+				1CB5432D21DF473A00B37EAE /* SBJsonStreamParserAccumulator.h */,
+			);
+			path = SBJson;
+			sourceTree = "<group>";
+		};
+		1CB5433B21DF4D4800B37EAE /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				1CB5433C21DF4D4800B37EAE /* loader.json */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		1CE69ABA21D9B7EE00B9FE4A /* Settings */ = {
@@ -504,6 +637,7 @@
 			files = (
 				1CE9653A21DC77D000334B4A /* img_mypage_1@3x.png in Resources */,
 				1C858E5621C9036200900481 /* img_cherry@3x.png in Resources */,
+				1CB5433D21DF4D4800B37EAE /* loader.json in Resources */,
 				1CE69AB221D8EEC100B9FE4A /* img_profile_3@3x.png in Resources */,
 				1C858DA621C780D500900481 /* img_login_mail@3x.png in Resources */,
 				1C858E3B21C872C900900481 /* img_tab_2_sel@3x.png in Resources */,
@@ -517,15 +651,14 @@
 				1C858DA521C780D500900481 /* img_login_lock@3x.png in Resources */,
 				1C858DA421C780D500900481 /* img_login_background@3x.png in Resources */,
 				1C858E3F21C872C900900481 /* img_tab_1_sel@3x.png in Resources */,
-				1C858DB221C781FE00900481 /* preloader.json in Resources */,
 				1C858E3C21C872C900900481 /* img_tab_3_sel@3x.png in Resources */,
+				1CB5433721DF473B00B37EAE /* SBJson.zip in Resources */,
 				1C858E3A21C872C900900481 /* img_tab_4_sel@3x.png in Resources */,
 				1C858E4021C872C900900481 /* img_tab_4_nor@3x.png in Resources */,
 				1C858E4221C872C900900481 /* img_tab_5_sel@3x.png in Resources */,
 				1C858E4121C872C900900481 /* img_tab_5_nor@3x.png in Resources */,
 				1CE9653C21DC77D000334B4A /* img_mypage_5@3x.png in Resources */,
 				1CE69AB321D8EEC100B9FE4A /* img_profile_4@3x.png in Resources */,
-				1C858DB121C781FE00900481 /* loading.json in Resources */,
 				1CE9653921DC77D000334B4A /* img_mypage_2@3x.png in Resources */,
 				1C858D9221C7733F00900481 /* Assets.xcassets in Resources */,
 				1CE69AB521D8EEC100B9FE4A /* img_profile_5@3x.png in Resources */,
@@ -602,6 +735,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C03842221D278C90024C3B3 /* UserProfileHeaderView.swift in Sources */,
+				1CB5433421DF473B00B37EAE /* SBJsonWriter.m in Sources */,
+				1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */,
 				1C03842021D1EBE70024C3B3 /* UserPictureCollectionViewCell.swift in Sources */,
 				1CE69AAA21D896D600B9FE4A /* UserProfileStatsView.swift in Sources */,
 				1CE69AF021DA458F00B9FE4A /* RecommendsCollectionViewCell.swift in Sources */,
@@ -612,12 +747,18 @@
 				1CE69AE721DA43D000B9FE4A /* FavouriteViewController.swift in Sources */,
 				1C858DB521C7877800900481 /* LoginViewController.swift in Sources */,
 				1CE69AF921DBA47E00B9FE4A /* CherryButton.swift in Sources */,
+				1CB5433921DF473B00B37EAE /* SBJsonStreamWriterState.m in Sources */,
+				1CB5430121DF44E300B37EAE /* QUrlReachablility.swift in Sources */,
 				1CE69ACD21D9B8F100B9FE4A /* ChatViewController.swift in Sources */,
 				1CC9B60421DC6DD4008C22B8 /* BaseMainViewController.swift in Sources */,
 				1C03841721D090F20024C3B3 /* RecommendData.swift in Sources */,
+				1CB5433821DF473B00B37EAE /* SBJsonStreamWriterAccumulator.m in Sources */,
+				1CB5432E21DF473B00B37EAE /* NSObject+SBJson.m in Sources */,
 				1CE69AF521DB5CBB00B9FE4A /* ChatListViewController.swift in Sources */,
 				1C03841121D002090024C3B3 /* BaseData.swift in Sources */,
 				1CE69AF121DA458F00B9FE4A /* RecommendsViewController.swift in Sources */,
+				1CB5430721DF472B00B37EAE /* Strings.swift in Sources */,
+				1CB5433021DF473B00B37EAE /* SBJsonParser.m in Sources */,
 				1C858DAD21C7818E00900481 /* LoadingIndicatorView.swift in Sources */,
 				1C03841E21D1DC1C0024C3B3 /* PictureData.swift in Sources */,
 				1C03841921D09B220024C3B3 /* CircleIndicatorView.swift in Sources */,
@@ -625,22 +766,39 @@
 				1CC9B5F221DC52B8008C22B8 /* MyPageViewController.swift in Sources */,
 				1CE69AE621DA43D000B9FE4A /* FavouriteCollectionViewCell.swift in Sources */,
 				1CE69AF421DB5CBB00B9FE4A /* ChatListTableViewCell.swift in Sources */,
+				1CB5430021DF44E300B37EAE /* QUtils.swift in Sources */,
 				1C858E5221C8F15F00900481 /* BaseNavigationController.swift in Sources */,
 				1C858E5421C8F6EF00900481 /* ProfileButton.swift in Sources */,
+				1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */,
+				1CB5430F21DF473300B37EAE /* Date.swift in Sources */,
 				1C858E2C21C870F100900481 /* MainViewController.swift in Sources */,
+				1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */,
 				1CE69AFD21DBCBF300B9FE4A /* ChatListData.swift in Sources */,
+				1CB5431221DF473300B37EAE /* Application.swift in Sources */,
+				1CB5433A21DF473B00B37EAE /* SBJsonTokeniser.m in Sources */,
 				1C03841321D0025F0024C3B3 /* UserData.swift in Sources */,
+				1CB5433221DF473B00B37EAE /* SBJsonUTF8Stream.m in Sources */,
 				1C858D8B21C7733D00900481 /* AppDelegate.swift in Sources */,
 				1CE69AEB21DA457A00B9FE4A /* SearchConditionViewController.swift in Sources */,
+				1CB5433121DF473B00B37EAE /* SBJsonStreamParserAccumulator.m in Sources */,
+				1CB5431021DF473300B37EAE /* Others.swift in Sources */,
 				1C858E2E21C870FE00900481 /* MainTabbarView.swift in Sources */,
+				1CB5430821DF472B00B37EAE /* Defines.swift in Sources */,
 				1CE69AF721DB71B200B9FE4A /* CategoryData.swift in Sources */,
+				1CB5430221DF44E300B37EAE /* QHttpClient.swift in Sources */,
+				1CB5433621DF473B00B37EAE /* SBJsonStreamParserAdapter.m in Sources */,
+				1CB5433321DF473B00B37EAE /* SBJsonStreamParserState.m in Sources */,
 				1CE69AB821D91C6A00B9FE4A /* UserProfileTableViewCell.swift in Sources */,
 				1CE69AA021D5AF6200B9FE4A /* BarIndicatorView.swift in Sources */,
+				1CB5431121DF473300B37EAE /* Image.swift in Sources */,
 				1C858DA921C7813100900481 /* BaseViewController.swift in Sources */,
+				1CB5433521DF473B00B37EAE /* SBJsonStreamWriter.m in Sources */,
 				1CC9B60221DC537F008C22B8 /* MyPageTableViewCell.swift in Sources */,
 				1CE69ACF21D9B8FE00B9FE4A /* ChatTableViewCell.swift in Sources */,
 				1CE69AFB21DBC08900B9FE4A /* ChatListSegmentView.swift in Sources */,
+				1CB5430921DF472B00B37EAE /* Urls.swift in Sources */,
 				1CE69AE221DA43B900B9FE4A /* CategoryTableViewCell.swift in Sources */,
+				1CB5432F21DF473B00B37EAE /* SBJsonStreamParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
