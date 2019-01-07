@@ -63,7 +63,21 @@ class MyPageViewController: BaseViewController {
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = tableData[indexPath.row]
         
+        switch data.type {
+        case .Settings:
+            let viewController = SettingsViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
+            break
+            
+        case .Notice, .Supports:
+            let viewController = BoardViewController(type: data.type == .Supports ? .FAQ : .Notice)
+            self.navigationController?.pushViewController(viewController, animated: true)
+            break
+            
+        default: break
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

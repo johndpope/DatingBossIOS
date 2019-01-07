@@ -24,6 +24,9 @@ struct RequestUrl {
     
     public struct Service {
         public static let GetTerms = "http://www.lovecenthome.com/ios/terms"
+        public static let Settings = "http://www.lovecenthome.com/setup/"
+        public static let Notice = "http://www.lovecenthome.com/board/"
+        public static let Board = "http://www.lovecenthome.com/board/"
     }
     
     public struct Main {
