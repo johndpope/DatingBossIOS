@@ -110,9 +110,15 @@ class FindEmailPopupViewController: BasePopupViewController {
             _ = textfieldPhone.resignFirstResponder()
             
             guard let text = textfieldPhone.text, text.count > 0 else {
-                let alertController = UIAlertController(title: "", message: "휴대폰 번호를 입력하세요", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+                let alertController = UIAlertController(title: nil, message: "휴대폰 번호를 입력하세요", preferredStyle: .alert)
+                self.present(alertController, animated: true) {
+                    _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
+                        timer.invalidate()
+                        alertController.dismiss(animated: true, completion: {
+                            _ = self.textfieldPhone.becomeFirstResponder()
+                        })
+                    })
+                }
                 break
             }
             
@@ -122,14 +128,26 @@ class FindEmailPopupViewController: BasePopupViewController {
             
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.Find, params: params) { (isSucceed, errMessage, response) in
-                guard isSucceed else {
-                    let alertController = UIAlertController(title: "", message: errMessage ?? kStringErrorUnknown, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
+                guard let responseData = response as? [String:Any], let status = responseData["Status"] as? String, status != "Failed" else {
+                    let alertController = UIAlertController(title: "", message: "가입 이력이 없는 번호입니다.", preferredStyle: .alert)
+                    self.present(alertController, animated: true) {
+                        _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
+                            timer.invalidate()
+                            alertController.dismiss(animated: true, completion: nil)
+                        })
+                    }
                     return
                 }
                 
-                self.pressedButton(self.buttonCancel)
+                let alertController = UIAlertController(title: "", message: "문자로 이메일을 보내드렸습니다.", preferredStyle: .alert)
+                self.present(alertController, animated: true) {
+                    _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
+                        timer.invalidate()
+                        alertController.dismiss(animated: true, completion: {() -> Void in
+                            self.pressedButton(self.buttonCancel)
+                        })
+                    })
+                }
             }
             break
             

@@ -111,8 +111,14 @@ class FindPasswordPopupViewController: BasePopupViewController {
             
             guard let text = textfieldEmail.text, text.count > 0 else {
                 let alertController = UIAlertController(title: "", message: "이메일을 입력하세요", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true) {
+                    _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
+                        timer.invalidate()
+                        alertController.dismiss(animated: true, completion: {
+                            _ = self.textfieldEmail.becomeFirstResponder()
+                        })
+                    })
+                }
                 break
             }
             
@@ -122,14 +128,26 @@ class FindPasswordPopupViewController: BasePopupViewController {
             
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.Find, params: params) { (isSucceed, errMessage, response) in
-                guard isSucceed else {
-                    let alertController = UIAlertController(title: "", message: errMessage ?? kStringErrorUnknown, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
+                guard let responseData = response as? [String:Any], let status = responseData["Status"] as? String, status != "Failed" else {
+                    let alertController = UIAlertController(title: "", message: "가입 이력이 없는 이메일입니다.", preferredStyle: .alert)
+                    self.present(alertController, animated: true) {
+                        _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
+                            timer.invalidate()
+                            alertController.dismiss(animated: true, completion: nil)
+                        })
+                    }
                     return
                 }
                 
-                self.pressedButton(self.buttonCancel)
+                let alertController = UIAlertController(title: "", message: "문자로 비밀번호를 보내드렸습니다.", preferredStyle: .alert)
+                self.present(alertController, animated: true) {
+                    _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
+                        timer.invalidate()
+                        alertController.dismiss(animated: true, completion: {() -> Void in
+                            self.pressedButton(self.buttonCancel)
+                        })
+                    })
+                }
             }
             break
             
