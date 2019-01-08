@@ -323,6 +323,14 @@ class LoginViewController: BaseViewController {
             }
             break
             
+        case buttonFindEmail:
+            let viewController = FindEmailPopupViewController()
+            self.view.addSubview(viewController.view)
+            self.addChild(viewController)
+            
+            viewController.show()
+            break
+            
         default: break
         }
     }

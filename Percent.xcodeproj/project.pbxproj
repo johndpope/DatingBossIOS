@@ -40,6 +40,9 @@
 		1C5AC83321E49ADF0007827D /* img_intro_text@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC83221E49ADF0007827D /* img_intro_text@3x.png */; };
 		1C5AC83621E49BC50007827D /* img_intro_percent@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC83421E49BC50007827D /* img_intro_percent@3x.png */; };
 		1C5AC83721E49BC50007827D /* img_intro_heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC83521E49BC50007827D /* img_intro_heart@3x.png */; };
+		1C5AC83A21E4AF520007827D /* BasePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AC83921E4AF520007827D /* BasePopupViewController.swift */; };
+		1C5AC83C21E4AFBE0007827D /* FindEmailPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AC83B21E4AFBE0007827D /* FindEmailPopupViewController.swift */; };
+		1C5AC83E21E4CF1A0007827D /* FindPasswordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AC83D21E4CF1A0007827D /* FindPasswordPopupViewController.swift */; };
 		1C858D8B21C7733D00900481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858D8A21C7733D00900481 /* AppDelegate.swift */; };
 		1C858D9221C7733F00900481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C858D9121C7733F00900481 /* Assets.xcassets */; };
 		1C858D9521C7733F00900481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C858D9321C7733F00900481 /* LaunchScreen.storyboard */; };
@@ -164,6 +167,9 @@
 		1C5AC83221E49ADF0007827D /* img_intro_text@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_intro_text@3x.png"; sourceTree = "<group>"; };
 		1C5AC83421E49BC50007827D /* img_intro_percent@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_intro_percent@3x.png"; sourceTree = "<group>"; };
 		1C5AC83521E49BC50007827D /* img_intro_heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_intro_heart@3x.png"; sourceTree = "<group>"; };
+		1C5AC83921E4AF520007827D /* BasePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupViewController.swift; sourceTree = "<group>"; };
+		1C5AC83B21E4AFBE0007827D /* FindEmailPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailPopupViewController.swift; sourceTree = "<group>"; };
+		1C5AC83D21E4CF1A0007827D /* FindPasswordPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordPopupViewController.swift; sourceTree = "<group>"; };
 		1C858D8721C7733D00900481 /* Percent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Percent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C858D8A21C7733D00900481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C858D9121C7733F00900481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -323,6 +329,16 @@
 			path = UserProfile;
 			sourceTree = "<group>";
 		};
+		1C5AC83821E4AEFD0007827D /* Popups */ = {
+			isa = PBXGroup;
+			children = (
+				1C5AC83921E4AF520007827D /* BasePopupViewController.swift */,
+				1C5AC83B21E4AFBE0007827D /* FindEmailPopupViewController.swift */,
+				1C5AC83D21E4CF1A0007827D /* FindPasswordPopupViewController.swift */,
+			);
+			path = Popups;
+			sourceTree = "<group>";
+		};
 		1C858D7E21C7733D00900481 = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +390,7 @@
 				1CE69ABA21D9B7EE00B9FE4A /* Settings */,
 				1CE69AC121D9B85500B9FE4A /* Market */,
 				1C03841A21D1CDC90024C3B3 /* UserProfile */,
+				1C5AC83821E4AEFD0007827D /* Popups */,
 			);
 			path = UserInterface;
 			sourceTree = "<group>";
@@ -817,6 +834,7 @@
 				1C03842221D278C90024C3B3 /* UserProfileHeaderView.swift in Sources */,
 				1CB5433421DF473B00B37EAE /* SBJsonWriter.m in Sources */,
 				1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */,
+				1C5AC83E21E4CF1A0007827D /* FindPasswordPopupViewController.swift in Sources */,
 				1C03842021D1EBE70024C3B3 /* UserPictureCollectionViewCell.swift in Sources */,
 				1CE69AAA21D896D600B9FE4A /* UserProfileStatsView.swift in Sources */,
 				1CE69AF021DA458F00B9FE4A /* RecommendsCollectionViewCell.swift in Sources */,
@@ -842,6 +860,7 @@
 				1CE69AF121DA458F00B9FE4A /* RecommendsViewController.swift in Sources */,
 				1CB5430721DF472B00B37EAE /* Strings.swift in Sources */,
 				1CB5433021DF473B00B37EAE /* SBJsonParser.m in Sources */,
+				1C5AC83C21E4AFBE0007827D /* FindEmailPopupViewController.swift in Sources */,
 				1C858DAD21C7818E00900481 /* LoadingIndicatorView.swift in Sources */,
 				1C03841E21D1DC1C0024C3B3 /* PictureData.swift in Sources */,
 				1C5AC81E21E3A0F60007827D /* BoardData.swift in Sources */,
@@ -880,6 +899,7 @@
 				1CB5431121DF473300B37EAE /* Image.swift in Sources */,
 				1C858DA921C7813100900481 /* BaseViewController.swift in Sources */,
 				1CB5433521DF473B00B37EAE /* SBJsonStreamWriter.m in Sources */,
+				1C5AC83A21E4AF520007827D /* BasePopupViewController.swift in Sources */,
 				1CC9B60221DC537F008C22B8 /* MyPageTableViewCell.swift in Sources */,
 				1C5AC81721E35D900007827D /* SettingsTableViewCell.swift in Sources */,
 				1CE69ACF21D9B8FE00B9FE4A /* ChatTableViewCell.swift in Sources */,

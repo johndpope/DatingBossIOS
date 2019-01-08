@@ -29,7 +29,7 @@ let kStringNevermind = NSLocalizedString("Nevermind", value:"Nevermind", comment
 let kStringShow = NSLocalizedString("Show", value: "Show", comment: "")
 let kStringHide = NSLocalizedString("Hide", value: "Hide", comment: "")
 
-let kStringErrorUnknown = NSLocalizedString("Error - Unknown", value:"Unknown error has occurred.\nPlease try again later.", comment:"")
+let kStringErrorUnknown = NSLocalizedString("Error - Unknown", value:"네트워크 상태가 불안정합니다.\n잠시후 다시 시도해 주세요.", comment:"")
 
 let kStringLoginEmailPlaceholder = NSLocalizedString("Login - Email Placeholder", value: "Email", comment: "")
 let kStringLoginPasswordPlaceholder = NSLocalizedString("Login - Password Placeholder", value: "Password", comment: "")
