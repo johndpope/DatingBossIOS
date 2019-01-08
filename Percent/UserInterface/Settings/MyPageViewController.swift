@@ -15,6 +15,7 @@ enum MyPageType: String {
     case Notice = "img_mypage_5"
     case Supports = "img_mypage_6"
     case Terms = "img_mypage_7"
+    case Logout = ""
 }
 
 struct MyPageData {
@@ -56,6 +57,7 @@ class MyPageViewController: BaseViewController {
         tableData.append(MyPageData(type: .Notice, title: "공지사항"))
         tableData.append(MyPageData(type: .Supports, title: "고객센터"))
         tableData.append(MyPageData(type: .Terms, title: "이용약관 / 법적고지"))
+        tableData.append(MyPageData(type: .Logout, title: "로그아웃"))
         
         theTableView.reloadData()
     }
@@ -74,6 +76,14 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case .Notice, .Supports:
             let viewController = BoardViewController(type: data.type == .Supports ? .FAQ : .Notice)
             self.navigationController?.pushViewController(viewController, animated: true)
+            break
+            
+        case .Logout:
+            QDataManager.shared.password = nil
+            QDataManager.shared.commit()
+            
+            let viewController = LoginViewController()
+            UIApplication.appDelegate().changeRootViewController(viewController)
             break
             
         default: break

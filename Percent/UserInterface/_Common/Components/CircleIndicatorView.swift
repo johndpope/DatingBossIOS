@@ -16,6 +16,7 @@ class CircleIndicatorView: UIView {
             }
         }
         var colour: UIColor = .black
+        var lineWidth: CGFloat = 4.0
         
         override init(frame: CGRect = CGRect.zero) {
             super.init(frame: frame)
@@ -31,13 +32,13 @@ class CircleIndicatorView: UIView {
             super.draw(rect)
             
             if let context = UIGraphicsGetCurrentContext() {
-                context.setLineWidth(4.0)
+                context.setLineWidth(self.lineWidth)
                 context.setStrokeColor(self.colour.cgColor)
                 context.setLineJoin(.round)
                 
                 let center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-                let radius = (frame.size.width - 4) / 2
-                context.addArc(center: center, radius: radius, startAngle: .pi * -0.5, endAngle: .pi * 1.5 * value, clockwise: false)
+                let radius = (frame.size.width - lineWidth) / 2
+                context.addArc(center: center, radius: radius, startAngle: .pi * -0.5, endAngle: .pi * (2.0 * value - 0.5), clockwise: false)
                 context.strokePath()
             }
         }
@@ -64,12 +65,13 @@ class CircleIndicatorView: UIView {
         }
     }
     
-    init(frame: CGRect = CGRect.zero, backgroundColour: UIColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 0.2), indicatorColour: UIColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)) {
+    init(frame: CGRect = CGRect.zero, backgroundColour: UIColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 0.2), indicatorColour: UIColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), lineWidth: CGFloat = 4.0) {
         super.init(frame: frame)
         
         self.backgroundColor = .clear
         
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.lineWidth = lineWidth
         backgroundView.colour = backgroundColour
         backgroundView.value = 1.0
         self.addSubview(backgroundView)
@@ -80,6 +82,7 @@ class CircleIndicatorView: UIView {
         backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         foregroundView.translatesAutoresizingMaskIntoConstraints = false
+        foregroundView.lineWidth = lineWidth
         foregroundView.colour = indicatorColour
         foregroundView.value = 0.0
         self.addSubview(foregroundView)

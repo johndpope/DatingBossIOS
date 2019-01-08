@@ -36,6 +36,10 @@
 		1C5AC82021E3A3EB0007827D /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AC81F21E3A3EB0007827D /* BoardTableViewCell.swift */; };
 		1C5AC82321E3ACC70007827D /* img_board_collapsed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC82121E3ACC70007827D /* img_board_collapsed@3x.png */; };
 		1C5AC82421E3ACC70007827D /* img_board_expanded@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC82221E3ACC70007827D /* img_board_expanded@3x.png */; };
+		1C5AC83121E497BA0007827D /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AC83021E497BA0007827D /* IntroViewController.swift */; };
+		1C5AC83321E49ADF0007827D /* img_intro_text@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC83221E49ADF0007827D /* img_intro_text@3x.png */; };
+		1C5AC83621E49BC50007827D /* img_intro_percent@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC83421E49BC50007827D /* img_intro_percent@3x.png */; };
+		1C5AC83721E49BC50007827D /* img_intro_heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC83521E49BC50007827D /* img_intro_heart@3x.png */; };
 		1C858D8B21C7733D00900481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858D8A21C7733D00900481 /* AppDelegate.swift */; };
 		1C858D9221C7733F00900481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C858D9121C7733F00900481 /* Assets.xcassets */; };
 		1C858D9521C7733F00900481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C858D9321C7733F00900481 /* LaunchScreen.storyboard */; };
@@ -156,6 +160,10 @@
 		1C5AC81F21E3A3EB0007827D /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		1C5AC82121E3ACC70007827D /* img_board_collapsed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_board_collapsed@3x.png"; sourceTree = "<group>"; };
 		1C5AC82221E3ACC70007827D /* img_board_expanded@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_board_expanded@3x.png"; sourceTree = "<group>"; };
+		1C5AC83021E497BA0007827D /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		1C5AC83221E49ADF0007827D /* img_intro_text@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_intro_text@3x.png"; sourceTree = "<group>"; };
+		1C5AC83421E49BC50007827D /* img_intro_percent@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_intro_percent@3x.png"; sourceTree = "<group>"; };
+		1C5AC83521E49BC50007827D /* img_intro_heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_intro_heart@3x.png"; sourceTree = "<group>"; };
 		1C858D8721C7733D00900481 /* Percent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Percent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C858D8A21C7733D00900481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C858D9121C7733F00900481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -395,6 +403,9 @@
 				1C5AC82121E3ACC70007827D /* img_board_collapsed@3x.png */,
 				1C5AC82221E3ACC70007827D /* img_board_expanded@3x.png */,
 				1C03842321D28A050024C3B3 /* img_heart@3x.png */,
+				1C5AC83521E49BC50007827D /* img_intro_heart@3x.png */,
+				1C5AC83421E49BC50007827D /* img_intro_percent@3x.png */,
+				1C5AC83221E49ADF0007827D /* img_intro_text@3x.png */,
 				1C03842421D28A050024C3B3 /* img_star@3x.png */,
 				1C858E5521C9036100900481 /* img_cherry@3x.png */,
 				1C858D9F21C780D500900481 /* img_login_icon@3x.png */,
@@ -461,6 +472,7 @@
 		1C858DB321C7876600900481 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1C5AC83021E497BA0007827D /* IntroViewController.swift */,
 				1C858DB421C7877800900481 /* LoginViewController.swift */,
 			);
 			path = Login;
@@ -696,11 +708,13 @@
 				1CE69AB221D8EEC100B9FE4A /* img_profile_3@3x.png in Resources */,
 				1C858DA621C780D500900481 /* img_login_mail@3x.png in Resources */,
 				1C858E3B21C872C900900481 /* img_tab_2_sel@3x.png in Resources */,
+				1C5AC83321E49ADF0007827D /* img_intro_text@3x.png in Resources */,
 				1C03842621D28A050024C3B3 /* img_star@3x.png in Resources */,
 				1C03842521D28A050024C3B3 /* img_heart@3x.png in Resources */,
 				1C858E3921C872C900900481 /* img_tab_3_nor@3x.png in Resources */,
 				1C5AC80E21E35D750007827D /* img_settings_3@3x.png in Resources */,
 				1C858D9521C7733F00900481 /* LaunchScreen.storyboard in Resources */,
+				1C5AC83621E49BC50007827D /* img_intro_percent@3x.png in Resources */,
 				1C5AC81521E35D750007827D /* img_settings_9@3x.png in Resources */,
 				1C5AC81321E35D750007827D /* img_settings_4@3x.png in Resources */,
 				1C5AC82321E3ACC70007827D /* img_board_collapsed@3x.png in Resources */,
@@ -718,6 +732,7 @@
 				1C858E4021C872C900900481 /* img_tab_4_nor@3x.png in Resources */,
 				1C858E4221C872C900900481 /* img_tab_5_sel@3x.png in Resources */,
 				1C5AC81121E35D750007827D /* img_settings_8@3x.png in Resources */,
+				1C5AC83721E49BC50007827D /* img_intro_heart@3x.png in Resources */,
 				1C858E4121C872C900900481 /* img_tab_5_nor@3x.png in Resources */,
 				1CE9653C21DC77D000334B4A /* img_mypage_5@3x.png in Resources */,
 				1CE69AB321D8EEC100B9FE4A /* img_profile_4@3x.png in Resources */,
@@ -833,6 +848,7 @@
 				1C03841921D09B220024C3B3 /* CircleIndicatorView.swift in Sources */,
 				1C03841C21D1CDE80024C3B3 /* UserProfileViewController.swift in Sources */,
 				1CC9B5F221DC52B8008C22B8 /* MyPageViewController.swift in Sources */,
+				1C5AC83121E497BA0007827D /* IntroViewController.swift in Sources */,
 				1CE69AE621DA43D000B9FE4A /* FavouriteCollectionViewCell.swift in Sources */,
 				1CE69AF421DB5CBB00B9FE4A /* ChatListTableViewCell.swift in Sources */,
 				1CB5430021DF44E300B37EAE /* QUtils.swift in Sources */,
