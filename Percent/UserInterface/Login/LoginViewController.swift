@@ -335,6 +335,14 @@ class LoginViewController: BaseViewController {
             viewController.show()
             break
             
+        case buttonFindPassword:
+            let viewController = FindPasswordPopupViewController()
+            self.view.addSubview(viewController.view)
+            self.addChild(viewController)
+            
+            viewController.show()
+            break
+            
         default: break
         }
     }

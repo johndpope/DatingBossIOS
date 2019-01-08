@@ -44,6 +44,8 @@
 		1C5AC83C21E4AFBE0007827D /* FindEmailPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AC83B21E4AFBE0007827D /* FindEmailPopupViewController.swift */; };
 		1C5AC83E21E4CF1A0007827D /* FindPasswordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AC83D21E4CF1A0007827D /* FindPasswordPopupViewController.swift */; };
 		1C5AC84021E4D2490007827D /* img_login_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC83F21E4D2490007827D /* img_login_background@2x.png */; };
+		1C5AC84421E4D45C0007827D /* spoqa_han_sans_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC84221E4D45C0007827D /* spoqa_han_sans_regular.ttf */; };
+		1C5AC84521E4D45C0007827D /* spoqa_han_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC84321E4D45C0007827D /* spoqa_han_sans_bold.ttf */; };
 		1C858D8B21C7733D00900481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858D8A21C7733D00900481 /* AppDelegate.swift */; };
 		1C858D9221C7733F00900481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C858D9121C7733F00900481 /* Assets.xcassets */; };
 		1C858D9521C7733F00900481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C858D9321C7733F00900481 /* LaunchScreen.storyboard */; };
@@ -171,6 +173,8 @@
 		1C5AC83B21E4AFBE0007827D /* FindEmailPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailPopupViewController.swift; sourceTree = "<group>"; };
 		1C5AC83D21E4CF1A0007827D /* FindPasswordPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordPopupViewController.swift; sourceTree = "<group>"; };
 		1C5AC83F21E4D2490007827D /* img_login_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_login_background@2x.png"; sourceTree = "<group>"; };
+		1C5AC84221E4D45C0007827D /* spoqa_han_sans_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = spoqa_han_sans_regular.ttf; sourceTree = "<group>"; };
+		1C5AC84321E4D45C0007827D /* spoqa_han_sans_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = spoqa_han_sans_bold.ttf; sourceTree = "<group>"; };
 		1C858D8721C7733D00900481 /* Percent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Percent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C858D8A21C7733D00900481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C858D9121C7733F00900481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -339,6 +343,15 @@
 			path = Popups;
 			sourceTree = "<group>";
 		};
+		1C5AC84121E4D45C0007827D /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				1C5AC84221E4D45C0007827D /* spoqa_han_sans_regular.ttf */,
+				1C5AC84321E4D45C0007827D /* spoqa_han_sans_bold.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		1C858D7E21C7733D00900481 = {
 			isa = PBXGroup;
 			children = (
@@ -410,6 +423,7 @@
 			children = (
 				1CB5433B21DF4D4800B37EAE /* Animations */,
 				1C858DA721C780DD00900481 /* Images */,
+				1C5AC84121E4D45C0007827D /* Font */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -758,8 +772,10 @@
 				1CE69AB521D8EEC100B9FE4A /* img_profile_5@3x.png in Resources */,
 				1CE9653821DC77D000334B4A /* img_mypage_6@3x.png in Resources */,
 				1CE9653721DC77D000334B4A /* img_mypage_4@3x.png in Resources */,
+				1C5AC84421E4D45C0007827D /* spoqa_han_sans_regular.ttf in Resources */,
 				1C858DA321C780D500900481 /* img_login_icon@3x.png in Resources */,
 				1C5AC81421E35D750007827D /* img_settings_1@3x.png in Resources */,
+				1C5AC84521E4D45C0007827D /* spoqa_han_sans_bold.ttf in Resources */,
 				1C858E3D21C872C900900481 /* img_tab_1_nor@3x.png in Resources */,
 				1C5AC81021E35D750007827D /* img_settings_5@3x.png in Resources */,
 				1CE9653D21DC77D000334B4A /* img_mypage_3@3x.png in Resources */,
