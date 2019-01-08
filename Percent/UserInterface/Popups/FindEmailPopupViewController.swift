@@ -29,7 +29,7 @@ class FindEmailPopupViewController: BasePopupViewController {
         textfieldPhone.translatesAutoresizingMaskIntoConstraints = false
         textfieldPhone.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         textfieldPhone.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .regular)
-        textfieldPhone.keyboardType = .namePhonePad
+        textfieldPhone.keyboardType = .phonePad
         textfieldPhone.autocorrectionType = .no
         textfieldPhone.borderStyle = .none
         textfieldPhone.leftView = label

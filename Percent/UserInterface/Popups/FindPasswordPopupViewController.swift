@@ -29,7 +29,7 @@ class FindPasswordPopupViewController: BasePopupViewController {
         textfieldEmail.translatesAutoresizingMaskIntoConstraints = false
         textfieldEmail.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         textfieldEmail.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .regular)
-        textfieldEmail.keyboardType = .namePhonePad
+        textfieldEmail.keyboardType = .emailAddress
         textfieldEmail.autocorrectionType = .no
         textfieldEmail.borderStyle = .none
         textfieldEmail.leftView = label
