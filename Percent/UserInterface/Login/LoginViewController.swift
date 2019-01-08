@@ -64,8 +64,6 @@ class LoginViewController: BaseViewController {
         button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         
-        var height = CGFloat(0)
-        
         let imageViewIcon = UIImageView()
         imageViewIcon.translatesAutoresizingMaskIntoConstraints = false
         imageViewIcon.image = UIImage(named: "img_login_icon")
@@ -76,8 +74,6 @@ class LoginViewController: BaseViewController {
         imageViewIcon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         imageViewIcon.widthAnchor.constraint(equalToConstant: 76 * QUtils.optimizeRatio()).isActive = true
         imageViewIcon.heightAnchor.constraint(equalToConstant: 76 * QUtils.optimizeRatio()).isActive = true
-        
-        height += 76 * QUtils.optimizeRatio() * 2
         
         let backView = UIView()
         backView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,8 +86,6 @@ class LoginViewController: BaseViewController {
         backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40 * QUtils.optimizeRatio()).isActive = true
         backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40 * QUtils.optimizeRatio()).isActive = true
         backView.heightAnchor.constraint(equalToConstant: 114 * QUtils.optimizeRatio()).isActive = true
-        
-        height += 114 * QUtils.optimizeRatio()
         
         var seperator = UIView()
         seperator.translatesAutoresizingMaskIntoConstraints = false
@@ -186,8 +180,6 @@ class LoginViewController: BaseViewController {
         buttonFindEmail.topAnchor.constraint(equalTo: buttonFindPassword.topAnchor).isActive = true
         buttonFindEmail.trailingAnchor.constraint(equalTo: seperator.leadingAnchor).isActive = true
         
-        height += buttonFindEmail.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
-        
         buttonLogin.translatesAutoresizingMaskIntoConstraints = false
         buttonLogin.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .normal)
         buttonLogin.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)), for: .highlighted)
@@ -206,41 +198,53 @@ class LoginViewController: BaseViewController {
         buttonLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40 * QUtils.optimizeRatio()).isActive = true
         buttonLogin.heightAnchor.constraint(equalToConstant: buttonLogin.layer.cornerRadius * 2).isActive = true
         
-        height += buttonLogin.layer.cornerRadius * 2
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = kStringLoginSignupGuide + " "
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
-        label.sizeToFit()
-        contentView.addSubview(label)
-        
-        var attributes = [NSAttributedString.Key:Any]()
-        attributes[.foregroundColor] = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        attributes[.font] = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .semibold)
-        attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue
-        attributes[.underlineColor] = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = kStringLoginSignupGuide + " "
+//        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//        label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+//        label.sizeToFit()
+//        contentView.addSubview(label)
+//
+//        var attributes = [NSAttributedString.Key:Any]()
+//        attributes[.foregroundColor] = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//        attributes[.font] = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .semibold)
+//        attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue
+//        attributes[.underlineColor] = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//
+//        buttonSignup.translatesAutoresizingMaskIntoConstraints = false
+//        buttonSignup.setAttributedTitle(NSAttributedString(string: kStringLoginSignup, attributes: attributes), for: .normal)
+//        attributes[.foregroundColor] = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+//        buttonSignup.setAttributedTitle(NSAttributedString(string: kStringLoginSignup, attributes: attributes), for: .highlighted)
+//        buttonSignup.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
+//        buttonSignup.sizeToFit()
+//        contentView.addSubview(buttonSignup)
+//
+//        label.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+//        label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: (UIScreen.main.bounds.size.width - label.frame.size.width - buttonSignup.frame.size.width) / 2).isActive = true
+//
+//        buttonSignup.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor).isActive = true
+//        buttonSignup.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
+//        buttonSignup.widthAnchor.constraint(equalToConstant: buttonSignup.frame.size.width + 32 * QUtils.optimizeRatio()).isActive = true
+//        buttonSignup.heightAnchor.constraint(equalToConstant: buttonSignup.frame.size.height + 16 * QUtils.optimizeRatio()).isActive = true
+
         buttonSignup.translatesAutoresizingMaskIntoConstraints = false
-        buttonSignup.setAttributedTitle(NSAttributedString(string: kStringLoginSignup, attributes: attributes), for: .normal)
-        attributes[.foregroundColor] = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
-        buttonSignup.setAttributedTitle(NSAttributedString(string: kStringLoginSignup, attributes: attributes), for: .highlighted)
+        buttonSignup.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)), for: .normal)
+        buttonSignup.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), for: .highlighted)
+        buttonSignup.setTitle(kStringLoginSignup, for: .normal)
+        buttonSignup.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        buttonSignup.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
         buttonSignup.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-        buttonSignup.sizeToFit()
+        buttonSignup.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        buttonSignup.layer.cornerRadius = 24 * QUtils.optimizeRatio()
+        buttonSignup.clipsToBounds = true
         contentView.addSubview(buttonSignup)
         
-        label.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
-        label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: (UIScreen.main.bounds.size.width - label.frame.size.width - buttonSignup.frame.size.width) / 2).isActive = true
-        
-        buttonSignup.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor).isActive = true
-        buttonSignup.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
-        buttonSignup.widthAnchor.constraint(equalToConstant: buttonSignup.frame.size.width + 32 * QUtils.optimizeRatio()).isActive = true
-        buttonSignup.heightAnchor.constraint(equalToConstant: buttonSignup.frame.size.height + 16 * QUtils.optimizeRatio()).isActive = true
-
-        height += 56 * QUtils.optimizeRatio()
-        
-        contentView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        buttonSignup.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 12 * QUtils.optimizeRatio()).isActive = true
+        buttonSignup.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40 * QUtils.optimizeRatio()).isActive = true
+        buttonSignup.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40 * QUtils.optimizeRatio()).isActive = true
+        buttonSignup.heightAnchor.constraint(equalToConstant: buttonLogin.layer.cornerRadius * 2).isActive = true
+        buttonSignup.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
         self.view.layoutIfNeeded()
     }
