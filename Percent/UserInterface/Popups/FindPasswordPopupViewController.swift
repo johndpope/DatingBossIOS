@@ -121,7 +121,7 @@ class FindPasswordPopupViewController: BasePopupViewController {
             params["email"] = text
             
             let httpClient = QHttpClient()
-            httpClient.request(to: RequestUrl.Account.Find, method: .get, params: params) { (isSucceed, errMessage, response) in
+            httpClient.request(to: RequestUrl.Account.Find, params: params) { (isSucceed, errMessage, response) in
                 guard isSucceed else {
                     let alertController = UIAlertController(title: "", message: errMessage ?? kStringErrorUnknown, preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
