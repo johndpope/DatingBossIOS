@@ -343,6 +343,17 @@ class LoginViewController: BaseViewController {
             viewController.show()
             break
             
+        case buttonSignup:
+            let alertController = AlertPopupViewController(withTitle: "회원가입", message: "만 19세 이상만 가입이 가능합니다.\n계속 진행하시겠습니까?")
+            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
+            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
+                
+            }))
+            self.view.addSubview(alertController.view)
+            self.addChild(alertController)
+            alertController.show()
+            break
+            
         default: break
         }
     }

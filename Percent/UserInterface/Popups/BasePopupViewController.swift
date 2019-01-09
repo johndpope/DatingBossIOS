@@ -14,7 +14,7 @@ class BasePopupViewController: UIViewController {
     internal let buttonDismiss = UIButton(type: .custom)
     
     internal let contentView = UIView()
-    internal let labelTitle = UILabel()
+    let labelTitle = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()

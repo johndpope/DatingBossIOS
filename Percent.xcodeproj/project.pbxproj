@@ -70,6 +70,8 @@
 		1C858E5221C8F15F00900481 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E5121C8F15E00900481 /* BaseNavigationController.swift */; };
 		1C858E5421C8F6EF00900481 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E5321C8F6EF00900481 /* ProfileButton.swift */; };
 		1C858E5621C9036200900481 /* img_cherry@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C858E5521C9036100900481 /* img_cherry@3x.png */; };
+		1CA5876E21E5D8BD002B60F2 /* AlertPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */; };
+		1CA5877121E5DCF4002B60F2 /* SignupGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */; };
 		1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F721DF44E300B37EAE /* QTextAttributes.swift */; };
 		1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F821DF44E300B37EAE /* QDataManager.swift */; };
 		1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F921DF44E300B37EAE /* QImageMaker.swift */; };
@@ -202,6 +204,8 @@
 		1C858E5121C8F15E00900481 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		1C858E5321C8F6EF00900481 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		1C858E5521C9036100900481 /* img_cherry@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_cherry@3x.png"; sourceTree = "<group>"; };
+		1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopupViewController.swift; sourceTree = "<group>"; };
+		1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGuideViewController.swift; sourceTree = "<group>"; };
 		1CB542F721DF44E300B37EAE /* QTextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextAttributes.swift; sourceTree = "<group>"; };
 		1CB542F821DF44E300B37EAE /* QDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDataManager.swift; sourceTree = "<group>"; };
 		1CB542F921DF44E300B37EAE /* QImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImageMaker.swift; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				1C5AC83921E4AF520007827D /* BasePopupViewController.swift */,
+				1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */,
 				1C5AC83B21E4AFBE0007827D /* FindEmailPopupViewController.swift */,
 				1C5AC83D21E4CF1A0007827D /* FindPasswordPopupViewController.swift */,
 			);
@@ -394,6 +399,7 @@
 				1C858D9D21C780CC00900481 /* _Base */,
 				1C858DAA21C7817000900481 /* _Common */,
 				1C858DB321C7876600900481 /* Login */,
+				1CA5876F21E5DCB3002B60F2 /* Signup */,
 				1C858E2A21C870D900900481 /* Main */,
 				1C858E4821C8E8DE00900481 /* Recommends */,
 				1C858E4721C8E8DC00900481 /* Choice */,
@@ -565,6 +571,14 @@
 				1CE69AEE21DA458F00B9FE4A /* RecommendsCollectionViewCell.swift */,
 			);
 			path = Recommends;
+			sourceTree = "<group>";
+		};
+		1CA5876F21E5DCB3002B60F2 /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */,
+			);
+			path = Signup;
 			sourceTree = "<group>";
 		};
 		1CB542F621DF44BF00B37EAE /* QKits */ = {
@@ -890,6 +904,7 @@
 				1C858E5221C8F15F00900481 /* BaseNavigationController.swift in Sources */,
 				1C858E5421C8F6EF00900481 /* ProfileButton.swift in Sources */,
 				1C5AC80121E3568B0007827D /* SettingsViewController.swift in Sources */,
+				1CA5877121E5DCF4002B60F2 /* SignupGuideViewController.swift in Sources */,
 				1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */,
 				1CB5430F21DF473300B37EAE /* Date.swift in Sources */,
 				1C858E2C21C870F100900481 /* MainViewController.swift in Sources */,
@@ -910,6 +925,7 @@
 				1CB5430221DF44E300B37EAE /* QHttpClient.swift in Sources */,
 				1CB5433621DF473B00B37EAE /* SBJsonStreamParserAdapter.m in Sources */,
 				1CB5433321DF473B00B37EAE /* SBJsonStreamParserState.m in Sources */,
+				1CA5876E21E5D8BD002B60F2 /* AlertPopupViewController.swift in Sources */,
 				1CE69AB821D91C6A00B9FE4A /* UserProfileTableViewCell.swift in Sources */,
 				1CE69AA021D5AF6200B9FE4A /* BarIndicatorView.swift in Sources */,
 				1CB5431121DF473300B37EAE /* Image.swift in Sources */,

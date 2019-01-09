@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let IMAGE_RESIZE_RATIO = CGFloat(0.7)
+
 class IntroViewController: BaseViewController {
     private let imageViewTitle = UIImageView()
     private let imageViewIcon = UIImageView()
@@ -35,8 +37,8 @@ class IntroViewController: BaseViewController {
         
         imageViewTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         imageViewTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        imageViewTitle.widthAnchor.constraint(equalToConstant: (image?.size.width ?? 0) * 0.7).isActive = true
-        imageViewTitle.heightAnchor.constraint(equalToConstant: (image?.size.height ?? 0) * 0.7).isActive = true
+        imageViewTitle.widthAnchor.constraint(equalToConstant: (image?.size.width ?? 0) * IMAGE_RESIZE_RATIO).isActive = true
+        imageViewTitle.heightAnchor.constraint(equalToConstant: (image?.size.height ?? 0) * IMAGE_RESIZE_RATIO).isActive = true
         
         circleView.translatesAutoresizingMaskIntoConstraints = false
         circleView.value = 0.0
@@ -46,8 +48,8 @@ class IntroViewController: BaseViewController {
         circleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         circleView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         circleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        circleView.widthAnchor.constraint(equalToConstant: 68 * QUtils.optimizeRatio()).isActive = true
-        circleView.heightAnchor.constraint(equalToConstant: 68 * QUtils.optimizeRatio()).isActive = true
+        circleView.widthAnchor.constraint(equalToConstant: 96 * QUtils.optimizeRatio() * IMAGE_RESIZE_RATIO).isActive = true
+        circleView.heightAnchor.constraint(equalToConstant: 96 * QUtils.optimizeRatio() * IMAGE_RESIZE_RATIO).isActive = true
         
         image = UIImage(named: "img_intro_percent")
         imageViewIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -56,8 +58,8 @@ class IntroViewController: BaseViewController {
         
         imageViewIcon.centerXAnchor.constraint(equalTo: circleView.centerXAnchor).isActive = true
         imageViewIcon.centerYAnchor.constraint(equalTo: circleView.centerYAnchor).isActive = true
-        imageViewIcon.widthAnchor.constraint(equalToConstant: (image?.size.width ?? 0) * 0.7).isActive = true
-        imageViewIcon.heightAnchor.constraint(equalToConstant: (image?.size.height ?? 0) * 0.7).isActive = true
+        imageViewIcon.widthAnchor.constraint(equalToConstant: (image?.size.width ?? 0) * IMAGE_RESIZE_RATIO).isActive = true
+        imageViewIcon.heightAnchor.constraint(equalToConstant: (image?.size.height ?? 0) * IMAGE_RESIZE_RATIO).isActive = true
         
         image = UIImage(named: "img_intro_heart")
         imageViewHeart.translatesAutoresizingMaskIntoConstraints = false
@@ -67,8 +69,8 @@ class IntroViewController: BaseViewController {
         
         imageViewHeart.centerXAnchor.constraint(equalTo: circleView.centerXAnchor).isActive = true
         imageViewHeart.centerYAnchor.constraint(equalTo: circleView.centerYAnchor).isActive = true
-        imageViewHeart.widthAnchor.constraint(equalToConstant: (image?.size.width ?? 0) * 0.7).isActive = true
-        imageViewHeart.heightAnchor.constraint(equalToConstant: (image?.size.height ?? 0) * 0.7).isActive = true
+        imageViewHeart.widthAnchor.constraint(equalToConstant: (image?.size.width ?? 0) * IMAGE_RESIZE_RATIO).isActive = true
+        imageViewHeart.heightAnchor.constraint(equalToConstant: (image?.size.height ?? 0) * IMAGE_RESIZE_RATIO).isActive = true
         
         self.view.layoutIfNeeded()
     }
