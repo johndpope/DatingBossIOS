@@ -17,6 +17,7 @@ class BaseViewController: UIViewController {
     var leftNavigationItemView: UIButton?
     var cherriesButton = CherryButton()
     
+    internal var navigationTintColor = #colorLiteral(red: 0.4274509804, green: 0.4274509804, blue: 0.4274509804, alpha: 1)
     private var navigationViewHidden = false
     var isNavigationViewHidden: Bool {
         return navigationViewHidden
@@ -46,6 +47,7 @@ class BaseViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.receiveCherryNotification(_:)), name: NotificationName.Cherry.Decreased, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.receiveCherryNotification(_:)), name: NotificationName.Cherry.Changed, object: nil)
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
@@ -109,7 +111,8 @@ class BaseViewController: UIViewController {
             
             if image != nil {
                 leftNavigationItemView = UIButton()
-                leftNavigationItemView?.setImage(image, for: .normal)
+                leftNavigationItemView?.setImage(image?.withRenderingMode(.alwaysTemplate), for: .normal)
+                leftNavigationItemView?.tintColor = navigationTintColor
                 leftNavigationItemView?.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
                 leftNavigationItemView?.translatesAutoresizingMaskIntoConstraints = false
                 navigationView.contentView.addSubview(leftNavigationItemView!)
@@ -128,7 +131,7 @@ class BaseViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = self.title
-        titleLabel.textColor = #colorLiteral(red: 0.168627451, green: 0.168627451, blue: 0.168627451, alpha: 1)
+        titleLabel.textColor = navigationTintColor
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         navigationView.contentView.addSubview(titleLabel)
         
