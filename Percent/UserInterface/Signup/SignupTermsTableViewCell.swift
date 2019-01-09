@@ -37,7 +37,7 @@ class SignupTermsTableViewCell: UITableViewCell {
         
         let seperator = UIView()
         seperator.translatesAutoresizingMaskIntoConstraints = false
-        seperator.backgroundColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
         self.contentView.addSubview(seperator)
         
         seperator.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true

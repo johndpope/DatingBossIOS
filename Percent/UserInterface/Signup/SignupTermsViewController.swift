@@ -75,7 +75,7 @@ class SignupTermsViewController: BaseSignupViewController {
         let tableFooterView = UIView()
         tableFooterView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 96 * QUtils.optimizeRatio())
         
-        buttonAgreeAll.translatesAutoresizingMaskIntoConstraints = false
+        buttonAgreeAll.frame = CGRect(x: 16 * QUtils.optimizeRatio(), y: 24 * QUtils.optimizeRatio(), width: UIScreen.main.bounds.size.width - 32 * QUtils.optimizeRatio(), height: 48 * QUtils.optimizeRatio())
         buttonAgreeAll.clipsToBounds = true
         buttonAgreeAll.layer.borderColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
         buttonAgreeAll.layer.borderWidth = 1
@@ -86,11 +86,6 @@ class SignupTermsViewController: BaseSignupViewController {
         buttonAgreeAll.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
         buttonAgreeAll.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
         tableFooterView.addSubview(buttonAgreeAll)
-        
-        buttonAgreeAll.leadingAnchor.constraint(equalTo: tableFooterView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
-        buttonAgreeAll.trailingAnchor.constraint(equalTo: tableFooterView.leadingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
-        buttonAgreeAll.heightAnchor.constraint(equalToConstant: buttonAgreeAll.layer.cornerRadius * 2).isActive = true
-        buttonAgreeAll.centerYAnchor.constraint(equalTo: tableFooterView.centerYAnchor).isActive = true
         
         theTableView.tableFooterView = tableFooterView
         
@@ -123,6 +118,35 @@ class SignupTermsViewController: BaseSignupViewController {
                 tableData[i] = data
             }
             theTableView.reloadData()
+            break
+            
+        case buttonCancel:
+            self.navigationController?.popViewController(animated: true)
+            break
+            
+        case buttonConfirm:
+            var errMessage: String?
+            
+            for item in tableData {
+                if item.isAgreed == false {
+                    errMessage = "모든 약관에 동의해주세요"
+                    break
+                }
+            }
+            
+            guard errMessage == nil else {
+                let alertController = UIAlertController(title: "", message: errMessage, preferredStyle: .alert)
+                self.present(alertController, animated: true) {
+                    _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
+                        timer.invalidate()
+                        alertController.dismiss(animated: true, completion: nil)
+                    })
+                }
+                return
+            }
+            
+            let viewController = SignupIdViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
             break
             
         default:

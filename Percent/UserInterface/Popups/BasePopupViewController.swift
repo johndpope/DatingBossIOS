@@ -16,6 +16,8 @@ class BasePopupViewController: UIViewController {
     internal let contentView = UIView()
     let labelTitle = UILabel()
     
+    var titleColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +46,7 @@ class BasePopupViewController: UIViewController {
         contentView.widthAnchor.constraint(equalToConstant: kWidthPopupContentView).isActive = true
         
         labelTitle.translatesAutoresizingMaskIntoConstraints = false
-        labelTitle.textColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+        labelTitle.textColor = titleColour
         labelTitle.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
         contentView.addSubview(labelTitle)
         

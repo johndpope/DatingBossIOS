@@ -77,6 +77,12 @@ class SignupGuideViewController: BaseSignupViewController {
         reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        leftNavigationItemView?.isHidden = true
+    }
+    
     override func pressedButton(_ sender: UIButton) {
         super.pressedButton(sender)
         
@@ -97,11 +103,11 @@ class SignupGuideViewController: BaseSignupViewController {
     private func reloadData() {
         tableData.removeAll()
         
-        tableData.append(SignupGuideData(title: "본인 인증  / 프로필 작성", content: "본인 인증과 프로필 작성은 필수입니다."))
-        tableData.append(SignupGuideData(title: "가치관 설문 작성", content: "사랑, 인생 가치관을 작성하는 단계입니다."))
-        tableData.append(SignupGuideData(title: "성격 설문 작성", content: "성격을 설문작성하여 자신을 나타냅니다."))
-        tableData.append(SignupGuideData(title: "연애스타일 설문 작성", content: "연애시 즐겨하는 스타일 타입을 분석합니다."))
-        tableData.append(SignupGuideData(title: "선호 외모 입력", content: "이성의 외모를 통해 매칭확률을 높입니다."))
+        tableData.append(SignupGuideData(title: "프로필 작성", content: "약관 동의 / 본인 인증 / 기본 정보 입력"))
+        tableData.append(SignupGuideData(title: "가치관 설문 작성", content: "가치관이 맞아야 연애와 결혼에 대한 만족도가 높아집니다."))
+        tableData.append(SignupGuideData(title: "성격 설문 작성", content: "성격이 맞아야 다툼없는 연애와 결혼생활을 할 수 있습니다."))
+        tableData.append(SignupGuideData(title: "연애스타일 설문 작성", content: "연애 스타일이 비슷하면 상대를 배려하며 즐거운 연애를 할 수 있습니다."))
+        tableData.append(SignupGuideData(title: "이상형 설정", content: "이상형 설정을 수행하시면 인공지능 알고리즘으로 분석하여 이상형에 가장 가까운 이성을 우선으로 추천해드립니다."))
         
         theTableView.reloadData()
     }
@@ -113,7 +119,13 @@ extension SignupGuideViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64 * QUtils.optimizeRatio()
+        guard let cell = self.tableView(tableView, cellForRowAt: indexPath) as? SignupGuideTableViewCell else { return 0 }
+        cell.data = tableData[indexPath.row]
+        var height = cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        if height < 64 * QUtils.optimizeRatio() {
+            height = 64 * QUtils.optimizeRatio()
+        }
+        return height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

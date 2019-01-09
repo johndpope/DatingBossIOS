@@ -14,6 +14,8 @@ class AlertPopupViewController: BasePopupViewController {
     
     private var actions = [AlertPopupAction]()
     
+    var messageColour = #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)
+    
     init(withTitle tString: String?, message mString: String?) {
         titleString = tString
         messageString = mString
@@ -36,7 +38,7 @@ class AlertPopupViewController: BasePopupViewController {
             labelMessage = UILabel()
             labelMessage?.translatesAutoresizingMaskIntoConstraints = false
             labelMessage?.text = messageString
-            labelMessage?.textColor = #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)
+            labelMessage?.textColor = messageColour
             labelMessage?.textAlignment = .center
             labelMessage?.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .medium)
             labelMessage?.numberOfLines = 0

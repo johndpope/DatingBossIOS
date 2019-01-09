@@ -80,6 +80,10 @@
 		1CA5877D21E5F09F002B60F2 /* img_check_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA5877B21E5F09F002B60F2 /* img_check_sel@3x.png */; };
 		1CA5877F21E5F801002B60F2 /* SignupTermsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877E21E5F801002B60F2 /* SignupTermsDetailViewController.swift */; };
 		1CA5878121E5F9A5002B60F2 /* TermsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5878021E5F9A5002B60F2 /* TermsData.swift */; };
+		1CA5878321E5FEB1002B60F2 /* SignupIdVieWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5878221E5FEB1002B60F2 /* SignupIdVieWController.swift */; };
+		1CA5878721E6173C002B60F2 /* SignupStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5878621E6173C002B60F2 /* SignupStepViewController.swift */; };
+		1CA5878921E63594002B60F2 /* SignupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5878821E63594002B60F2 /* SignupProfileViewController.swift */; };
+		1CA5878B21E63775002B60F2 /* SignupNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5878A21E63775002B60F2 /* SignupNavigationViewController.swift */; };
 		1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F721DF44E300B37EAE /* QTextAttributes.swift */; };
 		1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F821DF44E300B37EAE /* QDataManager.swift */; };
 		1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F921DF44E300B37EAE /* QImageMaker.swift */; };
@@ -222,6 +226,10 @@
 		1CA5877B21E5F09F002B60F2 /* img_check_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_check_sel@3x.png"; sourceTree = "<group>"; };
 		1CA5877E21E5F801002B60F2 /* SignupTermsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupTermsDetailViewController.swift; sourceTree = "<group>"; };
 		1CA5878021E5F9A5002B60F2 /* TermsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsData.swift; sourceTree = "<group>"; };
+		1CA5878221E5FEB1002B60F2 /* SignupIdVieWController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupIdVieWController.swift; sourceTree = "<group>"; };
+		1CA5878621E6173C002B60F2 /* SignupStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStepViewController.swift; sourceTree = "<group>"; };
+		1CA5878821E63594002B60F2 /* SignupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileViewController.swift; sourceTree = "<group>"; };
+		1CA5878A21E63775002B60F2 /* SignupNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNavigationViewController.swift; sourceTree = "<group>"; };
 		1CB542F721DF44E300B37EAE /* QTextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextAttributes.swift; sourceTree = "<group>"; };
 		1CB542F821DF44E300B37EAE /* QDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDataManager.swift; sourceTree = "<group>"; };
 		1CB542F921DF44E300B37EAE /* QImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImageMaker.swift; sourceTree = "<group>"; };
@@ -596,11 +604,15 @@
 			isa = PBXGroup;
 			children = (
 				1CA5877421E5EAED002B60F2 /* BaseSignupViewController.swift */,
+				1CA5878A21E63775002B60F2 /* SignupNavigationViewController.swift */,
 				1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */,
 				1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */,
 				1CA5877621E5EDB1002B60F2 /* SignupTermsViewController.swift */,
 				1CA5877821E5EDF8002B60F2 /* SignupTermsTableViewCell.swift */,
 				1CA5877E21E5F801002B60F2 /* SignupTermsDetailViewController.swift */,
+				1CA5878221E5FEB1002B60F2 /* SignupIdVieWController.swift */,
+				1CA5878621E6173C002B60F2 /* SignupStepViewController.swift */,
+				1CA5878821E63594002B60F2 /* SignupProfileViewController.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -928,8 +940,10 @@
 				1C03841921D09B220024C3B3 /* CircleIndicatorView.swift in Sources */,
 				1C03841C21D1CDE80024C3B3 /* UserProfileViewController.swift in Sources */,
 				1CC9B5F221DC52B8008C22B8 /* MyPageViewController.swift in Sources */,
+				1CA5878921E63594002B60F2 /* SignupProfileViewController.swift in Sources */,
 				1C5AC83121E497BA0007827D /* IntroViewController.swift in Sources */,
 				1CE69AE621DA43D000B9FE4A /* FavouriteCollectionViewCell.swift in Sources */,
+				1CA5878B21E63775002B60F2 /* SignupNavigationViewController.swift in Sources */,
 				1CE69AF421DB5CBB00B9FE4A /* ChatListTableViewCell.swift in Sources */,
 				1CB5430021DF44E300B37EAE /* QUtils.swift in Sources */,
 				1C858E5221C8F15F00900481 /* BaseNavigationController.swift in Sources */,
@@ -947,6 +961,7 @@
 				1C03841321D0025F0024C3B3 /* UserData.swift in Sources */,
 				1CB5433221DF473B00B37EAE /* SBJsonUTF8Stream.m in Sources */,
 				1C858D8B21C7733D00900481 /* AppDelegate.swift in Sources */,
+				1CA5878721E6173C002B60F2 /* SignupStepViewController.swift in Sources */,
 				1CE69AEB21DA457A00B9FE4A /* SearchConditionViewController.swift in Sources */,
 				1C5AC81C21E39C4B0007827D /* BoardViewController.swift in Sources */,
 				1CB5433121DF473B00B37EAE /* SBJsonStreamParserAccumulator.m in Sources */,
@@ -965,6 +980,7 @@
 				1CB5433521DF473B00B37EAE /* SBJsonStreamWriter.m in Sources */,
 				1C5AC83A21E4AF520007827D /* BasePopupViewController.swift in Sources */,
 				1CC9B60221DC537F008C22B8 /* MyPageTableViewCell.swift in Sources */,
+				1CA5878321E5FEB1002B60F2 /* SignupIdVieWController.swift in Sources */,
 				1C5AC81721E35D900007827D /* SettingsTableViewCell.swift in Sources */,
 				1CE69ACF21D9B8FE00B9FE4A /* ChatTableViewCell.swift in Sources */,
 				1CE69AFB21DBC08900B9FE4A /* ChatListSegmentView.swift in Sources */,

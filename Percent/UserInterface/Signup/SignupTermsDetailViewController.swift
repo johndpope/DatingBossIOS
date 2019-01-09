@@ -36,7 +36,7 @@ class SignupTermsDetailViewController: BaseSignupViewController {
         theWebView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         theWebView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         theWebView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        theWebView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 16).isActive = true
+        theWebView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         
         theWebView.loadHTMLString(data.terms_text ?? "", baseURL: nil)
     }

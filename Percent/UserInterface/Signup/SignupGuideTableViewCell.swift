@@ -27,8 +27,12 @@ class SignupGuideTableViewCell: UITableViewCell {
         didSet {
             labelTitle.text = data?.title
             labelContent.text = data?.content
+            
+            self.layoutIfNeeded()
         }
     }
+    
+    private var heightConstraint: NSLayoutConstraint!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,7 +57,7 @@ class SignupGuideTableViewCell: UITableViewCell {
         labelStepCount.font = UIFont.systemFont(ofSize: 20 * QUtils.optimizeRatio(), weight: .bold)
         self.contentView.addSubview(labelStepCount)
         
-        labelStepCount.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -14 * QUtils.optimizeRatio()).isActive = true
+        labelStepCount.topAnchor.constraint(equalTo: labelStep.bottomAnchor, constant: 2 * QUtils.optimizeRatio()).isActive = true
         labelStepCount.leadingAnchor.constraint(equalTo: labelStep.leadingAnchor).isActive = true
         labelStepCount.widthAnchor.constraint(equalTo: labelStep.widthAnchor).isActive = true
         
@@ -64,20 +68,22 @@ class SignupGuideTableViewCell: UITableViewCell {
         
         labelTitle.topAnchor.constraint(equalTo: labelStep.topAnchor).isActive = true
         labelTitle.leadingAnchor.constraint(equalTo: labelStep.trailingAnchor).isActive = true
-        labelTitle.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
+        labelTitle.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
         
         labelContent.translatesAutoresizingMaskIntoConstraints = false
         labelContent.textColor = #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)
         labelContent.font = UIFont.systemFont(ofSize: 12 * QUtils.optimizeRatio(), weight: .bold)
+        labelContent.numberOfLines = 2
         self.contentView.addSubview(labelContent)
         
-        labelContent.bottomAnchor.constraint(equalTo: labelStepCount.bottomAnchor).isActive = true
+        labelContent.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 4 * QUtils.optimizeRatio()).isActive = true
         labelContent.leadingAnchor.constraint(equalTo: labelTitle.leadingAnchor).isActive = true
         labelContent.trailingAnchor.constraint(equalTo: labelTitle.trailingAnchor).isActive = true
+        labelContent.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12 * QUtils.optimizeRatio()).isActive = true
         
         let seperator = UIView()
         seperator.translatesAutoresizingMaskIntoConstraints = false
-        seperator.backgroundColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
         self.contentView.addSubview(seperator)
         
         seperator.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
