@@ -74,6 +74,12 @@
 		1CA5877121E5DCF4002B60F2 /* SignupGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */; };
 		1CA5877321E5DE1A002B60F2 /* SignupGuideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */; };
 		1CA5877521E5EAED002B60F2 /* BaseSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877421E5EAED002B60F2 /* BaseSignupViewController.swift */; };
+		1CA5877721E5EDB1002B60F2 /* SignupTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877621E5EDB1002B60F2 /* SignupTermsViewController.swift */; };
+		1CA5877921E5EDF8002B60F2 /* SignupTermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877821E5EDF8002B60F2 /* SignupTermsTableViewCell.swift */; };
+		1CA5877C21E5F09F002B60F2 /* img_check_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA5877A21E5F09F002B60F2 /* img_check_nor@3x.png */; };
+		1CA5877D21E5F09F002B60F2 /* img_check_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA5877B21E5F09F002B60F2 /* img_check_sel@3x.png */; };
+		1CA5877F21E5F801002B60F2 /* SignupTermsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877E21E5F801002B60F2 /* SignupTermsDetailViewController.swift */; };
+		1CA5878121E5F9A5002B60F2 /* TermsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5878021E5F9A5002B60F2 /* TermsData.swift */; };
 		1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F721DF44E300B37EAE /* QTextAttributes.swift */; };
 		1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F821DF44E300B37EAE /* QDataManager.swift */; };
 		1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F921DF44E300B37EAE /* QImageMaker.swift */; };
@@ -210,6 +216,12 @@
 		1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGuideViewController.swift; sourceTree = "<group>"; };
 		1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGuideTableViewCell.swift; sourceTree = "<group>"; };
 		1CA5877421E5EAED002B60F2 /* BaseSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSignupViewController.swift; sourceTree = "<group>"; };
+		1CA5877621E5EDB1002B60F2 /* SignupTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupTermsViewController.swift; sourceTree = "<group>"; };
+		1CA5877821E5EDF8002B60F2 /* SignupTermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupTermsTableViewCell.swift; sourceTree = "<group>"; };
+		1CA5877A21E5F09F002B60F2 /* img_check_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_check_nor@3x.png"; sourceTree = "<group>"; };
+		1CA5877B21E5F09F002B60F2 /* img_check_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_check_sel@3x.png"; sourceTree = "<group>"; };
+		1CA5877E21E5F801002B60F2 /* SignupTermsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupTermsDetailViewController.swift; sourceTree = "<group>"; };
+		1CA5878021E5F9A5002B60F2 /* TermsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsData.swift; sourceTree = "<group>"; };
 		1CB542F721DF44E300B37EAE /* QTextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextAttributes.swift; sourceTree = "<group>"; };
 		1CB542F821DF44E300B37EAE /* QDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDataManager.swift; sourceTree = "<group>"; };
 		1CB542F921DF44E300B37EAE /* QImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImageMaker.swift; sourceTree = "<group>"; };
@@ -325,6 +337,7 @@
 				1CE69AFE21DBCC3000B9FE4A /* ChatData.swift */,
 				1C5AC81821E37B7D0007827D /* SettingsData.swift */,
 				1C5AC81D21E3A0F60007827D /* BoardData.swift */,
+				1CA5878021E5F9A5002B60F2 /* TermsData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -443,6 +456,8 @@
 			children = (
 				1C5AC82121E3ACC70007827D /* img_board_collapsed@3x.png */,
 				1C5AC82221E3ACC70007827D /* img_board_expanded@3x.png */,
+				1CA5877A21E5F09F002B60F2 /* img_check_nor@3x.png */,
+				1CA5877B21E5F09F002B60F2 /* img_check_sel@3x.png */,
 				1C03842321D28A050024C3B3 /* img_heart@3x.png */,
 				1C5AC83521E49BC50007827D /* img_intro_heart@3x.png */,
 				1C5AC83421E49BC50007827D /* img_intro_percent@3x.png */,
@@ -583,6 +598,9 @@
 				1CA5877421E5EAED002B60F2 /* BaseSignupViewController.swift */,
 				1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */,
 				1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */,
+				1CA5877621E5EDB1002B60F2 /* SignupTermsViewController.swift */,
+				1CA5877821E5EDF8002B60F2 /* SignupTermsTableViewCell.swift */,
+				1CA5877E21E5F801002B60F2 /* SignupTermsDetailViewController.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -759,6 +777,7 @@
 				1CE69AB221D8EEC100B9FE4A /* img_profile_3@3x.png in Resources */,
 				1C858DA621C780D500900481 /* img_login_mail@3x.png in Resources */,
 				1C858E3B21C872C900900481 /* img_tab_2_sel@3x.png in Resources */,
+				1CA5877D21E5F09F002B60F2 /* img_check_sel@3x.png in Resources */,
 				1C5AC83321E49ADF0007827D /* img_intro_text@3x.png in Resources */,
 				1C03842621D28A050024C3B3 /* img_star@3x.png in Resources */,
 				1C03842521D28A050024C3B3 /* img_heart@3x.png in Resources */,
@@ -796,6 +815,7 @@
 				1C858DA321C780D500900481 /* img_login_icon@3x.png in Resources */,
 				1C5AC81421E35D750007827D /* img_settings_1@3x.png in Resources */,
 				1C5AC84521E4D45C0007827D /* spoqa_han_sans_bold.ttf in Resources */,
+				1CA5877C21E5F09F002B60F2 /* img_check_nor@3x.png in Resources */,
 				1C858E3D21C872C900900481 /* img_tab_1_nor@3x.png in Resources */,
 				1C5AC81021E35D750007827D /* img_settings_5@3x.png in Resources */,
 				1CE9653D21DC77D000334B4A /* img_mypage_3@3x.png in Resources */,
@@ -873,6 +893,7 @@
 				1C5AC83E21E4CF1A0007827D /* FindPasswordPopupViewController.swift in Sources */,
 				1C03842021D1EBE70024C3B3 /* UserPictureCollectionViewCell.swift in Sources */,
 				1CE69AAA21D896D600B9FE4A /* UserProfileStatsView.swift in Sources */,
+				1CA5877721E5EDB1002B60F2 /* SignupTermsViewController.swift in Sources */,
 				1CE69AF021DA458F00B9FE4A /* RecommendsCollectionViewCell.swift in Sources */,
 				1CE69AE321DA43B900B9FE4A /* CategoryViewController.swift in Sources */,
 				1CE69AED21DA457A00B9FE4A /* SearchResultsViewController.swift in Sources */,
@@ -894,7 +915,9 @@
 				1C5AC82021E3A3EB0007827D /* BoardTableViewCell.swift in Sources */,
 				1CE69AF521DB5CBB00B9FE4A /* ChatListViewController.swift in Sources */,
 				1C03841121D002090024C3B3 /* BaseData.swift in Sources */,
+				1CA5877F21E5F801002B60F2 /* SignupTermsDetailViewController.swift in Sources */,
 				1CE69AF121DA458F00B9FE4A /* RecommendsViewController.swift in Sources */,
+				1CA5877921E5EDF8002B60F2 /* SignupTermsTableViewCell.swift in Sources */,
 				1CB5430721DF472B00B37EAE /* Strings.swift in Sources */,
 				1CB5433021DF473B00B37EAE /* SBJsonParser.m in Sources */,
 				1C5AC83C21E4AFBE0007827D /* FindEmailPopupViewController.swift in Sources */,
@@ -919,6 +942,7 @@
 				1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */,
 				1CE69AFD21DBCBF300B9FE4A /* ChatListData.swift in Sources */,
 				1CB5431221DF473300B37EAE /* Application.swift in Sources */,
+				1CA5878121E5F9A5002B60F2 /* TermsData.swift in Sources */,
 				1CB5433A21DF473B00B37EAE /* SBJsonTokeniser.m in Sources */,
 				1C03841321D0025F0024C3B3 /* UserData.swift in Sources */,
 				1CB5433221DF473B00B37EAE /* SBJsonUTF8Stream.m in Sources */,

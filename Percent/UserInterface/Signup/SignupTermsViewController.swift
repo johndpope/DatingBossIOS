@@ -1,5 +1,5 @@
 //
-//  SignupGuideViewController.swift
+//  SignupTermsViewController.swift
 //  Percent
 //
 //  Created by Jun-kyu Jeon on 12/11/2018.
@@ -8,23 +8,21 @@
 
 import UIKit
 
-struct SignupGuideData {
-    let title: String
-    let content: String
-}
 
-class SignupGuideViewController: BaseSignupViewController {
+class SignupTermsViewController: BaseSignupViewController {
     private let theTableView = UITableView()
+    
+    private let buttonAgreeAll = UIButton(type: .custom)
     
     private let buttonCancel = UIButton(type: .custom)
     private let buttonConfirm = UIButton(type: .custom)
     
-    private var tableData = [SignupGuideData]()
+    private var tableData = [TermsData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "가입 절차"
+        self.title = "약관 동의"
         
         buttonCancel.translatesAutoresizingMaskIntoConstraints = false
         buttonCancel.clipsToBounds = true
@@ -47,7 +45,7 @@ class SignupGuideViewController: BaseSignupViewController {
         buttonConfirm.clipsToBounds = true
         buttonConfirm.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .normal)
         buttonConfirm.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)), for: .highlighted)
-        buttonConfirm.setTitle("시작", for: .normal)
+        buttonConfirm.setTitle("본인인증", for: .normal)
         buttonConfirm.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         buttonConfirm.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
         buttonConfirm.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
@@ -64,7 +62,7 @@ class SignupGuideViewController: BaseSignupViewController {
         theTableView.delegate = self
         theTableView.dataSource = self
         theTableView.separatorStyle = .none
-        theTableView.register(SignupGuideTableViewCell.self, forCellReuseIdentifier: "SignupGuideTableViewCell")
+        theTableView.register(SignupTermsTableViewCell.self, forCellReuseIdentifier: "SignupTermsTableViewCell")
         self.view.addSubview(theTableView)
         
         theTableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -72,42 +70,82 @@ class SignupGuideViewController: BaseSignupViewController {
         theTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         theTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
-        theTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 24 * QUtils.optimizeRatio()))
+        theTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 16 * QUtils.optimizeRatio()))
+        
+        let tableFooterView = UIView()
+        tableFooterView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 96 * QUtils.optimizeRatio())
+        
+        buttonAgreeAll.translatesAutoresizingMaskIntoConstraints = false
+        buttonAgreeAll.clipsToBounds = true
+        buttonAgreeAll.layer.borderColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+        buttonAgreeAll.layer.borderWidth = 1
+        buttonAgreeAll.layer.cornerRadius = 24 * QUtils.optimizeRatio()
+        buttonAgreeAll.setTitle("약관에 모두 동의", for: .normal)
+        buttonAgreeAll.setTitleColor(#colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), for: .normal)
+        buttonAgreeAll.setTitleColor(#colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), for: .highlighted)
+        buttonAgreeAll.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
+        buttonAgreeAll.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
+        tableFooterView.addSubview(buttonAgreeAll)
+        
+        buttonAgreeAll.leadingAnchor.constraint(equalTo: tableFooterView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+        buttonAgreeAll.trailingAnchor.constraint(equalTo: tableFooterView.leadingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
+        buttonAgreeAll.heightAnchor.constraint(equalToConstant: buttonAgreeAll.layer.cornerRadius * 2).isActive = true
+        buttonAgreeAll.centerYAnchor.constraint(equalTo: tableFooterView.centerYAnchor).isActive = true
+        
+        theTableView.tableFooterView = tableFooterView
         
         reloadData()
+    }
+    
+    private func reloadData() {
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Service.GetTerms, method: .get, headerValues: nil, params: nil) { (isSucceed, errMessage, response) in
+            guard isSucceed, let responseData = response as? [[String:Any]] else { return }
+            
+            self.tableData.removeAll()
+            
+            self.tableData.append(contentsOf: responseData.map({ (item) -> TermsData in
+                return TermsData(with: item)
+            }))
+            
+            self.theTableView.reloadData()
+        }
     }
     
     override func pressedButton(_ sender: UIButton) {
         super.pressedButton(sender)
         
         switch sender {
-        case buttonCancel:
-            self.dismiss(animated: true, completion: nil)
+        case buttonAgreeAll:
+            for i in 0 ..< tableData.count {
+                let data = tableData[i]
+                data.isAgreed = true
+                tableData[i] = data
+            }
+            theTableView.reloadData()
             break
             
-        case buttonConfirm:
-            let viewController = SignupTermsViewController()
-            self.navigationController?.pushViewController(viewController, animated: true)
+        default:
             break
-            
-        default: break
         }
     }
     
-    private func reloadData() {
-        tableData.removeAll()
+    @objc private func pressedCellButton(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
         
-        tableData.append(SignupGuideData(title: "본인 인증  / 프로필 작성", content: "본인 인증과 프로필 작성은 필수입니다."))
-        tableData.append(SignupGuideData(title: "가치관 설문 작성", content: "사랑, 인생 가치관을 작성하는 단계입니다."))
-        tableData.append(SignupGuideData(title: "성격 설문 작성", content: "성격을 설문작성하여 자신을 나타냅니다."))
-        tableData.append(SignupGuideData(title: "연애스타일 설문 작성", content: "연애시 즐겨하는 스타일 타입을 분석합니다."))
-        tableData.append(SignupGuideData(title: "선호 외모 입력", content: "이성의 외모를 통해 매칭확률을 높입니다."))
-        
-        theTableView.reloadData()
+        let data = tableData[sender.tag]
+        data.isAgreed = sender.isSelected
+        tableData[sender.tag] = data
     }
 }
 
-extension SignupGuideViewController: UITableViewDelegate, UITableViewDataSource {
+extension SignupTermsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = SignupTermsDetailViewController(data: tableData[indexPath.row])
+        let navController = UINavigationController(rootViewController: viewController)
+        self.present(navController, animated: true, completion: nil)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
@@ -117,12 +155,20 @@ extension SignupGuideViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SignupGuideTableViewCell") as? SignupGuideTableViewCell else { return UITableViewCell() }
-        cell.indexPath = indexPath
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SignupTermsTableViewCell") as? SignupTermsTableViewCell else { return UITableViewCell() }
+        
+        let data = tableData[indexPath.row]
+        
+        var text = data.terms_title
+        if data.indispensable_fl == false {
+            text += " (선택사항)"
+        }
+        
+        cell.labelTitle.text = text
+        
+        cell.buttonConfirm.tag = indexPath.row
+        cell.buttonConfirm.isSelected = data.isAgreed
+        cell.buttonConfirm.addTarget(self, action: #selector(self.pressedCellButton(_:)), for: .touchUpInside)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        (cell as? SignupGuideTableViewCell)?.data = tableData[indexPath.row]
     }
 }
