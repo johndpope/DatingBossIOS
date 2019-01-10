@@ -16,6 +16,7 @@ struct RequestUrl {
         public static let Validate = "http://www.lovecenthome.com/ios/duplicate"
         public static let Check = "http://www.lovecenthome.com/ios/check"
         public static let GetInfo = "http://www.lovecenthome.com/ios/member/"
+        public static let GetProfileEntries = "http://www.lovecenthome.com/member/view/"
         public static let GetStats = "http://www.lovecenthome.com/ios/graph/"
         public static let Update = "http://www.lovecenthome.com/ios/member/"
         public static let Unregister = "http://www.lovecenthome.com/ios/member/"

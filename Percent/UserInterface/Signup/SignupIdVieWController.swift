@@ -11,13 +11,27 @@ import UIKit
 import WebKit
 
 class SignupIdViewController: BaseSignupViewController {
-    private let theWebView = WKWebView()
+    private var theWebView: WKWebView!
+    
+    override init(navigationViewEffect effect: UIVisualEffect? = nil) {
+        super.init(navigationViewEffect: effect)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "본인 인증"
         
+        let contentController = WKUserContentController()
+        let config = WKWebViewConfiguration()
+        contentController.add(self, name: "idAuth")
+        config.userContentController = contentController
+        
+        theWebView = WKWebView(frame: CGRect.zero, configuration: config)
         theWebView.translatesAutoresizingMaskIntoConstraints = false
         theWebView.navigationDelegate = self
         theWebView.uiDelegate = self
@@ -28,7 +42,7 @@ class SignupIdViewController: BaseSignupViewController {
         theWebView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         theWebView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
-        let urlRequest = URLRequest(url: URL(string: "http://www.lovecenthome.com/IdAuth/checkplus_main.jsp")!)
+        let urlRequest = URLRequest(url: URL(string: "http://www.lovecenthome.com/IdAuth/checkplus_main_ios.jsp")!)
         theWebView.load(urlRequest)
     }
 }
@@ -45,8 +59,9 @@ extension SignupIdViewController: WKNavigationDelegate, WKUIDelegate, WKScriptMe
 //    }
 //
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        print(navigationResponse.response.url?.absoluteString)
         
-        guard let urlString = navigationResponse.response.url?.absoluteString, urlString.range(of: "www.bossofdating.com/IdAuth/checkplus_success.jsp") != nil else {
+        guard let urlString = navigationResponse.response.url?.absoluteString, urlString.range(of: "/IdAuth/checkplus_success.jsp") != nil else {
             decisionHandler(.allow)
             return
         }
