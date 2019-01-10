@@ -12,6 +12,10 @@ let kHeightNavigationView = CGFloat(56)
 let kTagNavigationBottomLine = 90001
 
 class BaseViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     let navigationView: UIVisualEffectView
     
     var leftNavigationItemView: UIButton?

@@ -30,9 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         QHttpClient.addCommonHeaderValue("application/json", for: "Content-Type")
         
-        let viewController = IntroViewController()
+//        let viewController = IntroViewController()
+        let viewController = SignupProfileViewController()
+        let navController = SignupNavigationViewController(rootViewController: viewController)
         
-        self.window?.rootViewController = viewController
+        self.window?.rootViewController = navController
         self.window!.makeKeyAndVisible()
         return true
     }

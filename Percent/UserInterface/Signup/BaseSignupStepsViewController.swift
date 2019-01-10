@@ -9,6 +9,10 @@
 import UIKit
 
 class BaseSignupStepsViewController: BaseViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     internal let headerView = UIView()
     internal let labelTitle = UILabel()
     

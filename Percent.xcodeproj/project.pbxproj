@@ -89,6 +89,7 @@
 		1CA5879121E6FCD8002B60F2 /* SignupProfileEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5879021E6FCD8002B60F2 /* SignupProfileEntryView.swift */; };
 		1CA5879421E6FDD8002B60F2 /* img_validation_checked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA5879221E6FDD7002B60F2 /* img_validation_checked@3x.png */; };
 		1CA5879521E6FDD8002B60F2 /* img_validation_unchecked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA5879321E6FDD7002B60F2 /* img_validation_unchecked@3x.png */; };
+		1CAC5A8B21E718C2002A0A4E /* SignupProfileSpecsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A8A21E718C2002A0A4E /* SignupProfileSpecsViewController.swift */; };
 		1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F721DF44E300B37EAE /* QTextAttributes.swift */; };
 		1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F821DF44E300B37EAE /* QDataManager.swift */; };
 		1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F921DF44E300B37EAE /* QImageMaker.swift */; };
@@ -240,6 +241,7 @@
 		1CA5879021E6FCD8002B60F2 /* SignupProfileEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileEntryView.swift; sourceTree = "<group>"; };
 		1CA5879221E6FDD7002B60F2 /* img_validation_checked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_validation_checked@3x.png"; sourceTree = "<group>"; };
 		1CA5879321E6FDD7002B60F2 /* img_validation_unchecked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_validation_unchecked@3x.png"; sourceTree = "<group>"; };
+		1CAC5A8A21E718C2002A0A4E /* SignupProfileSpecsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecsViewController.swift; sourceTree = "<group>"; };
 		1CB542F721DF44E300B37EAE /* QTextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextAttributes.swift; sourceTree = "<group>"; };
 		1CB542F821DF44E300B37EAE /* QDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDataManager.swift; sourceTree = "<group>"; };
 		1CB542F921DF44E300B37EAE /* QImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImageMaker.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 				1CA5878621E6173C002B60F2 /* SignupStepViewController.swift */,
 				1CA5878821E63594002B60F2 /* SignupProfileViewController.swift */,
 				1CA5879021E6FCD8002B60F2 /* SignupProfileEntryView.swift */,
+				1CAC5A8A21E718C2002A0A4E /* SignupProfileSpecsViewController.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -933,6 +936,7 @@
 				1C858DB521C7877800900481 /* LoginViewController.swift in Sources */,
 				1CE69AF921DBA47E00B9FE4A /* CherryButton.swift in Sources */,
 				1C5AC80321E358090007827D /* PSwitchView.swift in Sources */,
+				1CAC5A8B21E718C2002A0A4E /* SignupProfileSpecsViewController.swift in Sources */,
 				1C5AC81921E37B7D0007827D /* SettingsData.swift in Sources */,
 				1CB5433921DF473B00B37EAE /* SBJsonStreamWriterState.m in Sources */,
 				1CB5430121DF44E300B37EAE /* QUrlReachablility.swift in Sources */,
