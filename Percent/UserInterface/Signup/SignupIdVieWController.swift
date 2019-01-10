@@ -52,6 +52,7 @@ extension SignupIdViewController: WKNavigationDelegate, WKUIDelegate, WKScriptMe
         }
         
         let viewController = SignupStepViewController(step: 1)
+        viewController.delegate = self
         self.navigationController?.present(viewController, animated: true, completion: nil)
         
         decisionHandler(.allow)
@@ -60,5 +61,14 @@ extension SignupIdViewController: WKNavigationDelegate, WKUIDelegate, WKScriptMe
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("userContentController")
         print(message.body)
+    }
+}
+
+extension SignupIdViewController: SignupStepViewControllerDelegate {
+    func signupStepViewController(doneProgress viewController: SignupStepViewController) {
+        let newVc = SignupProfileViewController()
+        self.navigationController?.pushViewController(newVc, animated: false)
+        
+        viewController.dismiss(animated: true, completion: nil)
     }
 }

@@ -16,5 +16,7 @@ class BaseSignupViewController: BaseViewController {
         self.navigationView.contentView.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        (self.navigationController as? SignupNavigationViewController)?.setSignupNavigatingView(hidden: true)
     }
 }

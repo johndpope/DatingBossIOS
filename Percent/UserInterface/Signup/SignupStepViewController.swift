@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol SignupStepViewControllerDelegate {
+    func signupStepViewController(doneProgress viewController: SignupStepViewController)
+}
+
 class SignupStepViewController: UIViewController {
     private let step: Int
+    
+    var delegate: SignupStepViewControllerDelegate?
     
     init(step value: Int) {
         step = value
@@ -92,6 +98,8 @@ class SignupStepViewController: UIViewController {
             
             if value >= 1.0 {
                 timer.invalidate()
+                
+                self.delegate?.signupStepViewController(doneProgress: self)
             }
         })
     }

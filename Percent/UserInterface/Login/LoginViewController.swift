@@ -350,7 +350,7 @@ class LoginViewController: BaseViewController {
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "아니오", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "예", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
                 let viewController = SignupGuideViewController()
-                let navController = UINavigationController(rootViewController: viewController)
+                let navController = SignupNavigationViewController(rootViewController: viewController)
                 self.present(navController, animated: true, completion: nil)
             }))
             self.view.addSubview(alertController.view)
