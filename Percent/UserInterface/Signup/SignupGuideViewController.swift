@@ -92,6 +92,8 @@ class SignupGuideViewController: BaseSignupViewController {
             break
             
         case buttonConfirm:
+            UserPayload.shared.clear()
+            
             let viewController = SignupTermsViewController()
             self.navigationController?.pushViewController(viewController, animated: true)
             break

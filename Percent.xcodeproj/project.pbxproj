@@ -90,6 +90,9 @@
 		1CA5879421E6FDD8002B60F2 /* img_validation_checked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA5879221E6FDD7002B60F2 /* img_validation_checked@3x.png */; };
 		1CA5879521E6FDD8002B60F2 /* img_validation_unchecked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA5879321E6FDD7002B60F2 /* img_validation_unchecked@3x.png */; };
 		1CAC5A8B21E718C2002A0A4E /* SignupProfileSpecsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A8A21E718C2002A0A4E /* SignupProfileSpecsViewController.swift */; };
+		1CAC5A8D21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A8C21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift */; };
+		1CAC5A8F21E721E9002A0A4E /* img_plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAC5A8E21E721E9002A0A4E /* img_plus@3x.png */; };
+		1CAC5A9221E72344002A0A4E /* UserPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A9121E72344002A0A4E /* UserPayload.swift */; };
 		1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F721DF44E300B37EAE /* QTextAttributes.swift */; };
 		1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F821DF44E300B37EAE /* QDataManager.swift */; };
 		1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F921DF44E300B37EAE /* QImageMaker.swift */; };
@@ -242,6 +245,9 @@
 		1CA5879221E6FDD7002B60F2 /* img_validation_checked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_validation_checked@3x.png"; sourceTree = "<group>"; };
 		1CA5879321E6FDD7002B60F2 /* img_validation_unchecked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_validation_unchecked@3x.png"; sourceTree = "<group>"; };
 		1CAC5A8A21E718C2002A0A4E /* SignupProfileSpecsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecsViewController.swift; sourceTree = "<group>"; };
+		1CAC5A8C21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfilePictureCollectionViewCell.swift; sourceTree = "<group>"; };
+		1CAC5A8E21E721E9002A0A4E /* img_plus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plus@3x.png"; sourceTree = "<group>"; };
+		1CAC5A9121E72344002A0A4E /* UserPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPayload.swift; sourceTree = "<group>"; };
 		1CB542F721DF44E300B37EAE /* QTextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextAttributes.swift; sourceTree = "<group>"; };
 		1CB542F821DF44E300B37EAE /* QDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDataManager.swift; sourceTree = "<group>"; };
 		1CB542F921DF44E300B37EAE /* QImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImageMaker.swift; sourceTree = "<group>"; };
@@ -348,6 +354,7 @@
 		1C03840F21D001D40024C3B3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				1CAC5A9021E7233A002A0A4E /* Payload */,
 				1C03841021D002090024C3B3 /* BaseData.swift */,
 				1C03841221D0025F0024C3B3 /* UserData.swift */,
 				1C03841621D090F20024C3B3 /* RecommendData.swift */,
@@ -488,6 +495,7 @@
 				1C5AC83F21E4D2490007827D /* img_login_background@2x.png */,
 				1C858DA121C780D500900481 /* img_login_lock@3x.png */,
 				1C858DA221C780D500900481 /* img_login_mail@3x.png */,
+				1CAC5A8E21E721E9002A0A4E /* img_plus@3x.png */,
 				1CE69AAE21D8EEC000B9FE4A /* img_profile_1@3x.png */,
 				1CE69AAB21D8EEC000B9FE4A /* img_profile_2@3x.png */,
 				1CE69AAC21D8EEC000B9FE4A /* img_profile_3@3x.png */,
@@ -631,8 +639,17 @@
 				1CA5878821E63594002B60F2 /* SignupProfileViewController.swift */,
 				1CA5879021E6FCD8002B60F2 /* SignupProfileEntryView.swift */,
 				1CAC5A8A21E718C2002A0A4E /* SignupProfileSpecsViewController.swift */,
+				1CAC5A8C21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift */,
 			);
 			path = Signup;
+			sourceTree = "<group>";
+		};
+		1CAC5A9021E7233A002A0A4E /* Payload */ = {
+			isa = PBXGroup;
+			children = (
+				1CAC5A9121E72344002A0A4E /* UserPayload.swift */,
+			);
+			path = Payload;
 			sourceTree = "<group>";
 		};
 		1CB542F621DF44BF00B37EAE /* QKits */ = {
@@ -820,6 +837,7 @@
 				1C5AC81321E35D750007827D /* img_settings_4@3x.png in Resources */,
 				1C5AC82321E3ACC70007827D /* img_board_collapsed@3x.png in Resources */,
 				1CE69AB621D8EEC100B9FE4A /* img_profile_6@3x.png in Resources */,
+				1CAC5A8F21E721E9002A0A4E /* img_plus@3x.png in Resources */,
 				1C858E3E21C872C900900481 /* img_tab_2_nor@3x.png in Resources */,
 				1C5AC80F21E35D750007827D /* img_settings_2@3x.png in Resources */,
 				1CE69AB121D8EEC100B9FE4A /* img_profile_2@3x.png in Resources */,
@@ -950,6 +968,7 @@
 				1C03841121D002090024C3B3 /* BaseData.swift in Sources */,
 				1CA5877F21E5F801002B60F2 /* SignupTermsDetailViewController.swift in Sources */,
 				1CE69AF121DA458F00B9FE4A /* RecommendsViewController.swift in Sources */,
+				1CAC5A9221E72344002A0A4E /* UserPayload.swift in Sources */,
 				1CA5877921E5EDF8002B60F2 /* SignupTermsTableViewCell.swift in Sources */,
 				1CB5430721DF472B00B37EAE /* Strings.swift in Sources */,
 				1CB5433021DF473B00B37EAE /* SBJsonParser.m in Sources */,
@@ -972,6 +991,7 @@
 				1C858E5421C8F6EF00900481 /* ProfileButton.swift in Sources */,
 				1C5AC80121E3568B0007827D /* SettingsViewController.swift in Sources */,
 				1CA5877121E5DCF4002B60F2 /* SignupGuideViewController.swift in Sources */,
+				1CAC5A8D21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift in Sources */,
 				1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */,
 				1CB5430F21DF473300B37EAE /* Date.swift in Sources */,
 				1C858E2C21C870F100900481 /* MainViewController.swift in Sources */,
