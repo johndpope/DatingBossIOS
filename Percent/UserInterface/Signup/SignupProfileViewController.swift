@@ -25,6 +25,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         labelTitle.text = "계정 정보 입력"
         
         var button = UIButton(type: .custom)
@@ -182,6 +183,19 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         super.viewWillAppear(animated)
         
         leftNavigationItemView?.isHidden = true
+    }
+    
+    override func pressedButton(_ sender: UIButton) {
+        super.pressedButton(sender)
+        
+        switch sender {
+        case buttonConfirm:
+            let viewController = SignupProfileSpecsViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
+            break
+            
+        default: break
+        }
     }
     
     @objc private func textfieldDidChange(_ textfield: UITextField) {

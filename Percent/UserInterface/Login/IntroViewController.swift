@@ -124,6 +124,10 @@ class IntroViewController: BaseViewController {
                     
                     let viewController = MainViewController()
                     UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                    
+//                    let viewController = SignupProfileViewController()
+//                    let navController = SignupNavigationViewController(rootViewController: viewController)
+//                    UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                 }
             })
         })
