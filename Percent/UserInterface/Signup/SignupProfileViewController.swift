@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let TEST_MODE = true                        // true 이면 회원가입하지 않고 넘어감
+private let TEST_MODE = false                        // true 이면 회원가입하지 않고 넘어감
 
 class SignupProfileViewController: BaseSignupStepsViewController {
     private let theTableView = UITableView()
