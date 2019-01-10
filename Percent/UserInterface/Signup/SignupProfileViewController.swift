@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let TEST_MODE = true                        // true 이면 회원가입하지 않고 넘어감
+
 class SignupProfileViewController: BaseSignupStepsViewController {
     private let theTableView = UITableView()
     
@@ -165,6 +167,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         buttonConfirm.clipsToBounds = true
         buttonConfirm.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .normal)
         buttonConfirm.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)), for: .highlighted)
+        buttonConfirm.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)), for: .disabled)
         buttonConfirm.setTitle("가입하기", for: .normal)
         buttonConfirm.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         buttonConfirm.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
@@ -190,8 +193,91 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         
         switch sender {
         case buttonConfirm:
-            let viewController = SignupProfileSpecsViewController()
-            self.navigationController?.pushViewController(viewController, animated: true)
+            guard TEST_MODE == false else {
+                LoadingIndicatorManager.shared.showIndicatorView()
+                
+                var params = [String:Any]()
+                params["id"] = ApplicationOptions.TestInfo.ID
+                params["pw"] = ApplicationOptions.TestInfo.Password.sha256()
+                params["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+                params["os"] = "ios"
+                params["device_info"] = UIDevice.modelName
+                
+                let httpClient = QHttpClient()
+                httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
+                    LoadingIndicatorManager.shared.hideIndicatorView()
+                    guard isSucceed, let responseData = response as? [String:Any] else {
+                        let alertController = UIAlertController(title: "로그인", message: "로그인에 실패하였습니다.", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                        return
+                    }
+                    
+                    MyData.shared.setMyInfo(with: responseData)
+                    
+                    QDataManager.shared.userId = ApplicationOptions.TestInfo.ID
+                    QDataManager.shared.password = ApplicationOptions.TestInfo.Password
+                    QDataManager.shared.commit()
+                    
+                    let viewController = SignupProfileSpecsViewController()
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+                return
+            }
+            
+            LoadingIndicatorManager.shared.showIndicatorView()
+            
+            var params = [String:Any]()
+            params["id"] = UserPayload.shared.email
+            params["device_id"] = UUID().uuidString
+            params["phone"] = UserPayload.shared.phone
+            params["pw"] = UserPayload.shared.password
+            params["name"] = UserPayload.shared.name
+            params["nickname"] = UserPayload.shared.nickname
+            params["sex"] = UserPayload.shared.gender.rawValue
+            
+            if let timeInterval = UserPayload.shared.birthDate {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyyMMdd"
+                params["birth"] = formatter.string(from: Date(timeIntervalSince1970: timeInterval))
+            }
+            
+            params["fcm_key"] = "TEST_TOKEN"
+            
+            let httpClient = QHttpClient()
+            httpClient.request(to: RequestUrl.Account.Signup, params: params) { (isSucceed, errMessage, response) in
+                guard isSucceed else {
+                    LoadingIndicatorManager.shared.hideIndicatorView()
+                    return
+                }
+                
+                var params = [String:Any]()
+                params["id"] = UserPayload.shared.email
+                params["pw"] = UserPayload.shared.password?.sha256()
+                params["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+                params["os"] = "ios"
+                params["device_info"] = UIDevice.modelName
+                
+                let httpClient = QHttpClient()
+                httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
+                    LoadingIndicatorManager.shared.hideIndicatorView()
+                    guard isSucceed, let responseData = response as? [String:Any] else {
+                        let alertController = UIAlertController(title: "로그인", message: "로그인에 실패하였습니다.", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                        return
+                    }
+                    
+                    MyData.shared.setMyInfo(with: responseData)
+                    
+                    QDataManager.shared.userId = UserPayload.shared.email
+                    QDataManager.shared.password = UserPayload.shared.password
+                    QDataManager.shared.commit()
+                    
+                    let viewController = SignupProfileSpecsViewController()
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
             break
             
         default: break
@@ -250,6 +336,8 @@ class SignupProfileViewController: BaseSignupStepsViewController {
                 theTableView.reloadSections([0], with: .automatic)
             }
         }
+        
+        buttonConfirm.isEnabled = entryViewEmail.checked && entryViewPassword.checked && entryViewRepeatPassword.checked && entryViewNickname.checked
     }
     
     @objc private func resignAll() {

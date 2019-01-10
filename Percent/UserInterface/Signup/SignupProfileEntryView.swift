@@ -21,6 +21,12 @@ class SignupProfileEntryView: UIView {
         }
     }
     
+    var hideCheckIndicator: Bool = false {
+        didSet {
+            imageViewChecked.isHidden = hideCheckIndicator
+        }
+    }
+    
     override init(frame: CGRect = CGRect.zero) {
         super.init(frame: frame)
         
@@ -99,5 +105,37 @@ class SignupProfileTextEntryView: SignupProfileEntryView {
         if sender == buttonTextfield {
             _ = textfield.becomeFirstResponder()
         }
+    }
+}
+
+class SignupProfilePopupEntryView: SignupProfileEntryView {
+    let labelValue = UILabel()
+    
+    override init(frame: CGRect = CGRect.zero) {
+        super.init(frame: frame)
+        
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "img_profile_expand")
+        imageView.contentMode = .scaleAspectFit
+        self.addSubview(imageView)
+        
+        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -35 * QUtils.optimizeRatio()).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 15 * QUtils.optimizeRatio()).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 15 * QUtils.optimizeRatio()).isActive = true
+        
+        labelValue.translatesAutoresizingMaskIntoConstraints = false
+        labelValue.textAlignment = .right
+        labelValue.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+        labelValue.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        self.addSubview(labelValue)
+        
+        labelValue.trailingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+        labelValue.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
     }
 }

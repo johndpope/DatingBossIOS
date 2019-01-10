@@ -14,6 +14,7 @@ class UserPayload: NSObject {
     var name: String?
     var phone: String?
     var birthDate: Double?
+    var gender: Gender = .male
     
     var email: String?
     var password: String?
@@ -25,6 +26,7 @@ class UserPayload: NSObject {
         name = nil
         phone = nil
         birthDate = nil
+        gender = .male
         
         email = nil
         password = nil

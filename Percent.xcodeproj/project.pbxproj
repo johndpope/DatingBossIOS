@@ -93,6 +93,9 @@
 		1CAC5A8D21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A8C21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift */; };
 		1CAC5A8F21E721E9002A0A4E /* img_plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAC5A8E21E721E9002A0A4E /* img_plus@3x.png */; };
 		1CAC5A9221E72344002A0A4E /* UserPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A9121E72344002A0A4E /* UserPayload.swift */; };
+		1CAC5A9521E7A6C8002A0A4E /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A9421E7A6C8002A0A4E /* AppDataManager.swift */; };
+		1CAC5A9721E7A771002A0A4E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A9621E7A771002A0A4E /* AppData.swift */; };
+		1CAC5A9921E7B0D3002A0A4E /* img_profile_expand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAC5A9821E7B0D3002A0A4E /* img_profile_expand@3x.png */; };
 		1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F721DF44E300B37EAE /* QTextAttributes.swift */; };
 		1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F821DF44E300B37EAE /* QDataManager.swift */; };
 		1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F921DF44E300B37EAE /* QImageMaker.swift */; };
@@ -248,6 +251,9 @@
 		1CAC5A8C21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfilePictureCollectionViewCell.swift; sourceTree = "<group>"; };
 		1CAC5A8E21E721E9002A0A4E /* img_plus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plus@3x.png"; sourceTree = "<group>"; };
 		1CAC5A9121E72344002A0A4E /* UserPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPayload.swift; sourceTree = "<group>"; };
+		1CAC5A9421E7A6C8002A0A4E /* AppDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
+		1CAC5A9621E7A771002A0A4E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		1CAC5A9821E7B0D3002A0A4E /* img_profile_expand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_expand@3x.png"; sourceTree = "<group>"; };
 		1CB542F721DF44E300B37EAE /* QTextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextAttributes.swift; sourceTree = "<group>"; };
 		1CB542F821DF44E300B37EAE /* QDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDataManager.swift; sourceTree = "<group>"; };
 		1CB542F921DF44E300B37EAE /* QImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImageMaker.swift; sourceTree = "<group>"; };
@@ -354,6 +360,7 @@
 		1C03840F21D001D40024C3B3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				1CAC5A9321E7A6B8002A0A4E /* Manager */,
 				1CAC5A9021E7233A002A0A4E /* Payload */,
 				1C03841021D002090024C3B3 /* BaseData.swift */,
 				1C03841221D0025F0024C3B3 /* UserData.swift */,
@@ -365,6 +372,7 @@
 				1C5AC81821E37B7D0007827D /* SettingsData.swift */,
 				1C5AC81D21E3A0F60007827D /* BoardData.swift */,
 				1CA5878021E5F9A5002B60F2 /* TermsData.swift */,
+				1CAC5A9621E7A771002A0A4E /* AppData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -502,6 +510,7 @@
 				1CE69AAD21D8EEC000B9FE4A /* img_profile_4@3x.png */,
 				1CE69AAF21D8EEC000B9FE4A /* img_profile_5@3x.png */,
 				1CE69AB021D8EEC000B9FE4A /* img_profile_6@3x.png */,
+				1CAC5A9821E7B0D3002A0A4E /* img_profile_expand@3x.png */,
 				1C5AC80B21E35D750007827D /* img_settings_1@3x.png */,
 				1C5AC80621E35D750007827D /* img_settings_2@3x.png */,
 				1C5AC80521E35D740007827D /* img_settings_3@3x.png */,
@@ -650,6 +659,14 @@
 				1CAC5A9121E72344002A0A4E /* UserPayload.swift */,
 			);
 			path = Payload;
+			sourceTree = "<group>";
+		};
+		1CAC5A9321E7A6B8002A0A4E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				1CAC5A9421E7A6C8002A0A4E /* AppDataManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		1CB542F621DF44BF00B37EAE /* QKits */ = {
@@ -828,6 +845,7 @@
 				1CA5877D21E5F09F002B60F2 /* img_check_sel@3x.png in Resources */,
 				1C5AC83321E49ADF0007827D /* img_intro_text@3x.png in Resources */,
 				1C03842621D28A050024C3B3 /* img_star@3x.png in Resources */,
+				1CAC5A9921E7B0D3002A0A4E /* img_profile_expand@3x.png in Resources */,
 				1C03842521D28A050024C3B3 /* img_heart@3x.png in Resources */,
 				1C858E3921C872C900900481 /* img_tab_3_nor@3x.png in Resources */,
 				1C5AC80E21E35D750007827D /* img_settings_3@3x.png in Resources */,
@@ -949,7 +967,9 @@
 				1CE69AED21DA457A00B9FE4A /* SearchResultsViewController.swift in Sources */,
 				1CA5877521E5EAED002B60F2 /* BaseSignupViewController.swift in Sources */,
 				1CE69AEC21DA457A00B9FE4A /* ChoiceViewController.swift in Sources */,
+				1CAC5A9521E7A6C8002A0A4E /* AppDataManager.swift in Sources */,
 				1CE69AFF21DBCC3000B9FE4A /* ChatData.swift in Sources */,
+				1CAC5A9721E7A771002A0A4E /* AppData.swift in Sources */,
 				1CE69AE721DA43D000B9FE4A /* FavouriteViewController.swift in Sources */,
 				1C858DB521C7877800900481 /* LoginViewController.swift in Sources */,
 				1CE69AF921DBA47E00B9FE4A /* CherryButton.swift in Sources */,

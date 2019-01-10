@@ -48,34 +48,26 @@ class SignupIdViewController: BaseSignupViewController {
 }
 
 extension SignupIdViewController: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//        print("navigationAction.allHTTPHeaderFields")
-//        print(navigationAction.request.allHTTPHeaderFields)
-//
-//        print("navigationAction.allHTTPHeaderFields")
-//        print(navigationAction.request.)
-//
-//        decisionHandler(.allow)
-//    }
-//
-    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        print(navigationResponse.response.url?.absoluteString)
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let dict = message.body as?  [String:Any] else { return }
         
-        guard let urlString = navigationResponse.response.url?.absoluteString, urlString.range(of: "/IdAuth/checkplus_success.jsp") != nil else {
-            decisionHandler(.allow)
-            return
+        UserPayload.shared.clear()
+        
+        UserPayload.shared.name = dict["name"] as? String
+        UserPayload.shared.phone = dict["phone"] as? String
+        
+        if let dateString = dict["birth"] as? String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd"
+            UserPayload.shared.birthDate = formatter.date(from: dateString)?.timeIntervalSince1970
         }
+        
+        UserPayload.shared.gender = Gender(rawValue: dict["sex"] as? String ?? "m") ?? .male
         
         let viewController = SignupStepViewController(step: 1)
         viewController.delegate = self
         self.navigationController?.present(viewController, animated: true, completion: nil)
         
-        decisionHandler(.allow)
-    }
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("userContentController")
-        print(message.body)
     }
 }
 
