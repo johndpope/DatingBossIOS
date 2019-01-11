@@ -8,6 +8,16 @@
 
 import Foundation
 
+enum SignupStatus: String {
+    case unknown = ""
+    case complete = "y"
+    case denied = "n"
+    case pending = "r"
+    case profile = "p"
+    case survey = "s"
+    case looks = "l"
+}
+
 class MyData: UserData {
     static let shared = MyData()
     
@@ -331,11 +341,18 @@ class UserData: BaseData {
         }
     }
     
-    var sign_up_fl: Bool {
+    var sign_up_fl: String? {
         get {
-            return (rawData["sign_up_fl"] as? String ?? "n") == "y"
+            return rawData["sign_up_fl"] as? String
         } set {
-            rawData["sign_up_fl"] = newValue ? "y" : "n"
+            rawData["sign_up_fl"] = newValue
+        }
+    }
+    
+    var signupStatus: SignupStatus {
+        get {
+            guard sign_up_fl != nil else { return .unknown }
+            return SignupStatus(rawValue: sign_up_fl!) ?? .unknown
         }
     }
     

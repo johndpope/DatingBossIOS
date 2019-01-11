@@ -27,6 +27,8 @@ class QDataManager: NSObject {
     var userId: String?
     var password: String?
     
+    var registerStep: Int?
+    
     required override init() {
         super.init()
         self.clear()
@@ -43,6 +45,7 @@ class QDataManager: NSObject {
         self.uuidString  =  aDecoder.decodeObject(forKey: "uuidString") as? String
         self.userId  =  aDecoder.decodeObject(forKey: "userId") as? String
         self.password  =  aDecoder.decodeObject(forKey: "password") as? String
+        self.registerStep  =  (aDecoder.decodeObject(forKey: "registerStep") as? NSNumber)?.intValue
     }
     
     func commit() {
@@ -64,6 +67,7 @@ class QDataManager: NSObject {
         uuidString = nil
         userId = nil
         password = nil
+        registerStep = nil
         
         commit()
     }
@@ -142,5 +146,6 @@ extension QDataManager: NSCopying, NSCoding {
         aCoder.encode(uuidString, forKey: "uuidString")
         aCoder.encode(userId, forKey: "userId")
         aCoder.encode(password, forKey: "password")
+        aCoder.encode(registerStep != nil ? NSNumber(value: registerStep!) : nil, forKey: "registerStep")
     }
 }

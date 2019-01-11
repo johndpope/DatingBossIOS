@@ -122,14 +122,34 @@ class IntroViewController: BaseViewController {
                     
                     MyData.shared.setMyInfo(with: responseData)
                     
-                    if ApplicationOptions.Build.Level == .DEVELOP {
+                    guard ApplicationOptions.Build.Level.rawValue > BuildLevel.DEVELOP.rawValue else {
                         let viewController = SignupProfileViewController()
                         let navController = SignupNavigationViewController(rootViewController: viewController)
                         UIApplication.appDelegate().changeRootViewController(navController, animated: true)
-
-                    } else {
+                        return
+                    }
+                    
+                    switch MyData.shared.signupStatus {
+                    case .complete:
                         let viewController = MainViewController()
                         UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                        break
+                        
+                    case .denied:
+                        gotoLogin()
+                        break
+                        
+                    case .profile:
+                        let viewController = SignupProfileSpecsViewController()
+                        let navController = SignupNavigationViewController(rootViewController: viewController)
+                        UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                        break
+                        
+                    case .looks:
+                        
+                        break
+                        
+                    default: break
                     }
                 }
             })

@@ -156,6 +156,10 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         theTableView.register(SignupProfileWarningTableViewCell.self, forCellReuseIdentifier: "SignupProfileWarningTableViewCell")
         self.view.addSubview(theTableView)
         
+        let tapGestureRecognizer = UITapGestureRecognizer()
+        tapGestureRecognizer.addTarget(self, action: #selector(self.resignAll))
+        theTableView.addGestureRecognizer(tapGestureRecognizer)
+        
         theTableView.topAnchor.constraint(equalTo: seperator.bottomAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
         theTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         theTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
@@ -191,6 +195,10 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         
         switch sender {
         case buttonConfirm:
+            UserPayload.shared.email = entryViewEmail.textfield.text
+            UserPayload.shared.password = entryViewPassword.textfield.text
+            UserPayload.shared.nickname = entryViewNickname.textfield.text
+            
             guard ApplicationOptions.Build.Level.rawValue > BuildLevel.DEVELOP.rawValue else {
                 LoadingIndicatorManager.shared.showIndicatorView()
                 
@@ -229,7 +237,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
             params["id"] = UserPayload.shared.email
             params["device_id"] = UUID().uuidString
             params["phone"] = UserPayload.shared.phone
-            params["pw"] = UserPayload.shared.password
+            params["pw"] = UserPayload.shared.password?.sha256()
             params["name"] = UserPayload.shared.name
             params["nickname"] = UserPayload.shared.nickname
             params["sex"] = UserPayload.shared.gender.rawValue
@@ -240,7 +248,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
                 params["birth"] = formatter.string(from: Date(timeIntervalSince1970: timeInterval))
             }
             
-            params["fcm_key"] = "TEST_TOKEN"
+            params["fcm_key"] = UUID().uuidString
             
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.Signup, params: params) { (isSucceed, errMessage, response) in
@@ -248,6 +256,9 @@ class SignupProfileViewController: BaseSignupStepsViewController {
                     LoadingIndicatorManager.shared.hideIndicatorView()
                     return
                 }
+                
+                QDataManager.shared.registerStep = 1
+                QDataManager.shared.commit()
                 
                 var params = [String:Any]()
                 params["id"] = UserPayload.shared.email
@@ -355,6 +366,10 @@ extension SignupProfileViewController: UITextFieldDelegate {
 }
 
 extension SignupProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        resignAll()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return warnings.count
     }
@@ -386,6 +401,8 @@ class SignupProfileWarningTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.selectionStyle = .none
         
         self.contentView.clipsToBounds = true
         
