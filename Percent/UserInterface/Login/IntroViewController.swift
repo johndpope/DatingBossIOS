@@ -122,12 +122,15 @@ class IntroViewController: BaseViewController {
                     
                     MyData.shared.setMyInfo(with: responseData)
                     
-                    let viewController = MainViewController()
-                    UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
-                    
-//                    let viewController = SignupProfileViewController()
-//                    let navController = SignupNavigationViewController(rootViewController: viewController)
-//                    UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                    if ApplicationOptions.Build.Level == .DEVELOP {
+                        let viewController = SignupProfileViewController()
+                        let navController = SignupNavigationViewController(rootViewController: viewController)
+                        UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+
+                    } else {
+                        let viewController = MainViewController()
+                        UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                    }
                 }
             })
         })

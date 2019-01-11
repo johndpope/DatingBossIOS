@@ -950,11 +950,11 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
             alertController.addAction(UIAlertAction(title: "카메라로 촬영하기", style: .default, handler: { (action) in
                 let pickerController = UIImagePickerController()
                 pickerController.delegate = self
+                pickerController.sourceType = .camera
                 pickerController.allowsEditing = true
                 pickerController.cameraCaptureMode = .photo
                 pickerController.cameraDevice = .rear
                 pickerController.showsCameraControls = true
-                pickerController.sourceType = .camera
                 self.present(pickerController, animated: true, completion: nil)
             }))
         }
@@ -1109,6 +1109,20 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
         } else {
             UserPayload.shared.hobby.append(data)
         }
+        
+        var text = ""
+        for i in 0 ..< UserPayload.shared.hobby.count {
+            guard let item = UserPayload.shared.hobby[i].code_name else { continue }
+            
+            if text.count > 0 {
+                text += ", "
+            }
+            
+            text += item
+        }
+        
+        entryViewHobby.labelValue.text = text
+        entryViewHobby.checked = text.count > 0
         
         tableView.reloadData()
     }

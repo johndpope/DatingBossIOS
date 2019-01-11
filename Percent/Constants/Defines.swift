@@ -8,15 +8,16 @@
 
 import Foundation
 
-public enum BuildLevel {
-    case UI_TEST
-    case DEVELOP
-    case DISTRIBUTE
+public enum BuildLevel: Int {
+    case UI_TEST = 0
+    case DEVELOP = 1
+    case CLIENT_TEST = 2
+    case DISTRIBUTE = 3
 }
 
 public struct ApplicationOptions {
     public struct Build {
-        public static let Level = BuildLevel.DEVELOP
+        public static let Level = BuildLevel.CLIENT_TEST
     }
     
     public struct TestInfo {

@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let TEST_MODE = false                        // true 이면 회원가입하지 않고 넘어감
-
 class SignupProfileViewController: BaseSignupStepsViewController {
     private let theTableView = UITableView()
     
@@ -193,7 +191,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         
         switch sender {
         case buttonConfirm:
-            guard TEST_MODE == false else {
+            guard ApplicationOptions.Build.Level.rawValue > BuildLevel.DEVELOP.rawValue else {
                 LoadingIndicatorManager.shared.showIndicatorView()
                 
                 var params = [String:Any]()
