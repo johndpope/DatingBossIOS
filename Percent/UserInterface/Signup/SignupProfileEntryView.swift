@@ -29,7 +29,7 @@ class SignupProfileEntryView: UIView {
     
     override init(frame: CGRect = CGRect.zero) {
         super.init(frame: frame)
-        
+
         button.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(button)
         
@@ -120,7 +120,7 @@ class SignupProfilePopupEntryView: SignupProfileEntryView {
         imageView.contentMode = .scaleAspectFit
         self.addSubview(imageView)
         
-        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -35 * QUtils.optimizeRatio()).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
         imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 15 * QUtils.optimizeRatio()).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 15 * QUtils.optimizeRatio()).isActive = true
@@ -131,7 +131,7 @@ class SignupProfilePopupEntryView: SignupProfileEntryView {
         labelValue.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         self.addSubview(labelValue)
         
-        labelValue.trailingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+        labelValue.trailingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
         labelValue.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
     

@@ -26,10 +26,12 @@ class SignupNavigationBarView: UIView {
         get {
             return stepValue
         } set {
-            if stepValue < 1 {
+            if newValue < 1 {
                 stepValue = 1
-            } else if stepValue > 5 {
+            } else if newValue > 5 {
                 stepValue = 5
+            } else {
+                stepValue = newValue
             }
             
             updateValue()

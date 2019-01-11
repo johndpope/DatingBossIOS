@@ -96,6 +96,7 @@
 		1CAC5A9521E7A6C8002A0A4E /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A9421E7A6C8002A0A4E /* AppDataManager.swift */; };
 		1CAC5A9721E7A771002A0A4E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5A9621E7A771002A0A4E /* AppData.swift */; };
 		1CAC5A9921E7B0D3002A0A4E /* img_profile_expand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAC5A9821E7B0D3002A0A4E /* img_profile_expand@3x.png */; };
+		1CAC5AB321E88DEC002A0A4E /* AlertPopupCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAC5AB221E88DEB002A0A4E /* AlertPopupCustomViewController.swift */; };
 		1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F721DF44E300B37EAE /* QTextAttributes.swift */; };
 		1CB542FE21DF44E300B37EAE /* QDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F821DF44E300B37EAE /* QDataManager.swift */; };
 		1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB542F921DF44E300B37EAE /* QImageMaker.swift */; };
@@ -126,6 +127,9 @@
 		1CC9B5F221DC52B8008C22B8 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9B5F121DC52B8008C22B8 /* MyPageViewController.swift */; };
 		1CC9B60221DC537F008C22B8 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9B60121DC537F008C22B8 /* MyPageTableViewCell.swift */; };
 		1CC9B60421DC6DD4008C22B8 /* BaseMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9B60321DC6DD4008C22B8 /* BaseMainViewController.swift */; };
+		1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD3D99121E898E500938293 /* StoreKit.framework */; };
+		1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */; };
+		1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */; };
 		1CE69AA021D5AF6200B9FE4A /* BarIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE69A9F21D5AF6200B9FE4A /* BarIndicatorView.swift */; };
 		1CE69AAA21D896D600B9FE4A /* UserProfileStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE69AA921D896D600B9FE4A /* UserProfileStatsView.swift */; };
 		1CE69AB121D8EEC100B9FE4A /* img_profile_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CE69AAB21D8EEC000B9FE4A /* img_profile_2@3x.png */; };
@@ -254,6 +258,7 @@
 		1CAC5A9421E7A6C8002A0A4E /* AppDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
 		1CAC5A9621E7A771002A0A4E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		1CAC5A9821E7B0D3002A0A4E /* img_profile_expand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_expand@3x.png"; sourceTree = "<group>"; };
+		1CAC5AB221E88DEB002A0A4E /* AlertPopupCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopupCustomViewController.swift; sourceTree = "<group>"; };
 		1CB542F721DF44E300B37EAE /* QTextAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextAttributes.swift; sourceTree = "<group>"; };
 		1CB542F821DF44E300B37EAE /* QDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDataManager.swift; sourceTree = "<group>"; };
 		1CB542F921DF44E300B37EAE /* QImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImageMaker.swift; sourceTree = "<group>"; };
@@ -297,6 +302,10 @@
 		1CC9B5F121DC52B8008C22B8 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		1CC9B60121DC537F008C22B8 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		1CC9B60321DC6DD4008C22B8 /* BaseMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMainViewController.swift; sourceTree = "<group>"; };
+		1CD3D99021E8980C00938293 /* Percent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Percent.entitlements; sourceTree = "<group>"; };
+		1CD3D99121E898E500938293 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecTableViewCell.swift; sourceTree = "<group>"; };
+		1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_dialog_check@3x.png"; sourceTree = "<group>"; };
 		1CE69A9F21D5AF6200B9FE4A /* BarIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarIndicatorView.swift; sourceTree = "<group>"; };
 		1CE69AA921D896D600B9FE4A /* UserProfileStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileStatsView.swift; sourceTree = "<group>"; };
 		1CE69AAB21D8EEC000B9FE4A /* img_profile_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_2@3x.png"; sourceTree = "<group>"; };
@@ -342,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				158AE75F1D3FCA14110B3A80 /* Pods_Percent.framework in Frameworks */,
+				1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +404,7 @@
 			children = (
 				1C5AC83921E4AF520007827D /* BasePopupViewController.swift */,
 				1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */,
+				1CAC5AB221E88DEB002A0A4E /* AlertPopupCustomViewController.swift */,
 				1C5AC83B21E4AFBE0007827D /* FindEmailPopupViewController.swift */,
 				1C5AC83D21E4CF1A0007827D /* FindPasswordPopupViewController.swift */,
 			);
@@ -430,6 +441,7 @@
 		1C858D8921C7733D00900481 /* Percent */ = {
 			isa = PBXGroup;
 			children = (
+				1CD3D99021E8980C00938293 /* Percent.entitlements */,
 				1C858D8A21C7733D00900481 /* AppDelegate.swift */,
 				1CB5430321DF472A00B37EAE /* Constants */,
 				1CB5430A21DF473200B37EAE /* Extensions */,
@@ -504,6 +516,7 @@
 				1C858DA121C780D500900481 /* img_login_lock@3x.png */,
 				1C858DA221C780D500900481 /* img_login_mail@3x.png */,
 				1CAC5A8E21E721E9002A0A4E /* img_plus@3x.png */,
+				1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */,
 				1CE69AAE21D8EEC000B9FE4A /* img_profile_1@3x.png */,
 				1CE69AAB21D8EEC000B9FE4A /* img_profile_2@3x.png */,
 				1CE69AAC21D8EEC000B9FE4A /* img_profile_3@3x.png */,
@@ -649,6 +662,7 @@
 				1CA5879021E6FCD8002B60F2 /* SignupProfileEntryView.swift */,
 				1CAC5A8A21E718C2002A0A4E /* SignupProfileSpecsViewController.swift */,
 				1CAC5A8C21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift */,
+				1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -768,6 +782,7 @@
 		57D7C06E83854E98D1F99BD7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1CD3D99121E898E500938293 /* StoreKit.framework */,
 				F694B76A0F5993BD9BC5430A /* Pods_Percent.framework */,
 			);
 			name = Frameworks;
@@ -808,6 +823,14 @@
 					1C858D8621C7733D00900481 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1010;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -839,6 +862,7 @@
 				1C858E5621C9036200900481 /* img_cherry@3x.png in Resources */,
 				1CB5433D21DF4D4800B37EAE /* loader.json in Resources */,
 				1CE69AB221D8EEC100B9FE4A /* img_profile_3@3x.png in Resources */,
+				1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */,
 				1C858DA621C780D500900481 /* img_login_mail@3x.png in Resources */,
 				1CA5879421E6FDD8002B60F2 /* img_validation_checked@3x.png in Resources */,
 				1C858E3B21C872C900900481 /* img_tab_2_sel@3x.png in Resources */,
@@ -995,6 +1019,7 @@
 				1C5AC83C21E4AFBE0007827D /* FindEmailPopupViewController.swift in Sources */,
 				1C858DAD21C7818E00900481 /* LoadingIndicatorView.swift in Sources */,
 				1CA5877321E5DE1A002B60F2 /* SignupGuideTableViewCell.swift in Sources */,
+				1CAC5AB321E88DEC002A0A4E /* AlertPopupCustomViewController.swift in Sources */,
 				1C03841E21D1DC1C0024C3B3 /* PictureData.swift in Sources */,
 				1C5AC81E21E3A0F60007827D /* BoardData.swift in Sources */,
 				1C03841921D09B220024C3B3 /* CircleIndicatorView.swift in Sources */,
@@ -1006,6 +1031,7 @@
 				1CE69AE621DA43D000B9FE4A /* FavouriteCollectionViewCell.swift in Sources */,
 				1CA5878B21E63775002B60F2 /* SignupNavigationViewController.swift in Sources */,
 				1CE69AF421DB5CBB00B9FE4A /* ChatListTableViewCell.swift in Sources */,
+				1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */,
 				1CB5430021DF44E300B37EAE /* QUtils.swift in Sources */,
 				1C858E5221C8F15F00900481 /* BaseNavigationController.swift in Sources */,
 				1C858E5421C8F6EF00900481 /* ProfileButton.swift in Sources */,
@@ -1190,16 +1216,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Percent/Percent.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZG2TN24ADM;
+				DEVELOPMENT_TEAM = RLTGU6RFN2;
 				INFOPLIST_FILE = Percent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bossofdating.Percent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BossOfDating.Lovecent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Percent/Percent-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -1213,16 +1242,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Percent/Percent.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZG2TN24ADM;
+				DEVELOPMENT_TEAM = RLTGU6RFN2;
 				INFOPLIST_FILE = Percent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bossofdating.Percent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BossOfDating.Lovecent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Percent/Percent-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

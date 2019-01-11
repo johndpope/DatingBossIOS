@@ -22,6 +22,19 @@ class UserPayload: NSObject {
     
     var pictures = [UIImage]()
     
+    var height: Int?
+    var shape: AppData?
+    var blood: String?
+    var region: AppData?
+    var education: AppData?
+    var educationDetail: String?
+    var job: AppData?
+    var wage: AppData?
+    var religion: AppData?
+    var hobby = [AppData]()
+    var drinking: AppData?
+    var smoking: AppData?
+    
     func clear() {
         name = nil
         phone = nil
@@ -33,5 +46,18 @@ class UserPayload: NSObject {
         nickname = nil
         
         pictures.removeAll()
+        
+        height = nil
+        shape = nil
+        blood = nil
+        region = nil
+        education = nil
+        educationDetail = nil
+        job = nil
+        wage = nil
+        religion = nil
+        hobby.removeAll()
+        drinking = nil
+        smoking = nil
     }
 }
