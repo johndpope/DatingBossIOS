@@ -292,6 +292,10 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
             return
         }
         
+        imageViewLooks.pin_clearImages()
+        
+        theScrollView.setContentOffset(CGPoint.zero, animated: false)
+        
         let currentData = evaluatingData[currentPage]
         
         selectedTagIndex.removeAll()

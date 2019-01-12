@@ -1022,6 +1022,20 @@ extension SignupProfileSpecsViewController: UINavigationControllerDelegate, UIIm
             return
         }
         
+        LoadingIndicatorManager.shared.showIndicatorView()
+        
+        let index = replaceIndex ?? UserPayload.shared.pictures.count
+        
+        var params = [String:Any]()
+        params["picture"] = image.pngData()
+        params["tmp_fl"] = "y"
+        
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)/\(index)/y", params: params) { (isSucceed, errMessage, response) in
+            LoadingIndicatorManager.shared.hideIndicatorView()
+            
+        }
+        
         if replaceIndex != nil, replaceIndex! < UserPayload.shared.pictures.count {
             UserPayload.shared.pictures[replaceIndex!] = image
         } else {

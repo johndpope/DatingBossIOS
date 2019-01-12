@@ -145,8 +145,21 @@ class IntroViewController: BaseViewController {
                         UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                         break
                         
-                    case .looks:
+                    case .survey:
+                        let viewController = SignupSurveyViewController(depth: 0)
+                        let navController = SignupNavigationViewController(rootViewController: viewController)
+                        UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                        break
                         
+                    case .looks:
+                        let viewController = SignupSelectFavorLooksViewController()
+                        let navController = SignupNavigationViewController(rootViewController: viewController)
+                        UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                        break
+                        
+                    case .pending:
+                        let viewController = SignupFinalizeViewController()
+                        UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
                         break
                         
                     default: break
