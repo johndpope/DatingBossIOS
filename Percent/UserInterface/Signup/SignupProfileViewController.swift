@@ -50,6 +50,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         
         entryViewEmail.translatesAutoresizingMaskIntoConstraints = false
         entryViewEmail.labelTitle.text = "이메일"
+        entryViewEmail.textfield.text = UserPayload.shared.email
         entryViewEmail.textfield.keyboardType = .emailAddress
         entryViewEmail.textfield.returnKeyType = .next
         entryViewEmail.textfield.autocapitalizationType = .none
@@ -125,6 +126,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         
         entryViewNickname.translatesAutoresizingMaskIntoConstraints = false
         entryViewNickname.labelTitle.text = "닉네임"
+        entryViewNickname.textfield.text = UserPayload.shared.nickname
         entryViewNickname.textfield.keyboardType = .default
         entryViewNickname.textfield.returnKeyType = .done
         entryViewNickname.textfield.autocapitalizationType = .none
