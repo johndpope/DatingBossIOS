@@ -78,4 +78,8 @@ extension SignupIdViewController: SignupStepViewControllerDelegate {
         
         viewController.dismiss(animated: true, completion: nil)
     }
+    
+    func signupStepViewController(titleOf viewController: SignupStepViewController) -> String? {
+        return "프로필"
+    }
 }

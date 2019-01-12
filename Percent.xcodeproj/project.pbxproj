@@ -130,6 +130,9 @@
 		1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD3D99121E898E500938293 /* StoreKit.framework */; };
 		1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */; };
 		1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */; };
+		1CD3D99821E99D0100938293 /* SignupSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99721E99D0000938293 /* SignupSurveyViewController.swift */; };
+		1CD3D99A21E9E27E00938293 /* SurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99921E9E27E00938293 /* SurveyManager.swift */; };
+		1CD3D99C21E9E2FE00938293 /* SurveyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99B21E9E2FE00938293 /* SurveyData.swift */; };
 		1CE69AA021D5AF6200B9FE4A /* BarIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE69A9F21D5AF6200B9FE4A /* BarIndicatorView.swift */; };
 		1CE69AAA21D896D600B9FE4A /* UserProfileStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE69AA921D896D600B9FE4A /* UserProfileStatsView.swift */; };
 		1CE69AB121D8EEC100B9FE4A /* img_profile_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CE69AAB21D8EEC000B9FE4A /* img_profile_2@3x.png */; };
@@ -306,6 +309,9 @@
 		1CD3D99121E898E500938293 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecTableViewCell.swift; sourceTree = "<group>"; };
 		1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_dialog_check@3x.png"; sourceTree = "<group>"; };
+		1CD3D99721E99D0000938293 /* SignupSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSurveyViewController.swift; sourceTree = "<group>"; };
+		1CD3D99921E9E27E00938293 /* SurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyManager.swift; sourceTree = "<group>"; };
+		1CD3D99B21E9E2FE00938293 /* SurveyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyData.swift; sourceTree = "<group>"; };
 		1CE69A9F21D5AF6200B9FE4A /* BarIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarIndicatorView.swift; sourceTree = "<group>"; };
 		1CE69AA921D896D600B9FE4A /* UserProfileStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileStatsView.swift; sourceTree = "<group>"; };
 		1CE69AAB21D8EEC000B9FE4A /* img_profile_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_2@3x.png"; sourceTree = "<group>"; };
@@ -383,6 +389,7 @@
 				1C5AC81D21E3A0F60007827D /* BoardData.swift */,
 				1CA5878021E5F9A5002B60F2 /* TermsData.swift */,
 				1CAC5A9621E7A771002A0A4E /* AppData.swift */,
+				1CD3D99B21E9E2FE00938293 /* SurveyData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -663,6 +670,7 @@
 				1CAC5A8A21E718C2002A0A4E /* SignupProfileSpecsViewController.swift */,
 				1CAC5A8C21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift */,
 				1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */,
+				1CD3D99721E99D0000938293 /* SignupSurveyViewController.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -679,6 +687,7 @@
 			isa = PBXGroup;
 			children = (
 				1CAC5A9421E7A6C8002A0A4E /* AppDataManager.swift */,
+				1CD3D99921E9E27E00938293 /* SurveyManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1020,6 +1029,7 @@
 				1C858DAD21C7818E00900481 /* LoadingIndicatorView.swift in Sources */,
 				1CA5877321E5DE1A002B60F2 /* SignupGuideTableViewCell.swift in Sources */,
 				1CAC5AB321E88DEC002A0A4E /* AlertPopupCustomViewController.swift in Sources */,
+				1CD3D99821E99D0100938293 /* SignupSurveyViewController.swift in Sources */,
 				1C03841E21D1DC1C0024C3B3 /* PictureData.swift in Sources */,
 				1C5AC81E21E3A0F60007827D /* BoardData.swift in Sources */,
 				1C03841921D09B220024C3B3 /* CircleIndicatorView.swift in Sources */,
@@ -1028,6 +1038,7 @@
 				1CC9B5F221DC52B8008C22B8 /* MyPageViewController.swift in Sources */,
 				1CA5878921E63594002B60F2 /* SignupProfileViewController.swift in Sources */,
 				1C5AC83121E497BA0007827D /* IntroViewController.swift in Sources */,
+				1CD3D99C21E9E2FE00938293 /* SurveyData.swift in Sources */,
 				1CE69AE621DA43D000B9FE4A /* FavouriteCollectionViewCell.swift in Sources */,
 				1CA5878B21E63775002B60F2 /* SignupNavigationViewController.swift in Sources */,
 				1CE69AF421DB5CBB00B9FE4A /* ChatListTableViewCell.swift in Sources */,
@@ -1049,6 +1060,7 @@
 				1C03841321D0025F0024C3B3 /* UserData.swift in Sources */,
 				1CB5433221DF473B00B37EAE /* SBJsonUTF8Stream.m in Sources */,
 				1C858D8B21C7733D00900481 /* AppDelegate.swift in Sources */,
+				1CD3D99A21E9E27E00938293 /* SurveyManager.swift in Sources */,
 				1CA5878721E6173C002B60F2 /* SignupStepViewController.swift in Sources */,
 				1CE69AEB21DA457A00B9FE4A /* SearchConditionViewController.swift in Sources */,
 				1C5AC81C21E39C4B0007827D /* BoardViewController.swift in Sources */,

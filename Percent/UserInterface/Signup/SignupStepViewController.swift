@@ -10,6 +10,7 @@ import UIKit
 
 protocol SignupStepViewControllerDelegate {
     func signupStepViewController(doneProgress viewController: SignupStepViewController)
+    func signupStepViewController(titleOf viewController: SignupStepViewController) -> String?
 }
 
 class SignupStepViewController: UIViewController {
@@ -72,18 +73,9 @@ class SignupStepViewController: UIViewController {
         label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-        var text = ""
-        switch step {
-        case 1:
-            text = "프로필 작성"
-            break
-            
-        default: break
-        }
-        
         label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = text
+        label.text = delegate?.signupStepViewController(titleOf: self)
         label.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .regular)
         contentView.addSubview(label)

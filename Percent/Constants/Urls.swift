@@ -30,6 +30,8 @@ struct RequestUrl {
         public static let Board = "http://www.lovecenthome.com/board/"
     }
     
+    public static let Survey = "http://www.lovecenthome.com/survey/"
+    
     public struct Main {
         public static let Recommends = "http://www.lovecenthome.com/ios/recom/"
     }
