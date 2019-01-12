@@ -72,7 +72,7 @@ class SignupFinalizeViewController: UIViewController {
         })
         
         var params = [String:Any]()
-        params["sign_up_fl"] = "l"
+        params["sign_up_fl"] = "r"
         
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
