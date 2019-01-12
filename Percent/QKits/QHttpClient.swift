@@ -25,6 +25,7 @@ private let kBoundaryString = "---percentboundary236739405175924702888539212340a
 enum QHttpMethod: String {
     case get = "GET"
     case post = "POST"
+    case patch = "PATCH"
 }
 
 enum QHttpDebugStatus {
@@ -186,7 +187,7 @@ class QHttpClient: NSObject {
 //        if httpMethod == .post && params != nil {
 //        }
         
-        if httpMethod == .post && paramString != nil {
+        if httpMethod != .get && paramString != nil {
             var httpBody = Data()
             if imageData != nil {
                 if params != nil {

@@ -133,6 +133,15 @@
 		1CD3D99821E99D0100938293 /* SignupSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99721E99D0000938293 /* SignupSurveyViewController.swift */; };
 		1CD3D99A21E9E27E00938293 /* SurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99921E9E27E00938293 /* SurveyManager.swift */; };
 		1CD3D99C21E9E2FE00938293 /* SurveyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99B21E9E2FE00938293 /* SurveyData.swift */; };
+		1CD3D99E21EA42FA00938293 /* SignupSelectFavorLooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99D21EA42FA00938293 /* SignupSelectFavorLooksViewController.swift */; };
+		1CD3D9A021EA484300938293 /* FavorLookData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99F21EA484300938293 /* FavorLookData.swift */; };
+		1CD3D9A521EA4FD100938293 /* img_favor_no_high@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D9A121EA4FD000938293 /* img_favor_no_high@3x.png */; };
+		1CD3D9A621EA4FD100938293 /* img_favor_yes_high@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D9A221EA4FD100938293 /* img_favor_yes_high@3x.png */; };
+		1CD3D9A721EA4FD100938293 /* img_favor_no_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D9A321EA4FD100938293 /* img_favor_no_nor@3x.png */; };
+		1CD3D9A821EA4FD100938293 /* img_favor_yes_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D9A421EA4FD100938293 /* img_favor_yes_nor@3x.png */; };
+		1CD3D9AA21EA54F300938293 /* SignupSelectTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D9A921EA54F300938293 /* SignupSelectTagCollectionViewCell.swift */; };
+		1CD3D9AC21EA552500938293 /* TagData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D9AB21EA552500938293 /* TagData.swift */; };
+		1CD3D9AE21EA5E3200938293 /* SignupFinalizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D9AD21EA5E3200938293 /* SignupFinalizeViewController.swift */; };
 		1CE69AA021D5AF6200B9FE4A /* BarIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE69A9F21D5AF6200B9FE4A /* BarIndicatorView.swift */; };
 		1CE69AAA21D896D600B9FE4A /* UserProfileStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE69AA921D896D600B9FE4A /* UserProfileStatsView.swift */; };
 		1CE69AB121D8EEC100B9FE4A /* img_profile_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CE69AAB21D8EEC000B9FE4A /* img_profile_2@3x.png */; };
@@ -312,6 +321,15 @@
 		1CD3D99721E99D0000938293 /* SignupSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSurveyViewController.swift; sourceTree = "<group>"; };
 		1CD3D99921E9E27E00938293 /* SurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyManager.swift; sourceTree = "<group>"; };
 		1CD3D99B21E9E2FE00938293 /* SurveyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyData.swift; sourceTree = "<group>"; };
+		1CD3D99D21EA42FA00938293 /* SignupSelectFavorLooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSelectFavorLooksViewController.swift; sourceTree = "<group>"; };
+		1CD3D99F21EA484300938293 /* FavorLookData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavorLookData.swift; sourceTree = "<group>"; };
+		1CD3D9A121EA4FD000938293 /* img_favor_no_high@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_favor_no_high@3x.png"; sourceTree = "<group>"; };
+		1CD3D9A221EA4FD100938293 /* img_favor_yes_high@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_favor_yes_high@3x.png"; sourceTree = "<group>"; };
+		1CD3D9A321EA4FD100938293 /* img_favor_no_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_favor_no_nor@3x.png"; sourceTree = "<group>"; };
+		1CD3D9A421EA4FD100938293 /* img_favor_yes_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_favor_yes_nor@3x.png"; sourceTree = "<group>"; };
+		1CD3D9A921EA54F300938293 /* SignupSelectTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSelectTagCollectionViewCell.swift; sourceTree = "<group>"; };
+		1CD3D9AB21EA552500938293 /* TagData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagData.swift; sourceTree = "<group>"; };
+		1CD3D9AD21EA5E3200938293 /* SignupFinalizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFinalizeViewController.swift; sourceTree = "<group>"; };
 		1CE69A9F21D5AF6200B9FE4A /* BarIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarIndicatorView.swift; sourceTree = "<group>"; };
 		1CE69AA921D896D600B9FE4A /* UserProfileStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileStatsView.swift; sourceTree = "<group>"; };
 		1CE69AAB21D8EEC000B9FE4A /* img_profile_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_2@3x.png"; sourceTree = "<group>"; };
@@ -389,7 +407,9 @@
 				1C5AC81D21E3A0F60007827D /* BoardData.swift */,
 				1CA5878021E5F9A5002B60F2 /* TermsData.swift */,
 				1CAC5A9621E7A771002A0A4E /* AppData.swift */,
+				1CD3D99F21EA484300938293 /* FavorLookData.swift */,
 				1CD3D99B21E9E2FE00938293 /* SurveyData.swift */,
+				1CD3D9AB21EA552500938293 /* TagData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -518,6 +538,10 @@
 				1C5AC83221E49ADF0007827D /* img_intro_text@3x.png */,
 				1C03842421D28A050024C3B3 /* img_star@3x.png */,
 				1C858E5521C9036100900481 /* img_cherry@3x.png */,
+				1CD3D9A121EA4FD000938293 /* img_favor_no_high@3x.png */,
+				1CD3D9A321EA4FD100938293 /* img_favor_no_nor@3x.png */,
+				1CD3D9A221EA4FD100938293 /* img_favor_yes_high@3x.png */,
+				1CD3D9A421EA4FD100938293 /* img_favor_yes_nor@3x.png */,
 				1C858D9F21C780D500900481 /* img_login_icon@3x.png */,
 				1C5AC83F21E4D2490007827D /* img_login_background@2x.png */,
 				1C858DA121C780D500900481 /* img_login_lock@3x.png */,
@@ -671,6 +695,9 @@
 				1CAC5A8C21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift */,
 				1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */,
 				1CD3D99721E99D0000938293 /* SignupSurveyViewController.swift */,
+				1CD3D99D21EA42FA00938293 /* SignupSelectFavorLooksViewController.swift */,
+				1CD3D9A921EA54F300938293 /* SignupSelectTagCollectionViewCell.swift */,
+				1CD3D9AD21EA5E3200938293 /* SignupFinalizeViewController.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -869,12 +896,14 @@
 				1C5AC80D21E35D750007827D /* img_settings_6@3x.png in Resources */,
 				1CE9653A21DC77D000334B4A /* img_mypage_1@3x.png in Resources */,
 				1C858E5621C9036200900481 /* img_cherry@3x.png in Resources */,
+				1CD3D9A821EA4FD100938293 /* img_favor_yes_nor@3x.png in Resources */,
 				1CB5433D21DF4D4800B37EAE /* loader.json in Resources */,
 				1CE69AB221D8EEC100B9FE4A /* img_profile_3@3x.png in Resources */,
 				1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */,
 				1C858DA621C780D500900481 /* img_login_mail@3x.png in Resources */,
 				1CA5879421E6FDD8002B60F2 /* img_validation_checked@3x.png in Resources */,
 				1C858E3B21C872C900900481 /* img_tab_2_sel@3x.png in Resources */,
+				1CD3D9A521EA4FD100938293 /* img_favor_no_high@3x.png in Resources */,
 				1CA5877D21E5F09F002B60F2 /* img_check_sel@3x.png in Resources */,
 				1C5AC83321E49ADF0007827D /* img_intro_text@3x.png in Resources */,
 				1C03842621D28A050024C3B3 /* img_star@3x.png in Resources */,
@@ -901,6 +930,7 @@
 				1C858E4021C872C900900481 /* img_tab_4_nor@3x.png in Resources */,
 				1C858E4221C872C900900481 /* img_tab_5_sel@3x.png in Resources */,
 				1C5AC81121E35D750007827D /* img_settings_8@3x.png in Resources */,
+				1CD3D9A621EA4FD100938293 /* img_favor_yes_high@3x.png in Resources */,
 				1C5AC83721E49BC50007827D /* img_intro_heart@3x.png in Resources */,
 				1C858E4121C872C900900481 /* img_tab_5_nor@3x.png in Resources */,
 				1CE9653C21DC77D000334B4A /* img_mypage_5@3x.png in Resources */,
@@ -917,6 +947,7 @@
 				1C5AC84521E4D45C0007827D /* spoqa_han_sans_bold.ttf in Resources */,
 				1CA5877C21E5F09F002B60F2 /* img_check_nor@3x.png in Resources */,
 				1C858E3D21C872C900900481 /* img_tab_1_nor@3x.png in Resources */,
+				1CD3D9A721EA4FD100938293 /* img_favor_no_nor@3x.png in Resources */,
 				1C5AC81021E35D750007827D /* img_settings_5@3x.png in Resources */,
 				1CE9653D21DC77D000334B4A /* img_mypage_3@3x.png in Resources */,
 				1C5AC84021E4D2490007827D /* img_login_background@2x.png in Resources */,
@@ -996,6 +1027,7 @@
 				1CE69AAA21D896D600B9FE4A /* UserProfileStatsView.swift in Sources */,
 				1CA5877721E5EDB1002B60F2 /* SignupTermsViewController.swift in Sources */,
 				1CE69AF021DA458F00B9FE4A /* RecommendsCollectionViewCell.swift in Sources */,
+				1CD3D9AE21EA5E3200938293 /* SignupFinalizeViewController.swift in Sources */,
 				1CE69AE321DA43B900B9FE4A /* CategoryViewController.swift in Sources */,
 				1CE69AED21DA457A00B9FE4A /* SearchResultsViewController.swift in Sources */,
 				1CA5877521E5EAED002B60F2 /* BaseSignupViewController.swift in Sources */,
@@ -1016,10 +1048,12 @@
 				1C03841721D090F20024C3B3 /* RecommendData.swift in Sources */,
 				1CB5433821DF473B00B37EAE /* SBJsonStreamWriterAccumulator.m in Sources */,
 				1CB5432E21DF473B00B37EAE /* NSObject+SBJson.m in Sources */,
+				1CD3D9A021EA484300938293 /* FavorLookData.swift in Sources */,
 				1C5AC82021E3A3EB0007827D /* BoardTableViewCell.swift in Sources */,
 				1CE69AF521DB5CBB00B9FE4A /* ChatListViewController.swift in Sources */,
 				1C03841121D002090024C3B3 /* BaseData.swift in Sources */,
 				1CA5877F21E5F801002B60F2 /* SignupTermsDetailViewController.swift in Sources */,
+				1CD3D99E21EA42FA00938293 /* SignupSelectFavorLooksViewController.swift in Sources */,
 				1CE69AF121DA458F00B9FE4A /* RecommendsViewController.swift in Sources */,
 				1CAC5A9221E72344002A0A4E /* UserPayload.swift in Sources */,
 				1CA5877921E5EDF8002B60F2 /* SignupTermsTableViewCell.swift in Sources */,
@@ -1029,6 +1063,7 @@
 				1C858DAD21C7818E00900481 /* LoadingIndicatorView.swift in Sources */,
 				1CA5877321E5DE1A002B60F2 /* SignupGuideTableViewCell.swift in Sources */,
 				1CAC5AB321E88DEC002A0A4E /* AlertPopupCustomViewController.swift in Sources */,
+				1CD3D9AA21EA54F300938293 /* SignupSelectTagCollectionViewCell.swift in Sources */,
 				1CD3D99821E99D0100938293 /* SignupSurveyViewController.swift in Sources */,
 				1C03841E21D1DC1C0024C3B3 /* PictureData.swift in Sources */,
 				1C5AC81E21E3A0F60007827D /* BoardData.swift in Sources */,
@@ -1046,6 +1081,7 @@
 				1CB5430021DF44E300B37EAE /* QUtils.swift in Sources */,
 				1C858E5221C8F15F00900481 /* BaseNavigationController.swift in Sources */,
 				1C858E5421C8F6EF00900481 /* ProfileButton.swift in Sources */,
+				1CD3D9AC21EA552500938293 /* TagData.swift in Sources */,
 				1C5AC80121E3568B0007827D /* SettingsViewController.swift in Sources */,
 				1CA5877121E5DCF4002B60F2 /* SignupGuideViewController.swift in Sources */,
 				1CAC5A8D21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift in Sources */,

@@ -32,6 +32,12 @@ struct RequestUrl {
     
     public static let Survey = "http://www.lovecenthome.com/survey/"
     
+    public struct FavorLooks {
+        public static let Pictrues = "http://www.lovecenthome.com/looks/"
+        public static let Tag = "http://www.lovecenthome.com/tag/"
+        public static let AddTag = "http://www.lovecenthome.com/looks/"
+    }
+    
     public struct Main {
         public static let Recommends = "http://www.lovecenthome.com/ios/recom/"
     }

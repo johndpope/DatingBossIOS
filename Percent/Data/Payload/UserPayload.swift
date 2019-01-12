@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserPayload: NSObject {
+class UserPayload: NSObject, NSCoding {
     static let shared = UserPayload()
     
     var name: String?
@@ -35,6 +35,26 @@ class UserPayload: NSObject {
     var drinking: AppData?
     var smoking: AppData?
     
+    override init() {
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init()
+        
+//        self.uuidString  =  aDecoder.decodeObject(forKey: "uuidString") as? String
+//        self.userId  =  aDecoder.decodeObject(forKey: "userId") as? String
+//        self.password  =  aDecoder.decodeObject(forKey: "password") as? String
+//        self.registerStep  =  (aDecoder.decodeObject(forKey: "registerStep") as? NSNumber)?.intValue
+    }
+    
+    func encode(with aCoder: NSCoder) {
+//        aCoder.encode(uuidString, forKey: "uuidString")
+//        aCoder.encode(userId, forKey: "userId")
+//        aCoder.encode(password, forKey: "password")
+//        aCoder.encode(registerStep != nil ? NSNumber(value: registerStep!) : nil, forKey: "registerStep")
+    }
+    
     func clear() {
         name = nil
         phone = nil
@@ -59,5 +79,9 @@ class UserPayload: NSObject {
         hobby.removeAll()
         drinking = nil
         smoking = nil
+    }
+    
+    func loadFromDatabase() {
+        
     }
 }

@@ -230,12 +230,6 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
     }
     
     private func gotoNextStep() {
-        guard let codesArray = AppDataManager.shared.data["survey1"] else { return }
-        
-        guard depth < codesArray.count - 1 else {
-            return
-        }
-        
         let viewController = SignupStepViewController(step: depth + 2)
         viewController.delegate = self
         self.present(viewController, animated: true, completion: nil)
@@ -244,6 +238,16 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
 
 extension SignupSurveyViewController: SignupStepViewControllerDelegate {
     func signupStepViewController(doneProgress viewController: SignupStepViewController) {
+        guard let codesArray = AppDataManager.shared.data["survey1"] else { return }
+        
+        guard depth < codesArray.count - 1 else {
+            let viewController = SignupSelectFavorLooksViewController()
+            self.navigationController?.pushViewController(viewController, animated: false)
+            
+            viewController.dismiss(animated: true, completion: nil)
+            return
+        }
+        
         let viewController = SignupSurveyViewController(depth: depth + 1)
         self.navigationController?.pushViewController(viewController, animated: false)
         
@@ -251,6 +255,8 @@ extension SignupSurveyViewController: SignupStepViewControllerDelegate {
     }
     
     func signupStepViewController(titleOf viewController: SignupStepViewController) -> String? {
+        guard let codesArray = AppDataManager.shared.data["survey1"] else { return nil }
+        guard depth < codesArray.count - 1 else { return "이상형 외모 설정" }
         return AppDataManager.shared.data["survey1"]?[depth + 1].code_name
     }
 }
