@@ -113,6 +113,7 @@ class LoginViewController: BaseViewController {
         textFieldEmail.keyboardType = .emailAddress
         textFieldEmail.returnKeyType = .next
         textFieldEmail.clearButtonMode = .whileEditing
+        textFieldEmail.autocapitalizationType = .none
         backView.addSubview(textFieldEmail)
         
         imageView = UIImageView()
@@ -136,6 +137,7 @@ class LoginViewController: BaseViewController {
         textFieldPassword.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         textFieldPassword.returnKeyType = .send
         textFieldPassword.clearButtonMode = .whileEditing
+        textFieldPassword.autocapitalizationType = .none
         textFieldPassword.isSecureTextEntry = true
         backView.addSubview(textFieldPassword)
         
@@ -331,8 +333,14 @@ class LoginViewController: BaseViewController {
                 QDataManager.shared.password = self.textFieldPassword.text
                 QDataManager.shared.commit()
                 
-                let viewController = MainViewController()
-                UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                if MyData.shared.signupStatus == .complete {
+                    let viewController = MainViewController()
+                    UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                } else if MyData.shared.signupStatus == .profile {
+                    let viewController = SignupProfileSpecsViewController()
+                    let navController = SignupNavigationViewController(rootViewController: viewController)
+                    UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                }
             }
             break
             

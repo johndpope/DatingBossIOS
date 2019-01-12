@@ -20,6 +20,8 @@ import UIKit
 
 let QHTTPCLIENT_FORCE_DEBUG = true
 
+private let kBoundaryString = "---percentboundary236739405175924702888539212340aca3742955c---"
+
 enum QHttpMethod: String {
     case get = "GET"
     case post = "POST"
@@ -113,15 +115,41 @@ class QHttpClient: NSObject {
         var reqUrl = url ?? ""
         var paramString: String?
         
-        if parameters != nil {
-            let keys = Array(parameters!.keys)
+//        if parameters != nil {
+//            let keys = Array(parameters!.keys)
+//
+//            if keys.count > 0 {
+//                let jsonWriter = SBJsonWriter()
+//                paramString = jsonWriter.string(with: params)
+//            }
+//        }
+        var imageData: Data?
+        
+        if params != nil {
+            let keys = Array((params!).keys)
             
             if keys.count > 0 {
-                let jsonWriter = SBJsonWriter()
-                paramString = jsonWriter.string(with: params)
+                paramString = ""
+                
+                for i in 0 ..< keys.count {
+                    if paramString!.count > 0 {
+                        paramString! += "&"
+                    }
+                    
+                    let key = keys[i]
+                    if let value = params![key] {
+                        if let valueArray = value as? [Any] {
+                            let jsonWriter = SBJsonWriter()
+                            paramString! += "\(key)=" + jsonWriter.string(with: valueArray)
+                        } else if let valueData = value as? Data {
+                            imageData = photoDataToFormData(data: valueData, boundary: kBoundaryString, fileName: "ios_\(Int(Date().timeIntervalSince1970)).png")
+                        } else {
+                            paramString! += "\(key)=\(value)"
+                        }
+                    }
+                }
             }
         }
-        
         
         if httpMethod == .get {
             if paramString != nil {
@@ -155,9 +183,41 @@ class QHttpClient: NSObject {
         
         request.httpMethod = method.rawValue
         
-        if httpMethod == .post && params != nil {
-            let jsonData: Data = try! JSONSerialization.data(withJSONObject: parameters!, options: .prettyPrinted)
-            request.httpBody = jsonData
+//        if httpMethod == .post && params != nil {
+//        }
+        
+        if httpMethod == .post && paramString != nil {
+            var httpBody = Data()
+            if imageData != nil {
+                if params != nil {
+                    for (key, value) in params! {
+                        if let array = value as? [Any] {
+                            for i in 0 ..< array.count {
+                                let subvalue = array[i]
+                                
+                                httpBody.append("--\(kBoundaryString)\r\n".data(using: .utf8)!)
+                                httpBody.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+                                httpBody.append("\(subvalue)\r\n".data(using: .utf8)!)
+                            }
+                            
+                            continue
+                        }
+                        httpBody.append("--\(kBoundaryString)\r\n".data(using: .utf8)!)
+                        httpBody.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+                        httpBody.append("\(value)\r\n".data(using: .utf8)!)
+                    }
+                }
+                
+                httpBody.append(imageData!)
+                
+                request.setValue("multipart/form-data; boundary=" + kBoundaryString, forHTTPHeaderField: "Content-Type")
+                request.setValue("\([UInt8](httpBody).count)", forHTTPHeaderField: "Content-Length")
+            } else {
+                let jsonData: Data = try! JSONSerialization.data(withJSONObject: parameters!, options: .prettyPrinted)
+                httpBody = jsonData
+            }
+            
+            request.httpBody = httpBody
         }
         
         if debugMode.requestUrl {
@@ -251,6 +311,29 @@ class QHttpClient: NSObject {
         debugMode.params = toggle
         debugMode.requestUrl = toggle
         debugMode.response = toggle
+    }
+    
+    func photoDataToFormData(data: Data, boundary: String, fileName: String) -> Data {
+        var fullData = Data()
+        
+        let lineOne = "--" + boundary + "\r\n"
+        fullData.append(lineOne.data(using: String.Encoding.utf8, allowLossyConversion: false)!)
+        
+        let lineTwo = "Content-Disposition: form-data; name=\"image\"; filename=\"" + fileName + "\"\r\n"
+        fullData.append(lineTwo.data(using: String.Encoding.utf8, allowLossyConversion: false)!)
+        
+        let lineThree = "Content-Type: image/png\r\n\r\n"
+        fullData.append(lineThree.data(using: String.Encoding.utf8,allowLossyConversion: false)!)
+        
+        fullData.append(data as Data)
+        
+        let lineFive = "\r\n"
+        fullData.append(lineFive.data(using: String.Encoding.utf8, allowLossyConversion: false)!)
+        
+        let lineSix = "--" + boundary + "--\r\n"
+        fullData.append(lineSix.data(using: String.Encoding.utf8, allowLossyConversion: false)!)
+        
+        return fullData
     }
 }
 
