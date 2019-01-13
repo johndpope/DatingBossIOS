@@ -28,11 +28,11 @@ class SignupFinalizeViewController: UIViewController {
         
         let circleView = CircleIndicatorView(frame: CGRect.zero, backgroundColour: .clear, indicatorColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), lineWidth: 4 * QUtils.optimizeRatio())
         circleView.translatesAutoresizingMaskIntoConstraints = false
-        circleView.value = 0
+        circleView.value = 1.0
         contentView.addSubview(circleView)
         
-        circleView.widthAnchor.constraint(equalToConstant: 80 * QUtils.optimizeRatio()).isActive = true
-        circleView.heightAnchor.constraint(equalToConstant: 80 * QUtils.optimizeRatio()).isActive = true
+        circleView.widthAnchor.constraint(equalToConstant: 64 * QUtils.optimizeRatio()).isActive = true
+        circleView.heightAnchor.constraint(equalToConstant: 64 * QUtils.optimizeRatio()).isActive = true
         circleView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         circleView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         
@@ -58,24 +58,27 @@ class SignupFinalizeViewController: UIViewController {
         label.heightAnchor.constraint(equalToConstant: 20 * QUtils.optimizeRatio()).isActive = true
         label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-        var value = CGFloat(0.0)
-        _ = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
-            value += 0.01
-            circleView.value = value
-            
-            if value >= 1.0 {
-                timer.invalidate()
-                
-                self.bumping()
-                self.timerBump = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.bumping), userInfo: nil, repeats: true)
-            }
-        })
+//        var value = CGFloat(0.0)
+//        _ = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
+//            value += 0.01
+//            circleView.value = value
+//
+//            if value >= 1.0 {
+//                timer.invalidate()
+//
+//                self.bumping()
+//                self.timerBump = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.bumping), userInfo: nil, repeats: true)
+//            }
+//        })
         
-        var params = [String:Any]()
-        params["sign_up_fl"] = "r"
+        self.bumping()
+        self.timerBump = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(self.bumping), userInfo: nil, repeats: true)
         
-        let httpClient = QHttpClient()
-        httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
+//        var params = [String:Any]()
+//        params["sign_up_fl"] = "r"
+//
+//        let httpClient = QHttpClient()
+//        httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
     }
     
     @objc private func bumping() {
