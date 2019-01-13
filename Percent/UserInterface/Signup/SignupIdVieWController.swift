@@ -67,7 +67,6 @@ extension SignupIdViewController: WKNavigationDelegate, WKUIDelegate, WKScriptMe
         let viewController = SignupStepViewController(step: 1)
         viewController.delegate = self
         self.navigationController?.present(viewController, animated: true, completion: nil)
-        
     }
 }
 

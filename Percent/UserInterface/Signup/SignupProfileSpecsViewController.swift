@@ -500,6 +500,12 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        AVCaptureDevice.requestAccess(for: .video) { (granted) in
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                
+            })
+        }
+        
         reloadContentSize()
     }
     

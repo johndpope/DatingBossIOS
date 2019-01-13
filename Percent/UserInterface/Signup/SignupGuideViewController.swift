@@ -95,7 +95,9 @@ class SignupGuideViewController: BaseSignupViewController {
             UserPayload.shared.clear()
             
             let viewController = SignupTermsViewController()
-            self.navigationController?.pushViewController(viewController, animated: true)
+            viewController.reloadData {
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
             break
             
         default: break

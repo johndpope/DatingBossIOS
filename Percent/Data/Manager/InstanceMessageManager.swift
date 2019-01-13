@@ -15,7 +15,7 @@ class InstanceMessageManager: NSObject {
     
     private var timer: Timer?
     
-    func showMessage(_ message: String) {
+    func showMessage(_ message: String, margin: CGFloat = 0) {
         if messageView != nil {
             timer?.invalidate()
             timer = nil
@@ -34,7 +34,7 @@ class InstanceMessageManager: NSObject {
         messageView?.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         UIApplication.appDelegate().window?.addSubview(messageView!)
         
-        messageView?.bottomAnchor.constraint(equalTo: UIApplication.appDelegate().window!.safeAreaLayoutGuide.bottomAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
+        messageView?.bottomAnchor.constraint(equalTo: UIApplication.appDelegate().window!.safeAreaLayoutGuide.bottomAnchor, constant: -16 * QUtils.optimizeRatio() - margin).isActive = true
         messageView?.centerXAnchor.constraint(equalTo: UIApplication.appDelegate().window!.centerXAnchor).isActive = true
         messageView?.heightAnchor.constraint(equalToConstant: (messageView?.layer.cornerRadius ?? 0) * 2).isActive = true
         

@@ -88,14 +88,19 @@ class SignupTermsViewController: BaseSignupViewController {
         tableFooterView.addSubview(buttonAgreeAll)
         
         theTableView.tableFooterView = tableFooterView
-        
-        reloadData()
     }
     
-    private func reloadData() {
+    func reloadData(_ completion: (() -> Void)? = nil) {
+        LoadingIndicatorManager.shared.showIndicatorView()
+        
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Service.GetTerms, method: .get, headerValues: nil, params: nil) { (isSucceed, errMessage, response) in
-            guard isSucceed, let responseData = response as? [[String:Any]] else { return }
+            LoadingIndicatorManager.shared.hideIndicatorView()
+            
+            guard isSucceed, let responseData = response as? [[String:Any]] else {
+                InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonCancel.frame.size.height + 8 * QUtils.optimizeRatio())
+                return
+            }
             
             self.tableData.removeAll()
             
@@ -104,6 +109,8 @@ class SignupTermsViewController: BaseSignupViewController {
             }))
             
             self.theTableView.reloadData()
+            
+            completion?()
         }
     }
     
@@ -135,13 +142,7 @@ class SignupTermsViewController: BaseSignupViewController {
             }
             
             guard errMessage == nil else {
-                let alertController = UIAlertController(title: "", message: errMessage, preferredStyle: .alert)
-                self.present(alertController, animated: true) {
-                    _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
-                        timer.invalidate()
-                        alertController.dismiss(animated: true, completion: nil)
-                    })
-                }
+                InstanceMessageManager.shared.showMessage(errMessage!, margin: buttonCancel.frame.size.height + 8 * QUtils.optimizeRatio())
                 return
             }
             
