@@ -114,6 +114,7 @@ class LoginViewController: BaseViewController {
         textFieldEmail.returnKeyType = .next
         textFieldEmail.clearButtonMode = .whileEditing
         textFieldEmail.autocapitalizationType = .none
+        textFieldEmail.delegate = self
         backView.addSubview(textFieldEmail)
         
         imageView = UIImageView()
@@ -139,6 +140,7 @@ class LoginViewController: BaseViewController {
         textFieldPassword.clearButtonMode = .whileEditing
         textFieldPassword.autocapitalizationType = .none
         textFieldPassword.isSecureTextEntry = true
+        textFieldPassword.delegate = self
         backView.addSubview(textFieldPassword)
         
         imageView = UIImageView()
@@ -285,7 +287,12 @@ class LoginViewController: BaseViewController {
             var handler: ((UIAlertAction) -> Void)?
             
             if textFieldEmail.text?.count ?? 0 == 0 || textFieldEmail.text?.isValidEmail() == false {
-                errMessage = textFieldEmail.text?.isValidEmail() == false ? "사용할 수 없는 이메일입니다." : "이메일을 입력해 주세요."
+                if textFieldEmail.text?.count ?? 0 == 0 {
+                    errMessage = "이메일을 입력하세요."
+                } else {
+                    errMessage = "이메일 형식이 올바르지 않습니다."
+                }
+                
                 handler = {(action) -> Void in
                     self.textFieldEmail.text = nil
                     self.textFieldPassword.text = nil
@@ -293,7 +300,7 @@ class LoginViewController: BaseViewController {
                     _ = self.textFieldEmail.becomeFirstResponder()
                 }
             } else if textFieldPassword.text?.count ?? 0 == 0 {
-                errMessage = "비밀번호를 입력해 주세요."
+                errMessage = "비밀번호를 입력하세요asdad."
                 handler = {(action) -> Void in
                     self.textFieldPassword.text = nil
                     
@@ -302,9 +309,7 @@ class LoginViewController: BaseViewController {
             }
             
             guard errMessage == nil else {
-                let alertController = UIAlertController(title: "로그인 실패", message: errMessage, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: kStringConfirm, style: .cancel, handler: handler))
-                self.present(alertController, animated: true, completion: nil)
+                InstanceMessageManager.shared.showMessage(errMessage!)
                 break
             }
             
@@ -321,9 +326,7 @@ class LoginViewController: BaseViewController {
             httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
                 LoadingIndicatorManager.shared.hideIndicatorView()
                 guard isSucceed, let responseData = response as? [String:Any] else {
-                    let alertController = UIAlertController(title: "로그인", message: "로그인에 실패하였습니다.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
+                    InstanceMessageManager.shared.showMessage("로그인 정보가 유효하지 않습니다.")
                     return
                 }
                 
@@ -377,5 +380,18 @@ class LoginViewController: BaseViewController {
             
         default: break
         }
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == textFieldEmail {
+            _ = textFieldPassword.becomeFirstResponder()
+            return false
+        } else {
+            pressedButton(buttonLogin)
+        }
+        
+        return true
     }
 }

@@ -30,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         QHttpClient.addCommonHeaderValue("application/json", for: "Content-Type")
         
-        let viewController = IntroViewController()
+//        let viewController = IntroViewController()
+        let viewController = LoginViewController()
         self.window?.rootViewController = viewController
         self.window!.makeKeyAndVisible()
         return true

@@ -1027,7 +1027,7 @@ extension SignupProfileSpecsViewController: UINavigationControllerDelegate, UIIm
         let index = replaceIndex ?? UserPayload.shared.pictures.count
         
         var params = [String:Any]()
-        params["picture"] = image.pngData()
+        params["picture"] = image.jpegData(compressionQuality: 0.8)
         params["tmp_fl"] = "y"
         
         let httpClient = QHttpClient()
