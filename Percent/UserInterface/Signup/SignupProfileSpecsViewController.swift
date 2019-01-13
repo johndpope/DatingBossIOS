@@ -24,11 +24,14 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     private let entryViewEducation = SignupProfilePopupEntryView()
     private let entryViewEducationDetail = SignupProfileTextEntryView()
     private let entryViewJob = SignupProfilePopupEntryView()
+    private let entryViewJobDetail = SignupProfileTextEntryView()
     private let entryViewWage = SignupProfilePopupEntryView()
     private let entryViewReligion = SignupProfilePopupEntryView()
     private let entryViewHobby = SignupProfilePopupEntryView()
     private let entryViewDrinking = SignupProfilePopupEntryView()
     private let entryViewSmoking = SignupProfilePopupEntryView()
+    
+    private var seperatorJobDetail: UIView!
     
     private let buttonTextView = UIButton(type: .custom)
     private let textViewComment = UITextView()
@@ -45,6 +48,8 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     private var selectedDataArray = [Int]()
     
     private var activatingEntryView: SignupProfileEntryView?
+    
+    private var constraintJobDetailHeight: NSLayoutConstraint!
     
     override init(navigationViewEffect effect: UIVisualEffect? = nil) {
         let flowLayout = UICollectionViewFlowLayout()
@@ -315,6 +320,38 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         seperator.translatesAutoresizingMaskIntoConstraints = false
         seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
         theScrollView.addSubview(seperator)
+        
+        seperator.topAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        seperator.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        seperator.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        entryViewJobDetail.translatesAutoresizingMaskIntoConstraints = false
+        entryViewJobDetail.clipsToBounds = true
+        entryViewJobDetail.hideCheckIndicator = true
+        entryViewJobDetail.labelTitle.text = "직업(선택)"
+        entryViewJobDetail.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewJobDetail.textfield.returnKeyType = .done
+        entryViewJobDetail.textfield.addTarget(self, action: #selector(self.textfieldDidChange(_:)), for: .editingChanged)
+        entryViewJobDetail.textfield.autocorrectionType = .no
+        entryViewJobDetail.textfield.delegate = self
+        theScrollView.addSubview(entryViewJobDetail)
+        
+        entryViewJobDetail.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
+        entryViewJobDetail.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        entryViewJobDetail.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        constraintJobDetailHeight = entryViewJobDetail.heightAnchor.constraint(equalToConstant: 0)
+        constraintJobDetailHeight.isActive = true
+        
+        bottomAnchor = entryViewJobDetail.bottomAnchor
+
+        seperator = UIView()
+        seperator.translatesAutoresizingMaskIntoConstraints = false
+        seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
+        seperator.isHidden = true
+        theScrollView.addSubview(seperator)
+        
+        seperatorJobDetail = seperator
 
         seperator.topAnchor.constraint(equalTo: bottomAnchor).isActive = true
         seperator.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
@@ -554,9 +591,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             break
             
         case buttonConfirm:
-            let viewController = SignupStepViewController(step: 2)
-            viewController.delegate = self
-            self.present(viewController, animated: true, completion: nil)
+            uploadProfile()
             break
             
         case buttonCancel:
@@ -899,6 +934,92 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     @objc private func textfieldDidChange(_ textfield: UITextField) {
         if (textfield.superview as? SignupProfileTextEntryView) == entryViewEducationDetail {
             UserPayload.shared.educationDetail = textfield.text
+        } else if (textfield.superview as? SignupProfileTextEntryView) == entryViewJobDetail {
+            UserPayload.shared.jobDetail = textfield.text
+        }
+    }
+    
+    private func uploadProfile() {
+        var errMessage: String?
+        
+        if UserPayload.shared.pictures.count < 3 {
+            errMessage = "프로필 사진을 3장 이상 등록해주세요."
+        } else if entryViewHeight.checked == false {
+            errMessage = "키를 입력하세요."
+        } else if entryViewShape.checked == false {
+            errMessage = "체형을 입력하세요."
+        } else if entryViewBlood.checked == false {
+            errMessage = "혈액형을 입력하세요."
+        } else if entryViewRegion.checked == false {
+            errMessage = "지역을 입력하세요."
+        } else if entryViewEducation.checked == false {
+            errMessage = "학력을 입력하세요."
+        } else if entryViewJob.checked == false {
+            errMessage = "직업을 입력하세요."
+        } else if entryViewWage.checked == false {
+            errMessage = "연봉을 입력하세요."
+        } else if entryViewReligion.checked == false {
+            errMessage = "종교를 입력하세요."
+        } else if entryViewHobby.checked == false {
+            errMessage = "취미를 입력하세요."
+        } else if entryViewDrinking.checked == false {
+            errMessage = "음주 스타일을 입력하세요."
+        } else if entryViewSmoking.checked == false {
+            errMessage = "흡연여부를 입력하세요."
+        } else if textViewComment.text.count == 0 {
+            errMessage = "하고싶은 말을 입력하세요."
+        }
+        
+        guard errMessage == nil else {
+            InstanceMessageManager.shared.showMessage(errMessage!, margin: buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
+            return
+        }
+        
+        var params = [String:Any]()
+        params["height"] = UserPayload.shared.height
+        params["form_cd"] = UserPayload.shared.shape?.code
+        params["blood_type"] = UserPayload.shared.blood
+        params["area_cd"] = UserPayload.shared.region?.code
+        params["edu_cd"] = UserPayload.shared.education?.code
+        params["job_cd"] = UserPayload.shared.job?.code
+        params["income_cd"] = UserPayload.shared.wage?.code
+        params["religion_cd"] = UserPayload.shared.religion?.code
+        params["drinking_cd"] = UserPayload.shared.drinking?.code
+        params["smoking_cd"] = UserPayload.shared.smoking?.code
+        
+        var hobby_cd = ""
+        for hobby in UserPayload.shared.hobby {
+            guard let code = hobby.code else { continue }
+            if hobby_cd.count > 0 {
+                hobby_cd += ","
+            }
+            
+            hobby_cd += code
+        }
+        params["hobby_cd"] = hobby_cd
+        
+        params["introduction"] = UserPayload.shared.introduction
+        params["school"] = UserPayload.shared.educationDetail
+        params["job_etc"] = UserPayload.shared.jobDetail
+        
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Account.Update + "\(MyData.shared.mem_idx)", method: .patch, headerValues: nil, params: params) { (isSucceed, errMessage, response) in
+            guard let responseData = response as? [String:Any],
+                let status = responseData["Status"] as? String,
+                status == "Ok"  else {
+                    InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
+                    return
+            }
+            
+            var params = [String:Any]()
+            params["sign_up_fl"] = "s"
+            
+            let httpClient = QHttpClient()
+            httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
+            
+            let viewController = SignupStepViewController(step: 2)
+            viewController.delegate = self
+            self.present(viewController, animated: true, completion: nil)
         }
     }
 }
@@ -1040,6 +1161,8 @@ extension SignupProfileSpecsViewController: UIScrollViewDelegate {
 
 extension SignupProfileSpecsViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
+        UserPayload.shared.introduction = textView.text
+        
         let originHeight = constraintTextViewHeight.constant
         
         let textview = UITextView(frame: textViewComment.frame)
@@ -1144,9 +1267,18 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
             self.entryViewEducation.labelValue.text = (value as? AppData)?.code_name
         } else if activatingEntryView == entryViewJob {
             UserPayload.shared.job = value as? AppData
+            UserPayload.shared.jobDetail = nil
             
             self.entryViewJob.checked = true
             self.entryViewJob.labelValue.text = (value as? AppData)?.code_name
+            
+            self.entryViewJobDetail.textfield.text = nil
+            
+            seperatorJobDetail.isHidden = (value as? AppData)?.code_name != "기타"
+            constraintJobDetailHeight.constant = (value as? AppData)?.code_name != "기타" ? 0 : 56 * QUtils.optimizeRatio()
+            self.view.layoutIfNeeded()
+            
+            reloadContentSize()
         } else if activatingEntryView == entryViewWage {
             UserPayload.shared.wage = value as? AppData
             

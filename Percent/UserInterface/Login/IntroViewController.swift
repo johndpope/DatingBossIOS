@@ -133,6 +133,7 @@ class IntroViewController: BaseViewController {
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             return
                         }
+                        
 
                         switch MyData.shared.signupStatus {
                         case .complete:

@@ -287,6 +287,12 @@ class SignupProfileViewController: BaseSignupStepsViewController {
                     QDataManager.shared.password = UserPayload.shared.password
                     QDataManager.shared.commit()
                     
+                    var params = [String:Any]()
+                    params["sign_up_fl"] = "p"
+                    
+                    let httpClient = QHttpClient()
+                    httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
+                    
                     let viewController = SignupProfileSpecsViewController()
                     self.navigationController?.pushViewController(viewController, animated: true)
                 }

@@ -29,11 +29,13 @@ class UserPayload: NSObject {
     var education: AppData?
     var educationDetail: String?
     var job: AppData?
+    var jobDetail: String?
     var wage: AppData?
     var religion: AppData?
     var hobby = [AppData]()
     var drinking: AppData?
     var smoking: AppData?
+    var introduction: String?
     
     override init() {
         super.init()
@@ -58,11 +60,13 @@ class UserPayload: NSObject {
         education = nil
         educationDetail = nil
         job = nil
+        jobDetail = nil
         wage = nil
         religion = nil
         hobby.removeAll()
         drinking = nil
         smoking = nil
+        introduction = nil
     }
     
     func loadFromDatabase() {

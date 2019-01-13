@@ -58,10 +58,10 @@ class SignupNavigationBarView: UIView {
         
         contentView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 32 * QUtils.optimizeRatio()).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32 * QUtils.optimizeRatio()).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
         
-        let labelWidth = (UIScreen.main.bounds.size.width - 64 * QUtils.optimizeRatio()) / 5
+        let labelWidth = (UIScreen.main.bounds.size.width - 32 * QUtils.optimizeRatio()) / 5
         var leadingAnchor: NSLayoutXAxisAnchor?
         
         for i in 0 ..< 5 {
@@ -69,7 +69,7 @@ class SignupNavigationBarView: UIView {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = "STEP0\(i + 1)"
             label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 10 * QUtils.optimizeRatio(), weight: .bold)
+            label.font = UIFont.systemFont(ofSize: 12 * QUtils.optimizeRatio(), weight: .bold)
             contentView.addSubview(label)
             
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
@@ -89,7 +89,7 @@ class SignupNavigationBarView: UIView {
         barView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(barView)
         
-        barView.topAnchor.constraint(equalTo: labelsStep[0].bottomAnchor, constant: 15 * QUtils.optimizeRatio()).isActive = true
+        barView.topAnchor.constraint(equalTo: labelsStep[0].bottomAnchor, constant: 12 * QUtils.optimizeRatio()).isActive = true
         barView.leadingAnchor.constraint(equalTo: labelsStep[0].leadingAnchor).isActive = true
         barView.trailingAnchor.constraint(equalTo: labelsStep[4].trailingAnchor).isActive = true
         barView.heightAnchor.constraint(equalToConstant: 4 * QUtils.optimizeRatio()).isActive = true
