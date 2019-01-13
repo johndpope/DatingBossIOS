@@ -66,7 +66,7 @@ class SignupStepViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = step < 10 ? "0\(step)" : "\(step)"
         label.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 0 * QUtils.optimizeRatio(), weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 40 * QUtils.optimizeRatio(), weight: .regular)
         contentView.addSubview(label)
         
         label.topAnchor.constraint(equalTo: bottomAnchor).isActive = true

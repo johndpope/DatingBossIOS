@@ -133,42 +133,42 @@ class IntroViewController: BaseViewController {
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             return
                         }
-
-                        switch MyData.shared.signupStatus {
-                        case .complete:
-                            let viewController = MainViewController()
-                            UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
-                            break
-
-                        case .denied:
-                            gotoLogin()
-                            break
-
-                        case .profile:
+//
+//                        switch MyData.shared.signupStatus {
+//                        case .complete:
+//                            let viewController = MainViewController()
+//                            UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+//                            break
+//
+//                        case .denied:
+//                            gotoLogin()
+//                            break
+//
+//                        case .profile:
                             let viewController = SignupProfileSpecsViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
-                            break
-
-                        case .survey:
-                            let viewController = SignupSurveyViewController(depth: 0)
-                            let navController = SignupNavigationViewController(rootViewController: viewController)
-                            UIApplication.appDelegate().changeRootViewController(navController, animated: true)
-                            break
-
-                        case .looks:
-                            let viewController = SignupSelectFavorLooksViewController()
-                            let navController = SignupNavigationViewController(rootViewController: viewController)
-                            UIApplication.appDelegate().changeRootViewController(navController, animated: true)
-                            break
-
-                        case .pending:
-                            let viewController = SignupFinalizeViewController()
-                            UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
-                            break
-
-                        default: break
-                        }
+//                            break
+//
+//                        case .survey:
+//                            let viewController = SignupSurveyViewController(depth: 0)
+//                            let navController = SignupNavigationViewController(rootViewController: viewController)
+//                            UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+//                            break
+//
+//                        case .looks:
+//                            let viewController = SignupSelectFavorLooksViewController()
+//                            let navController = SignupNavigationViewController(rootViewController: viewController)
+//                            UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+//                            break
+//
+//                        case .pending:
+//                            let viewController = SignupFinalizeViewController()
+//                            UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+//                            break
+//
+//                        default: break
+//                        }
                     }
                 })
             })
