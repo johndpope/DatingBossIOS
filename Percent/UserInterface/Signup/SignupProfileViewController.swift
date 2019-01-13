@@ -256,8 +256,10 @@ class SignupProfileViewController: BaseSignupStepsViewController {
             
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.Signup, params: params) { (isSucceed, errMessage, response) in
-                guard isSucceed else {
+                guard let responseData = response as? [String:Any], let status = responseData["Status"] as? String, status == "OK" else {
                     LoadingIndicatorManager.shared.hideIndicatorView()
+                    
+                    InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
                     return
                 }
                 
@@ -274,10 +276,8 @@ class SignupProfileViewController: BaseSignupStepsViewController {
                 let httpClient = QHttpClient()
                 httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
                     LoadingIndicatorManager.shared.hideIndicatorView()
-                    guard isSucceed, let responseData = response as? [String:Any] else {
-                        let alertController = UIAlertController(title: "로그인", message: "로그인에 실패하였습니다.", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
+                    guard let responseData = response as? [String:Any], let status = responseData["Status"] as? String, status == "OK" else {
+                        InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
                         return
                     }
                     

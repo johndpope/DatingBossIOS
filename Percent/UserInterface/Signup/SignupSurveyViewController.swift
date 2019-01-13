@@ -186,22 +186,33 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
     }
     
     private func reloadData() {
-        SurveyManager.shared.reloadSurveys { (isSucceed) in
-            guard isSucceed else { return }
-            
-            guard let codesArray = AppDataManager.shared.data["survey1"],
-                let titleString = codesArray[self.depth].code_name,
-                let key = codesArray[self.depth].code,
-                let array = SurveyManager.shared.dataDict[key]  else { return }
-            
-            self.dataArray.removeAll()
-            self.dataArray.append(contentsOf: array)
-            
-            self.labelTitle.text = titleString
-            
-            self.loadQuestion()
-            
-            self.view.layoutIfNeeded()
+        let loadSurveys = {() -> Void in
+            SurveyManager.shared.reloadSurveys { (isSucceed) in
+                guard isSucceed else { return }
+                
+                guard let codesArray = AppDataManager.shared.data["survey1"],
+                    let titleString = codesArray[self.depth].code_name,
+                    let key = codesArray[self.depth].code,
+                    let array = SurveyManager.shared.dataDict[key]  else { return }
+                
+                self.dataArray.removeAll()
+                self.dataArray.append(contentsOf: array)
+                
+                self.labelTitle.text = titleString
+                
+                self.loadQuestion()
+                
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        guard AppDataManager.shared.data.count == 0 else {
+            loadSurveys()
+            return
+        }
+        
+        AppDataManager.shared.reloadData { (complete) in
+            loadSurveys()
         }
     }
     

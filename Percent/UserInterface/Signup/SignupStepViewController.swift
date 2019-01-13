@@ -91,7 +91,7 @@ class SignupStepViewController: UIViewController {
             if value >= 1.0 {
                 timer.invalidate()
                 
-                _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (aTimer) in
+                _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false, block: { (aTimer) in
                     self.delegate?.signupStepViewController(doneProgress: self)
                 })
             }
