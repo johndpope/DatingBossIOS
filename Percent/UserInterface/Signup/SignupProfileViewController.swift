@@ -56,7 +56,8 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         entryViewEmail.textfield.autocapitalizationType = .none
         entryViewEmail.textfield.delegate = self
         entryViewEmail.textfield.addTarget(self, action: #selector(self.textfieldDidChange(_:)), for: .editingChanged)
-        entryViewEmail.button.addTarget(self, action: #selector(self.resignAll), for: .touchUpInside)
+//        entryViewEmail.button.addTarget(self, action: #selector(self.resignAll), for: .touchUpInside)
+        entryViewEmail.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         self.view.addSubview(entryViewEmail)
         
         entryViewEmail.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
@@ -81,7 +82,8 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         entryViewPassword.textfield.returnKeyType = .next
         entryViewPassword.textfield.delegate = self
         entryViewPassword.textfield.addTarget(self, action: #selector(self.textfieldDidChange(_:)), for: .editingChanged)
-        entryViewPassword.button.addTarget(self, action: #selector(self.resignAll), for: .touchUpInside)
+//        entryViewPassword.button.addTarget(self, action: #selector(self.resignAll), for: .touchUpInside)
+        entryViewPassword.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         self.view.addSubview(entryViewPassword)
         
         entryViewPassword.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -106,7 +108,8 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         entryViewRepeatPassword.textfield.returnKeyType = .next
         entryViewRepeatPassword.textfield.delegate = self
         entryViewRepeatPassword.textfield.addTarget(self, action: #selector(self.textfieldDidChange(_:)), for: .editingChanged)
-        entryViewRepeatPassword.button.addTarget(self, action: #selector(self.resignAll), for: .touchUpInside)
+//        entryViewRepeatPassword.button.addTarget(self, action: #selector(self.resignAll), for: .touchUpInside)
+        entryViewRepeatPassword.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         self.view.addSubview(entryViewRepeatPassword)
         
         entryViewRepeatPassword.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -132,7 +135,8 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         entryViewNickname.textfield.autocapitalizationType = .none
         entryViewNickname.textfield.delegate = self
         entryViewNickname.textfield.addTarget(self, action: #selector(self.textfieldDidChange(_:)), for: .editingChanged)
-        entryViewNickname.button.addTarget(self, action: #selector(self.resignAll), for: .touchUpInside)
+//        entryViewNickname.button.addTarget(self, action: #selector(self.resignAll), for: .touchUpInside)
+        entryViewNickname.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         self.view.addSubview(entryViewNickname)
         
         entryViewNickname.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -215,9 +219,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
                 httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
                     LoadingIndicatorManager.shared.hideIndicatorView()
                     guard isSucceed, let responseData = response as? [String:Any] else {
-                        let alertController = UIAlertController(title: "로그인", message: "로그인에 실패하였습니다.", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
+                        InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
                         return
                     }
                     
@@ -295,6 +297,11 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         }
     }
     
+    @objc private func pressedEntryButton(_ sender: UIButton) {
+        guard let entryView = sender.superview as? SignupProfileTextEntryView else { return }
+        _ = entryView.textfield.becomeFirstResponder()
+    }
+    
     @objc private func textfieldDidChange(_ textfield: UITextField) {
         if textfield.superview == entryViewEmail {
             let originValue = entryViewEmail.checked
@@ -361,9 +368,26 @@ class SignupProfileViewController: BaseSignupStepsViewController {
 
 extension SignupProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        guard started == false else { return }
+        guard textField == entryViewEmail.textfield, started == false else { return }
         started = true
         theTableView.reloadData()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == entryViewEmail.textfield {
+            _ = entryViewPassword.textfield.becomeFirstResponder()
+            return false
+        } else if textField == entryViewPassword.textfield {
+            _ = entryViewRepeatPassword.textfield.becomeFirstResponder()
+            return false
+        } else if textField == entryViewRepeatPassword.textfield {
+            _ = entryViewNickname.textfield.becomeFirstResponder()
+            return false
+        } else if textField == entryViewNickname.textfield {
+            _ = entryViewNickname.textfield.resignFirstResponder()
+        }
+        
+        return true
     }
 }
 

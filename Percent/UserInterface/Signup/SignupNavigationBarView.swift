@@ -61,16 +61,26 @@ class SignupNavigationBarView: UIView {
         contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 32 * QUtils.optimizeRatio()).isActive = true
         contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32 * QUtils.optimizeRatio()).isActive = true
         
+        let labelWidth = (UIScreen.main.bounds.size.width - 64 * QUtils.optimizeRatio()) / 5
+        var leadingAnchor: NSLayoutXAxisAnchor?
+        
         for i in 0 ..< 5 {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.text = "STEP\(i + 1)"
+            label.text = "STEP0\(i + 1)"
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 10 * QUtils.optimizeRatio(), weight: .bold)
             contentView.addSubview(label)
             
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
-            label.centerXAnchor.constraint(equalTo: contentView.leadingAnchor, constant: ((UIScreen.main.bounds.size.width - 64 * QUtils.optimizeRatio()) * CGFloat(i) / 4)).isActive = true
+            if leadingAnchor == nil {
+                label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+            } else {
+                label.leadingAnchor.constraint(equalTo: leadingAnchor!).isActive = true
+            }
+            label.widthAnchor.constraint(equalToConstant: labelWidth).isActive = true
+
+            leadingAnchor = label.trailingAnchor
             
             labelsStep.append(label)
         }
@@ -130,11 +140,10 @@ class SignupNavigationBarView: UIView {
         labelsStep[3].textColor = self.stepValue == 4 ? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5)
         labelsStep[4].textColor = self.stepValue == 5 ? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5)
         
-        print(self.labelsStep[0].frame)
-        print(self.labelsStep[0].center)
+        let unit = barIndicatorView.superview!.frame.size.width / 5
         
         let animations = {() -> Void in
-            self.constraintIndicatorBar.constant = self.labelsStep[self.stepValue - 1].center.x - self.labelsStep[0].frame.origin.x
+            self.constraintIndicatorBar.constant = unit * CGFloat(self.stepValue)
             
             self.layoutIfNeeded()
         }
