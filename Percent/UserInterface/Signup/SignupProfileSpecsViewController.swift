@@ -1031,7 +1031,7 @@ extension SignupProfileSpecsViewController: UINavigationControllerDelegate, UIIm
         params["tmp_fl"] = "y"
         
         let httpClient = QHttpClient()
-        httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)/\(index)/y", params: params) { (isSucceed, errMessage, response) in
+        httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)/\(index + 1)/y", params: params) { (isSucceed, errMessage, response) in
             LoadingIndicatorManager.shared.hideIndicatorView()
             
         }
