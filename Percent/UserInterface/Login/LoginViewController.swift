@@ -294,7 +294,7 @@ class LoginViewController: BaseViewController {
                     _ = self.textFieldEmail.becomeFirstResponder()
                 }
             } else if textFieldPassword.text?.count ?? 0 == 0 {
-                errMessage = "비밀번호를 입력하세요asdad."
+                errMessage = "비밀번호를 입력하세요."
                 handler = {(action) -> Void in
                     self.textFieldPassword.text = nil
                     
