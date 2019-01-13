@@ -24,12 +24,6 @@ class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AVCaptureDevice.requestAccess(for: .video) { (granted) in
-            PHPhotoLibrary.requestAuthorization({ (status) in
-                
-            })
-        }
-        
         self.setNavigationViewHidden(true, animated: false)
         
         var imageView = UIImageView()
