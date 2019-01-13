@@ -1006,7 +1006,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         httpClient.request(to: RequestUrl.Account.Update + "\(MyData.shared.mem_idx)", method: .patch, headerValues: nil, params: params) { (isSucceed, errMessage, response) in
             guard let responseData = response as? [String:Any],
                 let status = responseData["Status"] as? String,
-                status == "Ok"  else {
+                status == "OK"  else {
                     InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
                     return
             }
