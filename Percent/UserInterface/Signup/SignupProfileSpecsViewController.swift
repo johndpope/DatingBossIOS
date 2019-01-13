@@ -42,6 +42,10 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     private var selectedEntryView: SignupProfileEntryView?
     private var editingView: UIView?
     
+    private var selectedDataArray = [Int]()
+    
+    private var activatingEntryView: SignupProfileEntryView?
+    
     override init(navigationViewEffect effect: UIVisualEffect? = nil) {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = SignupProfilePictureCollectionViewCell.sectionInset
@@ -77,7 +81,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "※ 작성 후 변경은 한달 후에 가능하니 신중히 작성해주세요."
+        label.text = "※ 허위로 작성시 이용에 불이익을 받을 수 있습니다."
         label.textColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         label.numberOfLines = 0
@@ -91,7 +95,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         
         label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "※ 허위로 작성시 이용에 불이익을 받을 수 있습니다."
+        label.text = "※ 연봉 정보는 이성에게 노출하지 않고 분석에만 쓰입니다."
         label.textColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         label.numberOfLines = 0
@@ -105,7 +109,35 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         
         label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "※ 사진은 최소 3장(필수) 최대 5장"
+        label.text = "※ 연락처 기재 시 강제탈퇴 처리됩니다."
+        label.textColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        label.numberOfLines = 0
+        theScrollView.addSubview(label)
+        
+        label.topAnchor.constraint(equalTo: bottomAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        label.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+        label.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
+        
+        bottomAnchor = label.bottomAnchor
+        
+        label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "※ 사진은 최소 3장(필수) 최대 6장까지 등록할 수 있습니다."
+        label.textColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        label.numberOfLines = 0
+        theScrollView.addSubview(label)
+        
+        label.topAnchor.constraint(equalTo: bottomAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        label.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+        label.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
+        
+        bottomAnchor = label.bottomAnchor
+        
+        label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "※ 본인 얼굴이 나온 사진을 등록해주세요.(심사항목)"
         label.textColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         label.numberOfLines = 0
@@ -562,7 +594,10 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerView.showsSelectionIndicator = true
             pickerView.selectRow((UserPayload.shared.height ?? 170) - 150, inComponent: 0, animated: false)
             
+            activatingEntryView = entryViewHeight
+            
             let alertController = AlertPopupCustomViewController(withTitle: entryViewHeight.labelTitle.text, View: pickerView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
@@ -570,7 +605,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
                 UserPayload.shared.height = value
                 
                 self.entryViewHeight.checked = true
-                self.entryViewHeight.labelValue.text = "\(value) cm"
+                self.entryViewHeight.labelValue.text = "\(value)"
             }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
@@ -580,131 +615,84 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             
             guard let dataArray = AppDataManager.shared.data[key] else { return }
             
-            var selectedRow = dataArray.count / 2
-            
             pickerData.removeAll()
-            for i in 0 ..< dataArray.count {
-                let item = dataArray[i]
-                if let code = item.code, code == UserPayload.shared.shape?.code {
-                    selectedRow = i
-                }
-                pickerData.append(item.code_name ?? "")
-            }
+            pickerData.append(contentsOf: dataArray)
             
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: 260))
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            pickerView.showsSelectionIndicator = true
-            pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewShape.labelTitle.text, View: pickerView)
+            activatingEntryView = entryViewShape
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewShape.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                let value = dataArray[pickerView.selectedRow(inComponent: 0)]
-                UserPayload.shared.shape = value
-                
-                self.entryViewShape.checked = true
-                self.entryViewShape.labelValue.text = value.code_name
-            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewBlood {
             let dataArray = ["A", "B", "AB", "O"]
-            var selectedRow = 0
             
             pickerData.removeAll()
-            for i in 0 ..< dataArray.count {
-                let item = dataArray[i]
-                if item == UserPayload.shared.blood ?? "" {
-                    selectedRow = i
-                }
-                pickerData.append(item)
-            }
+            pickerData.append(contentsOf: dataArray)
             
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: 260))
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            pickerView.showsSelectionIndicator = true
-            pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewBlood.labelTitle.text, View: pickerView)
+            activatingEntryView = entryViewBlood
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewBlood.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                let value = dataArray[pickerView.selectedRow(inComponent: 0)]
-                UserPayload.shared.blood = value
-                
-                self.entryViewBlood.checked = true
-                self.entryViewBlood.labelValue.text = value
-            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewRegion {
             guard let dataArray = AppDataManager.shared.data["area"] else { return }
             
-            var selectedRow = 0
-            
             pickerData.removeAll()
-            for i in 0 ..< dataArray.count {
-                let item = dataArray[i]
-                if let code = item.code, code == UserPayload.shared.region?.code {
-                    selectedRow = i
-                }
-                pickerData.append(item.code_name ?? "")
-            }
+            pickerData.append(contentsOf: dataArray)
             
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: 260))
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            pickerView.showsSelectionIndicator = true
-            pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewRegion.labelTitle.text, View: pickerView)
+            activatingEntryView = entryViewRegion
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewRegion.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                let value = dataArray[pickerView.selectedRow(inComponent: 0)]
-                UserPayload.shared.region = value
-                
-                self.entryViewRegion.checked = true
-                self.entryViewRegion.labelValue.text = value.code_name
-            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewEducation {
             guard let dataArray = AppDataManager.shared.data["edu"] else { return }
             
-            var selectedRow = 0
-            
             pickerData.removeAll()
-            for i in 0 ..< dataArray.count {
-                let item = dataArray[i]
-                if let code = item.code, code == UserPayload.shared.education?.code {
-                    selectedRow = i
-                }
-                pickerData.append(item.code_name ?? "")
-            }
+            pickerData.append(contentsOf: dataArray)
             
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: 260))
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            pickerView.showsSelectionIndicator = true
-            pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewEducation.labelTitle.text, View: pickerView)
+            activatingEntryView = entryViewEducation
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewEducation.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                let value = dataArray[pickerView.selectedRow(inComponent: 0)]
-                UserPayload.shared.education = value
-                
-                self.entryViewEducation.checked = true
-                self.entryViewEducation.labelValue.text = value.code_name
-            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
@@ -714,99 +702,63 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         } else if entryView == entryViewJob {
             guard let dataArray = AppDataManager.shared.data["job"] else { return }
             
-            var selectedRow = 0
-            
             pickerData.removeAll()
-            for i in 0 ..< dataArray.count {
-                let item = dataArray[i]
-                if let code = item.code, code == UserPayload.shared.job?.code {
-                    selectedRow = i
-                }
-                pickerData.append(item.code_name ?? "")
-            }
+            pickerData.append(contentsOf: dataArray)
             
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: 260))
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            pickerView.showsSelectionIndicator = true
-            pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewJob.labelTitle.text, View: pickerView)
+            activatingEntryView = entryViewJob
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewJob.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                let value = dataArray[pickerView.selectedRow(inComponent: 0)]
-                UserPayload.shared.job = value
-                
-                self.entryViewJob.checked = true
-                self.entryViewJob.labelValue.text = value.code_name
-            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewWage {
             guard let dataArray = AppDataManager.shared.data["income"] else { return }
             
-            var selectedRow = 0
-            
             pickerData.removeAll()
-            for i in 0 ..< dataArray.count {
-                let item = dataArray[i]
-                if let code = item.code, code == UserPayload.shared.wage?.code {
-                    selectedRow = i
-                }
-                pickerData.append(item.code_name ?? "")
-            }
+            pickerData.append(contentsOf: dataArray)
             
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: 260))
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            pickerView.showsSelectionIndicator = true
-            pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewWage.labelTitle.text, View: pickerView)
+            activatingEntryView = entryViewWage
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewWage.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                let value = dataArray[pickerView.selectedRow(inComponent: 0)]
-                UserPayload.shared.wage = value
-                
-                self.entryViewWage.checked = true
-                self.entryViewWage.labelValue.text = value.code_name
-            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewReligion {
             guard let dataArray = AppDataManager.shared.data["religion"] else { return }
             
-            var selectedRow = 0
-            
             pickerData.removeAll()
-            for i in 0 ..< dataArray.count {
-                let item = dataArray[i]
-                if let code = item.code, code == UserPayload.shared.religion?.code {
-                    selectedRow = i
-                }
-                pickerData.append(item.code_name ?? "")
-            }
+            pickerData.append(contentsOf: dataArray)
             
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: 260))
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            pickerView.showsSelectionIndicator = true
-            pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewReligion.labelTitle.text, View: pickerView)
+            activatingEntryView = entryViewReligion
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewReligion.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                let value = dataArray[pickerView.selectedRow(inComponent: 0)]
-                UserPayload.shared.religion = value
-                
-                self.entryViewReligion.checked = true
-                self.entryViewReligion.labelValue.text = value.code_name
-            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
@@ -814,6 +766,19 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             guard let dataArray = AppDataManager.shared.data["hobby"] else { return }
             
             pickerData.removeAll()
+            
+            let preselected = UserPayload.shared.hobby.map { (item) -> String in
+                return item.code ?? ""
+            }
+            
+            selectedDataArray.removeAll()
+            
+            for i in 0 ..< dataArray.count {
+                let item = dataArray[i]
+                guard let code = item.code, preselected.firstIndex(of: code) != nil else { continue }
+                selectedDataArray.append(i)
+            }
+            
             pickerData.append(contentsOf: dataArray)
             
             let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * 7))
@@ -822,75 +787,76 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
+            activatingEntryView = entryViewHobby
+            
             let alertController = AlertPopupCustomViewController(withTitle: entryViewHobby.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
+            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
+                var selection = [AppData]()
+                
+                var valueString = ""
+                
+                for index in self.selectedDataArray {
+                    guard let data = self.pickerData[index] as? AppData, let codeName = data.code_name else { continue }
+                    selection.append(data)
+                    
+                    if valueString.count > 0 {
+                        valueString += ", "
+                    }
+                    
+                    valueString += codeName
+                }
+                
+                UserPayload.shared.hobby.removeAll()
+                UserPayload.shared.hobby.append(contentsOf: selection)
+                
+                self.entryViewHobby.labelValue.text = valueString
+                self.entryViewHobby.checked = valueString.count > 0
+            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewDrinking {
             guard let dataArray = AppDataManager.shared.data["drinking"] else { return }
             
-            var selectedRow = 0
-            
             pickerData.removeAll()
-            for i in 0 ..< dataArray.count {
-                let item = dataArray[i]
-                if let code = item.code, code == UserPayload.shared.drinking?.code {
-                    selectedRow = i
-                }
-                pickerData.append(item.code_name ?? "")
-            }
+            pickerData.append(contentsOf: dataArray)
             
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: 260))
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            pickerView.showsSelectionIndicator = true
-            pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewDrinking.labelTitle.text, View: pickerView)
+            activatingEntryView = entryViewDrinking
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewDrinking.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                let value = dataArray[pickerView.selectedRow(inComponent: 0)]
-                UserPayload.shared.drinking = value
-                
-                self.entryViewDrinking.checked = true
-                self.entryViewDrinking.labelValue.text = value.code_name
-            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewSmoking {
             guard let dataArray = AppDataManager.shared.data["smoking"] else { return }
             
-            var selectedRow = 0
-            
             pickerData.removeAll()
-            for i in 0 ..< dataArray.count {
-                let item = dataArray[i]
-                if let code = item.code, code == UserPayload.shared.smoking?.code {
-                    selectedRow = i
-                }
-                pickerData.append(item.code_name ?? "")
-            }
+            pickerData.append(contentsOf: dataArray)
             
-            let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: 260))
-            pickerView.delegate = self
-            pickerView.dataSource = self
-            pickerView.showsSelectionIndicator = true
-            pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.separatorStyle = .none
+            tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
             
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewSmoking.labelTitle.text, View: pickerView)
+            activatingEntryView = entryViewSmoking
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewSmoking.labelTitle.text, View: tableView)
+            alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                let value = dataArray[pickerView.selectedRow(inComponent: 0)]
-                UserPayload.shared.smoking = value
-                
-                self.entryViewSmoking.checked = true
-                self.entryViewSmoking.labelValue.text = value.code_name
-            }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
@@ -1001,7 +967,7 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -1126,42 +1092,72 @@ extension SignupProfileSpecsViewController: UIPickerViewDelegate, UIPickerViewDa
 
 extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let data = pickerData[indexPath.row] as? AppData, let code = data.code else { return }
-        
-        let dataArray = UserPayload.shared.hobby.map { (item) -> String in
-            return item.code ?? "-1"
-        }
-        
-        if let index = dataArray.firstIndex(of: code) {
-            UserPayload.shared.hobby.remove(at: index)
-        } else if UserPayload.shared.hobby.count > 2 {
-            let alertController = UIAlertController(title: "", message: "더 선택할 수 없습니다.", preferredStyle: .alert)
-            self.present(alertController, animated: true) {
-                _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
-                    timer.invalidate()
-                    alertController.dismiss(animated: true, completion: nil)
-                })
+        guard activatingEntryView != entryViewHobby else {
+            if let index = selectedDataArray.firstIndex(of: indexPath.row) {
+                _ = selectedDataArray.remove(at: index)
+            } else if selectedDataArray.count < 3 {
+                selectedDataArray.append(indexPath.row)
+            } else {
+                InstanceMessageManager.shared.showMessage("더 선택할 수 없습니다.")
             }
+            
+            tableView.reloadData()
             return
-        } else {
-            UserPayload.shared.hobby.append(data)
         }
         
-        var text = ""
-        for i in 0 ..< UserPayload.shared.hobby.count {
-            guard let item = UserPayload.shared.hobby[i].code_name else { continue }
+        let value = pickerData[indexPath.row]
+        
+        if activatingEntryView == entryViewShape {
+            UserPayload.shared.shape = value as? AppData
             
-            if text.count > 0 {
-                text += ", "
-            }
+            self.entryViewShape.checked = true
+            self.entryViewShape.labelValue.text = (value as? AppData)?.code_name
+        } else if activatingEntryView == entryViewBlood {
+            UserPayload.shared.blood = value as? String
             
-            text += item
+            self.entryViewBlood.checked = true
+            self.entryViewBlood.labelValue.text = value as? String
+        } else if activatingEntryView == entryViewRegion {
+            UserPayload.shared.region = value as? AppData
+            
+            self.entryViewRegion.checked = true
+            self.entryViewRegion.labelValue.text = (value as? AppData)?.code_name
+        } else if activatingEntryView == entryViewEducation {
+            UserPayload.shared.education = value as? AppData
+            
+            self.entryViewEducation.checked = true
+            self.entryViewEducation.labelValue.text = (value as? AppData)?.code_name
+        } else if activatingEntryView == entryViewJob {
+            UserPayload.shared.job = value as? AppData
+            
+            self.entryViewJob.checked = true
+            self.entryViewJob.labelValue.text = (value as? AppData)?.code_name
+        } else if activatingEntryView == entryViewWage {
+            UserPayload.shared.wage = value as? AppData
+            
+            self.entryViewWage.checked = true
+            self.entryViewWage.labelValue.text = (value as? AppData)?.code_name
+        } else if activatingEntryView == entryViewReligion {
+            UserPayload.shared.religion = value as? AppData
+            
+            self.entryViewReligion.checked = true
+            self.entryViewReligion.labelValue.text = (value as? AppData)?.code_name
+        } else if activatingEntryView == entryViewDrinking {
+            UserPayload.shared.drinking = value as? AppData
+            
+            self.entryViewDrinking.checked = true
+            self.entryViewDrinking.labelValue.text = (value as? AppData)?.code_name
+        } else if activatingEntryView == entryViewSmoking {
+            UserPayload.shared.smoking = value as? AppData
+            
+            self.entryViewSmoking.checked = true
+            self.entryViewSmoking.labelValue.text = (value as? AppData)?.code_name
         }
         
-        entryViewHobby.labelValue.text = text
-        entryViewHobby.checked = text.count > 0
-        
-        tableView.reloadData()
+        for subVC in self.children {
+            guard let alertController = subVC as? BasePopupViewController else { continue }
+            alertController.hide()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1174,16 +1170,19 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SignupProfileSpecTableViewCell") as? SignupProfileSpecTableViewCell else { return UITableViewCell() }
-        cell.data = pickerData[indexPath.row] as? AppData
+        
+        if let data = pickerData[indexPath.row] as? AppData {
+            cell.labelTitle.text = data.code_name
+        } else if let titleString = pickerData[indexPath.row] as? String {
+            cell.labelTitle.text = titleString
+        } else {
+            cell.labelTitle.text = nil
+        }
         
         cell.backgroundColor = indexPath.row % 2 == 0 ? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) : #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         
-        if let code = cell.data?.code {
-            let dataArray = UserPayload.shared.hobby.map { (item) -> String in
-                return item.code ?? "-1"
-            }
-            
-            cell.isSelectedCell = dataArray.firstIndex(of: code) != nil
+        if activatingEntryView == entryViewHobby {
+            cell.isSelectedCell = selectedDataArray.firstIndex(of: indexPath.row) != nil
         } else {
             cell.isSelectedCell = false
         }
@@ -1202,5 +1201,14 @@ extension SignupProfileSpecsViewController: SignupStepViewControllerDelegate {
     
     func signupStepViewController(titleOf viewController: SignupStepViewController) -> String? {
         return AppDataManager.shared.data["survey1"]?.first?.code_name
+    }
+}
+
+extension SignupProfileSpecsViewController: BasePopupViewControllerDelegate {
+    func popupViewController(dismissed viewController: BasePopupViewController) {
+        activatingEntryView = nil
+        
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParent()
     }
 }

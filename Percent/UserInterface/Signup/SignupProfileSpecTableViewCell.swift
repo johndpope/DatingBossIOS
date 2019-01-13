@@ -11,14 +11,8 @@ import UIKit
 class SignupProfileSpecTableViewCell: UITableViewCell {
     class var height: CGFloat { return 46 * QUtils.optimizeRatio() }
     
-    private let labelTitle = UILabel()
+    let labelTitle = UILabel()
     private let imageViewChecked = UIImageView()
-    
-    var data: AppData? {
-        didSet {
-            labelTitle.text = data?.code_name
-        }
-    }
     
     var isSelectedCell: Bool = false {
         didSet {

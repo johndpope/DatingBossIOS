@@ -10,6 +10,10 @@ import UIKit
 
 let kWidthPopupContentView = CGFloat(280)
 
+@objc protocol BasePopupViewControllerDelegate {
+    @objc optional func popupViewController(dismissed viewController: BasePopupViewController)
+}
+
 class BasePopupViewController: UIViewController {
     internal let buttonDismiss = UIButton(type: .custom)
     
@@ -17,6 +21,8 @@ class BasePopupViewController: UIViewController {
     let labelTitle = UILabel()
     
     var titleColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+    
+    var delegate: BasePopupViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +98,10 @@ class BasePopupViewController: UIViewController {
             self.contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             
             self.buttonDismiss.backgroundColor = .clear
-        }, completion: completion)
+        }) { (complete) in
+            completion?(true)
+            self.delegate?.popupViewController?(dismissed: self)
+        }
     }
 }
 
