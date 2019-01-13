@@ -80,9 +80,11 @@ class SignupTermsViewController: BaseSignupViewController {
         buttonAgreeAll.layer.borderColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
         buttonAgreeAll.layer.borderWidth = 1
         buttonAgreeAll.layer.cornerRadius = 24 * QUtils.optimizeRatio()
+        buttonAgreeAll.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), for: .normal)
+        buttonAgreeAll.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .highlighted)
         buttonAgreeAll.setTitle("약관에 모두 동의", for: .normal)
         buttonAgreeAll.setTitleColor(#colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), for: .normal)
-        buttonAgreeAll.setTitleColor(#colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), for: .highlighted)
+        buttonAgreeAll.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .highlighted)
         buttonAgreeAll.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
         buttonAgreeAll.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
         tableFooterView.addSubview(buttonAgreeAll)
