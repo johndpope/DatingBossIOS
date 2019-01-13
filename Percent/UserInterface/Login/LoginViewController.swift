@@ -330,13 +330,31 @@ class LoginViewController: BaseViewController {
                 QDataManager.shared.password = self.textFieldPassword.text
                 QDataManager.shared.commit()
                 
-                if MyData.shared.signupStatus == .complete {
+                if ApplicationOptions.Build.Level.rawValue < BuildLevel.CLIENT_TEST.rawValue {
+                    let viewController = SignupProfileViewController()
+                    let navController = SignupNavigationViewController(rootViewController: viewController)
+                    UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                } else if MyData.shared.signupStatus == .complete {
                     let viewController = MainViewController()
                     UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                } else if MyData.shared.signupStatus == .denied {
+                    let viewController = LoginViewController()
+                    UIApplication.appDelegate().changeRootViewController(viewController)
                 } else if MyData.shared.signupStatus == .profile {
                     let viewController = SignupProfileSpecsViewController()
                     let navController = SignupNavigationViewController(rootViewController: viewController)
                     UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                } else if MyData.shared.signupStatus == .survey {
+                    let viewController = SignupSurveyViewController(depth: 0)
+                    let navController = SignupNavigationViewController(rootViewController: viewController)
+                    UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                } else if MyData.shared.signupStatus == .looks {
+                    let viewController = SignupSelectFavorLooksViewController()
+                    let navController = SignupNavigationViewController(rootViewController: viewController)
+                    UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                } else if MyData.shared.signupStatus == .pending {
+                    let viewController = SignupFinalizeViewController()
+                    UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
                 }
             }
             break
