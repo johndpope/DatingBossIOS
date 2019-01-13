@@ -496,7 +496,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         buttonConfirm.clipsToBounds = true
         buttonConfirm.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .normal)
         buttonConfirm.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)), for: .highlighted)
-        buttonConfirm.setTitle("시작", for: .normal)
+        buttonConfirm.setTitle("작성 완료", for: .normal)
         buttonConfirm.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         buttonConfirm.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
         buttonConfirm.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
@@ -565,7 +565,8 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "아니오", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "예", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
-                exit(0)
+                let viewController = LoginViewController()
+                UIApplication.appDelegate().changeRootViewController(viewController)
             }))
             self.view.addSubview(alertController.view)
             self.addChild(alertController)
@@ -1064,6 +1065,11 @@ extension SignupProfileSpecsViewController: UITextFieldDelegate {
         editingView = textField.superview
         return true
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        _ = textField.resignFirstResponder()
+        return true
+    }
 }
 
 extension SignupProfileSpecsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -1212,3 +1218,4 @@ extension SignupProfileSpecsViewController: BasePopupViewControllerDelegate {
         viewController.removeFromParent()
     }
 }
+
