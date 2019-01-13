@@ -914,8 +914,8 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
         let accessableCamera = AVCaptureDevice.authorizationStatus(for: .video)
         let accessablePhoto = PHPhotoLibrary.authorizationStatus()
         
-        guard accessableCamera == .authorized || accessablePhoto == .authorized else {
-            let alertController = AlertPopupViewController(withTitle: "접근권한이 없습니다.", message: "카메라, 사진 접근 권한이 없습니다.\n설정으로 이동하여 접근권한 설정을\n변경하여 주세요.")
+        let showPermissionAlert = {(message: String) -> Void in
+            let alertController = AlertPopupViewController(withTitle: "접근권한이 없습니다.", message: message)
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
@@ -932,34 +932,43 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
             UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
-            return
         }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if accessableCamera == .authorized {
-            alertController.addAction(UIAlertAction(title: "카메라로 촬영하기", style: .default, handler: { (action) in
-                let pickerController = UIImagePickerController()
-                pickerController.delegate = self
-                pickerController.sourceType = .camera
-                pickerController.allowsEditing = true
-                pickerController.cameraCaptureMode = .photo
-                pickerController.cameraDevice = .rear
-                pickerController.showsCameraControls = true
-                self.present(pickerController, animated: true, completion: nil)
-            }))
-        }
-        if accessablePhoto == .authorized {
-            alertController.addAction(UIAlertAction(title: "사진에서 가져오기", style: .default, handler: { (action) in
-                let pickerController = UIImagePickerController()
-                pickerController.delegate = self
-                pickerController.allowsEditing = true
-                pickerController.sourceType = .photoLibrary
-                self.present(pickerController, animated: true, completion: nil)
-            }))
-        }
-        if replaceIndex != nil {
-            alertController.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { (action) in
-                UserPayload.shared.pictures.remove(at: self.replaceIndex!)
+        alertController.addAction(UIAlertAction(title: "카메라로 촬영하기", style: .default, handler: { (action) in
+            guard accessableCamera == .authorized else {
+                showPermissionAlert("카메라 접근 권한이 없습니다.\n설정으로 이동하여 접근권한 설정을\n변경하여 주세요.")
+                return
+            }
+            
+            let pickerController = UIImagePickerController()
+            pickerController.delegate = self
+            pickerController.sourceType = .camera
+            pickerController.allowsEditing = true
+            pickerController.cameraCaptureMode = .photo
+            pickerController.cameraDevice = .rear
+            pickerController.showsCameraControls = true
+            self.present(pickerController, animated: true, completion: nil)
+        }))
+        alertController.addAction(UIAlertAction(title: "사진에서 가져오기", style: .default, handler: { (action) in
+            guard accessablePhoto == .authorized else {
+                showPermissionAlert("사진 접근 권한이 없습니다.\n설정으로 이동하여 접근권한 설정을\n변경하여 주세요.")
+                return
+            }
+            
+            let pickerController = UIImagePickerController()
+            pickerController.delegate = self
+            pickerController.allowsEditing = true
+            pickerController.sourceType = .photoLibrary
+            self.present(pickerController, animated: true, completion: nil)
+        }))
+        if indexPath.row > 0, indexPath.row < UserPayload.shared.pictures.count {
+            alertController.addAction(UIAlertAction(title: "대표사진 등록", style: .default, handler: { (action) in
+                var pictureArray = UserPayload.shared.pictures
+                let data = pictureArray.remove(at: indexPath.row)
+                pictureArray.insert(data, at: 0)
+                UserPayload.shared.pictures = pictureArray
+                
                 self.collectionViewPictures.reloadData()
             }))
         }
