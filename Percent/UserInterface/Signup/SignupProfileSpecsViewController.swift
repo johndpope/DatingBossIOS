@@ -654,7 +654,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerData.removeAll()
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            let maximumRows = Int((UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5)
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > maximumRows ? maximumRows : pickerData.count)))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
@@ -675,7 +677,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerData.removeAll()
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            let maximumRows = Int((UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5)
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > maximumRows ? maximumRows : pickerData.count)))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
@@ -696,7 +700,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerData.removeAll()
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            let maximumRows = Int((UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5)
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > maximumRows ? maximumRows : pickerData.count)))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
@@ -717,7 +723,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerData.removeAll()
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            let maximumRows = Int((UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5)
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > maximumRows ? maximumRows : pickerData.count)))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
@@ -741,7 +749,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerData.removeAll()
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            let maximumRows = Int((UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5)
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > maximumRows ? maximumRows : pickerData.count)))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
@@ -762,7 +772,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerData.removeAll()
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            let maximumRows = Int((UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5)
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > maximumRows ? maximumRows : pickerData.count)))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
@@ -783,7 +795,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerData.removeAll()
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            let maximumRows = Int((UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5)
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > maximumRows ? maximumRows : pickerData.count)))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
@@ -862,7 +876,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerData.removeAll()
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            let maximumRows = Int((UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5)
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > maximumRows ? maximumRows : pickerData.count)))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
@@ -883,7 +899,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             pickerData.removeAll()
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > 7 ? 7 : pickerData.count)))
+            let maximumRows = Int((UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5)
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * CGFloat(pickerData.count > maximumRows ? maximumRows : pickerData.count)))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none

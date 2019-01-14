@@ -100,9 +100,9 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         sliderAnswer.translatesAutoresizingMaskIntoConstraints = false
         sliderAnswer.isContinuous = true
         sliderAnswer.minimumTrackTintColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 0.6)
+        sliderAnswer.setThumbImage(UIImage(named: "img_signup_slider"), for: .normal)
         sliderAnswer.value = 2
         sliderAnswer.maximumValue = 4
-        sliderAnswer.thumbTintColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
         sliderAnswer.addTarget(self, action: #selector(self.sliderValueChanged(_:)), for: .valueChanged)
         self.view.addSubview(sliderAnswer)
         
@@ -130,8 +130,8 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
             
             noteButton.centerXAnchor.constraint(equalTo: note.centerXAnchor).isActive = true
             noteButton.centerYAnchor.constraint(equalTo: note.centerYAnchor).isActive = true
-            noteButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            noteButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            noteButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            noteButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
         
         buttonPrevious.translatesAutoresizingMaskIntoConstraints = false
@@ -204,8 +204,8 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
                 let alertController = AlertPopupViewController(withTitle: "안내", message: "\(labelTitle.text ?? "") 설문이 완료되었습니다.\n다음 단계로 진행하시겠습니까?")
                 alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
                 alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
-                alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "아니오", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-                alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "예", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
+                alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
+                alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
                     self.gotoNextStep()
                 }))
                 self.view.addSubview(alertController.view)
@@ -338,6 +338,13 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
     }
     
     private func gotoNextStep() {
+        guard depth > 1 else {
+            let viewController = SignupStepViewController(step: self.depth + 2)
+            viewController.delegate = self
+            self.present(viewController, animated: true, completion: nil)
+            return
+        }
+        
         LoadingIndicatorManager.shared.showIndicatorView()
         
         var surveyList = [[String:Any]]()
