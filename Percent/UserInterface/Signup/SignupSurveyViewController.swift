@@ -353,6 +353,8 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Survey + "\(MyData.shared.mem_idx)", params: params) { (isSucceed, errMessage, response) in
+            LoadingIndicatorManager.shared.hideIndicatorView()
+            
             guard let responseData = response as? [String:Any],
                 let status = responseData["Status"] as? String,
                 status == "OK"  else {
@@ -366,7 +368,7 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
             
-            let viewController = SignupStepViewController(step: depth + 2)
+            let viewController = SignupStepViewController(step: self.depth + 2)
             viewController.delegate = self
             self.present(viewController, animated: true, completion: nil)
         }
