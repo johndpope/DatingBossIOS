@@ -598,8 +598,8 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             let alertController = AlertPopupViewController(withTitle: "회원가입 중단", message: "회원가입을 중단하시겠습니까?")
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "아니오", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "예", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
+            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
+            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
                 let viewController = LoginViewController()
                 UIApplication.appDelegate().changeRootViewController(viewController)
             }))
@@ -643,7 +643,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
                 self.entryViewHeight.checked = true
                 self.entryViewHeight.labelValue.text = "\(value)"
             }))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewShape {
@@ -666,7 +666,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewBlood {
@@ -687,7 +687,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewRegion {
@@ -708,7 +708,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewEducation {
@@ -729,7 +729,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewEducationDetail {
@@ -753,7 +753,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewWage {
@@ -774,7 +774,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewReligion {
@@ -795,7 +795,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewHobby {
@@ -817,7 +817,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             
             pickerData.append(contentsOf: dataArray)
             
-            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * 7))
+            let maximumRows = (UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5
+            
+            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: SignupProfileSpecTableViewCell.height * maximumRows))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
@@ -851,7 +853,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
                 self.entryViewHobby.labelValue.text = valueString
                 self.entryViewHobby.checked = valueString.count > 0
             }))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewDrinking {
@@ -872,7 +874,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         } else if entryView == entryViewSmoking {
@@ -893,7 +895,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             alertController.delegate = self
             alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            self.view.addSubview(alertController.view)
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
             alertController.show()
         }
@@ -966,8 +968,8 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             errMessage = "음주 스타일을 입력하세요."
         } else if entryViewSmoking.checked == false {
             errMessage = "흡연여부를 입력하세요."
-        } else if textViewComment.text.count == 0 {
-            errMessage = "하고싶은 말을 입력하세요."
+//        } else if textViewComment.text.count == 0 {
+//            errMessage = "하고싶은 말을 입력하세요."
         }
         
         guard errMessage == nil else {
@@ -978,7 +980,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         var params = [String:Any]()
         params["height"] = UserPayload.shared.height
         params["form_cd"] = UserPayload.shared.shape?.code
-        params["blood_type"] = UserPayload.shared.blood
+        params["blood_type"] = UserPayload.shared.blood?.lowercased()
         params["area_cd"] = UserPayload.shared.region?.code
         params["edu_cd"] = UserPayload.shared.education?.code
         params["job_cd"] = UserPayload.shared.job?.code
