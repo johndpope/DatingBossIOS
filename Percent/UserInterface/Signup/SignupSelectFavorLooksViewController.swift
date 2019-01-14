@@ -120,10 +120,10 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         label.text = "No"
         label.textColor = #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .regular)
         contentView.addSubview(label)
         
-        label.bottomAnchor.constraint(equalTo: buttonNo.topAnchor, constant: 4 * QUtils.optimizeRatio()).isActive = true
+        label.bottomAnchor.constraint(equalTo: buttonNo.topAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
         label.centerXAnchor.constraint(equalTo: buttonNo.centerXAnchor).isActive = true
         
         buttonYes.translatesAutoresizingMaskIntoConstraints = false
@@ -142,10 +142,10 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         label.text = "Yes"
         label.textColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .regular)
         contentView.addSubview(label)
         
-        label.bottomAnchor.constraint(equalTo: buttonYes.topAnchor, constant: 4 * QUtils.optimizeRatio()).isActive = true
+        label.bottomAnchor.constraint(equalTo: buttonYes.topAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
         label.centerXAnchor.constraint(equalTo: buttonYes.centerXAnchor).isActive = true
         
         contentView = UIView()
@@ -177,7 +177,7 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         buttonDone.clipsToBounds = true
         buttonDone.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .normal)
         buttonDone.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)), for: .disabled)
-        buttonDone.setTitle("설정완료", for: .normal)
+        buttonDone.setTitle("설정 완료", for: .normal)
         buttonDone.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         buttonDone.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
         buttonDone.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
@@ -287,6 +287,12 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
     
     private func reloadEvaluatingData() {
         guard currentPage < evaluatingData.count else {
+            var params = [String:Any]()
+            params["sign_up_fl"] = "r"
+            
+            let httpClient = QHttpClient()
+            httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
+            
             let viewController = SignupFinalizeViewController()
             self.present(viewController, animated: true, completion: nil)
             return

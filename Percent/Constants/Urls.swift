@@ -16,7 +16,7 @@ struct RequestUrl {
         public static let Validate = "http://www.lovecenthome.com/ios/duplicate"
         public static let Check = "http://www.lovecenthome.com/ios/check"
         public static let GetInfo = "http://www.lovecenthome.com/ios/member/"
-        public static let GetProfileEntries = "http://www.lovecenthome.com/member/view/"
+        public static let GetProfileEntries = "http://www.lovecenthome.com/ios/member/view/"
         public static let GetStats = "http://www.lovecenthome.com/ios/graph/"
         public static let Update = "http://www.lovecenthome.com/ios/member/"
         public static let Unregister = "http://www.lovecenthome.com/ios/member/"
@@ -25,17 +25,17 @@ struct RequestUrl {
     
     public struct Service {
         public static let GetTerms = "http://www.lovecenthome.com/ios/terms"
-        public static let Settings = "http://www.lovecenthome.com/setup/"
-        public static let Notice = "http://www.lovecenthome.com/board/"
-        public static let Board = "http://www.lovecenthome.com/board/"
+        public static let Settings = "http://www.lovecenthome.com/ios/setup/"
+        public static let Notice = "http://www.lovecenthome.com/ios/board/"
+        public static let Board = "http://www.lovecenthome.com/ios/board/"
     }
     
-    public static let Survey = "http://www.lovecenthome.com/survey/"
+    public static let Survey = "http://www.lovecenthome.com/ios/survey/"
     
     public struct FavorLooks {
-        public static let Pictrues = "http://www.lovecenthome.com/looks/"
-        public static let Tag = "http://www.lovecenthome.com/tag/"
-        public static let AddTag = "http://www.lovecenthome.com/looks/"
+        public static let Pictrues = "http://www.lovecenthome.com/ios/looks/"
+        public static let Tag = "http://www.lovecenthome.com/ios/tag/"
+        public static let AddTag = "http://www.lovecenthome.com/ios/looks/"
     }
     
     public struct Main {
