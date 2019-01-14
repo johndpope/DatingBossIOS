@@ -345,7 +345,7 @@ class LoginViewController: BaseViewController {
                     let navController = SignupNavigationViewController(rootViewController: viewController)
                     UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                 } else if MyData.shared.signupStatus == .survey {
-                    let viewController = SignupSurveyViewController(depth: 0)
+                    let viewController = SignupSurveyViewController()
                     let navController = SignupNavigationViewController(rootViewController: viewController)
                     UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                 } else if MyData.shared.signupStatus == .looks {

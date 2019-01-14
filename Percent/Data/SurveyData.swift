@@ -24,4 +24,12 @@ class SurveyData: BaseData {
     var text: String? {
         return rawData["text"] as? String
     }
+    
+    var answer: Int? {
+        get {
+            return rawData["answer"] as? Int
+        } set {
+            rawData["answer"] = newValue
+        }
+    }
 }

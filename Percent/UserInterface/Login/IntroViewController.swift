@@ -152,7 +152,7 @@ class IntroViewController: BaseViewController {
                             break
 
                         case .survey:
-                            let viewController = SignupSurveyViewController(depth: 0)
+                            let viewController = SignupSurveyViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             break

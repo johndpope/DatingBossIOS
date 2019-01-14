@@ -21,6 +21,18 @@ class SurveyManager: NSObject {
         return surveys
     }
     
+    var answers = [SurveyData]()
+    
+    override init() {
+        super.init()
+        
+        if let surveyAnswers = QDataManager.shared.surveyAnswers[MyData.shared.mem_idx] {
+            answers.append(contentsOf: surveyAnswers.map({ (item) -> SurveyData in
+                return SurveyData(with: item)
+            }))
+        }
+    }
+    
     func reloadSurveys(forcing: Bool = false, completion: ((Bool) -> Void)? = nil) {
         if forcing == false, surveys.count > 0 {
             completion?(true)
@@ -50,5 +62,17 @@ class SurveyManager: NSObject {
             
             completion?(true)
         }
+    }
+    
+    func commitSurveyAnswer() {
+        QDataManager.shared.surveyAnswers[MyData.shared.mem_idx] = answers.map({ (item) -> [String:Any] in
+            return item.rawData
+        })
+        QDataManager.shared.commit()
+    }
+    
+    func clearSurveyAnswer() {
+        QDataManager.shared.surveyAnswers.removeAll()
+        QDataManager.shared.commit()
     }
 }

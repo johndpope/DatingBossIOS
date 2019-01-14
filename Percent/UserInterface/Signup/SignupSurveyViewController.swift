@@ -16,6 +16,8 @@ enum SurveyAnswerType: Int {
     case postitive = 4
 }
 
+private let kTagButtonNote = 1001
+
 class SignupSurveyViewController: BaseSignupStepsViewController {
     private let labelCount = UILabel()
     private let labelQuestion = UILabel()
@@ -33,8 +35,23 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
     private var constraintWide: NSLayoutConstraint!
     private var constraintNarrow: NSLayoutConstraint!
     
-    init(navigationViewEffect effect: UIVisualEffect? = nil, depth dCode: Int) {
-        depth = dCode
+    private var coverView = UIView()
+    
+    init(navigationViewEffect effect: UIVisualEffect? = nil, depth dCode: Int? = nil) {
+        var depthValue = dCode ?? 0
+        
+        if dCode == nil, let lastData = SurveyManager.shared.answers.last, let type1_cd = lastData.type1_cd {
+            if type1_cd == "10" {
+                depthValue = 0
+            } else if type1_cd == "20" {
+                depthValue = 1
+            } else if type1_cd == "30" {
+                depthValue = 2
+            }
+        }
+        
+        depth = depthValue
+        
         super.init(navigationViewEffect: effect)
     }
     
@@ -93,7 +110,7 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         sliderAnswer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30 * QUtils.optimizeRatio()).isActive = true
         sliderAnswer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30 * QUtils.optimizeRatio()).isActive = true
         
-        let unit = (self.view.frame.size.width - 60 * QUtils.optimizeRatio()) / 4
+        let unit = (self.view.frame.size.width - 88 * QUtils.optimizeRatio()) / 4
         for i in 0 ..< 5 {
             let note = UIView()
             note.translatesAutoresizingMaskIntoConstraints = false
@@ -101,9 +118,20 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
             self.view.addSubview(note)
             
             note.topAnchor.constraint(equalTo: sliderAnswer.bottomAnchor, constant: 10 * QUtils.optimizeRatio()).isActive = true
-            note.centerXAnchor.constraint(equalTo: sliderAnswer.leadingAnchor, constant: unit * CGFloat(i)).isActive = true
+            note.centerXAnchor.constraint(equalTo: sliderAnswer.leadingAnchor, constant: 14 * QUtils.optimizeRatio() + unit * CGFloat(i)).isActive = true
             note.widthAnchor.constraint(equalToConstant: 1).isActive = true
             note.heightAnchor.constraint(equalToConstant: 10).isActive = true
+            
+            let noteButton = UIButton(type: .custom)
+            noteButton.translatesAutoresizingMaskIntoConstraints = false
+            noteButton.addTarget(self, action: #selector(self.pressedNoteButton(_:)), for: .touchUpInside)
+            noteButton.tag = kTagButtonNote + i
+            self.view.addSubview(noteButton)
+            
+            noteButton.centerXAnchor.constraint(equalTo: note.centerXAnchor).isActive = true
+            noteButton.centerYAnchor.constraint(equalTo: note.centerYAnchor).isActive = true
+            noteButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            noteButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
         
         buttonPrevious.translatesAutoresizingMaskIntoConstraints = false
@@ -142,6 +170,15 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         constraintNarrow.isActive = false
         buttonNext.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
         buttonNext.heightAnchor.constraint(equalTo: buttonPrevious.heightAnchor).isActive = true
+        
+        coverView.translatesAutoresizingMaskIntoConstraints = false
+        coverView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.view.addSubview(coverView)
+        
+        coverView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        coverView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        coverView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        coverView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         
         reloadData()
     }
@@ -185,6 +222,11 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         }
     }
     
+    @objc private func pressedNoteButton(_ sender: UIButton) {
+        sliderAnswer.value = Float(sender.tag - kTagButtonNote)
+        sliderValueChanged(sliderAnswer)
+    }
+    
     private func reloadData() {
         let loadSurveys = {() -> Void in
             SurveyManager.shared.reloadSurveys { (isSucceed) in
@@ -195,8 +237,17 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
                     let key = codesArray[self.depth].code,
                     let array = SurveyManager.shared.dataDict[key]  else { return }
                 
+                let typeCode = SurveyManager.shared.answers.last?.type2_cd
+                
                 self.dataArray.removeAll()
-                self.dataArray.append(contentsOf: array)
+                for i in 0 ..< array.count {
+                    let item = array[i]
+                    self.dataArray.append(item)
+                    
+                    if typeCode != nil, typeCode == item.type2_cd {
+                        self.currentPage = i
+                    }
+                }
                 
                 self.labelTitle.text = titleString
                 
@@ -217,7 +268,32 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
     }
     
     private func loadQuestion() {
-        let data = dataArray[currentPage]
+        var data = dataArray[currentPage]
+        
+        var value = 2
+        
+        var index: Int?
+        var answers = SurveyManager.shared.answers
+        for i in 0 ..< answers.count {
+            let item = answers[i]
+            guard item.type2_cd == data.type2_cd ?? "fakeId" else { continue }
+            index = i
+            
+            dataArray[currentPage] = item
+            data = item
+            break
+        }
+        
+        if index == nil {
+            data.answer = 2
+            answers.append(data)
+        } else {
+            value = data.answer ?? 2
+            answers[index!] = data
+        }
+        
+        SurveyManager.shared.answers = answers
+        SurveyManager.shared.commitSurveyAnswer()
         
         labelCount.text = "\(currentPage + 1) / \(dataArray.count)"
         
@@ -226,9 +302,11 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         constraintNarrow.isActive = currentPage > 0
         
         labelQuestion.text = data.text
-        sliderAnswer.value = 2
+        sliderAnswer.value = Float(value)
         
         sliderValueChanged(sliderAnswer)
+        
+        coverView.isHidden = true
         
         self.view.layoutIfNeeded()
     }
@@ -236,14 +314,62 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
     @objc private func sliderValueChanged(_ sender: UISlider) {
         sender.setValue(sender.value.rounded(), animated: false)
         
-        let answers = ["아니다", "조금 아니다", "보통", "조금 그렇다", "그렇다"]
-        labelAnswer.text = "\(answers[Int(sender.value)])"
+        let ansStrings = ["아니다", "조금 아니다", "보통", "조금 그렇다", "그렇다"]
+        labelAnswer.text = "\(ansStrings[Int(sender.value)])"
+        
+        let data = dataArray[currentPage]
+        
+        var index: Int?
+        var answers = SurveyManager.shared.answers
+        for i in 0 ..< answers.count {
+            let item = answers[i]
+            guard item.type2_cd == data.type2_cd ?? "fakeId" else { continue }
+            index = i
+            break
+        }
+        
+        if index != nil {
+            data.answer = Int(sender.value)
+            answers[index!] = data
+        }
+        
+        SurveyManager.shared.answers = answers
+        SurveyManager.shared.commitSurveyAnswer()
     }
     
     private func gotoNextStep() {
-        let viewController = SignupStepViewController(step: depth + 2)
-        viewController.delegate = self
-        self.present(viewController, animated: true, completion: nil)
+        LoadingIndicatorManager.shared.showIndicatorView()
+        
+        var surveyList = [[String:Any]]()
+        for survey in SurveyManager.shared.answers {
+            var dict = [String:Any]()
+            dict["survey_idx"] = survey.survey_idx
+            dict["answer"] = (survey.answer ?? 2) + 1
+            surveyList.append(dict)
+        }
+        
+        var params = [String:Any]()
+        params["surveyList"] = surveyList
+        
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Survey + "\(MyData.shared.mem_idx)", params: params) { (isSucceed, errMessage, response) in
+            guard let responseData = response as? [String:Any],
+                let status = responseData["Status"] as? String,
+                status == "OK"  else {
+                    InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonNext.frame.size.height + 8 * QUtils.optimizeRatio())
+                    return
+            }
+            
+            var params = [String:Any]()
+            params["sign_up_fl"] = "l"
+            
+            let httpClient = QHttpClient()
+            httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
+            
+            let viewController = SignupStepViewController(step: depth + 2)
+            viewController.delegate = self
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
 }
 
