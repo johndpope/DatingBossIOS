@@ -106,6 +106,10 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         sliderAnswer.addTarget(self, action: #selector(self.sliderValueChanged(_:)), for: .valueChanged)
         self.view.addSubview(sliderAnswer)
         
+        let tapGestureRecognizer = UITapGestureRecognizer()
+        tapGestureRecognizer.addTarget(self, action: #selector(self.recognizedTapGestureOnSlider(_:)))
+        sliderAnswer.addGestureRecognizer(tapGestureRecognizer)
+        
         sliderAnswer.topAnchor.constraint(equalTo: labelAnswer.bottomAnchor, constant: 30 * QUtils.optimizeRatio()).isActive = true
         sliderAnswer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30 * QUtils.optimizeRatio()).isActive = true
         sliderAnswer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30 * QUtils.optimizeRatio()).isActive = true
@@ -129,9 +133,9 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
             self.view.addSubview(noteButton)
             
             noteButton.centerXAnchor.constraint(equalTo: note.centerXAnchor).isActive = true
-            noteButton.centerYAnchor.constraint(equalTo: note.centerYAnchor).isActive = true
-            noteButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-            noteButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            noteButton.topAnchor.constraint(equalTo: sliderAnswer.bottomAnchor).isActive = true
+            noteButton.bottomAnchor.constraint(equalTo: note.bottomAnchor, constant: 10 * QUtils.optimizeRatio()).isActive = true
+            noteButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
         }
         
         buttonPrevious.translatesAutoresizingMaskIntoConstraints = false
@@ -337,9 +341,22 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         SurveyManager.shared.commitSurveyAnswer()
     }
     
+    @objc private func recognizedTapGestureOnSlider(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: self.view).x
+        
+        let unit = (self.view.frame.size.width - 88 * QUtils.optimizeRatio()) / 4
+        let normalize = ((location - 44 * QUtils.optimizeRatio() + (unit / 2)) / unit).rounded(.down)
+        
+        let gap = location - (normalize * unit) - 44 * QUtils.optimizeRatio()
+        
+        if gap > -14, gap < 14 {
+            sliderAnswer.value = Float(normalize)
+        }
+    }
+    
     private func gotoNextStep() {
         guard depth > 1 else {
-            let viewController = SignupStepViewController(step: self.depth + 2)
+            let viewController = SignupStepViewController(step: self.depth + 3)
             viewController.delegate = self
             self.present(viewController, animated: true, completion: nil)
             return
