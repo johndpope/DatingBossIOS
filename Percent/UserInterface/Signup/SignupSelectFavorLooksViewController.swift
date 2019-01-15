@@ -123,7 +123,7 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         label.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .regular)
         contentView.addSubview(label)
         
-        label.bottomAnchor.constraint(equalTo: buttonNo.topAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        label.bottomAnchor.constraint(equalTo: buttonNo.topAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
         label.centerXAnchor.constraint(equalTo: buttonNo.centerXAnchor).isActive = true
         
         buttonYes.translatesAutoresizingMaskIntoConstraints = false
@@ -145,7 +145,7 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         label.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .regular)
         contentView.addSubview(label)
         
-        label.bottomAnchor.constraint(equalTo: buttonYes.topAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        label.bottomAnchor.constraint(equalTo: buttonYes.topAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
         label.centerXAnchor.constraint(equalTo: buttonYes.centerXAnchor).isActive = true
         
         contentView = UIView()

@@ -134,7 +134,6 @@ class IntroViewController: BaseViewController {
                             return
                         }
                         
-
                         switch MyData.shared.signupStatus {
                         case .complete:
                             let viewController = MainViewController()
