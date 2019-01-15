@@ -10,6 +10,7 @@ import UIKit
 
 class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
     private let imageViewLooks = UIImageView()
+    private let buttonImage = UIButton(type: .custom)
     
     private let theScrollView = UIScrollView()
     
@@ -54,6 +55,7 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         labelTitle.text = "이상형 외모 설정"
         
         imageViewLooks.translatesAutoresizingMaskIntoConstraints = false
+        imageViewLooks.isUserInteractionEnabled = true
         imageViewLooks.backgroundColor = #colorLiteral(red: 0.9176470588, green: 0.9176470588, blue: 0.9176470588, alpha: 1)
         imageViewLooks.clipsToBounds = true
         imageViewLooks.contentMode = .scaleAspectFill
@@ -65,6 +67,15 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         imageViewLooks.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         imageViewLooks.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         imageViewLooks.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: 270 / 512).isActive = true
+        
+        buttonImage.translatesAutoresizingMaskIntoConstraints = false
+        buttonImage.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
+        imageViewLooks.addSubview(buttonImage)
+        
+        buttonImage.topAnchor.constraint(equalTo: imageViewLooks.topAnchor).isActive = true
+        buttonImage.bottomAnchor.constraint(equalTo: imageViewLooks.bottomAnchor).isActive = true
+        buttonImage.leadingAnchor.constraint(equalTo: imageViewLooks.leadingAnchor).isActive = true
+        buttonImage.trailingAnchor.constraint(equalTo: imageViewLooks.trailingAnchor).isActive = true
         
         theScrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(theScrollView)
@@ -229,6 +240,15 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         super.pressedButton(sender)
         
         switch sender {
+        case buttonImage:
+            guard let image = imageViewLooks.image else { break }
+            let viewController = ImagePreviewViewController(image: image)
+            UIApplication.appDelegate().window?.addSubview(viewController.view)
+            self.addChild(viewController)
+            
+            viewController.show()
+            break
+            
         case buttonNo:
             currentPage += 1
             reloadEvaluatingData()
