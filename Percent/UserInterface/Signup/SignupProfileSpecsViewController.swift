@@ -689,6 +689,8 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
                 
                 self.entryViewHeight.checked = true
                 self.entryViewHeight.labelValue.text = "\(value)"
+                
+                UserPayload.shared.commit()
             }))
             UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
@@ -913,6 +915,8 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
                 
                 self.entryViewHobby.labelValue.text = valueString
                 self.entryViewHobby.checked = valueString.count > 0
+                
+                UserPayload.shared.commit()
             }))
             UIApplication.appDelegate().window?.addSubview(alertController.view)
             self.addChild(alertController)
@@ -1404,6 +1408,8 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
             guard let alertController = subVC as? BasePopupViewController else { continue }
             alertController.hide()
         }
+        
+        UserPayload.shared.commit()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
