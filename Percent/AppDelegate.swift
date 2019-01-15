@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         QHttpClient.addCommonHeaderValue("application/json", for: "Content-Type")
         
-        SurveyManager.shared.clearSurveyAnswer()
+//        SurveyManager.shared.clearSurveyAnswer()
         
         let viewController = IntroViewController()
         self.window?.rootViewController = viewController

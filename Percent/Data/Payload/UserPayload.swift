@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct UserPictureData {
+    let image: UIImage
+    let picture_idx: String
+}
+
 class UserPayload: NSObject {
     static let shared = UserPayload()
     
@@ -20,7 +25,7 @@ class UserPayload: NSObject {
     var password: String?
     var nickname: String?
     
-    var pictures = [UIImage]()
+    var pictures = [UserPictureData]()
     
     var height: Int?
     var shape: AppData?

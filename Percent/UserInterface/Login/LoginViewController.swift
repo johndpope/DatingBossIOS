@@ -319,7 +319,10 @@ class LoginViewController: BaseViewController {
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
                 LoadingIndicatorManager.shared.hideIndicatorView()
-                guard isSucceed, let responseData = response as? [String:Any] else {
+                guard isSucceed, let responseData = response as? [String:Any], responseData["mem_idx"] as? Int != nil else {
+                    QDataManager.shared.password = nil
+                    QDataManager.shared.commit()
+                    
                     InstanceMessageManager.shared.showMessage("로그인 정보가 유효하지 않습니다.")
                     return
                 }

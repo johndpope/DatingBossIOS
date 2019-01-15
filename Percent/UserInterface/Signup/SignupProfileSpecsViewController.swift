@@ -549,6 +549,29 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         self.theScrollView.layoutIfNeeded()
         
         AppDataManager.shared.reloadData()
+        
+        var params = [String:Any]()
+        params["opposite_mem_idx"] = MyData.shared.mem_idx
+        params["tmp_fl"] = "y"
+        
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)", params: params) { (isSucceed, errMessage, response) in
+            guard let responseData = response as? [[String:Any]] else { return }
+            
+            for i in 0 ..< responseData.count {
+                let item = responseData[i]
+                guard let picture_idx = item["picture_idx"] as? Int,
+                    let urlString = item["picture_name"] as? String/* ,
+                    let imageUrl = URL(string: RequestUrl.Image.File + urlString),
+                    let imageData = try? Data(contentsOf: imageUrl),
+                    let image = UIImage(data: imageData) */ else { continue }
+                
+                let newData = UserPictureData(image: UIImage(), picture_idx: "\(picture_idx)")
+                UserPayload.shared.pictures.append(newData)
+            }
+            
+            self.collectionViewPictures.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -1105,12 +1128,32 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
         }))
         if indexPath.row > 0, indexPath.row < UserPayload.shared.pictures.count {
             alertController.addAction(UIAlertAction(title: "대표사진 등록", style: .default, handler: { (action) in
-                var pictureArray = UserPayload.shared.pictures
-                let data = pictureArray.remove(at: indexPath.row)
-                pictureArray.insert(data, at: 0)
-                UserPayload.shared.pictures = pictureArray
+                LoadingIndicatorManager.shared.showIndicatorView()
                 
-                self.collectionViewPictures.reloadData()
+                var pictureList = [[String:Any]]()
+                for i in 0 ..< UserPayload.shared.pictures.count {
+                    let item = UserPayload.shared.pictures[i]
+                    
+                    var newData = [String:Any]()
+                    newData["picture_idx"] = item.picture_idx
+                    newData["picture_seq"] = i + 1
+                    pictureList.append(newData)
+                }
+                
+                var params = [String:Any]()
+                params["pictureList"] = pictureList
+                
+                let httpClient = QHttpClient()
+                httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)", method: .patch, headerValues: nil, params: params, completion: { (isSucceed, errMessgae, response) in
+                    LoadingIndicatorManager.shared.hideIndicatorView()
+                    
+                    var pictureArray = UserPayload.shared.pictures
+                    let data = pictureArray.remove(at: indexPath.row)
+                    pictureArray.insert(data, at: 0)
+                    UserPayload.shared.pictures = pictureArray
+                    
+                    self.collectionViewPictures.reloadData()
+                })
             }))
         }
         alertController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
@@ -1124,7 +1167,7 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SignupProfilePictureCollectionViewCell", for: indexPath) as? SignupProfilePictureCollectionViewCell else { return UICollectionViewCell() }
         if indexPath.row < UserPayload.shared.pictures.count {
-            cell.image = UserPayload.shared.pictures[indexPath.row]
+            cell.image = UserPayload.shared.pictures[indexPath.row].image
         } else {
             cell.image = nil
         }
@@ -1157,18 +1200,26 @@ extension SignupProfileSpecsViewController: UINavigationControllerDelegate, UIIm
         httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)/\(index + 1)/y", params: params) { (isSucceed, errMessage, response) in
             LoadingIndicatorManager.shared.hideIndicatorView()
             
+            guard let responseData = response as? [String:Any], let picture_idx = responseData["picture_idx"] as? String else {
+                picker.dismiss(animated: true, completion: {
+                    InstanceMessageManager.shared.showMessage(kStringErrorUnknown)
+                })
+                return
+            }
+            
+            let newData = UserPictureData(image: image, picture_idx: picture_idx)
+            
+            if self.replaceIndex != nil, self.replaceIndex! < UserPayload.shared.pictures.count {
+                UserPayload.shared.pictures[self.replaceIndex!] = newData
+            } else {
+                UserPayload.shared.pictures.append(newData)
+            }
+            
+            self.collectionViewPictures.reloadData()
+            
+            self.replaceIndex = nil
+            picker.dismiss(animated: true, completion: nil)
         }
-        
-        if replaceIndex != nil, replaceIndex! < UserPayload.shared.pictures.count {
-            UserPayload.shared.pictures[replaceIndex!] = image
-        } else {
-            UserPayload.shared.pictures.append(image)
-        }
-        
-        collectionViewPictures.reloadData()
-        
-        replaceIndex = nil
-        picker.dismiss(animated: true, completion: nil)
     }
 }
 

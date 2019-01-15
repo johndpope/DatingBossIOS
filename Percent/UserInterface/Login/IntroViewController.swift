@@ -120,7 +120,10 @@ class IntroViewController: BaseViewController {
                     let httpClient = QHttpClient()
                     httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
                         LoadingIndicatorManager.shared.hideIndicatorView()
-                        guard isSucceed, let responseData = response as? [String:Any] else {
+                        guard isSucceed, let responseData = response as? [String:Any], responseData["mem_idx"] as? Int != nil else {
+                            QDataManager.shared.password = nil
+                            QDataManager.shared.commit()
+                            
                             gotoLogin()
                             return
                         }
@@ -133,7 +136,7 @@ class IntroViewController: BaseViewController {
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             return
                         }
-                        
+
                         switch MyData.shared.signupStatus {
                         case .complete:
                             let viewController = MainViewController()

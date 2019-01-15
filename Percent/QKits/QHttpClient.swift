@@ -26,6 +26,7 @@ enum QHttpMethod: String {
     case get = "GET"
     case post = "POST"
     case patch = "PATCH"
+    case delete = "DELETE"
 }
 
 enum QHttpDebugStatus {
@@ -143,7 +144,7 @@ class QHttpClient: NSObject {
                             let jsonWriter = SBJsonWriter()
                             paramString! += "\(key)=" + jsonWriter.string(with: valueArray)
                         } else if let valueData = value as? Data {
-                            imageData = photoDataToFormData(data: valueData, boundary: kBoundaryString, fileName: "ios_\(Int(Date().timeIntervalSince1970)).png")
+                            imageData = photoDataToFormData(data: valueData, boundary: kBoundaryString, fileName: "ios_\(Int(Date().timeIntervalSince1970)).jpeg")
                         } else {
                             paramString! += "\(key)=\(value)"
                         }
@@ -323,7 +324,7 @@ class QHttpClient: NSObject {
         let lineTwo = "Content-Disposition: form-data; name=\"picture\"; filename=\"" + fileName + "\"\r\n"
         fullData.append(lineTwo.data(using: String.Encoding.utf8, allowLossyConversion: false)!)
         
-        let lineThree = "Content-Type: image/png\r\n\r\n"
+        let lineThree = "Content-Type: image/jpeg\r\n\r\n"
         fullData.append(lineThree.data(using: String.Encoding.utf8,allowLossyConversion: false)!)
         
         fullData.append(data as Data)
