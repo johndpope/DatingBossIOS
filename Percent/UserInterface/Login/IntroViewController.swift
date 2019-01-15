@@ -148,24 +148,32 @@ class IntroViewController: BaseViewController {
                             break
 
                         case .profile:
+                            UserPayload.shared.loadFromDatabase()
+                            
                             let viewController = SignupProfileSpecsViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             break
 
                         case .survey:
+                            UserPayload.shared.loadFromDatabase()
+                            
                             let viewController = SignupSurveyViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             break
 
                         case .looks:
+                            UserPayload.shared.loadFromDatabase()
+                            
                             let viewController = SignupSelectFavorLooksViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             break
 
                         case .pending:
+                            UserPayload.shared.loadFromDatabase()
+                            
                             let viewController = SignupFinalizeViewController()
                             UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
                             break

@@ -27,11 +27,7 @@ class SignupProfilePictureCollectionViewCell: UICollectionViewCell {
     
     private let imageViewPicture = UIImageView()
     
-    var image: UIImage? {
-        didSet {
-            imageViewPicture.image = image
-        }
-    }
+    var data: UserPictureData?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,5 +61,20 @@ class SignupProfilePictureCollectionViewCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError()
+    }
+    
+    func reloadData() {
+        guard data != nil else {
+            imageViewPicture.image = nil
+            return
+        }
+        
+        if let image = data?.image {
+            imageViewPicture.image = image
+        } else if let imageUrl = data?.imageUrl {
+            imageViewPicture.pin_setImage(from: URL(string: RequestUrl.Image.File + imageUrl))
+        } else {
+            imageViewPicture.image = nil
+        }
     }
 }

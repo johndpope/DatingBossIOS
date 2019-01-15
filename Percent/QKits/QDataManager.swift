@@ -31,6 +31,8 @@ class QDataManager: NSObject {
     
     var surveyAnswers = [Int:[[String:Any]]]()
     
+    var signupData = [String:Any]()
+    
     required override init() {
         super.init()
         self.clear()
@@ -49,6 +51,7 @@ class QDataManager: NSObject {
         self.password  =  aDecoder.decodeObject(forKey: "password") as? String
         self.registerStep  =  (aDecoder.decodeObject(forKey: "registerStep") as? NSNumber)?.intValue
         self.surveyAnswers = aDecoder.decodeObject(forKey: "surveyAnswers") as? [Int:[[String:Any]]] ?? [:]
+        self.signupData = aDecoder.decodeObject(forKey: "signupData") as? [String:Any] ?? [:]
     }
     
     func commit() {
@@ -72,6 +75,7 @@ class QDataManager: NSObject {
         password = nil
         registerStep = nil
         surveyAnswers.removeAll()
+        signupData.removeAll()
         
         commit()
     }
@@ -152,5 +156,6 @@ extension QDataManager: NSCopying, NSCoding {
         aCoder.encode(password, forKey: "password")
         aCoder.encode(registerStep != nil ? NSNumber(value: registerStep!) : nil, forKey: "registerStep")
         aCoder.encode(surveyAnswers, forKey: "surveyAnswers")
+        aCoder.encode(signupData, forKey: "signupData")
     }
 }

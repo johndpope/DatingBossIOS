@@ -170,6 +170,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewHeight.translatesAutoresizingMaskIntoConstraints = false
         entryViewHeight.labelTitle.text = "키"
         entryViewHeight.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        if let height = UserPayload.shared.height {
+            entryViewHeight.labelValue.text = "\(height)"
+        }
         theScrollView.addSubview(entryViewHeight)
         
         entryViewHeight.topAnchor.constraint(equalTo: collectionViewPictures.bottomAnchor).isActive = true
@@ -192,6 +195,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewShape.translatesAutoresizingMaskIntoConstraints = false
         entryViewShape.labelTitle.text = "체형"
         entryViewShape.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewShape.labelValue.text = UserPayload.shared.shape?.code_name
         theScrollView.addSubview(entryViewShape)
         
         entryViewShape.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -214,6 +218,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewBlood.translatesAutoresizingMaskIntoConstraints = false
         entryViewBlood.labelTitle.text = "혈액형"
         entryViewBlood.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewBlood.labelValue.text = UserPayload.shared.blood
         theScrollView.addSubview(entryViewBlood)
         
         entryViewBlood.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -236,6 +241,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewRegion.translatesAutoresizingMaskIntoConstraints = false
         entryViewRegion.labelTitle.text = "지역"
         entryViewRegion.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewRegion.labelValue.text = UserPayload.shared.region?.code_name
         theScrollView.addSubview(entryViewRegion)
         
         entryViewRegion.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -258,6 +264,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewEducation.translatesAutoresizingMaskIntoConstraints = false
         entryViewEducation.labelTitle.text = "학력"
         entryViewEducation.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewEducation.labelValue.text = UserPayload.shared.education?.code_name
         theScrollView.addSubview(entryViewEducation)
         
         entryViewEducation.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -285,6 +292,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewEducationDetail.textfield.addTarget(self, action: #selector(self.textfieldDidChange(_:)), for: .editingChanged)
         entryViewEducationDetail.textfield.autocorrectionType = .no
         entryViewEducationDetail.textfield.delegate = self
+        entryViewEducationDetail.textfield.text = UserPayload.shared.educationDetail
         theScrollView.addSubview(entryViewEducationDetail)
         
         entryViewEducationDetail.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -307,6 +315,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewJob.translatesAutoresizingMaskIntoConstraints = false
         entryViewJob.labelTitle.text = "직업"
         entryViewJob.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewJob.labelValue.text = UserPayload.shared.job?.code_name
         theScrollView.addSubview(entryViewJob)
 
         entryViewJob.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -335,6 +344,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewJobDetail.textfield.addTarget(self, action: #selector(self.textfieldDidChange(_:)), for: .editingChanged)
         entryViewJobDetail.textfield.autocorrectionType = .no
         entryViewJobDetail.textfield.delegate = self
+        entryViewJobDetail.textfield.text = UserPayload.shared.jobDetail
         theScrollView.addSubview(entryViewJobDetail)
         
         entryViewJobDetail.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -361,6 +371,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewWage.translatesAutoresizingMaskIntoConstraints = false
         entryViewWage.labelTitle.text = "연봉"
         entryViewWage.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewWage.labelValue.text = UserPayload.shared.wage?.code_name
         theScrollView.addSubview(entryViewWage)
 
         entryViewWage.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -383,6 +394,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewReligion.translatesAutoresizingMaskIntoConstraints = false
         entryViewReligion.labelTitle.text = "종교"
         entryViewReligion.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewReligion.labelValue.text = UserPayload.shared.religion?.code_name
         theScrollView.addSubview(entryViewReligion)
 
         entryViewReligion.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -405,6 +417,15 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewHobby.translatesAutoresizingMaskIntoConstraints = false
         entryViewHobby.labelTitle.text = "취미"
         entryViewHobby.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        var hobbies = ""
+        for i in 0 ..< UserPayload.shared.hobby.count {
+            if hobbies.count > 0 {
+                hobbies += ", "
+            }
+            
+            hobbies += UserPayload.shared.hobby[i].code_name ?? ""
+        }
+        entryViewHobby.labelValue.text = hobbies
         theScrollView.addSubview(entryViewHobby)
 
         entryViewHobby.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -427,6 +448,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewDrinking.translatesAutoresizingMaskIntoConstraints = false
         entryViewDrinking.labelTitle.text = "음주 스타일"
         entryViewDrinking.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewDrinking.labelValue.text = UserPayload.shared.drinking?.code_name
         theScrollView.addSubview(entryViewDrinking)
 
         entryViewDrinking.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -449,6 +471,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewSmoking.translatesAutoresizingMaskIntoConstraints = false
         entryViewSmoking.labelTitle.text = "흡연여부"
         entryViewSmoking.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
+        entryViewSmoking.labelValue.text = UserPayload.shared.smoking?.code_name
         theScrollView.addSubview(entryViewSmoking)
 
         entryViewSmoking.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -503,6 +526,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         textViewComment.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         textViewComment.delegate = self
         textViewComment.isEditable = true
+        textViewComment.text = UserPayload.shared.introduction
         backView.addSubview(textViewComment)
 
         textViewComment.topAnchor.constraint(equalTo: backView.topAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
@@ -566,7 +590,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
                     let imageData = try? Data(contentsOf: imageUrl),
                     let image = UIImage(data: imageData) */ else { continue }
                 
-                let newData = UserPictureData(image: UIImage(), picture_idx: "\(picture_idx)")
+                let newData = UserPictureData(image: nil, imageUrl: urlString, picture_idx: "\(picture_idx)")
                 UserPayload.shared.pictures.append(newData)
             }
             
@@ -1167,11 +1191,15 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SignupProfilePictureCollectionViewCell", for: indexPath) as? SignupProfilePictureCollectionViewCell else { return UICollectionViewCell() }
         if indexPath.row < UserPayload.shared.pictures.count {
-            cell.image = UserPayload.shared.pictures[indexPath.row].image
+            cell.data = UserPayload.shared.pictures[indexPath.row]
         } else {
-            cell.image = nil
+            cell.data = nil
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        (cell as? SignupProfilePictureCollectionViewCell)?.reloadData()
     }
 }
 
@@ -1207,7 +1235,7 @@ extension SignupProfileSpecsViewController: UINavigationControllerDelegate, UIIm
                 return
             }
             
-            let newData = UserPictureData(image: image, picture_idx: picture_idx)
+            let newData = UserPictureData(image: image, imageUrl: nil, picture_idx: picture_idx)
             
             if self.replaceIndex != nil, self.replaceIndex! < UserPayload.shared.pictures.count {
                 UserPayload.shared.pictures[self.replaceIndex!] = newData
