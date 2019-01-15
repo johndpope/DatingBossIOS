@@ -320,7 +320,7 @@ class QHttpClient: NSObject {
         let lineOne = "--" + boundary + "\r\n"
         fullData.append(lineOne.data(using: String.Encoding.utf8, allowLossyConversion: false)!)
         
-        let lineTwo = "Content-Disposition: form-data; name=\"image\"; filename=\"" + fileName + "\"\r\n"
+        let lineTwo = "Content-Disposition: form-data; name=\"picture\"; filename=\"" + fileName + "\"\r\n"
         fullData.append(lineTwo.data(using: String.Encoding.utf8, allowLossyConversion: false)!)
         
         let lineThree = "Content-Type: image/png\r\n\r\n"
