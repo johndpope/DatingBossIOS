@@ -18,6 +18,9 @@ class SignupProfileViewController: BaseSignupStepsViewController {
     private let entryViewRepeatPassword = SignupProfileTextEntryView()
     private let entryViewNickname = SignupProfileTextEntryView()
     
+    private var isValidEmail = false
+    private var isValidNickname = false
+    
     private var started = false
     
     private let warnings = ["※ 잘못된 형식의 이메일입니다.", "※ 비밀번호는 영문 + 숫자 조합 6자리 이상으로 입력하세요.", "※ 비밀번호가 일치하지 않습니다.", "※ 닉네임은 두 글자 이상으로 입력하세요."]
@@ -190,6 +193,8 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         buttonConfirm.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
         buttonConfirm.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
         buttonConfirm.heightAnchor.constraint(equalToConstant: buttonConfirm.layer.cornerRadius * 2).isActive = true
+        
+        _ = entryViewEmail.textfield.becomeFirstResponder()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -203,39 +208,44 @@ class SignupProfileViewController: BaseSignupStepsViewController {
         
         switch sender {
         case buttonConfirm:
+            var errMessage: String?
+            
+            let email = entryViewEmail.textfield.text ?? ""
+            let password = entryViewPassword.textfield.text ?? ""
+            let repeatPassword = entryViewRepeatPassword.textfield.text
+            let nickname = entryViewNickname.textfield.text ?? ""
+            
+            let digits = CharacterSet(charactersIn: "0123456789")
+            let alphabets = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+            
+            let hasDigits = password.rangeOfCharacter(from: digits) != nil
+            let hasChars = password.rangeOfCharacter(from: alphabets) != nil
+            let hasEnoughLength = password.count >= 6
+            
+            if email.count == 0 {
+                errMessage = "이메일을 입력해주세요."
+            } else if email.isValidEmail() == false {
+                errMessage = "잘못된 형식의 이메일입니다."
+            } else if isValidEmail == false {
+                errMessage = "중복된 이메일입니다."
+            } else if hasDigits == false || hasChars == false || hasEnoughLength == false {
+                errMessage = "비밀번호는 영문+숫자 조합 6자리 이상으로 입력하세요."
+            } else if password != repeatPassword {
+                errMessage = "비밀번호가 일치하지 않습니다."
+            } else if nickname.count < 2 {
+                errMessage = "닉네임은 두 글자 이상으로 입력하세요."
+            } else if isValidNickname == false {
+                errMessage = "닉네임은 두 글자 이상으로 입력하세요."
+            }
+            
+            guard errMessage == nil else {
+                InstanceMessageManager.shared.showMessage(errMessage!, margin: buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
+                return
+            }
+            
             UserPayload.shared.email = entryViewEmail.textfield.text
             UserPayload.shared.password = entryViewPassword.textfield.text
             UserPayload.shared.nickname = entryViewNickname.textfield.text
-            
-            guard ApplicationOptions.Build.Level.rawValue > BuildLevel.DEVELOP.rawValue else {
-                LoadingIndicatorManager.shared.showIndicatorView()
-                
-                var params = [String:Any]()
-                params["id"] = ApplicationOptions.TestInfo.ID
-                params["pw"] = ApplicationOptions.TestInfo.Password.sha256()
-                params["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
-                params["os"] = "ios"
-                params["device_info"] = UIDevice.modelName
-                
-                let httpClient = QHttpClient()
-                httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
-                    LoadingIndicatorManager.shared.hideIndicatorView()
-                    guard isSucceed, let responseData = response as? [String:Any] else {
-                        InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
-                        return
-                    }
-                    
-                    MyData.shared.setMyInfo(with: responseData)
-                    
-                    QDataManager.shared.userId = ApplicationOptions.TestInfo.ID
-                    QDataManager.shared.password = ApplicationOptions.TestInfo.Password
-                    QDataManager.shared.commit()
-                    
-                    let viewController = SignupProfileSpecsViewController()
-                    self.navigationController?.pushViewController(viewController, animated: true)
-                }
-                return
-            }
             
             LoadingIndicatorManager.shared.showIndicatorView()
             
@@ -247,54 +257,54 @@ class SignupProfileViewController: BaseSignupStepsViewController {
             params["name"] = UserPayload.shared.name
             params["nickname"] = UserPayload.shared.nickname
             params["sex"] = UserPayload.shared.gender.rawValue
-            
+
             if let timeInterval = UserPayload.shared.birthDate {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyyMMdd"
                 params["birth"] = formatter.string(from: Date(timeIntervalSince1970: timeInterval))
             }
-            
+
             params["fcm_key"] = UUID().uuidString
-            
+
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.Signup, params: params) { (isSucceed, errMessage, response) in
                 guard let responseData = response as? [String:Any], let status = responseData["Status"] as? String, status == "OK" else {
                     LoadingIndicatorManager.shared.hideIndicatorView()
-                    
+
                     InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
                     return
                 }
-                
+
                 QDataManager.shared.registerStep = 1
                 QDataManager.shared.commit()
-                
+
                 var params = [String:Any]()
                 params["id"] = UserPayload.shared.email
                 params["pw"] = UserPayload.shared.password?.sha256()
                 params["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
                 params["os"] = "ios"
                 params["device_info"] = UIDevice.modelName
-                
+
                 let httpClient = QHttpClient()
                 httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
                     LoadingIndicatorManager.shared.hideIndicatorView()
-                    guard let responseData = response as? [String:Any], let status = responseData["Status"] as? String, status == "OK" else {
+                    guard let responseData = response as? [String:Any], responseData["mem_idx"] as? Int != nil else {
                         InstanceMessageManager.shared.showMessage(kStringErrorUnknown, margin: self.buttonConfirm.frame.size.height + 8 * QUtils.optimizeRatio())
                         return
                     }
-                    
+
                     MyData.shared.setMyInfo(with: responseData)
-                    
+
                     QDataManager.shared.userId = UserPayload.shared.email
                     QDataManager.shared.password = UserPayload.shared.password
                     QDataManager.shared.commit()
-                    
+
                     var params = [String:Any]()
                     params["sign_up_fl"] = "p"
-                    
+
                     let httpClient = QHttpClient()
                     httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
-                    
+
                     let viewController = SignupProfileSpecsViewController()
                     self.navigationController?.pushViewController(viewController, animated: true)
                 }
@@ -379,6 +389,76 @@ extension SignupProfileViewController: UITextFieldDelegate {
         guard textField == entryViewEmail.textfield, started == false else { return }
         started = true
         theTableView.reloadData()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        var errMessage: String?
+        
+        if textField == entryViewEmail.textfield {
+            let email = entryViewEmail.textfield.text ?? ""
+            if email.count == 0 {
+                errMessage = "이메일을 입력해주세요."
+            } else if email.isValidEmail() == false {
+                errMessage = "잘못된 형식의 이메일입니다."
+            }
+        } else if textField == entryViewPassword.textfield {
+            let password = entryViewPassword.textfield.text ?? ""
+            
+            let digits = CharacterSet(charactersIn: "0123456789")
+            let alphabets = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+            
+            let hasDigits = password.rangeOfCharacter(from: digits) != nil
+            let hasChars = password.rangeOfCharacter(from: alphabets) != nil
+            let hasEnoughLength = password.count >= 6
+            
+            if hasDigits == false || hasChars == false || hasEnoughLength == false {
+                errMessage = "비밀번호는 영문+숫자 조합 6자리 이상으로 입력하세요."
+            }
+        } else if textField == entryViewRepeatPassword.textfield {
+            if textField.text ?? "" != entryViewPassword.textfield.text {
+                errMessage = "비밀번호가 일치하지 않습니다."
+            }
+        } else if textField == entryViewNickname.textfield {
+            if (textField.text ?? "").count < 2 {
+                errMessage = "닉네임은 두 글자 이상으로 입력하세요."
+            }
+        }
+        
+        guard errMessage == nil else {
+            InstanceMessageManager.shared.showMessage(errMessage!, margin: 280)
+            return
+        }
+        
+        guard textField == entryViewEmail.textfield || textField == entryViewNickname.textfield else { return }
+        
+        var params = [String:Any]()
+        if textField == entryViewEmail.textfield {
+            params["id"] = textField.text
+        } else {
+            params["nickname"] = textField.text
+        }
+        
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Account.Validate, params: params) { (isSucceed, errMessage, response) in
+            guard let responseData = response as? [String:Any], responseData["Status"] as? String == "OK" else {
+                InstanceMessageManager.shared.showMessage(textField == self.entryViewEmail.textfield ? "중복된 이메일입니다." : "중복된 닉네임입니다.", margin: 280)
+                
+                if textField == self.entryViewEmail.textfield {
+                    self.isValidEmail = false
+                    self.entryViewEmail.checked = false
+                } else {
+                    self.isValidNickname = false
+                    self.entryViewNickname.checked = false
+                }
+                return
+            }
+            
+            if textField == self.entryViewEmail.textfield {
+                self.isValidEmail = true
+            } else {
+                self.isValidNickname = true
+            }
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

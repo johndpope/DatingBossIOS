@@ -84,15 +84,15 @@ class SignupProfileTextEntryView: SignupProfileEntryView {
         textfield.leadingAnchor.constraint(equalTo: labelTitle.trailingAnchor, constant: 40 * QUtils.optimizeRatio()).isActive = true
         textfield.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -36 * QUtils.optimizeRatio()).isActive = true
         textfield.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        
-        buttonTextfield.translatesAutoresizingMaskIntoConstraints = false
-        buttonTextfield.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-        self.addSubview(buttonTextfield)
-        
-        buttonTextfield.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        buttonTextfield.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        buttonTextfield.leadingAnchor.constraint(equalTo: labelTitle.trailingAnchor, constant: 40 * QUtils.optimizeRatio()).isActive = true
-        buttonTextfield.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//        
+//        buttonTextfield.translatesAutoresizingMaskIntoConstraints = false
+//        buttonTextfield.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
+//        self.addSubview(buttonTextfield)
+//        
+//        buttonTextfield.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+//        buttonTextfield.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+//        buttonTextfield.leadingAnchor.constraint(equalTo: labelTitle.trailingAnchor, constant: 40 * QUtils.optimizeRatio()).isActive = true
+//        buttonTextfield.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
