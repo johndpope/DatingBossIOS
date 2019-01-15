@@ -73,6 +73,7 @@ class SignupGuideTableViewCell: UITableViewCell {
         labelContent.translatesAutoresizingMaskIntoConstraints = false
         labelContent.textColor = #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)
         labelContent.font = UIFont.systemFont(ofSize: 12 * QUtils.optimizeRatio(), weight: .bold)
+        labelContent.lineBreakMode = .byWordWrapping
         labelContent.numberOfLines = 2
         self.contentView.addSubview(labelContent)
         

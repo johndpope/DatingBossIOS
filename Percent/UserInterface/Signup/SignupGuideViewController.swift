@@ -125,10 +125,17 @@ extension SignupGuideViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let cell = self.tableView(tableView, cellForRowAt: indexPath) as? SignupGuideTableViewCell else { return 0 }
         cell.data = tableData[indexPath.row]
-        var height = cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        cell.layoutIfNeeded()
+        
+        var height = cell.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
         if height < 64 * QUtils.optimizeRatio() {
             height = 64 * QUtils.optimizeRatio()
         }
+        
+        if indexPath.row > 2 {
+            height += 15 * QUtils.optimizeRatio()
+        }
+        
         return height
     }
     
