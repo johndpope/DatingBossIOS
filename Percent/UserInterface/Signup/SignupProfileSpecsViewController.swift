@@ -11,6 +11,8 @@ import UIKit
 import AVFoundation
 import Photos
 
+import MobileCoreServices
+
 private let kTagTextfieldSearchHobby = 1001
 
 class SignupProfileSpecsViewController: BaseSignupStepsViewController {
@@ -1204,6 +1206,9 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
             pickerController.cameraCaptureMode = .photo
             pickerController.cameraDevice = .rear
             pickerController.showsCameraControls = true
+            pickerController.popoverPresentationController?.delegate = self
+            pickerController.popoverPresentationController?.sourceView = self.view
+            self.view.alpha = 0.5
             self.present(pickerController, animated: true, completion: nil)
         }))
         alertController.addAction(UIAlertAction(title: "사진에서 가져오기", style: .default, handler: { (action) in
@@ -1216,6 +1221,10 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
             pickerController.delegate = self
             pickerController.allowsEditing = true
             pickerController.sourceType = .photoLibrary
+            pickerController.mediaTypes = [kUTTypeImage] as [String]
+            pickerController.popoverPresentationController?.delegate = self
+            pickerController.popoverPresentationController?.sourceView = self.view
+            self.view.alpha = 0.5
             self.present(pickerController, animated: true, completion: nil)
         }))
         if indexPath.row > 0, indexPath.row < UserPayload.shared.pictures.count {
@@ -1269,6 +1278,12 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         (cell as? SignupProfilePictureCollectionViewCell)?.reloadData()
+    }
+}
+
+extension SignupProfileSpecsViewController: UIPopoverPresentationControllerDelegate {
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        self.view.alpha = 1.0
     }
 }
 

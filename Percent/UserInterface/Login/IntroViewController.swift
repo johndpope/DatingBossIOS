@@ -129,7 +129,7 @@ class IntroViewController: BaseViewController {
                         }
                         
                         MyData.shared.setMyInfo(with: responseData)
-                        
+
                         guard ApplicationOptions.Build.Level.rawValue > BuildLevel.DEVELOP.rawValue else {
                             let viewController = SignupProfileViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)
@@ -149,7 +149,7 @@ class IntroViewController: BaseViewController {
 
                         case .profile:
                             UserPayload.shared.loadFromDatabase()
-                            
+
                             let viewController = SignupProfileSpecsViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
@@ -157,7 +157,7 @@ class IntroViewController: BaseViewController {
 
                         case .survey:
                             UserPayload.shared.loadFromDatabase()
-                            
+
                             let viewController = SignupSurveyViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
@@ -165,7 +165,7 @@ class IntroViewController: BaseViewController {
 
                         case .looks:
                             UserPayload.shared.loadFromDatabase()
-                            
+
                             let viewController = SignupSelectFavorLooksViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
@@ -173,7 +173,7 @@ class IntroViewController: BaseViewController {
 
                         case .pending:
                             UserPayload.shared.loadFromDatabase()
-                            
+
                             let viewController = SignupFinalizeViewController()
                             UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
                             break

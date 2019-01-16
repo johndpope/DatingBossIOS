@@ -89,6 +89,7 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         labelAnswer.textAlignment = .center
         labelAnswer.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         labelAnswer.font = UIFont.systemFont(ofSize: 24 * QUtils.optimizeRatio(), weight: .semibold)
+        labelAnswer.lineBreakMode = .byWordWrapping
         labelAnswer.layer.cornerRadius = 30 * QUtils.optimizeRatio()
         self.view.addSubview(labelAnswer)
         

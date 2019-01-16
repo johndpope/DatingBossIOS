@@ -62,7 +62,7 @@ class QHttpClient: NSObject {
     
     var progressDelegate: QHttpClientProgressDelegate?
     
-    var blockTimeout = true
+    var blockTimeout = false
     
     var state: URLSessionTask.State? {
         get {
