@@ -52,7 +52,6 @@ extension SignupIdViewController: WKNavigationDelegate, WKUIDelegate, WKScriptMe
         guard let dict = message.body as?  [String:Any] else { return }
         
         UserPayload.shared.clear()
-        UserPayload.shared.commit()
         
         UserPayload.shared.name = dict["name"] as? String
         UserPayload.shared.phone = dict["phone"] as? String
@@ -64,6 +63,8 @@ extension SignupIdViewController: WKNavigationDelegate, WKUIDelegate, WKScriptMe
         }
         
         UserPayload.shared.gender = Gender(rawValue: dict["sex"] as? String ?? "m") ?? .male
+        
+        UserPayload.shared.commit()
         
         let viewController = SignupStepViewController(step: 1)
         viewController.delegate = self

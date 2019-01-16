@@ -43,6 +43,8 @@ class UserPayload: NSObject {
     var smoking: AppData?
     var introduction: String?
     
+    var evaluatedCount = 0
+    
     override init() {
         super.init()
     }
@@ -73,6 +75,8 @@ class UserPayload: NSObject {
         drinking = nil
         smoking = nil
         introduction = nil
+        
+        evaluatedCount = 0
     }
     
     func loadFromDatabase() {
@@ -128,6 +132,8 @@ class UserPayload: NSObject {
             smoking = AppData(with: value)
         }
         introduction = signupData["introduction"] as? String
+        
+        evaluatedCount = signupData["evaluatedCount"] as? Int ?? 0
     }
     
     func commit() {
@@ -158,6 +164,8 @@ class UserPayload: NSObject {
         dataDict["drinking"] = drinking?.rawData
         dataDict["smoking"] = smoking?.rawData
         dataDict["introduction"] = introduction
+        
+        dataDict["evaluatedCount"] = evaluatedCount
         
         QDataManager.shared.signupData = dataDict
         QDataManager.shared.commit()

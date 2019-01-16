@@ -49,6 +49,8 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        currentPage = UserPayload.shared.evaluatedCount
+        
         headerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4)
         
         labelTitle.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -306,6 +308,9 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
     }
     
     private func reloadEvaluatingData() {
+        UserPayload.shared.evaluatedCount = currentPage
+        UserPayload.shared.commit()
+
         guard currentPage < evaluatingData.count else {
             var params = [String:Any]()
             params["sign_up_fl"] = "r"

@@ -136,7 +136,7 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
             noteButton.centerXAnchor.constraint(equalTo: note.centerXAnchor).isActive = true
             noteButton.topAnchor.constraint(equalTo: sliderAnswer.bottomAnchor).isActive = true
             noteButton.bottomAnchor.constraint(equalTo: note.bottomAnchor, constant: 10 * QUtils.optimizeRatio()).isActive = true
-            noteButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
+            noteButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         }
         
         buttonPrevious.translatesAutoresizingMaskIntoConstraints = false
@@ -350,7 +350,7 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         
         let gap = location - (normalize * unit) - 44 * QUtils.optimizeRatio()
         
-        if gap > -20, gap < 20 {
+        if gap > -38 * QUtils.optimizeRatio(), gap < 38 * QUtils.optimizeRatio() {
             sliderAnswer.value = Float(normalize)
             sliderValueChanged(sliderAnswer)
         }

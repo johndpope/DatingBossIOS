@@ -75,7 +75,7 @@ class SignupFinalizeViewController: UIViewController {
         self.timerBump = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(self.bumping), userInfo: nil, repeats: true)
         
 //        var params = [String:Any]()
-//        params["sign_up_fl"] = "r"
+//        params["sign_up_fl"] = "l"
 //
 //        let httpClient = QHttpClient()
 //        httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
