@@ -542,7 +542,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         buttonTextView.trailingAnchor.constraint(equalTo: backView.trailingAnchor).isActive = true
         
         textViewComment.translatesAutoresizingMaskIntoConstraints = false
-        textViewComment.isUserInteractionEnabled = false
+        textViewComment.isUserInteractionEnabled = true
         textViewComment.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         textViewComment.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         textViewComment.delegate = self
@@ -654,7 +654,6 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         
         switch sender {
         case buttonTextView:
-            editingView = textViewComment.superview
             _ = textViewComment.becomeFirstResponder()
             break
             
@@ -1289,12 +1288,19 @@ extension SignupProfileSpecsViewController: UINavigationControllerDelegate, UIIm
         
         let index = replaceIndex ?? UserPayload.shared.pictures.count
         
+        var requestUrl = RequestUrl.Image.Info + "\(MyData.shared.mem_idx)/"
+        
+        if replaceIndex != nil {
+            let replacingData = UserPayload.shared.pictures[replaceIndex!]
+            requestUrl += "\(replacingData.picture_idx)/"
+        }
+        
         var params = [String:Any]()
         params["picture"] = image.jpegData(compressionQuality: 0.8)
         params["tmp_fl"] = "y"
         
         let httpClient = QHttpClient()
-        httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)/\(index + 1)/y", params: params) { (isSucceed, errMessage, response) in
+        httpClient.request(to: requestUrl + "\(index + 1)/y", params: params) { (isSucceed, errMessage, response) in
             LoadingIndicatorManager.shared.hideIndicatorView()
             
             guard let responseData = response as? [String:Any], let picture_idx = responseData["picture_idx"] as? String else {
@@ -1329,6 +1335,11 @@ extension SignupProfileSpecsViewController: UIScrollViewDelegate {
 }
 
 extension SignupProfileSpecsViewController: UITextViewDelegate {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        editingView = textViewComment.superview
+        return true
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         UserPayload.shared.introduction = textView.text
         

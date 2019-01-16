@@ -351,6 +351,7 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         
         if gap > -14, gap < 14 {
             sliderAnswer.value = Float(normalize)
+            sliderValueChanged(sliderAnswer)
         }
     }
     

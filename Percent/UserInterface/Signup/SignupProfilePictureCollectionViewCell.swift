@@ -65,15 +65,19 @@ class SignupProfilePictureCollectionViewCell: UICollectionViewCell {
     
     func reloadData() {
         guard data != nil else {
+            imageViewPicture.backgroundColor = .clear
             imageViewPicture.image = nil
             return
         }
         
         if let image = data?.image {
+            imageViewPicture.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
             imageViewPicture.image = image
         } else if let imageUrl = data?.imageUrl {
-            imageViewPicture.pin_setImage(from: URL(string: RequestUrl.Image.File + imageUrl))
+            imageViewPicture.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
+            imageViewPicture.pin_setImage(from: URL(string: RequestUrl.Image.File + "\(MyData.shared.mem_idx)/" + imageUrl))
         } else {
+            imageViewPicture.backgroundColor = .clear
             imageViewPicture.image = nil
         }
     }
