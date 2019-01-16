@@ -153,12 +153,14 @@ class UserProfileViewController: BaseViewController {
     }
     
     func reloadData() {
-        tableData.append(UserProfileTableData(iconName: "img_profile_1", content: "\(data.area ?? "")에 사는 \(data.age)살 \(data.sex == .female ? " 여자" : "남자")입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_2", content: "\(data.edu ?? "")했습니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_1", content: "\(data.area ?? "")에 사는 \(data.age)세 \((data.blood_type ?? .A).rawValue.uppercased())형 \(data.sex == .female ? " 여자" : "남자")입니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_2", content: "학력은 \(data.edu ?? "")했습니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_3", content: "제 직업은 \(data.job ?? "") 입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)이고, \(data.form ?? "")의 몸 입니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고, \(data.form ?? "")의 체형입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_5", content: "종교는 \(data.religion ?? "") 입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_6", content: "취미는 \(data.hobby ?? "") 입니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_7", content: data.drinking ?? "", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_8", content: data.smoking ?? "", isApproved: nil))
         
         theTableView.reloadData()
     }

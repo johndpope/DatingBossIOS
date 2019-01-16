@@ -48,6 +48,8 @@
 		1C5AC84521E4D45C0007827D /* spoqa_han_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AC84321E4D45C0007827D /* spoqa_han_sans_bold.ttf */; };
 		1C61C4C421EE2FF700087D8A /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C61C4C321EE2FF700087D8A /* ImagePreviewViewController.swift */; };
 		1C61C4C621EED0D600087D8A /* img_popup_search@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C61C4C521EED0D600087D8A /* img_popup_search@3x.png */; };
+		1C61C4D121EF824900087D8A /* img_profile_8@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C61C4CF21EF824900087D8A /* img_profile_8@3x.png */; };
+		1C61C4D221EF824900087D8A /* img_profile_7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C61C4D021EF824900087D8A /* img_profile_7@3x.png */; };
 		1C858D8B21C7733D00900481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858D8A21C7733D00900481 /* AppDelegate.swift */; };
 		1C858D9221C7733F00900481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C858D9121C7733F00900481 /* Assets.xcassets */; };
 		1C858D9521C7733F00900481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C858D9321C7733F00900481 /* LaunchScreen.storyboard */; };
@@ -223,6 +225,8 @@
 		1C5AC84321E4D45C0007827D /* spoqa_han_sans_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = spoqa_han_sans_bold.ttf; sourceTree = "<group>"; };
 		1C61C4C321EE2FF700087D8A /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		1C61C4C521EED0D600087D8A /* img_popup_search@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_popup_search@3x.png"; sourceTree = "<group>"; };
+		1C61C4CF21EF824900087D8A /* img_profile_8@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_8@3x.png"; sourceTree = "<group>"; };
+		1C61C4D021EF824900087D8A /* img_profile_7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_7@3x.png"; sourceTree = "<group>"; };
 		1C858D8721C7733D00900481 /* Percent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Percent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C858D8A21C7733D00900481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C858D9121C7733F00900481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -563,6 +567,8 @@
 				1CE69AAD21D8EEC000B9FE4A /* img_profile_4@3x.png */,
 				1CE69AAF21D8EEC000B9FE4A /* img_profile_5@3x.png */,
 				1CE69AB021D8EEC000B9FE4A /* img_profile_6@3x.png */,
+				1C61C4D021EF824900087D8A /* img_profile_7@3x.png */,
+				1C61C4CF21EF824900087D8A /* img_profile_8@3x.png */,
 				1CAC5A9821E7B0D3002A0A4E /* img_profile_expand@3x.png */,
 				1C5AC80B21E35D750007827D /* img_settings_1@3x.png */,
 				1C5AC80621E35D750007827D /* img_settings_2@3x.png */,
@@ -910,6 +916,7 @@
 				1C858E5621C9036200900481 /* img_cherry@3x.png in Resources */,
 				1CD3D9A821EA4FD100938293 /* img_favor_yes_nor@3x.png in Resources */,
 				1CB5433D21DF4D4800B37EAE /* loader.json in Resources */,
+				1C61C4D221EF824900087D8A /* img_profile_7@3x.png in Resources */,
 				1CE69AB221D8EEC100B9FE4A /* img_profile_3@3x.png in Resources */,
 				1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */,
 				1C858DA621C780D500900481 /* img_login_mail@3x.png in Resources */,
@@ -927,6 +934,7 @@
 				1C858D9521C7733F00900481 /* LaunchScreen.storyboard in Resources */,
 				1C5AC83621E49BC50007827D /* img_intro_percent@3x.png in Resources */,
 				1C5AC81521E35D750007827D /* img_settings_9@3x.png in Resources */,
+				1C61C4D121EF824900087D8A /* img_profile_8@3x.png in Resources */,
 				1C5AC81321E35D750007827D /* img_settings_4@3x.png in Resources */,
 				1C5AC82321E3ACC70007827D /* img_board_collapsed@3x.png in Resources */,
 				1CE69AB621D8EEC100B9FE4A /* img_profile_6@3x.png in Resources */,

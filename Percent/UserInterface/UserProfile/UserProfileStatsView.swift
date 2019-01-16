@@ -10,7 +10,7 @@ import UIKit
 
 class UserProfileStatsView: UIView {
     private let labelSum = UILabel()
-    private let circularViewSum =  CircleIndicatorView()
+    private let circularViewSum =  CircleIndicatorView(lineWidth: 8.0)
     
     private let labelPointOfView = UILabel()
     private let barIndicatorViewPointOfView = BarIndicatorView()
@@ -177,7 +177,7 @@ class UserProfileStatsView: UIView {
         valueCharacter = 0
         valueStyle = 0
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true, block: { (aTimer) in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.008, repeats: true, block: { (aTimer) in
             if self.valueSum < self.data.sim_sum {
                 self.valueSum += 1
                 self.circularViewSum.value = CGFloat(self.valueSum) / 100

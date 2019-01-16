@@ -18,12 +18,20 @@ class SignupProfileViewController: BaseSignupStepsViewController {
     private let entryViewRepeatPassword = SignupProfileTextEntryView()
     private let entryViewNickname = SignupProfileTextEntryView()
     
-    private var isValidEmail = false
-    private var isValidNickname = false
+    private var isValidEmail = true {
+        didSet {
+            theTableView.reloadData()
+        }
+    }
+    private var isValidNickname = true {
+        didSet {
+            theTableView.reloadData()
+        }
+    }
     
     private var started = false
     
-    private let warnings = ["※ 잘못된 형식의 이메일입니다.", "※ 비밀번호는 영문 + 숫자 조합 6자리 이상으로 입력하세요.", "※ 비밀번호가 일치하지 않습니다.", "※ 닉네임은 두 글자 이상으로 입력하세요."]
+    private let warnings = ["※ 잘못된 형식의 이메일입니다.", "※ 비밀번호는 영문 + 숫자 조합 6자리 이상으로 입력하세요.", "※ 비밀번호가 일치하지 않습니다.", "※ 닉네임은 두 글자 이상으로 입력하세요.", "※ 중복된 이메일입니다.", "※ 중복된 닉네임입니다."]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -491,10 +499,12 @@ extension SignupProfileViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard started else { return 0 }
         
-        if (indexPath.row == 0 && !entryViewEmail.checked)
+        if (indexPath.row == 0 && !(entryViewEmail.textfield.text?.isValidEmail() ?? false))
             || (indexPath.row == 1 && !entryViewPassword.checked)
             || (indexPath.row == 2 && !entryViewRepeatPassword.checked)
-            || (indexPath.row == 3 && !entryViewNickname.checked) {
+            || (indexPath.row == 3 && (entryViewNickname.textfield.text ?? "").count < 2)
+            || (indexPath.row == 4 && !isValidEmail)
+            || (indexPath.row == 5 && !isValidNickname) {
             return 22 * QUtils.optimizeRatio()
         }
         
