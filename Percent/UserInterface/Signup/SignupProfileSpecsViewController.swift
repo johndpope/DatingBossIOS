@@ -13,7 +13,7 @@ import Photos
 
 import MobileCoreServices
 
-private let kTagTextfieldSearchHobby = 1001
+private let kTagtextfieldSearch = 1001
 
 class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     private let theScrollView = UIScrollView()
@@ -55,7 +55,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     
     private var constraintJobDetailHeight: NSLayoutConstraint!
     
-    private weak var textfieldSearchHobby: UITextField?
+    private weak var textfieldSearch: UITextField?
     private var searchResults = [AppData]()
     private weak var showingTableView: UITableView?
     
@@ -549,7 +549,6 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         textViewComment.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         textViewComment.delegate = self
         textViewComment.isEditable = true
-        textViewComment.text = UserPayload.shared.introduction
         backView.addSubview(textViewComment)
 
         textViewComment.topAnchor.constraint(equalTo: backView.topAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
@@ -559,6 +558,11 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         constraintTextViewHeight.isActive = true
         textViewComment.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
 
+        if let introduction = UserPayload.shared.introduction {
+            textViewComment.text = introduction
+            textViewDidChange(textViewComment)
+        }
+        
         buttonCancel.translatesAutoresizingMaskIntoConstraints = false
         buttonCancel.clipsToBounds = true
         buttonCancel.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)), for: .normal)
@@ -1048,7 +1052,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     }
     
     @objc private func textfieldDidChange(_ textfield: UITextField) {
-        if textfield.tag == kTagTextfieldSearchHobby {
+        if textfield.tag == kTagtextfieldSearch {
             searchHobby()
             return
         }
@@ -1062,7 +1066,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     
     private func searchHobby() {
         searchResults.removeAll()
-        guard let keyword = textfieldSearchHobby?.text, keyword.count > 0, let dataArray = pickerData as? [AppData] else {
+        guard let keyword = textfieldSearch?.text, keyword.count > 0, let dataArray = pickerData as? [AppData] else {
             showingTableView?.reloadData()
             return
         }
@@ -1208,7 +1212,6 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
             pickerController.showsCameraControls = true
             pickerController.popoverPresentationController?.delegate = self
             pickerController.popoverPresentationController?.sourceView = self.view
-            self.view.alpha = 0.5
             self.present(pickerController, animated: true, completion: nil)
         }))
         alertController.addAction(UIAlertAction(title: "사진에서 가져오기", style: .default, handler: { (action) in
@@ -1224,7 +1227,6 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
             pickerController.mediaTypes = [kUTTypeImage] as [String]
             pickerController.popoverPresentationController?.delegate = self
             pickerController.popoverPresentationController?.sourceView = self.view
-            self.view.alpha = 0.5
             self.present(pickerController, animated: true, completion: nil)
         }))
         if indexPath.row > 0, indexPath.row < UserPayload.shared.pictures.count {
@@ -1346,7 +1348,7 @@ extension SignupProfileSpecsViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         _ = textViewComment.resignFirstResponder()
         _ = entryViewEducationDetail.textfield.resignFirstResponder()
-        _ = textfieldSearchHobby?.resignFirstResponder()
+        _ = textfieldSearch?.resignFirstResponder()
     }
 }
 
@@ -1358,6 +1360,7 @@ extension SignupProfileSpecsViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         UserPayload.shared.introduction = textView.text
+        UserPayload.shared.commit()
         
         let originHeight = constraintTextViewHeight.constant
         
@@ -1390,7 +1393,7 @@ extension SignupProfileSpecsViewController: UITextViewDelegate {
 
 extension SignupProfileSpecsViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        guard textField.tag != kTagTextfieldSearchHobby else { return true }
+        guard textField.tag != kTagtextfieldSearch else { return true }
         
         editingView = textField.superview
         return true
@@ -1402,7 +1405,7 @@ extension SignupProfileSpecsViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        blockScrolling = textField == textfieldSearchHobby
+        blockScrolling = textField == textfieldSearch
         return true
     }
 }
@@ -1436,7 +1439,7 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
         guard activatingEntryView != entryViewHobby else {
             var data: AppData?
             
-            if (textfieldSearchHobby?.text?.count ?? 0) > 0 {
+            if (textfieldSearch?.text?.count ?? 0) > 0 {
                 data = searchResults[indexPath.row]
             } else {
                 data = pickerData[indexPath.row] as? AppData
@@ -1479,16 +1482,24 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
             self.entryViewEducation.checked = true
             self.entryViewEducation.labelValue.text = (value as? AppData)?.code_name
         } else if activatingEntryView == entryViewJob {
-            UserPayload.shared.job = value as? AppData
+            var data: AppData?
+            
+            if (textfieldSearch?.text?.count ?? 0) > 0 {
+                data = searchResults[indexPath.row]
+            } else {
+                data = pickerData[indexPath.row] as? AppData
+            }
+            
+            UserPayload.shared.job = data
             UserPayload.shared.jobDetail = nil
             
             self.entryViewJob.checked = true
-            self.entryViewJob.labelValue.text = (value as? AppData)?.code_name
+            self.entryViewJob.labelValue.text = data?.code_name
             
             self.entryViewJobDetail.textfield.text = nil
             
-            seperatorJobDetail.isHidden = (value as? AppData)?.code_name != "기타"
-            constraintJobDetailHeight.constant = (value as? AppData)?.code_name != "기타" ? 0 : 56 * QUtils.optimizeRatio()
+            seperatorJobDetail.isHidden = data?.code_name != "기타"
+            constraintJobDetailHeight.constant = data?.code_name != "기타" ? 0 : 56 * QUtils.optimizeRatio()
             self.view.layoutIfNeeded()
             
             reloadContentSize()
@@ -1523,11 +1534,12 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return activatingEntryView == entryViewHobby ? SignupProfileSpecTableViewCell.height : 0
+        guard activatingEntryView == entryViewHobby || activatingEntryView == entryViewJob else { return 0 }
+        return SignupProfileSpecTableViewCell.height
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard activatingEntryView == entryViewHobby else { return UIView() }
+        guard activatingEntryView == entryViewHobby || activatingEntryView == entryViewJob else { return UIView() }
         
         var frame = CGRect.zero
         frame.size.width = tableView.frame.size.width
@@ -1562,7 +1574,7 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
         
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.tag = kTagTextfieldSearchHobby
+        textfield.tag = kTagtextfieldSearch
         textfield.placeholder = "검색"
         textfield.textColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
         textfield.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
@@ -1572,7 +1584,7 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
         textfield.addTarget(self, action: #selector(self.textfieldDidChange(_:)), for: .editingChanged)
         backView.addSubview(textfield)
         
-        textfieldSearchHobby = textfield
+        textfieldSearch = textfield
         
         textfield.topAnchor.constraint(equalTo: backView.topAnchor).isActive = true
         textfield.bottomAnchor.constraint(equalTo: backView.bottomAnchor).isActive = true
@@ -1583,7 +1595,8 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if activatingEntryView == entryViewHobby, (textfieldSearchHobby?.text ?? "").count > 0 {
+        if (textfieldSearch?.text ?? "").count > 0,
+            (activatingEntryView == entryViewHobby || activatingEntryView == entryViewJob) {
             return searchResults.count
         }
         
@@ -1598,7 +1611,8 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SignupProfileSpecTableViewCell") as? SignupProfileSpecTableViewCell else { return UITableViewCell() }
         
         var candidate: Any
-        if activatingEntryView == entryViewHobby, (textfieldSearchHobby?.text ?? "").count > 0 {
+        if (textfieldSearch?.text ?? "").count > 0,
+            (activatingEntryView == entryViewHobby || activatingEntryView == entryViewJob) {
             candidate = searchResults[indexPath.row]
         } else {
             candidate = pickerData[indexPath.row]
@@ -1639,8 +1653,8 @@ extension SignupProfileSpecsViewController: SignupStepViewControllerDelegate {
 
 extension SignupProfileSpecsViewController: BasePopupViewControllerDelegate {
     func popupViewController(canDismiss viewController: BasePopupViewController) -> Bool {
-        guard (textfieldSearchHobby?.isEditing ?? false) == true else { return true }
-        _ = textfieldSearchHobby?.resignFirstResponder()
+        guard (textfieldSearch?.isEditing ?? false) == true else { return true }
+        _ = textfieldSearch?.resignFirstResponder()
         return false
     }
     
