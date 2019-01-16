@@ -11,6 +11,8 @@ import UIKit
 import AVFoundation
 import Photos
 
+private let kTagTextfieldSearchHobby = 1001
+
 class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     private let theScrollView = UIScrollView()
     
@@ -45,11 +47,17 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     private var selectedEntryView: SignupProfileEntryView?
     private var editingView: UIView?
     
-    private var selectedDataArray = [Int]()
+    private var selectedDataArray = [String]()
     
-    private var activatingEntryView: SignupProfileEntryView?
+    private weak var activatingEntryView: SignupProfileEntryView?
     
     private var constraintJobDetailHeight: NSLayoutConstraint!
+    
+    private weak var textfieldSearchHobby: UITextField?
+    private var searchResults = [AppData]()
+    private weak var showingTableView: UITableView?
+    
+    private var blockScrolling = false
     
     override init(navigationViewEffect effect: UIVisualEffect? = nil) {
         let flowLayout = UICollectionViewFlowLayout()
@@ -172,6 +180,9 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewHeight.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         if let height = UserPayload.shared.height {
             entryViewHeight.labelValue.text = "\(height)"
+            entryViewHeight.checked = true
+        } else {
+            entryViewHeight.checked = false
         }
         theScrollView.addSubview(entryViewHeight)
         
@@ -196,6 +207,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewShape.labelTitle.text = "체형"
         entryViewShape.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         entryViewShape.labelValue.text = UserPayload.shared.shape?.code_name
+        entryViewShape.checked = (UserPayload.shared.shape?.code_name ?? "").count > 0
         theScrollView.addSubview(entryViewShape)
         
         entryViewShape.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -219,6 +231,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewBlood.labelTitle.text = "혈액형"
         entryViewBlood.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         entryViewBlood.labelValue.text = UserPayload.shared.blood
+        entryViewBlood.checked = (UserPayload.shared.blood ?? "").count > 0
         theScrollView.addSubview(entryViewBlood)
         
         entryViewBlood.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -242,6 +255,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewRegion.labelTitle.text = "지역"
         entryViewRegion.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         entryViewRegion.labelValue.text = UserPayload.shared.region?.code_name
+        entryViewRegion.checked = (UserPayload.shared.region?.code_name ?? "").count > 0
         theScrollView.addSubview(entryViewRegion)
         
         entryViewRegion.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -265,6 +279,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewEducation.labelTitle.text = "학력"
         entryViewEducation.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         entryViewEducation.labelValue.text = UserPayload.shared.education?.code_name
+        entryViewEducation.checked = (UserPayload.shared.education?.code_name ?? "").count > 0
         theScrollView.addSubview(entryViewEducation)
         
         entryViewEducation.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -316,6 +331,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewJob.labelTitle.text = "직업"
         entryViewJob.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         entryViewJob.labelValue.text = UserPayload.shared.job?.code_name
+        entryViewJob.checked = (UserPayload.shared.job?.code_name ?? "").count > 0
         theScrollView.addSubview(entryViewJob)
 
         entryViewJob.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -372,6 +388,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewWage.labelTitle.text = "연봉"
         entryViewWage.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         entryViewWage.labelValue.text = UserPayload.shared.wage?.code_name
+        entryViewWage.checked = (UserPayload.shared.wage?.code_name ?? "").count > 0
         theScrollView.addSubview(entryViewWage)
 
         entryViewWage.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -395,6 +412,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewReligion.labelTitle.text = "종교"
         entryViewReligion.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         entryViewReligion.labelValue.text = UserPayload.shared.religion?.code_name
+        entryViewReligion.checked = (UserPayload.shared.religion?.code_name ?? "").count > 0
         theScrollView.addSubview(entryViewReligion)
 
         entryViewReligion.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -426,6 +444,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             hobbies += UserPayload.shared.hobby[i].code_name ?? ""
         }
         entryViewHobby.labelValue.text = hobbies
+        entryViewHobby.checked = hobbies.count > 0
         theScrollView.addSubview(entryViewHobby)
 
         entryViewHobby.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -449,6 +468,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewDrinking.labelTitle.text = "음주 스타일"
         entryViewDrinking.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         entryViewDrinking.labelValue.text = UserPayload.shared.drinking?.code_name
+        entryViewDrinking.checked = (UserPayload.shared.drinking?.code_name ?? "").count > 0
         theScrollView.addSubview(entryViewDrinking)
 
         entryViewDrinking.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -472,6 +492,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         entryViewSmoking.labelTitle.text = "흡연여부"
         entryViewSmoking.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         entryViewSmoking.labelValue.text = UserPayload.shared.smoking?.code_name
+        entryViewSmoking.checked = (UserPayload.shared.smoking?.code_name ?? "").count > 0
         theScrollView.addSubview(entryViewSmoking)
 
         entryViewSmoking.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -710,6 +731,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
+            showingTableView = tableView
             
             activatingEntryView = entryViewShape
             
@@ -733,6 +755,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
+            showingTableView = tableView
             
             activatingEntryView = entryViewBlood
             
@@ -756,6 +779,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
+            showingTableView = tableView
             
             activatingEntryView = entryViewRegion
             
@@ -779,6 +803,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
+            showingTableView = tableView
             
             activatingEntryView = entryViewEducation
             
@@ -805,6 +830,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
+            showingTableView = tableView
             
             activatingEntryView = entryViewJob
             
@@ -828,6 +854,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
+            showingTableView = tableView
             
             activatingEntryView = entryViewWage
             
@@ -851,6 +878,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
+            showingTableView = tableView
             
             activatingEntryView = entryViewReligion
             
@@ -875,10 +903,12 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             for i in 0 ..< dataArray.count {
                 let item = dataArray[i]
                 guard let code = item.code, preselected.firstIndex(of: code) != nil else { continue }
-                selectedDataArray.append(i)
+                selectedDataArray.append(code)
             }
             
             pickerData.append(contentsOf: dataArray)
+            
+            activatingEntryView = entryViewHobby
             
             let maximumRows = (UIScreen.main.bounds.size.height / SignupProfileSpecTableViewCell.height).rounded(.down) - 5
             
@@ -887,8 +917,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
-            
-            activatingEntryView = entryViewHobby
+            showingTableView = tableView
             
             let alertController = AlertPopupCustomViewController(withTitle: entryViewHobby.labelTitle.text, View: tableView)
             alertController.delegate = self
@@ -899,9 +928,17 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
                 
                 var valueString = ""
                 
-                for index in self.selectedDataArray {
-                    guard let data = self.pickerData[index] as? AppData, let codeName = data.code_name else { continue }
-                    selection.append(data)
+                for code in self.selectedDataArray {
+                    var data: AppData?
+                    for i in 0 ..< self.pickerData.count {
+                        guard let item = self.pickerData[i] as? AppData, item.code == code else { continue }
+                        data = item
+                        break
+                    }
+                    
+                    guard let codeName = data?.code_name else { continue }
+                    
+                    selection.append(data!)
                     
                     if valueString.count > 0 {
                         valueString += ", "
@@ -934,6 +971,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
+            showingTableView = tableView
             
             activatingEntryView = entryViewDrinking
             
@@ -957,6 +995,7 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             tableView.dataSource = self
             tableView.separatorStyle = .none
             tableView.register(SignupProfileSpecTableViewCell.self, forCellReuseIdentifier: "SignupProfileSpecTableViewCell")
+            showingTableView = tableView
             
             activatingEntryView = entryViewSmoking
             
@@ -993,6 +1032,11 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     }
 
     @objc private func keyboardHidden(notification: NSNotification) {
+        guard blockScrolling == false else {
+            blockScrolling = false
+            return
+        }
+        
         var contentSize = theScrollView.contentSize
         contentSize.height = buttonConfirm.frame.maxY + 7 * QUtils.optimizeRatio()
         theScrollView.contentSize = contentSize
@@ -1003,11 +1047,32 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
     }
     
     @objc private func textfieldDidChange(_ textfield: UITextField) {
+        if textfield.tag == kTagTextfieldSearchHobby {
+            searchHobby()
+            return
+        }
+        
         if (textfield.superview as? SignupProfileTextEntryView) == entryViewEducationDetail {
             UserPayload.shared.educationDetail = textfield.text
         } else if (textfield.superview as? SignupProfileTextEntryView) == entryViewJobDetail {
             UserPayload.shared.jobDetail = textfield.text
         }
+    }
+    
+    private func searchHobby() {
+        searchResults.removeAll()
+        guard let keyword = textfieldSearchHobby?.text, keyword.count > 0, let dataArray = pickerData as? [AppData] else {
+            showingTableView?.reloadData()
+            return
+        }
+        
+        for i in 0 ..< dataArray.count {
+            let item = dataArray[i]
+            guard let code_name = item.code_name, code_name.range(of: keyword) != nil else { continue }
+            searchResults.append(item)
+        }
+        
+        showingTableView?.reloadData()
     }
     
     private func uploadProfile() {
@@ -1259,6 +1324,7 @@ extension SignupProfileSpecsViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         _ = textViewComment.resignFirstResponder()
         _ = entryViewEducationDetail.textfield.resignFirstResponder()
+        _ = textfieldSearchHobby?.resignFirstResponder()
     }
 }
 
@@ -1297,12 +1363,19 @@ extension SignupProfileSpecsViewController: UITextViewDelegate {
 
 extension SignupProfileSpecsViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        guard textField.tag != kTagTextfieldSearchHobby else { return true }
+        
         editingView = textField.superview
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         _ = textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        blockScrolling = textField == textfieldSearchHobby
         return true
     }
 }
@@ -1334,10 +1407,20 @@ extension SignupProfileSpecsViewController: UIPickerViewDelegate, UIPickerViewDa
 extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard activatingEntryView != entryViewHobby else {
-            if let index = selectedDataArray.firstIndex(of: indexPath.row) {
+            var data: AppData?
+            
+            if (textfieldSearchHobby?.text?.count ?? 0) > 0 {
+                data = searchResults[indexPath.row]
+            } else {
+                data = pickerData[indexPath.row] as? AppData
+            }
+            
+            guard let code = data?.code else { return }
+            
+            if let index = selectedDataArray.firstIndex(of: code) {
                 _ = selectedDataArray.remove(at: index)
             } else if selectedDataArray.count < 3 {
-                selectedDataArray.append(indexPath.row)
+                selectedDataArray.append(code)
             } else {
                 InstanceMessageManager.shared.showMessage("더 선택할 수 없습니다.")
             }
@@ -1412,7 +1495,71 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
         UserPayload.shared.commit()
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return activatingEntryView == entryViewHobby ? SignupProfileSpecTableViewCell.height : 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard activatingEntryView == entryViewHobby else { return UIView() }
+        
+        var frame = CGRect.zero
+        frame.size.width = tableView.frame.size.width
+        frame.size.height = self.tableView(tableView, heightForHeaderInSection: section)
+        
+        let headerView = UIView(frame: frame)
+        headerView.backgroundColor = .clear
+        
+        let backView = UIView()
+        backView.translatesAutoresizingMaskIntoConstraints = false
+        backView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        backView.layer.borderColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        backView.layer.borderWidth = 1
+        backView.layer.cornerRadius = 20 * QUtils.optimizeRatio()
+        backView.clipsToBounds = true
+        headerView.addSubview(backView)
+        
+        backView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 12 * QUtils.optimizeRatio()).isActive = true
+        backView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -12 * QUtils.optimizeRatio()).isActive = true
+        backView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+        backView.heightAnchor.constraint(equalToConstant: backView.layer.cornerRadius * 2).isActive = true
+        
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "img_popup_search")
+        backView.addSubview(imageView)
+        
+        imageView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 12 * QUtils.optimizeRatio()).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: backView.centerYAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 32 * QUtils.optimizeRatio()).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 32 * QUtils.optimizeRatio()).isActive = true
+        
+        let textfield = UITextField()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.tag = kTagTextfieldSearchHobby
+        textfield.placeholder = "검색"
+        textfield.textColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+        textfield.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        textfield.returnKeyType = .done
+        textfield.delegate = self
+        textfield.clearButtonMode = .always
+        textfield.addTarget(self, action: #selector(self.textfieldDidChange(_:)), for: .editingChanged)
+        backView.addSubview(textfield)
+        
+        textfieldSearchHobby = textfield
+        
+        textfield.topAnchor.constraint(equalTo: backView.topAnchor).isActive = true
+        textfield.bottomAnchor.constraint(equalTo: backView.bottomAnchor).isActive = true
+        textfield.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        textfield.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -12 * QUtils.optimizeRatio()).isActive = true
+        
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if activatingEntryView == entryViewHobby, (textfieldSearchHobby?.text ?? "").count > 0 {
+            return searchResults.count
+        }
+        
         return pickerData.count
     }
     
@@ -1423,9 +1570,16 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SignupProfileSpecTableViewCell") as? SignupProfileSpecTableViewCell else { return UITableViewCell() }
         
-        if let data = pickerData[indexPath.row] as? AppData {
+        var candidate: Any
+        if activatingEntryView == entryViewHobby, (textfieldSearchHobby?.text ?? "").count > 0 {
+            candidate = searchResults[indexPath.row]
+        } else {
+            candidate = pickerData[indexPath.row]
+        }
+        
+        if let data = candidate as? AppData {
             cell.labelTitle.text = data.code_name
-        } else if let titleString = pickerData[indexPath.row] as? String {
+        } else if let titleString = candidate as? String {
             cell.labelTitle.text = titleString
         } else {
             cell.labelTitle.text = nil
@@ -1433,8 +1587,8 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
         
         cell.backgroundColor = indexPath.row % 2 == 0 ? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) : #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         
-        if activatingEntryView == entryViewHobby {
-            cell.isSelectedCell = selectedDataArray.firstIndex(of: indexPath.row) != nil
+        if activatingEntryView == entryViewHobby, let code = (candidate as? AppData)?.code {
+            cell.isSelectedCell = selectedDataArray.firstIndex(of: code) != nil
         } else {
             cell.isSelectedCell = false
         }
@@ -1457,8 +1611,15 @@ extension SignupProfileSpecsViewController: SignupStepViewControllerDelegate {
 }
 
 extension SignupProfileSpecsViewController: BasePopupViewControllerDelegate {
+    func popupViewController(canDismiss viewController: BasePopupViewController) -> Bool {
+        guard (textfieldSearchHobby?.isEditing ?? false) == true else { return true }
+        _ = textfieldSearchHobby?.resignFirstResponder()
+        return false
+    }
+    
     func popupViewController(dismissed viewController: BasePopupViewController) {
         activatingEntryView = nil
+        showingTableView = nil
         
         viewController.view.removeFromSuperview()
         viewController.removeFromParent()

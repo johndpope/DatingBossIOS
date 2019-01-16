@@ -11,6 +11,7 @@ import UIKit
 let kWidthPopupContentView = CGFloat(280)
 
 @objc protocol BasePopupViewControllerDelegate {
+    @objc optional func popupViewController(canDismiss viewController: BasePopupViewController) -> Bool
     @objc optional func popupViewController(dismissed viewController: BasePopupViewController)
 }
 
@@ -73,6 +74,8 @@ class BasePopupViewController: UIViewController {
     @objc internal func pressedButton(_ sender: UIButton) {
         switch sender {
         case buttonDismiss:
+            guard (delegate?.popupViewController?(canDismiss: self) ?? true) == true else { break }
+            
             self.hide { (complete) in
                 self.view.removeFromSuperview()
                 self.removeFromParent()
