@@ -1222,9 +1222,13 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
             alertController.addAction(UIAlertAction(title: "대표사진 등록", style: .default, handler: { (action) in
                 LoadingIndicatorManager.shared.showIndicatorView()
                 
+                var pictureArray = UserPayload.shared.pictures
+                let data = pictureArray.remove(at: indexPath.row)
+                pictureArray.insert(data, at: 0)
+                
                 var pictureList = [[String:Any]]()
-                for i in 0 ..< UserPayload.shared.pictures.count {
-                    let item = UserPayload.shared.pictures[i]
+                for i in 0 ..< pictureArray.count {
+                    let item = pictureArray[i]
                     
                     var newData = [String:Any]()
                     newData["picture_idx"] = item.picture_idx
@@ -1239,9 +1243,6 @@ extension SignupProfileSpecsViewController: UICollectionViewDelegate, UICollecti
                 httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)", method: .patch, headerValues: nil, params: params, completion: { (isSucceed, errMessgae, response) in
                     LoadingIndicatorManager.shared.hideIndicatorView()
                     
-                    var pictureArray = UserPayload.shared.pictures
-                    let data = pictureArray.remove(at: indexPath.row)
-                    pictureArray.insert(data, at: 0)
                     UserPayload.shared.pictures = pictureArray
                     
                     self.collectionViewPictures.reloadData()
