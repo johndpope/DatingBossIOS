@@ -28,7 +28,7 @@ class ImagePreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
+        self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.view.alpha = 0
         
         theScrollView.translatesAutoresizingMaskIntoConstraints = false

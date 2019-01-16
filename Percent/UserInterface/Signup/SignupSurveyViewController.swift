@@ -349,7 +349,7 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         
         let gap = location - (normalize * unit) - 44 * QUtils.optimizeRatio()
         
-        if gap > -14, gap < 14 {
+        if gap > -20, gap < 20 {
             sliderAnswer.value = Float(normalize)
             sliderValueChanged(sliderAnswer)
         }
@@ -393,7 +393,7 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.ChangeStatus + "\(MyData.shared.mem_idx)", method: .patch, params: params, completion: nil)
             
-            let viewController = SignupStepViewController(step: self.depth + 2)
+            let viewController = SignupStepViewController(step: 5)
             viewController.delegate = self
             self.present(viewController, animated: true, completion: nil)
         }
