@@ -243,7 +243,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
             } else if nickname.count < 2 {
                 errMessage = "닉네임은 두 글자 이상으로 입력하세요."
             } else if isValidNickname == false {
-                errMessage = "닉네임은 두 글자 이상으로 입력하세요."
+                errMessage = "중복된 닉네임입니다."
             }
             
             guard errMessage == nil else {

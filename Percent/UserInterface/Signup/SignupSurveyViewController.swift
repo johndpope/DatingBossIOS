@@ -98,6 +98,19 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         labelAnswer.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.65).isActive = true
         labelAnswer.heightAnchor.constraint(equalToConstant: labelAnswer.layer.cornerRadius * 2).isActive = true
         
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.isUserInteractionEnabled = true
+        self.view.addSubview(containerView)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer()
+        tapGestureRecognizer.addTarget(self, action: #selector(self.recognizedTapGestureOnSlider(_:)))
+        containerView.addGestureRecognizer(tapGestureRecognizer)
+        
+        containerView.topAnchor.constraint(equalTo: labelAnswer.bottomAnchor, constant: 10 * QUtils.optimizeRatio()).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
         sliderAnswer.translatesAutoresizingMaskIntoConstraints = false
         sliderAnswer.isContinuous = true
         sliderAnswer.minimumTrackTintColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 0.6)
@@ -105,38 +118,24 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         sliderAnswer.value = 2
         sliderAnswer.maximumValue = 4
         sliderAnswer.addTarget(self, action: #selector(self.sliderValueChanged(_:)), for: .valueChanged)
-        self.view.addSubview(sliderAnswer)
+        containerView.addSubview(sliderAnswer)
         
-        let tapGestureRecognizer = UITapGestureRecognizer()
-        tapGestureRecognizer.addTarget(self, action: #selector(self.recognizedTapGestureOnSlider(_:)))
-        sliderAnswer.addGestureRecognizer(tapGestureRecognizer)
-        
-        sliderAnswer.topAnchor.constraint(equalTo: labelAnswer.bottomAnchor, constant: 30 * QUtils.optimizeRatio()).isActive = true
-        sliderAnswer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30 * QUtils.optimizeRatio()).isActive = true
-        sliderAnswer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30 * QUtils.optimizeRatio()).isActive = true
+        sliderAnswer.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20 * QUtils.optimizeRatio()).isActive = true
+        sliderAnswer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 30 * QUtils.optimizeRatio()).isActive = true
+        sliderAnswer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -30 * QUtils.optimizeRatio()).isActive = true
         
         let unit = (self.view.frame.size.width - 88 * QUtils.optimizeRatio()) / 4
         for i in 0 ..< 5 {
             let note = UIView()
             note.translatesAutoresizingMaskIntoConstraints = false
             note.backgroundColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
-            self.view.addSubview(note)
+            containerView.addSubview(note)
             
             note.topAnchor.constraint(equalTo: sliderAnswer.bottomAnchor, constant: 10 * QUtils.optimizeRatio()).isActive = true
             note.centerXAnchor.constraint(equalTo: sliderAnswer.leadingAnchor, constant: 14 * QUtils.optimizeRatio() + unit * CGFloat(i)).isActive = true
             note.widthAnchor.constraint(equalToConstant: 1).isActive = true
             note.heightAnchor.constraint(equalToConstant: 10).isActive = true
-            
-            let noteButton = UIButton(type: .custom)
-            noteButton.translatesAutoresizingMaskIntoConstraints = false
-            noteButton.addTarget(self, action: #selector(self.pressedNoteButton(_:)), for: .touchUpInside)
-            noteButton.tag = kTagButtonNote + i
-            self.view.addSubview(noteButton)
-            
-            noteButton.centerXAnchor.constraint(equalTo: note.centerXAnchor).isActive = true
-            noteButton.topAnchor.constraint(equalTo: sliderAnswer.bottomAnchor).isActive = true
-            noteButton.bottomAnchor.constraint(equalTo: note.bottomAnchor, constant: 10 * QUtils.optimizeRatio()).isActive = true
-            noteButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            note.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20 * QUtils.optimizeRatio()).isActive = true
         }
         
         buttonPrevious.translatesAutoresizingMaskIntoConstraints = false
@@ -225,11 +224,6 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         default:
             break
         }
-    }
-    
-    @objc private func pressedNoteButton(_ sender: UIButton) {
-        sliderAnswer.value = Float(sender.tag - kTagButtonNote)
-        sliderValueChanged(sliderAnswer)
     }
     
     private func reloadData() {
