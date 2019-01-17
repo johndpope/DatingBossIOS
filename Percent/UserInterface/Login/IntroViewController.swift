@@ -149,8 +149,9 @@ class IntroViewController: BaseViewController {
 
                         case .profile:
                             UserPayload.shared.loadFromDatabase()
-
+                        
                             let viewController = SignupProfileSpecsViewController()
+                            viewController.showCurrentStep = true
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             break
@@ -159,6 +160,7 @@ class IntroViewController: BaseViewController {
                             UserPayload.shared.loadFromDatabase()
 
                             let viewController = SignupSurveyViewController()
+                            viewController.showCurrentStep = true
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             break
@@ -167,6 +169,7 @@ class IntroViewController: BaseViewController {
                             UserPayload.shared.loadFromDatabase()
 
                             let viewController = SignupSelectFavorLooksViewController()
+                            viewController.showCurrentStep = true
                             let navController = SignupNavigationViewController(rootViewController: viewController)
                             UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                             break

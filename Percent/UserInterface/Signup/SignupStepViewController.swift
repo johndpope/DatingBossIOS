@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol SignupStepViewControllerDelegate {
-    func signupStepViewController(doneProgress viewController: SignupStepViewController)
-    func signupStepViewController(titleOf viewController: SignupStepViewController) -> String?
+@objc protocol SignupStepViewControllerDelegate {
+    @objc func signupStepViewController(doneProgress viewController: SignupStepViewController)
+    @objc func signupStepViewController(titleOf viewController: SignupStepViewController) -> String?
 }
 
 class SignupStepViewController: UIViewController {
-    private let step: Int
+    let step: Int
     
     var delegate: SignupStepViewControllerDelegate?
     
@@ -92,6 +92,10 @@ class SignupStepViewController: UIViewController {
                 timer.invalidate()
                 
                 _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false, block: { (aTimer) in
+                    guard self.delegate != nil else {
+                        self.dismiss(animated: true, completion: nil)
+                        return
+                    }
                     self.delegate?.signupStepViewController(doneProgress: self)
                 })
             }

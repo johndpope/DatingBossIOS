@@ -16,6 +16,9 @@ class BaseSignupStepsViewController: BaseViewController {
     internal let headerView = UIView()
     internal let labelTitle = UILabel()
     
+    var showCurrentStep = false
+    var currentStep: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +42,21 @@ class BaseSignupStepsViewController: BaseViewController {
         
         labelTitle.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
         labelTitle.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+        
+        if showCurrentStep, currentStep != nil {
+            let viewController = SignupStepViewController(step: currentStep!)
+            viewController.delegate = self
+            self.present(viewController, animated: false, completion: nil)
+        }
+    }
+}
+
+extension BaseSignupStepsViewController: SignupStepViewControllerDelegate {
+    func signupStepViewController(doneProgress viewController: SignupStepViewController) {
+        self.dismiss(animated: true, completion: nil)
     }
     
+    func signupStepViewController(titleOf viewController: SignupStepViewController) -> String? {
+        return nil
+    }
 }

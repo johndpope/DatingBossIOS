@@ -98,7 +98,7 @@ class QHttpClient: NSObject {
     fileprivate var task: URLSessionDataTask?
     fileprivate var timeInterval: Double?
     
-    fileprivate let timeoutInterval = 60.0
+    fileprivate let timeoutInterval = 6.0
     fileprivate var timerTimeout: Timer?
     
     var identifier: Double? {

@@ -40,6 +40,8 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         collectionViewTag = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         
         super.init(navigationViewEffect: effect)
+        
+        currentStep = 5
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -305,6 +307,10 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
             
             self.reloadEvaluatingData()
         }
+    }
+    
+    @objc override func signupStepViewController(titleOf viewController: SignupStepViewController) -> String? {
+        return "이상형 설정"
     }
     
     private func reloadEvaluatingData() {

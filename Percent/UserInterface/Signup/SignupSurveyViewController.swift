@@ -53,6 +53,8 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         depth = depthValue
         
         super.init(navigationViewEffect: effect)
+        
+        currentStep = depth + 2
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -226,6 +228,33 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
         }
     }
     
+    @objc override func signupStepViewController(doneProgress viewController: SignupStepViewController) {
+        guard viewController.step != currentStep else {
+            super.signupStepViewController(doneProgress: viewController)
+            return
+        }
+        guard let codesArray = AppDataManager.shared.data["survey1"] else { return }
+        
+        guard depth < codesArray.count - 1 else {
+            let viewController = SignupSelectFavorLooksViewController()
+            self.navigationController?.pushViewController(viewController, animated: false)
+            
+            viewController.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        let viewController = SignupSurveyViewController(depth: depth + 1)
+        self.navigationController?.pushViewController(viewController, animated: false)
+        
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc override func signupStepViewController(titleOf viewController: SignupStepViewController) -> String? {
+        guard let codesArray = AppDataManager.shared.data["survey1"] else { return nil }
+        guard depth < codesArray.count - 1 else { return "이상형 외모 설정" }
+        return AppDataManager.shared.data["survey1"]?[viewController.step == currentStep ? depth : depth + 1].code_name
+    }
+    
     private func reloadData() {
         let loadSurveys = {() -> Void in
             SurveyManager.shared.reloadSurveys { (isSucceed) in
@@ -392,30 +421,5 @@ class SignupSurveyViewController: BaseSignupStepsViewController {
             viewController.delegate = self
             self.present(viewController, animated: true, completion: nil)
         }
-    }
-}
-
-extension SignupSurveyViewController: SignupStepViewControllerDelegate {
-    func signupStepViewController(doneProgress viewController: SignupStepViewController) {
-        guard let codesArray = AppDataManager.shared.data["survey1"] else { return }
-        
-        guard depth < codesArray.count - 1 else {
-            let viewController = SignupSelectFavorLooksViewController()
-            self.navigationController?.pushViewController(viewController, animated: false)
-            
-            viewController.dismiss(animated: true, completion: nil)
-            return
-        }
-        
-        let viewController = SignupSurveyViewController(depth: depth + 1)
-        self.navigationController?.pushViewController(viewController, animated: false)
-        
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    func signupStepViewController(titleOf viewController: SignupStepViewController) -> String? {
-        guard let codesArray = AppDataManager.shared.data["survey1"] else { return nil }
-        guard depth < codesArray.count - 1 else { return "이상형 외모 설정" }
-        return AppDataManager.shared.data["survey1"]?[depth + 1].code_name
     }
 }

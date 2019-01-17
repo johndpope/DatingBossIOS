@@ -9,22 +9,31 @@
 import UIKit
 
 class UserProfileHeaderView: UIView {
-    private let imageView = UIImageView()
+    let imageView = UIImageView()
     
     private let labelName = UILabel()
     private let labelAge = UILabel()
     private let labelRegion = UILabel()
     private let labelJobTitle = UILabel()
     
-    let buttonFavourite = UIButton(type: .custom)
+//    let buttonFavourite = UIButton(type: .custom)
     let buttonLike = UIButton(type: .custom)
     
     let data: UserData
     
     var showProfile: Bool = true
     
-    private var constraintShowImage = [NSLayoutConstraint]()
-    private var constraintHideImage = [NSLayoutConstraint]()
+    var constraintValue: CGFloat = 0 {
+        didSet {
+            constraintLeft.constant = 56 * QUtils.optimizeRatio() * constraintValue
+            constraintRight.constant = -56 * QUtils.optimizeRatio() * constraintValue
+            
+            self.layoutIfNeeded()
+        }
+    }
+    
+    private var constraintLeft: NSLayoutConstraint!
+    private var constraintRight: NSLayoutConstraint!
     
     init(frame: CGRect = CGRect.zero, data uData: UserData) {
         data = uData
@@ -37,10 +46,8 @@ class UserProfileHeaderView: UIView {
         self.addSubview(imageView)
         
         imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        var constraint = imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16 * QUtils.optimizeRatio())
-        constraintShowImage.append(constraint)
-        constraint = imageView.trailingAnchor.constraint(equalTo: self.leadingAnchor)
-        constraintHideImage.append(constraint)
+        constraintLeft = imageView.trailingAnchor.constraint(equalTo: self.leadingAnchor)
+        constraintLeft.isActive = true
         imageView.widthAnchor.constraint(equalToConstant: imageView.layer.cornerRadius * 2).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: imageView.layer.cornerRadius * 2).isActive = true
         
@@ -98,20 +105,18 @@ class UserProfileHeaderView: UIView {
         buttonLike.widthAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
         buttonLike.heightAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
         buttonLike.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        constraint = buttonLike.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8 * QUtils.optimizeRatio())
-        constraintShowImage.append(constraint)
-        constraint = buttonLike.leadingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8 * QUtils.optimizeRatio())
-        constraintHideImage.append(constraint)
+        constraintRight = buttonLike.leadingAnchor.constraint(equalTo: self.trailingAnchor)
+        constraintRight.isActive = true
         
-        buttonFavourite.translatesAutoresizingMaskIntoConstraints = false
-        buttonFavourite.setImage(UIImage(named: "img_star")?.recolour(with: #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)).resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .normal)
-        buttonFavourite.setImage(UIImage(named: "img_star")?.recolour(with: #colorLiteral(red: 0.9978266358, green: 0.768635273, blue: 0.2078177631, alpha: 1)).resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .selected)
-        self.addSubview(buttonFavourite)
-        
-        buttonFavourite.widthAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
-        buttonFavourite.heightAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
-        buttonFavourite.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        buttonFavourite.trailingAnchor.constraint(equalTo: buttonLike.leadingAnchor).isActive = true
+//        buttonFavourite.translatesAutoresizingMaskIntoConstraints = false
+//        buttonFavourite.setImage(UIImage(named: "img_star")?.recolour(with: #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)).resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .normal)
+//        buttonFavourite.setImage(UIImage(named: "img_star")?.recolour(with: #colorLiteral(red: 0.9978266358, green: 0.768635273, blue: 0.2078177631, alpha: 1)).resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .selected)
+//        self.addSubview(buttonFavourite)
+//
+//        buttonFavourite.widthAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
+//        buttonFavourite.heightAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
+//        buttonFavourite.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+//        buttonFavourite.trailingAnchor.constraint(equalTo: buttonLike.leadingAnchor).isActive = true
         
         seperator = UIView()
         seperator.translatesAutoresizingMaskIntoConstraints = false
@@ -123,49 +128,10 @@ class UserProfileHeaderView: UIView {
         seperator.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        showProfile(true, animated: false)
+        constraintValue = 0
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError()
-    }
-    
-    func showProfile(_ show: Bool, animated: Bool) {
-        guard showProfile != show else { return }
-        
-        showProfile = show
-        
-        self.layer.removeAllAnimations()
-        
-        self.imageView.isHidden = false
-        self.buttonLike.isHidden = false
-        
-        let animations = {() -> Void in
-            for constraint in self.constraintShowImage {
-                constraint.isActive = show
-            }
-            
-            for constraint in self.constraintHideImage {
-                constraint.isActive = !show
-            }
-            
-            self.imageView.alpha = show ? 1 : 0
-            self.buttonLike.alpha = show ? 1 : 0
-            
-            self.layoutIfNeeded()
-        }
-        
-        let completion = {(complete: Bool) -> Void in
-            self.imageView.isHidden = !show
-            self.buttonLike.isHidden = !show
-        }
-        
-        guard animated else {
-            animations()
-            completion(true)
-            return
-        }
-        
-        UIView.animate(withDuration: 0.3, animations: animations, completion: completion)
     }
 }

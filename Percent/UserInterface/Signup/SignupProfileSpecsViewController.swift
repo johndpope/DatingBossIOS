@@ -71,6 +71,8 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
         collectionViewPictures = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         
         super.init(navigationViewEffect: effect)
+        
+        currentStep = 1
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -683,6 +685,25 @@ class SignupProfileSpecsViewController: BaseSignupStepsViewController {
             
         default: break
         }
+    }
+    
+    @objc override func signupStepViewController(doneProgress viewController: SignupStepViewController) {
+        guard viewController.step != currentStep else {
+            super.signupStepViewController(doneProgress: viewController)
+            return
+        }
+        
+        let viewController = SignupSurveyViewController(depth: 0)
+        self.navigationController?.pushViewController(viewController, animated: false)
+        
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc override func signupStepViewController(titleOf viewController: SignupStepViewController) -> String? {
+        guard viewController.step != currentStep else {
+            return "프로필 설정"
+        }
+        return AppDataManager.shared.data["survey1"]?.first?.code_name
     }
     
     @objc private func pressedEntryButton(_ sender: UIButton) {
@@ -1635,19 +1656,6 @@ extension SignupProfileSpecsViewController: UITableViewDelegate, UITableViewData
         }
         
         return cell
-    }
-}
-
-extension SignupProfileSpecsViewController: SignupStepViewControllerDelegate {
-    func signupStepViewController(doneProgress viewController: SignupStepViewController) {
-        let viewController = SignupSurveyViewController(depth: 0)
-        self.navigationController?.pushViewController(viewController, animated: false)
-        
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    func signupStepViewController(titleOf viewController: SignupStepViewController) -> String? {
-        return AppDataManager.shared.data["survey1"]?.first?.code_name
     }
 }
 

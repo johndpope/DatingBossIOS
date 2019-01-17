@@ -12,7 +12,7 @@ import PINRemoteImage
 
 class UserPictureCollectionViewCell: UICollectionViewCell {
     class var itemSize: CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width + UIApplication.shared.statusBarFrame.size.height)
+        return CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width)
     }
     
     private let imageView = UIImageView()

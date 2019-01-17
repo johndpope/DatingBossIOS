@@ -345,14 +345,17 @@ class LoginViewController: BaseViewController {
                     UIApplication.appDelegate().changeRootViewController(viewController)
                 } else if MyData.shared.signupStatus == .profile {
                     let viewController = SignupProfileSpecsViewController()
+                    viewController.showCurrentStep = true
                     let navController = SignupNavigationViewController(rootViewController: viewController)
                     UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                 } else if MyData.shared.signupStatus == .survey {
                     let viewController = SignupSurveyViewController()
+                    viewController.showCurrentStep = true
                     let navController = SignupNavigationViewController(rootViewController: viewController)
                     UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                 } else if MyData.shared.signupStatus == .looks {
                     let viewController = SignupSelectFavorLooksViewController()
+                    viewController.showCurrentStep = true
                     let navController = SignupNavigationViewController(rootViewController: viewController)
                     UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                 } else if MyData.shared.signupStatus == .pending {
