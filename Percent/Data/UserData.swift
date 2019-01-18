@@ -190,6 +190,14 @@ class UserData: BaseData {
         }
     }
     
+    var job_etc: String? {
+        get {
+            return rawData["job_etc"] as? String
+        } set {
+            rawData["job_etc"] = newValue
+        }
+    }
+    
     var blood_type: BloodType? {
         get {
             guard let typeString = rawData["blood_type"] as? String else { return nil }

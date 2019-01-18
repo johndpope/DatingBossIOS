@@ -52,7 +52,7 @@ class UserProfileStatsView: UIView {
         
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "매칭룰"
+        label.text = "퍼센트"
         label.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 12 * QUtils.optimizeRatio(), weight: .regular)
         label.sizeToFit()

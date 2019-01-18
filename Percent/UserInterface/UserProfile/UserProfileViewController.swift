@@ -15,6 +15,10 @@ struct UserProfileTableData {
 }
 
 class UserProfileViewController: BaseViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     let data: UserData
     
     private let buttonReport = UIButton(type: .custom)
@@ -36,6 +40,8 @@ class UserProfileViewController: BaseViewController {
     private let buttonProposal = UIButton(type: .custom)
     
     private var isProposalButtonShown = true
+    
+    private var initialized = false
     
     init(navigationViewEffect effect: UIVisualEffect? = nil, data uData: UserData) {
         data = uData
@@ -66,6 +72,18 @@ class UserProfileViewController: BaseViewController {
         
         self.navigationView.viewWithTag(kTagNavigationBottomLine)?.removeFromSuperview()
         
+        let backView = UIView()
+        backView.translatesAutoresizingMaskIntoConstraints = false
+        backView.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+        self.view.addSubview(backView)
+        
+        backView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        backView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        backView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        backView.heightAnchor.constraint(equalToConstant: UIApplication.shared.statusBarFrame.size.height).isActive = true
+        
+        self.view.sendSubviewToBack(backView)
+        
         theTableView.translatesAutoresizingMaskIntoConstraints = false
         theTableView.separatorStyle = .none
         theTableView.delegate = self
@@ -73,7 +91,7 @@ class UserProfileViewController: BaseViewController {
         theTableView.register(UserProfileTableViewCell.self, forCellReuseIdentifier: "UserProfileTableViewCell")
         self.view.addSubview(theTableView)
         
-        theTableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        theTableView.topAnchor.constraint(equalTo: backView.bottomAnchor).isActive = true
         theTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         theTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         theTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -86,7 +104,7 @@ class UserProfileViewController: BaseViewController {
         theCollectionView.register(UserPictureCollectionViewCell.self, forCellWithReuseIdentifier: "UserPictureCollectionViewCell")
         theTableView.addSubview(theCollectionView)
         
-        theCollectionView.topAnchor.constraint(equalTo: theTableView.topAnchor, constant: -kHeightNavigationView  - UIApplication.shared.statusBarFrame.size.height - 72 * QUtils.optimizeRatio()).isActive = true
+        theCollectionView.topAnchor.constraint(equalTo: theTableView.topAnchor, constant: -kHeightNavigationView - 72 * QUtils.optimizeRatio()).isActive = true
         theCollectionView.widthAnchor.constraint(equalToConstant: UserPictureCollectionViewCell.itemSize.width).isActive = true
         theCollectionView.heightAnchor.constraint(equalToConstant: UserPictureCollectionViewCell.itemSize.height).isActive = true
         
@@ -163,7 +181,10 @@ class UserProfileViewController: BaseViewController {
         buttonProposal.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
         buttonProposal.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
         buttonProposal.heightAnchor.constraint(equalToConstant: 44 * QUtils.optimizeRatio()).isActive = true
-
+        
+        theTableView.contentInset = UIEdgeInsets(top: 72 * QUtils.optimizeRatio(), left: 0, bottom: 0, right: 0)
+        
+        self.view.layoutIfNeeded()
     }
     
     override func viewDidLayoutSubviews() {
@@ -171,14 +192,14 @@ class UserProfileViewController: BaseViewController {
         
         var frame = CGRect.zero
         frame.size.width = theTableView.frame.size.width
-        frame.size.height = theCollectionView.frame.size.height + statsView.frame.size.height - kHeightNavigationView  - UIApplication.shared.statusBarFrame.size.height
+        frame.size.height = theCollectionView.frame.size.height + statsView.frame.size.height - kHeightNavigationView + 16 * QUtils.optimizeRatio()
         
         let tableHeaderView = UIView()
         tableHeaderView.frame = frame
         tableHeaderView.isUserInteractionEnabled = false
         theTableView.tableHeaderView = tableHeaderView
         
-        theTableView.contentInset = UIEdgeInsets(top: headerView.frame.size.height, left: 0, bottom: 0, right: 0)
+        initialized = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -251,11 +272,19 @@ class UserProfileViewController: BaseViewController {
     
     func reloadData() {
         tableData.append(UserProfileTableData(iconName: "img_profile_1", content: "\(data.area ?? "")에 사는 \(data.age)세 \((data.blood_type ?? .A).rawValue.uppercased())형 \(data.sex == .female ? "여자" : "남자")입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_2", content: "학력은 \(data.edu ?? "")했습니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_3", content: "제 직업은 \(data.job ?? "") 입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고, \(data.form ?? "")의 체형입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_5", content: "종교는 \(data.religion ?? "") 입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_6", content: "취미는 \(data.hobby ?? "") 입니다.", isApproved: nil))
+        
+        var education = "학력은 \(data.edu ?? "")"
+        if let school = data.school {
+            education += " (\(school)) "
+        }
+        education += "입니다."
+        
+        tableData.append(UserProfileTableData(iconName: "img_profile_2", content: education, isApproved: nil))
+        
+        tableData.append(UserProfileTableData(iconName: "img_profile_3", content: "제 직업은 \(data.job_etc ?? (data.job ?? ""))입니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "")의 체형입니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_5", content: "종교는 \(data.religion ?? "")입니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_6", content: "취미는 \(data.hobby ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_7", content: data.drinking ?? "", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_8", content: data.smoking ?? "", isApproved: nil))
         
@@ -299,7 +328,7 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = section == 0 ? "정보" : "하고 싶은 말"
+        label.text = section == 0 ? "정보" : "하고싶은 말"
         label.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
         sectionheaderView.addSubview(label)
@@ -329,6 +358,14 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension UserProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewController = ImagePreviewViewController(images: collectionData, preselectedIndex: indexPath.row)
+        UIApplication.appDelegate().window?.addSubview(viewController.view)
+        self.addChild(viewController)
+        
+        viewController.show()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionData.count
     }
@@ -350,10 +387,10 @@ extension UserProfileViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard theCollectionView.frame.size.height > 0 else { return }
+        guard scrollView == theTableView, theCollectionView.frame.size.height > 0 else { return }
         
-        let max = theCollectionView.frame.size.height - (kHeightNavigationView + UIApplication.shared.statusBarFrame.size.height) * 2 - headerView.frame.size.height
-        var alpha = scrollView.contentOffset.y / max
+        let max = theCollectionView.frame.size.height - kHeightNavigationView - headerView.frame.size.height
+        var alpha = (scrollView.contentOffset.y + headerView.frame.size.height) / max
         
         var isStick = false
         

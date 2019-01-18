@@ -98,8 +98,7 @@ class UserProfileHeaderView: UIView {
         labelJobTitle.leadingAnchor.constraint(equalTo: seperator.trailingAnchor, constant: 7 * QUtils.optimizeRatio()).isActive = true
         
         buttonLike.translatesAutoresizingMaskIntoConstraints = false
-        buttonLike.setImage(UIImage(named: "img_heart")?.recolour(with: #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)).resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .normal)
-        buttonLike.setImage(UIImage(named: "img_heart")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .selected)
+        buttonLike.setImage(UIImage(named: "img_heart")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 32 * QUtils.optimizeRatio()), for: .normal)
         self.addSubview(buttonLike)
         
         buttonLike.widthAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true

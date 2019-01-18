@@ -246,7 +246,7 @@ class SignupSelectFavorLooksViewController: BaseSignupStepsViewController {
         switch sender {
         case buttonImage:
             guard let image = imageViewLooks.image else { break }
-            let viewController = ImagePreviewViewController(image: image)
+            let viewController = ImagePreviewViewController(images: [image])
             UIApplication.appDelegate().window?.addSubview(viewController.view)
             self.addChild(viewController)
             
