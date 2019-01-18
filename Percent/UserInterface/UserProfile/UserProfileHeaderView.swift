@@ -54,7 +54,7 @@ class UserProfileHeaderView: UIView {
         labelName.translatesAutoresizingMaskIntoConstraints = false
         labelName.text = data.nickname
         labelName.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        labelName.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
+        labelName.font = UIFont.systemFont(ofSize: 18 * QUtils.optimizeRatio(), weight: .heavy)
         self.addSubview(labelName)
         
         labelName.bottomAnchor.constraint(equalTo: self.centerYAnchor, constant: -4 * QUtils.optimizeRatio()).isActive = true

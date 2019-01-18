@@ -25,6 +25,7 @@ class UserProfileViewController: BaseViewController {
     
     private let theTableView =  UITableView()
     private let theCollectionView: UICollectionView!
+    private let coverView = UIView()
     private let pageControl = UIPageControl()
     
     private let headerView: UserProfileHeaderView
@@ -102,6 +103,7 @@ class UserProfileViewController: BaseViewController {
         theTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         theCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        theCollectionView.clipsToBounds = false
         theCollectionView.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
         theCollectionView.isPagingEnabled = true
         theCollectionView.delegate = self
@@ -112,6 +114,17 @@ class UserProfileViewController: BaseViewController {
         theCollectionView.topAnchor.constraint(equalTo: theTableView.topAnchor, constant: -kHeightNavigationView - 72 * QUtils.optimizeRatio()).isActive = true
         theCollectionView.widthAnchor.constraint(equalToConstant: UserPictureCollectionViewCell.itemSize.width).isActive = true
         theCollectionView.heightAnchor.constraint(equalToConstant: UserPictureCollectionViewCell.itemSize.height).isActive = true
+        
+        coverView.translatesAutoresizingMaskIntoConstraints = false
+        coverView.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+        coverView.alpha = 0
+        coverView.isUserInteractionEnabled = false
+        theTableView.addSubview(coverView)
+        
+        coverView.topAnchor.constraint(equalTo: theCollectionView.topAnchor).isActive = true
+        coverView.bottomAnchor.constraint(equalTo: theCollectionView.bottomAnchor).isActive = true
+        coverView.leadingAnchor.constraint(equalTo: theCollectionView.leadingAnchor).isActive = true
+        coverView.trailingAnchor.constraint(equalTo: theCollectionView.trailingAnchor).isActive = true
         
         pageControl.isUserInteractionEnabled = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -288,8 +301,14 @@ class UserProfileViewController: BaseViewController {
         
         tableData.append(UserProfileTableData(iconName: "img_profile_2", content: education, isApproved: nil))
         
-        tableData.append(UserProfileTableData(iconName: "img_profile_3", content: "제 직업은 \(data.job_etc ?? (data.job ?? ""))입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "")의 체형입니다.", isApproved: nil))
+        var job = "제 직업은 \(data.job ?? "")"
+        if let job_etc = data.job_etc {
+            job += " (\(job_etc)) "
+        }
+        job += "입니다."
+        
+        tableData.append(UserProfileTableData(iconName: "img_profile_3", content: job, isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_5", content: "종교는 \(data.religion ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_6", content: "취미는 \(data.hobby ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_7", content: data.drinking ?? "", isApproved: nil))
@@ -481,7 +500,18 @@ extension UserProfileViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard scrollView == theTableView, theCollectionView.frame.size.height > 0 else { return }
+        guard scrollView == theTableView else  { return }
+        
+        let stdOffset = scrollView.contentOffset.y + headerView.frame.size.height + kHeightNavigationView
+        if stdOffset <= 0 {
+            for cell in theCollectionView.visibleCells {
+                guard let theCell = cell as? UserPictureCollectionViewCell else { continue }
+                theCell.topConstraint.constant = stdOffset
+                theCell.layoutIfNeeded()
+            }
+        }
+        
+        guard theCollectionView.frame.size.height > 0 else { return }
         
         let max = theCollectionView.frame.size.height - kHeightNavigationView - headerView.frame.size.height
         var alpha = (scrollView.contentOffset.y + headerView.frame.size.height) / max
@@ -490,9 +520,11 @@ extension UserProfileViewController: UIScrollViewDelegate {
         
         if alpha < 0 {
             alpha = 0
+            self.navigationView.contentView.backgroundColor = .clear
         } else if alpha > 1 {
             alpha = 1
             isStick = true
+            self.navigationView.contentView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)
         }
         
         if alpha < 0.7, isProposalButtonShown == false {
@@ -524,6 +556,6 @@ extension UserProfileViewController: UIScrollViewDelegate {
         
         self.headerView.constraintValue = alpha
         
-        self.navigationView.contentView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1).withAlphaComponent(alpha)
+        self.coverView.alpha = alpha
     }
 }

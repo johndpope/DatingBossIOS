@@ -166,7 +166,8 @@ extension RecommendsViewController: UICollectionViewDelegate, UICollectionViewDa
             LoadingIndicatorManager.shared.hideIndicatorView()
             
             let viewController = UserProfileViewController(data: userData)
-            self.navigationController?.pushViewController(viewController, animated: true)
+            let navControlelr = UINavigationController(rootViewController: viewController)
+            self.present(navControlelr, animated: true, completion: nil)
         }
     }
     

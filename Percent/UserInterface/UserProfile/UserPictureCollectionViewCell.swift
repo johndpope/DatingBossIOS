@@ -17,6 +17,11 @@ class UserPictureCollectionViewCell: UICollectionViewCell {
     
     private let imageView = UIImageView()
     
+    private var variConstraint: NSLayoutConstraint!
+    var topConstraint: NSLayoutConstraint {
+        return variConstraint
+    }
+    
     var url: URL? {
         didSet {
             imageView.pin_setImage(from: url)
@@ -26,12 +31,16 @@ class UserPictureCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.clipsToBounds = false
+        self.contentView.clipsToBounds = false
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         self.contentView.addSubview(imageView)
         
-        imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        variConstraint = imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
+        variConstraint.isActive = true
         imageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true

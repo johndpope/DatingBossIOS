@@ -64,7 +64,7 @@ class UserProfileStatsView: UIView {
         labelSum.translatesAutoresizingMaskIntoConstraints = false
         labelSum.text = "0%"
         labelSum.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        labelSum.font = UIFont.systemFont(ofSize: 18 * QUtils.optimizeRatio(), weight: .regular)
+        labelSum.font = UIFont.systemFont(ofSize: 18 * QUtils.optimizeRatio(), weight: .bold)
         labelSum.sizeToFit()
         containerView.addSubview(labelSum)
 
