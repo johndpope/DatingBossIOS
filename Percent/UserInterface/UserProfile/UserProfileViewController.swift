@@ -457,6 +457,9 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
             let keys = Array(self.statsData.keys).sorted()
             let key = keys[indexPath.row]
             cell.data = self.statsData[key]
+            
+            cell.reloadData()
+            
             return cell
         }
         
@@ -466,7 +469,6 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         (cell as? UserProfileTableViewCell)?.data = tableData[indexPath.row]
-        (cell as? UserRadarChartTableViewCell)?.reloadData()
     }
 }
 

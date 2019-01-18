@@ -259,11 +259,6 @@ class UserReportViewController: BaseViewController {
                 break
             }
             
-            guard textViewComment.text.count > 0 else {
-                InstanceMessageManager.shared.showMessage("상세내용을 적어주세요.", margin: buttonCancel.frame.size.height + 8 * QUtils.optimizeRatio())
-                break
-            }
-            
             let alertController = AlertPopupViewController(withTitle: "신고하기", message: "신고하시겠습니까?")
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "아니오", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
             alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "예", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
@@ -277,7 +272,7 @@ class UserReportViewController: BaseViewController {
                 params["report_text"] = self.textViewComment.text
                 
                 let httpCient = QHttpClient()
-                httpCient.request(to: RequestUrl.Report, params: params, completion: { (isSucceed, errMessage, response) in
+                httpCient.request(to: RequestUrl.Report + "\(MyData.shared.mem_idx)", params: params, completion: { (isSucceed, errMessage, response) in
                     LoadingIndicatorManager.shared.hideIndicatorView()
                     
                     InstanceMessageManager.shared.showMessage("신고가 완료됐습니다.", margin: self.buttonCancel.frame.size.height + 8 * QUtils.optimizeRatio())

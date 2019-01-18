@@ -39,6 +39,8 @@ class UserRadarChartTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.selectionStyle = .none
+        
         let seperator = UIView()
         seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
         seperator.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +65,11 @@ class UserRadarChartTableViewCell: UITableViewCell {
         
         chartView.translatesAutoresizingMaskIntoConstraints = false
         chartView.delegate = self
+        chartView.webColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        chartView.innerWebColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        chartView.isUserInteractionEnabled = false
         chartView.chartDescription?.enabled = false
+        chartView.skipWebLineCount = 0
         
         let xAxis = chartView.xAxis
         xAxis.forceLabelsEnabled = false
@@ -75,7 +81,7 @@ class UserRadarChartTableViewCell: UITableViewCell {
         yAxis.labelTextColor = .clear
         yAxis.labelCount = 4
         yAxis.axisMinimum = 0
-        yAxis.axisMaximum = 7
+        yAxis.axisMaximum = 3
         yAxis.drawLabelsEnabled = false
         
         chartView.legend.setCustom(entries: [])
