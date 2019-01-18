@@ -14,4 +14,5 @@ target 'Percent' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'PINRemoteImage'
+  pod 'Charts'
 end

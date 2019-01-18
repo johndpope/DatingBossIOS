@@ -43,6 +43,10 @@ class UserProfileViewController: BaseViewController {
     
     private var initialized = false
     
+    private var statsData = [String:[ChartValueData]]()
+    
+    private var showRadarChart = false
+    
     init(navigationViewEffect effect: UIVisualEffect? = nil, data uData: UserData) {
         data = uData
         
@@ -89,6 +93,7 @@ class UserProfileViewController: BaseViewController {
         theTableView.delegate = self
         theTableView.dataSource = self
         theTableView.register(UserProfileTableViewCell.self, forCellReuseIdentifier: "UserProfileTableViewCell")
+        theTableView.register(UserRadarChartTableViewCell.self, forCellReuseIdentifier: "UserRadarChartTableViewCell")
         self.view.addSubview(theTableView)
         
         theTableView.topAnchor.constraint(equalTo: backView.bottomAnchor).isActive = true
@@ -185,6 +190,8 @@ class UserProfileViewController: BaseViewController {
         theTableView.contentInset = UIEdgeInsets(top: 72 * QUtils.optimizeRatio(), left: 0, bottom: 0, right: 0)
         
         self.view.layoutIfNeeded()
+        
+        reloadStats()
     }
     
     override func viewDidLayoutSubviews() {
@@ -306,6 +313,36 @@ class UserProfileViewController: BaseViewController {
         
         self.view.bringSubviewToFront(navigationView)
     }
+    
+    private func reloadStats() {
+        var params = [String:Any]()
+        params["opposite_mem_idx"] = data.mem_idx
+        
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Account.GetStats + "\(MyData.shared.mem_idx)", params: params) { (isSucceed, errMessage, response) in
+            guard let responseData = response as? [[String:Any]] else { return }
+            
+            self.statsData.removeAll()
+            
+            for i in 0 ..< responseData.count {
+                let item = ChartValueData(with: responseData[i])
+                guard let code = item.code else { continue }
+                
+                var dataArray = self.statsData[code] ?? []
+                dataArray.append(item)
+                self.statsData[code] = dataArray
+            }
+            
+            self.theTableView.reloadData()
+        }
+    }
+    
+    @objc private func toggleExpandGraph(_ sender: UIButton) {
+        showRadarChart = !showRadarChart
+        sender.isSelected = showRadarChart
+        
+        theTableView.reloadData()
+    }
 }
 
 extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -314,21 +351,24 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard section > 0 else { return 0 }
         return 46 * QUtils.optimizeRatio()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard section > 0 else { return nil }
+        
         let sectionheaderView = UIView()
         sectionheaderView.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: self.tableView(tableView, heightForHeaderInSection: section))
         sectionheaderView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = section == 0 ? "정보" : "하고싶은 말"
+        label.text = section == 1 ? "정보" : "하고싶은 말"
         label.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
         sectionheaderView.addSubview(label)
@@ -336,24 +376,78 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
         label.centerYAnchor.constraint(equalTo: sectionheaderView.centerYAnchor).isActive = true
         label.leadingAnchor.constraint(equalTo: sectionheaderView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
         
+        if section == 1 {
+            let seperator = UIView()
+            seperator.translatesAutoresizingMaskIntoConstraints = false
+            seperator.backgroundColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+            sectionheaderView.addSubview(seperator)
+            
+            seperator.topAnchor.constraint(equalTo: sectionheaderView.topAnchor).isActive = true
+            seperator.leadingAnchor.constraint(equalTo: sectionheaderView.leadingAnchor).isActive = true
+            seperator.trailingAnchor.constraint(equalTo: sectionheaderView.trailingAnchor).isActive = true
+            seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+            
+            let image = UIImage(named: "img_profile_expand_bg")!
+            
+            let button = UIButton(type: .custom)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.setBackgroundImage(image, for: .normal)
+            button.setImage(UIImage(named: "img_profile_expand")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 24), for: .normal)
+            button.setImage(UIImage(named: "img_profile_collapsed")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 24), for: .selected)
+            button.addTarget(self, action: #selector(self.toggleExpandGraph(_:)), for: .touchUpInside)
+            sectionheaderView.addSubview(button)
+            
+            button.isSelected = showRadarChart
+            
+            button.topAnchor.constraint(equalTo: sectionheaderView.topAnchor).isActive = true
+            button.centerXAnchor.constraint(equalTo: sectionheaderView.centerXAnchor).isActive = true
+            button.widthAnchor.constraint(equalToConstant: image.size.width).isActive = true
+            button.heightAnchor.constraint(equalToConstant: image.size.height).isActive = true
+        }
+        
         return sectionheaderView
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? tableData.count : 0
+        guard section > 0 else { return showRadarChart ? statsData.keys.count : 0 }
+        return section == 1 ? tableData.count : 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard indexPath.section > 0 else {
+            guard showRadarChart, self.tableView(tableView, cellForRowAt: indexPath) as? UserRadarChartTableViewCell != nil else { return 0 }
+            return 46 + UIScreen.main.bounds.size.width * 0.8
+        }
         return 56 * QUtils.optimizeRatio()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard indexPath.section > 0 else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserRadarChartTableViewCell") as? UserRadarChartTableViewCell else { return UITableViewCell() }
+            cell.showLegend = indexPath.row == 0
+            
+            var titleString = "가치관"
+            if indexPath.row == 1 {
+                titleString = "성격"
+            } else if indexPath.row == 2 {
+                titleString = "연애스타일"
+            }
+            
+            cell.labelTitle.text = titleString
+            
+            let keys = Array(self.statsData.keys).sorted()
+            let key = keys[indexPath.row]
+            cell.data = self.statsData[key]
+            return cell
+        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserProfileTableViewCell") as? UserProfileTableViewCell else { return UITableViewCell() }
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         (cell as? UserProfileTableViewCell)?.data = tableData[indexPath.row]
+        (cell as? UserRadarChartTableViewCell)?.reloadData()
     }
 }
 

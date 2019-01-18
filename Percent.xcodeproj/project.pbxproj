@@ -134,6 +134,10 @@
 		1CC9B5F221DC52B8008C22B8 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9B5F121DC52B8008C22B8 /* MyPageViewController.swift */; };
 		1CC9B60221DC537F008C22B8 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9B60121DC537F008C22B8 /* MyPageTableViewCell.swift */; };
 		1CC9B60421DC6DD4008C22B8 /* BaseMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9B60321DC6DD4008C22B8 /* BaseMainViewController.swift */; };
+		1CCE2BB721F1CD9C0057122D /* RadarChartTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BB621F1CD9C0057122D /* RadarChartTestViewController.swift */; };
+		1CCE2BBB21F1DE1B0057122D /* UserRadarChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BBA21F1DE1B0057122D /* UserRadarChartTableViewCell.swift */; };
+		1CCE2BBE21F203250057122D /* img_profile_collapsed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BBC21F203240057122D /* img_profile_collapsed@3x.png */; };
+		1CCE2BBF21F203250057122D /* img_profile_expand_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BBD21F203250057122D /* img_profile_expand_bg@3x.png */; };
 		1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD3D99121E898E500938293 /* StoreKit.framework */; };
 		1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */; };
 		1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */; };
@@ -330,6 +334,10 @@
 		1CC9B5F121DC52B8008C22B8 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		1CC9B60121DC537F008C22B8 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		1CC9B60321DC6DD4008C22B8 /* BaseMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMainViewController.swift; sourceTree = "<group>"; };
+		1CCE2BB621F1CD9C0057122D /* RadarChartTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChartTestViewController.swift; sourceTree = "<group>"; };
+		1CCE2BBA21F1DE1B0057122D /* UserRadarChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRadarChartTableViewCell.swift; sourceTree = "<group>"; };
+		1CCE2BBC21F203240057122D /* img_profile_collapsed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_collapsed@3x.png"; sourceTree = "<group>"; };
+		1CCE2BBD21F203250057122D /* img_profile_expand_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_expand_bg@3x.png"; sourceTree = "<group>"; };
 		1CD3D99021E8980C00938293 /* Percent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Percent.entitlements; sourceTree = "<group>"; };
 		1CD3D99121E898E500938293 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecTableViewCell.swift; sourceTree = "<group>"; };
@@ -439,6 +447,7 @@
 				1C03842121D278C80024C3B3 /* UserProfileHeaderView.swift */,
 				1CE69AA921D896D600B9FE4A /* UserProfileStatsView.swift */,
 				1CE69AB721D91C6A00B9FE4A /* UserProfileTableViewCell.swift */,
+				1CCE2BBA21F1DE1B0057122D /* UserRadarChartTableViewCell.swift */,
 				1C03841F21D1EBE70024C3B3 /* UserPictureCollectionViewCell.swift */,
 				1C938D6421F0F4BD005D327C /* UserReportViewController.swift */,
 				1C938D6621F16664005D327C /* UserReportButton.swift */,
@@ -491,7 +500,6 @@
 				1CD3D99021E8980C00938293 /* Percent.entitlements */,
 				1C858D8A21C7733D00900481 /* AppDelegate.swift */,
 				1CB5430321DF472A00B37EAE /* Constants */,
-				1CB5430A21DF473200B37EAE /* Extensions */,
 				1C03840F21D001D40024C3B3 /* Data */,
 				1CB542F621DF44BF00B37EAE /* QKits */,
 				1C858D9C21C780CC00900481 /* UserInterface */,
@@ -507,6 +515,7 @@
 		1C858D9C21C780CC00900481 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				1CCE2BB521F1CD930057122D /* _Test */,
 				1C858D9D21C780CC00900481 /* _Base */,
 				1C858DAA21C7817000900481 /* _Common */,
 				1C858DB321C7876600900481 /* Login */,
@@ -577,6 +586,8 @@
 				1CE69AB021D8EEC000B9FE4A /* img_profile_6@3x.png */,
 				1C61C4D021EF824900087D8A /* img_profile_7@3x.png */,
 				1C61C4CF21EF824900087D8A /* img_profile_8@3x.png */,
+				1CCE2BBC21F203240057122D /* img_profile_collapsed@3x.png */,
+				1CCE2BBD21F203250057122D /* img_profile_expand_bg@3x.png */,
 				1CAC5A9821E7B0D3002A0A4E /* img_profile_expand@3x.png */,
 				1C938D6221F0F226005D327C /* img_report@3x.png */,
 				1C5AC80B21E35D750007827D /* img_settings_1@3x.png */,
@@ -765,6 +776,7 @@
 			children = (
 				1CB5430421DF472A00B37EAE /* Strings.swift */,
 				1CB5430521DF472A00B37EAE /* Defines.swift */,
+				1CB5430A21DF473200B37EAE /* Extensions */,
 				1CB5430621DF472A00B37EAE /* Urls.swift */,
 			);
 			path = Constants;
@@ -820,6 +832,14 @@
 				1CB5433C21DF4D4800B37EAE /* loader.json */,
 			);
 			path = Animations;
+			sourceTree = "<group>";
+		};
+		1CCE2BB521F1CD930057122D /* _Test */ = {
+			isa = PBXGroup;
+			children = (
+				1CCE2BB621F1CD9C0057122D /* RadarChartTestViewController.swift */,
+			);
+			path = _Test;
 			sourceTree = "<group>";
 		};
 		1CE69ABA21D9B7EE00B9FE4A /* Settings */ = {
@@ -966,6 +986,7 @@
 				1C938D6321F0F227005D327C /* img_report@3x.png in Resources */,
 				1C858E4121C872C900900481 /* img_tab_5_nor@3x.png in Resources */,
 				1CE9653C21DC77D000334B4A /* img_mypage_5@3x.png in Resources */,
+				1CCE2BBE21F203250057122D /* img_profile_collapsed@3x.png in Resources */,
 				1CE69AB321D8EEC100B9FE4A /* img_profile_4@3x.png in Resources */,
 				1CE9653921DC77D000334B4A /* img_mypage_2@3x.png in Resources */,
 				1C858D9221C7733F00900481 /* Assets.xcassets in Resources */,
@@ -985,6 +1006,7 @@
 				1C5AC84021E4D2490007827D /* img_login_background@2x.png in Resources */,
 				1CE9653B21DC77D000334B4A /* img_mypage_7@3x.png in Resources */,
 				1CE69AB421D8EEC100B9FE4A /* img_profile_1@3x.png in Resources */,
+				1CCE2BBF21F203250057122D /* img_profile_expand_bg@3x.png in Resources */,
 				1CA5879521E6FDD8002B60F2 /* img_validation_unchecked@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -999,6 +1021,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Percent/Pods-Percent-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -1011,6 +1034,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -1065,6 +1089,7 @@
 				1CE69AED21DA457A00B9FE4A /* SearchResultsViewController.swift in Sources */,
 				1CA5877521E5EAED002B60F2 /* BaseSignupViewController.swift in Sources */,
 				1CE69AEC21DA457A00B9FE4A /* ChoiceViewController.swift in Sources */,
+				1CCE2BBB21F1DE1B0057122D /* UserRadarChartTableViewCell.swift in Sources */,
 				1CAC5A9521E7A6C8002A0A4E /* AppDataManager.swift in Sources */,
 				1CE69AFF21DBCC3000B9FE4A /* ChatData.swift in Sources */,
 				1CAC5A9721E7A771002A0A4E /* AppData.swift in Sources */,
@@ -1080,6 +1105,7 @@
 				1CC9B60421DC6DD4008C22B8 /* BaseMainViewController.swift in Sources */,
 				1C03841721D090F20024C3B3 /* RecommendData.swift in Sources */,
 				1CB5433821DF473B00B37EAE /* SBJsonStreamWriterAccumulator.m in Sources */,
+				1CCE2BB721F1CD9C0057122D /* RadarChartTestViewController.swift in Sources */,
 				1CB5432E21DF473B00B37EAE /* NSObject+SBJson.m in Sources */,
 				1CD3D9A021EA484300938293 /* FavorLookData.swift in Sources */,
 				1C5AC82021E3A3EB0007827D /* BoardTableViewCell.swift in Sources */,
