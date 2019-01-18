@@ -56,4 +56,8 @@ struct RequestUrl {
     }
     
     public static let Chat = "http://www.lovecenthome.com/ios/chat/"
+    
+    public static let Like = "http://www.lovecenthome.com/ios/like/"
+    
+    public static let Report = "http://www.lovecenthome.com/ios/report/"
 }

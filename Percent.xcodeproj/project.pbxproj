@@ -74,6 +74,9 @@
 		1C858E5221C8F15F00900481 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E5121C8F15E00900481 /* BaseNavigationController.swift */; };
 		1C858E5421C8F6EF00900481 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C858E5321C8F6EF00900481 /* ProfileButton.swift */; };
 		1C858E5621C9036200900481 /* img_cherry@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C858E5521C9036100900481 /* img_cherry@3x.png */; };
+		1C938D6321F0F227005D327C /* img_report@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C938D6221F0F226005D327C /* img_report@3x.png */; };
+		1C938D6521F0F4BD005D327C /* UserReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C938D6421F0F4BD005D327C /* UserReportViewController.swift */; };
+		1C938D6721F16664005D327C /* UserReportButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C938D6621F16664005D327C /* UserReportButton.swift */; };
 		1CA5876E21E5D8BD002B60F2 /* AlertPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */; };
 		1CA5877121E5DCF4002B60F2 /* SignupGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */; };
 		1CA5877321E5DE1A002B60F2 /* SignupGuideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */; };
@@ -254,6 +257,9 @@
 		1C858E5121C8F15E00900481 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		1C858E5321C8F6EF00900481 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		1C858E5521C9036100900481 /* img_cherry@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_cherry@3x.png"; sourceTree = "<group>"; };
+		1C938D6221F0F226005D327C /* img_report@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_report@3x.png"; sourceTree = "<group>"; };
+		1C938D6421F0F4BD005D327C /* UserReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReportViewController.swift; sourceTree = "<group>"; };
+		1C938D6621F16664005D327C /* UserReportButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReportButton.swift; sourceTree = "<group>"; };
 		1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopupViewController.swift; sourceTree = "<group>"; };
 		1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGuideViewController.swift; sourceTree = "<group>"; };
 		1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGuideTableViewCell.swift; sourceTree = "<group>"; };
@@ -434,6 +440,8 @@
 				1CE69AA921D896D600B9FE4A /* UserProfileStatsView.swift */,
 				1CE69AB721D91C6A00B9FE4A /* UserProfileTableViewCell.swift */,
 				1C03841F21D1EBE70024C3B3 /* UserPictureCollectionViewCell.swift */,
+				1C938D6421F0F4BD005D327C /* UserReportViewController.swift */,
+				1C938D6621F16664005D327C /* UserReportButton.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -570,6 +578,7 @@
 				1C61C4D021EF824900087D8A /* img_profile_7@3x.png */,
 				1C61C4CF21EF824900087D8A /* img_profile_8@3x.png */,
 				1CAC5A9821E7B0D3002A0A4E /* img_profile_expand@3x.png */,
+				1C938D6221F0F226005D327C /* img_report@3x.png */,
 				1C5AC80B21E35D750007827D /* img_settings_1@3x.png */,
 				1C5AC80621E35D750007827D /* img_settings_2@3x.png */,
 				1C5AC80521E35D740007827D /* img_settings_3@3x.png */,
@@ -954,6 +963,7 @@
 				1C5AC81121E35D750007827D /* img_settings_8@3x.png in Resources */,
 				1CD3D9A621EA4FD100938293 /* img_favor_yes_high@3x.png in Resources */,
 				1C5AC83721E49BC50007827D /* img_intro_heart@3x.png in Resources */,
+				1C938D6321F0F227005D327C /* img_report@3x.png in Resources */,
 				1C858E4121C872C900900481 /* img_tab_5_nor@3x.png in Resources */,
 				1CE9653C21DC77D000334B4A /* img_mypage_5@3x.png in Resources */,
 				1CE69AB321D8EEC100B9FE4A /* img_profile_4@3x.png in Resources */,
@@ -1051,6 +1061,7 @@
 				1CE69AF021DA458F00B9FE4A /* RecommendsCollectionViewCell.swift in Sources */,
 				1CD3D9AE21EA5E3200938293 /* SignupFinalizeViewController.swift in Sources */,
 				1CE69AE321DA43B900B9FE4A /* CategoryViewController.swift in Sources */,
+				1C938D6721F16664005D327C /* UserReportButton.swift in Sources */,
 				1CE69AED21DA457A00B9FE4A /* SearchResultsViewController.swift in Sources */,
 				1CA5877521E5EAED002B60F2 /* BaseSignupViewController.swift in Sources */,
 				1CE69AEC21DA457A00B9FE4A /* ChoiceViewController.swift in Sources */,
@@ -1090,6 +1101,7 @@
 				1CD3D99821E99D0100938293 /* SignupSurveyViewController.swift in Sources */,
 				1C03841E21D1DC1C0024C3B3 /* PictureData.swift in Sources */,
 				1C5AC81E21E3A0F60007827D /* BoardData.swift in Sources */,
+				1C938D6521F0F4BD005D327C /* UserReportViewController.swift in Sources */,
 				1C03841921D09B220024C3B3 /* CircleIndicatorView.swift in Sources */,
 				1CA5878F21E6FAFA002B60F2 /* BaseSignupStepsViewController.swift in Sources */,
 				1C03841C21D1CDE80024C3B3 /* UserProfileViewController.swift in Sources */,

@@ -17,6 +17,8 @@ struct UserProfileTableData {
 class UserProfileViewController: BaseViewController {
     let data: UserData
     
+    private let buttonReport = UIButton(type: .custom)
+    
     private let theTableView =  UITableView()
     private let theCollectionView: UICollectionView!
     private let pageControl = UIPageControl()
@@ -185,6 +187,37 @@ class UserProfileViewController: BaseViewController {
         statsView.startAnimating()
     }
     
+    override func pressedButton(_ sender: UIButton) {
+        super.pressedButton(sender)
+        
+        switch sender {
+        case buttonReport:
+            LoadingIndicatorManager.shared.showIndicatorView()
+            
+            let httpClient = QHttpClient()
+            httpClient.request(to: RequestUrl.Report + "\(MyData.shared.mem_idx)", method: .get, params: nil) { (isSucceed, errMessage, response) in
+                LoadingIndicatorManager.shared.hideIndicatorView()
+                
+                guard let responseData = response as? [[String:Any]] else {
+                    InstanceMessageManager.shared.showMessage(kStringErrorUnknown)
+                    return
+                }
+                
+                let dataArray = responseData.map({ (item) -> UserReportData in
+                    return UserReportData(with: item)
+                })
+                
+                let viewController = UserReportViewController(targetId: self.data.mem_idx, data: dataArray)
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+            
+            break
+            
+        default:
+            break
+        }
+    }
+    
     private func reloadImages() {
         guard MyData.shared.mem_idx != -1 else { return }
         
@@ -227,6 +260,22 @@ class UserProfileViewController: BaseViewController {
         tableData.append(UserProfileTableData(iconName: "img_profile_8", content: data.smoking ?? "", isApproved: nil))
         
         theTableView.reloadData()
+    }
+    
+    override func loadNavigationItems() {
+        super.loadNavigationItems()
+        
+        buttonReport.translatesAutoresizingMaskIntoConstraints = false
+        buttonReport.setImage(UIImage(named: "img_report")?.resize(maxWidth: 28), for: .normal)
+        buttonReport.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
+        navigationView.contentView.addSubview(buttonReport)
+        
+        buttonReport.widthAnchor.constraint(equalToConstant: 52 * QUtils.optimizeRatio()).isActive = true
+        buttonReport.heightAnchor.constraint(equalToConstant: kHeightNavigationView).isActive = true
+        buttonReport.bottomAnchor.constraint(equalTo: navigationView.contentView.bottomAnchor).isActive = true
+        buttonReport.trailingAnchor.constraint(equalTo: navigationView.trailingAnchor, constant: -10 * QUtils.optimizeRatio()).isActive = true
+        
+        self.view.bringSubviewToFront(navigationView)
     }
 }
 
