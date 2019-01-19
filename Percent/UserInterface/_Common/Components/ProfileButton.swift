@@ -16,7 +16,7 @@ class ProfileButton: UIButton {
     var member_idx: Int?
     var imageName: String?
     
-    init(frame: CGRect = CGRect.zero, cornerRadius: CGFloat = 15) {
+    init(frame: CGRect = CGRect.zero, cornerRadius: CGFloat = 24) {
         super.init(frame: frame)
         
         imageViewProfile.translatesAutoresizingMaskIntoConstraints = false

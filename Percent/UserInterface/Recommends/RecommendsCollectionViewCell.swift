@@ -23,19 +23,18 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
         get {
             var size = CGSize.zero
             size.width = ((UIScreen.main.bounds.size.width - RecommendsCollectionViewCell.sectionInset.left - RecommendsCollectionViewCell.sectionInset.right - RecommendsCollectionViewCell.minimumInteritemSpacing) / 2).rounded(.down)
-            size.height = size.width + 54 * QUtils.optimizeRatio()
+            size.height = size.width + 56 * QUtils.optimizeRatio()
             return size
         }
     }
     
     private let imageView = UIImageView()
-    private let borderBackView = CircleIndicatorView()
+    private let borderView = CircleIndicatorView(backgroundColour: .clear, indicatorColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), lineWidth: 2)
     
     private let labelName = UILabel()
     private let labelPercent = UILabel()
     
     private let labelRegion = UILabel()
-    private let labelJobTitle = UILabel()
     private let labelAge = UILabel()
     
     private var percent = 0
@@ -51,12 +50,11 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
             }
             
             labelName.text = data?.nickname
-            borderBackView.value = 0
+            borderView.value = 0
             percent = 0
             labelPercent.text = "0%"
             
             labelRegion.text = data?.area
-            labelJobTitle.text = data?.job
             labelAge.text = data?.age != nil ? "\(data!.age)세" : nil
             
             timer?.invalidate()
@@ -75,7 +73,7 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
                 
                 self.layoutIfNeeded()
                 
-                self.borderBackView.value = CGFloat(self.percent) / 100
+                self.borderView.value = CGFloat(self.percent) / 100
             })
             
             self.layoutIfNeeded()
@@ -93,7 +91,7 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(imageView)
         
         imageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
-        imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 2).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: imageView.layer.cornerRadius * 2).isActive = true
         imageView.heightAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
         
@@ -108,13 +106,13 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
 //        borderView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
 //        borderView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
         
-        borderBackView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(borderBackView)
+        borderView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(borderView)
         
-        borderBackView.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
-        borderBackView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
-        borderBackView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
-        borderBackView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
+        borderView.widthAnchor.constraint(equalTo: imageView.widthAnchor, constant: 2).isActive = true
+        borderView.heightAnchor.constraint(equalTo: imageView.heightAnchor, constant: 2).isActive = true
+        borderView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
+        borderView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
         
         var containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -169,24 +167,6 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
         seperator.topAnchor.constraint(equalTo: labelRegion.topAnchor, constant: 2).isActive = true
         seperator.bottomAnchor.constraint(equalTo: labelRegion.bottomAnchor, constant: -2).isActive = true
         seperator.leadingAnchor.constraint(equalTo: labelRegion.trailingAnchor, constant: 4 * QUtils.optimizeRatio()).isActive = true
-        seperator.widthAnchor.constraint(equalToConstant: 1).isActive = true
-        
-        labelJobTitle.translatesAutoresizingMaskIntoConstraints = false
-        labelJobTitle.textColor = #colorLiteral(red: 0.4156862745, green: 0.4117647059, blue: 0.4156862745, alpha: 1)
-        labelJobTitle.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
-        containerView.addSubview(labelJobTitle)
-        
-        labelJobTitle.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        labelJobTitle.leadingAnchor.constraint(equalTo: seperator.trailingAnchor, constant: 4 * QUtils.optimizeRatio()).isActive = true
-        
-        seperator = UIView()
-        seperator.translatesAutoresizingMaskIntoConstraints = false
-        seperator.backgroundColor = #colorLiteral(red: 0.8784313725, green: 0.8745098039, blue: 0.8666666667, alpha: 1)
-        contentView.addSubview(seperator)
-        
-        seperator.topAnchor.constraint(equalTo: labelJobTitle.topAnchor, constant: 2).isActive = true
-        seperator.bottomAnchor.constraint(equalTo: labelJobTitle.bottomAnchor, constant: -2).isActive = true
-        seperator.leadingAnchor.constraint(equalTo: labelJobTitle.trailingAnchor, constant: 4 * QUtils.optimizeRatio()).isActive = true
         seperator.widthAnchor.constraint(equalToConstant: 1).isActive = true
         
         labelAge.translatesAutoresizingMaskIntoConstraints = false

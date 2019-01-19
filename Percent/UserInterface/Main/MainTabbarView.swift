@@ -50,8 +50,8 @@ class MainTabbarView: UIVisualEffectView {
             let button = UIButton(type: .custom)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.tag = i
-            button.setImage(UIImage(named: "img_tab_\(i + 1)_nor")?.resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .normal)
-            button.setImage(UIImage(named: "img_tab_\(i + 1)_sel")?.resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .selected)
+            button.setImage(UIImage(named: "img_main_tab_\(i + 1)_nor")?.resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .normal)
+            button.setImage(UIImage(named: "img_main_tab_\(i + 1)_sel")?.resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .selected)
             button.addTarget(self, action: #selector(self.pressedTab(_:)), for: .touchUpInside)
             self.contentView.addSubview(button)
             

@@ -9,7 +9,6 @@
 import UIKit
 
 class RecommendsViewController: BaseMainViewController {
-    private let buttonMore = UIButton(type: .custom)
     private let collectionView: UICollectionView
     
     private let buttonBuyCherries = UIButton(type: .custom)
@@ -44,25 +43,13 @@ class RecommendsViewController: BaseMainViewController {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "오늘의 퍼센트"
+        label.text = "오늘의 추천"
         label.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 18 * QUtils.optimizeRatio(), weight: .bold)
         self.view.addSubview(label)
         
         label.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
         label.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
-        
-        buttonMore.translatesAutoresizingMaskIntoConstraints = false
-        buttonMore.setTitle("추천 더 받기 +", for: .normal)
-        buttonMore.setTitleColor(#colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), for: .normal)
-        buttonMore.setTitleColor(#colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1), for: .highlighted)
-        buttonMore.contentEdgeInsets = UIEdgeInsets(top: 16 * QUtils.optimizeRatio(), left: 16 * QUtils.optimizeRatio(), bottom: 16 * QUtils.optimizeRatio(), right: 16 * QUtils.optimizeRatio())
-        buttonMore.titleLabel?.font = UIFont.systemFont(ofSize: 12 * QUtils.optimizeRatio(), weight: .bold)
-        buttonMore.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-        self.view.addSubview(buttonMore)
-        
-        buttonMore.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        buttonMore.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
