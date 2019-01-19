@@ -142,16 +142,18 @@ class UserRadarChartTableViewCell: UITableViewCell {
             }
         }
         
+        let gender = MyData.shared.sex ?? .male
+        
         let myDataSet = RadarChartDataSet(values: myEntries, label: "내 정보")
-        myDataSet.setColor(#colorLiteral(red: 0, green: 0, blue: 1, alpha: 1))
-        myDataSet.fillColor = #colorLiteral(red: 0, green: 0, blue: 1, alpha: 1)
+        myDataSet.setColor(gender == .male ? #colorLiteral(red: 0, green: 0, blue: 1, alpha: 1) : #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1))
+        myDataSet.fillColor = gender == .male ? #colorLiteral(red: 0, green: 0, blue: 1, alpha: 1) : #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)
         myDataSet.drawFilledEnabled = true
         myDataSet.fillAlpha = 0.2
         myDataSet.lineWidth = 2
         
         let oppDataSet = RadarChartDataSet(values: oppEntries, label: "상대 정보")
-        oppDataSet.setColor(#colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1))
-        oppDataSet.fillColor = #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)
+        oppDataSet.setColor(gender == .male ? #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1) : #colorLiteral(red: 0, green: 0, blue: 1, alpha: 1))
+        oppDataSet.fillColor = gender == .male ? #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1) : #colorLiteral(red: 0, green: 0, blue: 1, alpha: 1)
         oppDataSet.drawFilledEnabled = true
         oppDataSet.fillAlpha = 0.2
         oppDataSet.lineWidth = 2
