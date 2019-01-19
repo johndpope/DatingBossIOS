@@ -18,6 +18,10 @@ class UserReportData: BaseData {
     }
 }
 
+protocol UserReportViewControllerDelegate {
+    func userReportViewController(didReport viewController: UserReportViewController)
+}
+
 class UserReportViewController: BaseViewController {
     private let theScrollView = UIScrollView()
     
@@ -34,6 +38,8 @@ class UserReportViewController: BaseViewController {
     private let dataArray: [UserReportData]
     
     private var buttons = [UserReportButton]()
+    
+    var delegate: UserReportViewControllerDelegate?
     
     private let opposite_mem_idx: Int
     
@@ -274,6 +280,8 @@ class UserReportViewController: BaseViewController {
                 let httpCient = QHttpClient()
                 httpCient.request(to: RequestUrl.Report + "\(MyData.shared.mem_idx)", params: params, completion: { (isSucceed, errMessage, response) in
                     LoadingIndicatorManager.shared.hideIndicatorView()
+                    
+                    self.delegate?.userReportViewController(didReport: self)
                     
                     InstanceMessageManager.shared.showMessage("신고가 완료됐습니다.", margin: self.buttonCancel.frame.size.height + 8 * QUtils.optimizeRatio())
                     

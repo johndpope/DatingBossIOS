@@ -27,7 +27,7 @@ class InstanceMessageManager: NSObject {
         
         messageView = UILabel()
         messageView?.translatesAutoresizingMaskIntoConstraints = false
-        messageView?.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4)
+        messageView?.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
         messageView?.clipsToBounds = true
         messageView?.layer.cornerRadius = 24 * QUtils.optimizeRatio()
         messageView?.alpha = 0

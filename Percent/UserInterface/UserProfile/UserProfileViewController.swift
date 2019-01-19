@@ -139,6 +139,8 @@ class UserProfileViewController: BaseViewController {
 //        headerView.showProfile(false, animated: false)
         theTableView.addSubview(headerView)
         
+        headerView.buttonLike.isHidden = data.report_fl
+        
         constraintHeaderMoving = headerView.topAnchor.constraint(equalTo: theCollectionView.bottomAnchor)
         constraintHeaderMoving.isActive = true
         constraintHeaderStick = headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
@@ -189,12 +191,16 @@ class UserProfileViewController: BaseViewController {
         buttonProposal.translatesAutoresizingMaskIntoConstraints = false
         buttonProposal.clipsToBounds = true
         buttonProposal.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .normal)
+        buttonProposal.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.7018831372, green: 0.7020055652, blue: 0.7018753886, alpha: 1)), for: .disabled)
         buttonProposal.setTitle("호감 보내기", for: .normal)
+        buttonProposal.setTitle("신고한 사용자", for: .disabled)
         buttonProposal.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         buttonProposal.titleLabel?.font = UIFont.systemFont(ofSize: 18 * QUtils.optimizeRatio(), weight: .bold)
         buttonProposal.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
         buttonProposal.layer.cornerRadius = 22 * QUtils.optimizeRatio()
         self.view.addSubview(buttonProposal)
+        
+        buttonProposal.isEnabled = !data.report_fl
         
         buttonProposal.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
         buttonProposal.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
@@ -255,6 +261,7 @@ class UserProfileViewController: BaseViewController {
                 })
                 
                 let viewController = UserReportViewController(targetId: self.data.mem_idx, data: dataArray)
+                viewController.delegate = self
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
             
@@ -314,7 +321,7 @@ class UserProfileViewController: BaseViewController {
         job += "입니다."
         
         tableData.append(UserProfileTableData(iconName: "img_profile_3", content: job, isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "")체형입니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "")체형 입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_5", content: "종교는 \(data.religion ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_6", content: "취미는 \(data.hobby ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_7", content: data.drinking ?? "", isApproved: nil))
@@ -445,7 +452,7 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
         }
         
         guard indexPath.row > 0 else {
-            return UserProfileSectionHeaderCell.height
+            return UserProfileSectionHeaderCell.height + (indexPath.section > 1 ? 8 * QUtils.optimizeRatio() : 0)
         }
         return 56 * QUtils.optimizeRatio()
     }
@@ -578,5 +585,14 @@ extension UserProfileViewController: UIScrollViewDelegate {
         self.headerView.constraintValue = alpha
         
         self.coverView.alpha = alpha
+    }
+}
+
+extension UserProfileViewController: UserReportViewControllerDelegate {
+    func userReportViewController(didReport viewController: UserReportViewController) {
+        buttonProposal.isEnabled = false
+        headerView.buttonLike.isHidden = true
+        
+        data.report_fl = true
     }
 }

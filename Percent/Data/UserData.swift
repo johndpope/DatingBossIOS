@@ -117,6 +117,8 @@ class UserData: BaseData {
     var report_fl: Bool {
         get {
             return (rawData["report_fl"] as? String ?? "n") == "y"
+        } set {
+            rawData["report_fl"] = newValue ? "y" : "n"
         }
     }
     

@@ -19,8 +19,16 @@ class ChartValueData: BaseData {
         return rawData["graph_value"] as? Double ?? 0
     }
     
-    var name: String? {
-        return rawData["code_name"] as? String
+    var name: String {
+        get {
+            guard var code_name = rawData["code_name"] as? String, code_name.count < 5 else { return rawData["code_name"] as? String ?? "    " }
+            
+            while code_name.count < 5 {
+                code_name += " "
+            }
+            
+            return code_name
+        }
     }
     
     var mem_idx: Int? {
@@ -32,7 +40,11 @@ class UserRadarChartTableViewCell: UITableViewCell {
     let labelTitle = UILabel()
     private let chartView = RadarChartView()
     
-    var showLegend = false
+    var showLegend = false {
+        didSet {
+            chartView.legend.enabled = showLegend
+        }
+    }
     
     var data: [ChartValueData]?
     
@@ -74,6 +86,7 @@ class UserRadarChartTableViewCell: UITableViewCell {
         chartView.isUserInteractionEnabled = false
         chartView.chartDescription?.enabled = false
         chartView.skipWebLineCount = 0
+        chartView.setExtraOffsets(left: 0, top: 50, right: 0, bottom: 0)
         
         let xAxis = chartView.xAxis
         xAxis.forceLabelsEnabled = false
@@ -89,11 +102,18 @@ class UserRadarChartTableViewCell: UITableViewCell {
         yAxis.axisMaximum = 5
         yAxis.drawLabelsEnabled = false
         
-        chartView.legend.setCustom(entries: [])
+        let legend = chartView.legend
+        legend.verticalAlignment = .top
+        legend.horizontalAlignment = .center
+        legend.orientation = .horizontal
+        legend.drawInside = true
+        legend.yOffset = 1
+        legend.xEntrySpace = 10
+        legend.yEntrySpace = 0
         
         self.contentView.addSubview(chartView)
         
-        chartView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width * 0.8).isActive = true
+        chartView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width * 0.9).isActive = true
         chartView.heightAnchor.constraint(equalTo: chartView.widthAnchor).isActive = true
         chartView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
         chartView.topAnchor.constraint(equalTo: labelTitle.bottomAnchor).isActive = true
@@ -122,17 +142,19 @@ class UserRadarChartTableViewCell: UITableViewCell {
             }
         }
         
-        let myDataSet = RadarChartDataSet(values: myEntries, label: nil)
+        let myDataSet = RadarChartDataSet(values: myEntries, label: "내 정보")
         myDataSet.setColor(#colorLiteral(red: 0, green: 0, blue: 1, alpha: 1))
         myDataSet.fillColor = #colorLiteral(red: 0, green: 0, blue: 1, alpha: 1)
         myDataSet.drawFilledEnabled = true
-        myDataSet.fillAlpha = 0.4
+        myDataSet.fillAlpha = 0.2
+        myDataSet.lineWidth = 2
         
-        let oppDataSet = RadarChartDataSet(values: oppEntries, label: nil)
+        let oppDataSet = RadarChartDataSet(values: oppEntries, label: "상대 정보")
         oppDataSet.setColor(#colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1))
         oppDataSet.fillColor = #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)
         oppDataSet.drawFilledEnabled = true
-        oppDataSet.fillAlpha = 0.4
+        oppDataSet.fillAlpha = 0.2
+        oppDataSet.lineWidth = 2
         
         let cData = RadarChartData(dataSets: [myDataSet, oppDataSet])
         cData.setDrawValues(false)
@@ -150,6 +172,6 @@ extension UserRadarChartTableViewCell: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         let index = Int(value)
         guard data != nil, index < data!.count else { return "" }
-        return data![index].name ?? ""
+        return data![index].name
     }
 }
