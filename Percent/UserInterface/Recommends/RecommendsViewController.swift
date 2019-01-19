@@ -67,9 +67,7 @@ class RecommendsViewController: BaseMainViewController {
         buttonBuyCherries.clipsToBounds = true
         buttonBuyCherries.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .normal)
         buttonBuyCherries.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1)), for: .highlighted)
-        buttonBuyCherries.setImage(UIImage(named: "img_cherry")?.recolour(with: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)).resize(maxHeight: 18 * QUtils.optimizeRatio()), for: .normal)
-        buttonBuyCherries.setImage(UIImage(named: "img_cherry")?.recolour(with: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)).resize(maxHeight: 18 * QUtils.optimizeRatio()), for: .highlighted)
-        buttonBuyCherries.setTitle("체리 구매", for: .normal)
+        buttonBuyCherries.setTitle("이용 방법", for: .normal)
         buttonBuyCherries.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         buttonBuyCherries.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
         buttonBuyCherries.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
@@ -88,7 +86,7 @@ class RecommendsViewController: BaseMainViewController {
         buttonPremium.clipsToBounds = true
         buttonPremium.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1)), for: .normal)
         buttonPremium.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .highlighted)
-        buttonPremium.setTitle("프리미엄 서비스", for: .normal)
+        buttonPremium.setTitle("이상형 설정", for: .normal)
         buttonPremium.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         buttonPremium.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
         buttonPremium.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
@@ -105,7 +103,7 @@ class RecommendsViewController: BaseMainViewController {
         buttonEvents.clipsToBounds = true
         buttonEvents.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.9764705882, green: 0.3921568627, blue: 0.4352941176, alpha: 1)), for: .normal)
         buttonEvents.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1)), for: .highlighted)
-        buttonEvents.setTitle("이벤트", for: .normal)
+        buttonEvents.setTitle("지인 만나지 않기", for: .normal)
         buttonEvents.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         buttonEvents.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
         buttonEvents.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
