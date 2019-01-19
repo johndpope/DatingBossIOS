@@ -63,7 +63,7 @@ extension UIImage {
     }
     
     func resize(withSize newSize: CGSize, spacing: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, UIScreen.main.scale)
         
         var origin = CGPoint.zero
         origin.x = spacing
@@ -102,7 +102,7 @@ extension UIImage {
         
         let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
         
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, UIScreen.main.scale)
         self.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -287,7 +287,7 @@ extension UIImage {
     }
     
     func setOpacity(opacity: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.size, false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
         
         guard let cgImage = self.cgImage, let context = UIGraphicsGetCurrentContext() else {return self}
         

@@ -93,6 +93,7 @@ class UserProfileViewController: BaseViewController {
         theTableView.separatorStyle = .none
         theTableView.delegate = self
         theTableView.dataSource = self
+        theTableView.register(UserProfileSectionHeaderCell.self, forCellReuseIdentifier: "UserProfileSectionHeaderCell")
         theTableView.register(UserProfileTableViewCell.self, forCellReuseIdentifier: "UserProfileTableViewCell")
         theTableView.register(UserRadarChartTableViewCell.self, forCellReuseIdentifier: "UserRadarChartTableViewCell")
         self.view.addSubview(theTableView)
@@ -233,6 +234,11 @@ class UserProfileViewController: BaseViewController {
         
         switch sender {
         case buttonReport:
+            guard data.report_fl == false else {
+                InstanceMessageManager.shared.showMessage("이미 신고한 사용자입니다.")
+                return
+            }
+            
             LoadingIndicatorManager.shared.showIndicatorView()
             
             let httpClient = QHttpClient()
@@ -308,7 +314,7 @@ class UserProfileViewController: BaseViewController {
         job += "입니다."
         
         tableData.append(UserProfileTableData(iconName: "img_profile_3", content: job, isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "")입니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "")체형입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_5", content: "종교는 \(data.religion ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_6", content: "취미는 \(data.hobby ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_7", content: data.drinking ?? "", isApproved: nil))
@@ -373,69 +379,73 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
         return 3
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard section > 0 else { return 0 }
-        return 46 * QUtils.optimizeRatio()
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section > 0 else { return nil }
-        
-        let sectionheaderView = UIView()
-        sectionheaderView.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: self.tableView(tableView, heightForHeaderInSection: section))
-        sectionheaderView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = section == 1 ? "정보" : "하고싶은 말"
-        label.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
-        sectionheaderView.addSubview(label)
-        
-        label.centerYAnchor.constraint(equalTo: sectionheaderView.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: sectionheaderView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
-        
-        if section == 1 {
-            let seperator = UIView()
-            seperator.translatesAutoresizingMaskIntoConstraints = false
-            seperator.backgroundColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
-            sectionheaderView.addSubview(seperator)
-            
-            seperator.topAnchor.constraint(equalTo: sectionheaderView.topAnchor).isActive = true
-            seperator.leadingAnchor.constraint(equalTo: sectionheaderView.leadingAnchor).isActive = true
-            seperator.trailingAnchor.constraint(equalTo: sectionheaderView.trailingAnchor).isActive = true
-            seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
-            
-            let image = UIImage(named: "img_profile_expand_bg")!
-            
-            let button = UIButton(type: .custom)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.setBackgroundImage(image, for: .normal)
-            button.setImage(UIImage(named: "img_profile_expand")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 24), for: .normal)
-            button.setImage(UIImage(named: "img_profile_collapsed")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 24), for: .selected)
-            button.addTarget(self, action: #selector(self.toggleExpandGraph(_:)), for: .touchUpInside)
-            sectionheaderView.addSubview(button)
-            
-            button.isSelected = showRadarChart
-            
-            button.topAnchor.constraint(equalTo: sectionheaderView.topAnchor).isActive = true
-            button.centerXAnchor.constraint(equalTo: sectionheaderView.centerXAnchor).isActive = true
-            button.widthAnchor.constraint(equalToConstant: image.size.width).isActive = true
-            button.heightAnchor.constraint(equalToConstant: image.size.height).isActive = true
-        }
-        
-        return sectionheaderView
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        guard section > 0 else { return 0 }
+//        return 46 * QUtils.optimizeRatio()
+//    }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        guard section > 0 else { return nil }
+//
+//        let sectionheaderView = UIView()
+//        sectionheaderView.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: self.tableView(tableView, heightForHeaderInSection: section))
+//        sectionheaderView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
+//
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = section == 1 ? "정보" : "하고싶은 말"
+//        label.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+//        label.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
+//        sectionheaderView.addSubview(label)
+//
+//        label.centerYAnchor.constraint(equalTo: sectionheaderView.centerYAnchor).isActive = true
+//        label.leadingAnchor.constraint(equalTo: sectionheaderView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+//
+//        if section == 1 {
+//            let seperator = UIView()
+//            seperator.translatesAutoresizingMaskIntoConstraints = false
+//            seperator.backgroundColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+//            sectionheaderView.addSubview(seperator)
+//
+//            seperator.topAnchor.constraint(equalTo: sectionheaderView.topAnchor).isActive = true
+//            seperator.leadingAnchor.constraint(equalTo: sectionheaderView.leadingAnchor).isActive = true
+//            seperator.trailingAnchor.constraint(equalTo: sectionheaderView.trailingAnchor).isActive = true
+//            seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+//
+//            let image = UIImage(named: "img_profile_expand_bg")!
+//
+//            let button = UIButton(type: .custom)
+//            button.translatesAutoresizingMaskIntoConstraints = false
+//            button.setBackgroundImage(image, for: .normal)
+//            button.setImage(UIImage(named: "img_profile_expand")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 24), for: .normal)
+//            button.setImage(UIImage(named: "img_profile_collapsed")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 24), for: .selected)
+//            button.addTarget(self, action: #selector(self.toggleExpandGraph(_:)), for: .touchUpInside)
+//            sectionheaderView.addSubview(button)
+//
+//            button.isSelected = showRadarChart
+//
+//            button.topAnchor.constraint(equalTo: sectionheaderView.topAnchor).isActive = true
+//            button.centerXAnchor.constraint(equalTo: sectionheaderView.centerXAnchor).isActive = true
+//            button.widthAnchor.constraint(equalToConstant: image.size.width).isActive = true
+//            button.heightAnchor.constraint(equalToConstant: image.size.height).isActive = true
+//        }
+//
+//        return sectionheaderView
+//    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard section > 0 else { return showRadarChart ? statsData.keys.count : 0 }
-        return section == 1 ? tableData.count : 0
+        return (section == 1 ? tableData.count : 0) + 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard indexPath.section > 0 else {
             guard showRadarChart, self.tableView(tableView, cellForRowAt: indexPath) as? UserRadarChartTableViewCell != nil else { return 0 }
             return 46 + UIScreen.main.bounds.size.width * 0.8
+        }
+        
+        guard indexPath.row > 0 else {
+            return UserProfileSectionHeaderCell.height
         }
         return 56 * QUtils.optimizeRatio()
     }
@@ -463,12 +473,21 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
             return cell
         }
         
+        guard indexPath.row > 0 else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserProfileSectionHeaderCell") as? UserProfileSectionHeaderCell else { return UITableViewCell() }
+            cell.labelTitle.text = indexPath.section == 1 ? "정보" : "하고싶은 말"
+            cell.buttonExpander.addTarget(self, action: #selector(self.toggleExpandGraph(_:)), for: .touchUpInside)
+            cell.buttonExpander.isSelected = self.showRadarChart
+            cell.showExpander = indexPath.section == 1
+            return cell
+        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserProfileTableViewCell") as? UserProfileTableViewCell else { return UITableViewCell() }
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        (cell as? UserProfileTableViewCell)?.data = tableData[indexPath.row]
+        (cell as? UserProfileTableViewCell)?.data = tableData[indexPath.row - 1]
     }
 }
 
@@ -522,12 +541,12 @@ extension UserProfileViewController: UIScrollViewDelegate {
         
         if alpha < 0 {
             alpha = 0
-            self.navigationView.contentView.backgroundColor = .clear
         } else if alpha > 1 {
             alpha = 1
             isStick = true
-            self.navigationView.contentView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)
         }
+        
+        self.navigationView.contentView.backgroundColor = alpha == 1 ? #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1) : .clear
         
         if alpha < 0.7, isProposalButtonShown == false {
             isProposalButtonShown = true

@@ -65,23 +65,28 @@ class UserRadarChartTableViewCell: UITableViewCell {
         
         chartView.translatesAutoresizingMaskIntoConstraints = false
         chartView.delegate = self
+        chartView.webLineWidth = 1
         chartView.webColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        chartView.innerWebLineWidth = 1
         chartView.innerWebColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        chartView.webAlpha = 1.0
+        chartView.drawWeb = true
         chartView.isUserInteractionEnabled = false
         chartView.chartDescription?.enabled = false
         chartView.skipWebLineCount = 0
         
         let xAxis = chartView.xAxis
         xAxis.forceLabelsEnabled = false
+        xAxis.labelFont = UIFont.systemFont(ofSize: 10 * QUtils.optimizeRatio(), weight: .regular)
         xAxis.xOffset = 0
         xAxis.yOffset = 0
         xAxis.valueFormatter = self
         
         let yAxis = chartView.yAxis
         yAxis.labelTextColor = .clear
-        yAxis.labelCount = 4
+        yAxis.setLabelCount(6, force: true)
         yAxis.axisMinimum = 0
-        yAxis.axisMaximum = 3
+        yAxis.axisMaximum = 5
         yAxis.drawLabelsEnabled = false
         
         chartView.legend.setCustom(entries: [])
@@ -132,6 +137,8 @@ class UserRadarChartTableViewCell: UITableViewCell {
         let cData = RadarChartData(dataSets: [myDataSet, oppDataSet])
         cData.setDrawValues(false)
         chartView.data = cData
+        
+        
     }
 }
 

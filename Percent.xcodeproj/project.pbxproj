@@ -138,6 +138,7 @@
 		1CCE2BBB21F1DE1B0057122D /* UserRadarChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BBA21F1DE1B0057122D /* UserRadarChartTableViewCell.swift */; };
 		1CCE2BBE21F203250057122D /* img_profile_collapsed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BBC21F203240057122D /* img_profile_collapsed@3x.png */; };
 		1CCE2BBF21F203250057122D /* img_profile_expand_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BBD21F203250057122D /* img_profile_expand_bg@3x.png */; };
+		1CCE2BC121F35A3E0057122D /* UserProfileSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BC021F35A3E0057122D /* UserProfileSectionHeaderCell.swift */; };
 		1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD3D99121E898E500938293 /* StoreKit.framework */; };
 		1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */; };
 		1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */; };
@@ -338,6 +339,7 @@
 		1CCE2BBA21F1DE1B0057122D /* UserRadarChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRadarChartTableViewCell.swift; sourceTree = "<group>"; };
 		1CCE2BBC21F203240057122D /* img_profile_collapsed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_collapsed@3x.png"; sourceTree = "<group>"; };
 		1CCE2BBD21F203250057122D /* img_profile_expand_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_expand_bg@3x.png"; sourceTree = "<group>"; };
+		1CCE2BC021F35A3E0057122D /* UserProfileSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileSectionHeaderCell.swift; sourceTree = "<group>"; };
 		1CD3D99021E8980C00938293 /* Percent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Percent.entitlements; sourceTree = "<group>"; };
 		1CD3D99121E898E500938293 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecTableViewCell.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 			children = (
 				1C03841B21D1CDE80024C3B3 /* UserProfileViewController.swift */,
 				1C03842121D278C80024C3B3 /* UserProfileHeaderView.swift */,
+				1CCE2BC021F35A3E0057122D /* UserProfileSectionHeaderCell.swift */,
 				1CE69AA921D896D600B9FE4A /* UserProfileStatsView.swift */,
 				1CE69AB721D91C6A00B9FE4A /* UserProfileTableViewCell.swift */,
 				1CCE2BBA21F1DE1B0057122D /* UserRadarChartTableViewCell.swift */,
@@ -1161,6 +1164,7 @@
 				1CA5878721E6173C002B60F2 /* SignupStepViewController.swift in Sources */,
 				1CE69AEB21DA457A00B9FE4A /* SearchConditionViewController.swift in Sources */,
 				1C5AC81C21E39C4B0007827D /* BoardViewController.swift in Sources */,
+				1CCE2BC121F35A3E0057122D /* UserProfileSectionHeaderCell.swift in Sources */,
 				1C61C4C421EE2FF700087D8A /* ImagePreviewViewController.swift in Sources */,
 				1CB5433121DF473B00B37EAE /* SBJsonStreamParserAccumulator.m in Sources */,
 				1CB5431021DF473300B37EAE /* Others.swift in Sources */,
