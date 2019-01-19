@@ -139,6 +139,7 @@
 		1CCE2BBE21F203250057122D /* img_profile_collapsed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BBC21F203240057122D /* img_profile_collapsed@3x.png */; };
 		1CCE2BBF21F203250057122D /* img_profile_expand_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BBD21F203250057122D /* img_profile_expand_bg@3x.png */; };
 		1CCE2BC121F35A3E0057122D /* UserProfileSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BC021F35A3E0057122D /* UserProfileSectionHeaderCell.swift */; };
+		1CCE2BC321F37F710057122D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BC221F37F700057122D /* GoogleService-Info.plist */; };
 		1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD3D99121E898E500938293 /* StoreKit.framework */; };
 		1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */; };
 		1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */; };
@@ -340,6 +341,7 @@
 		1CCE2BBC21F203240057122D /* img_profile_collapsed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_collapsed@3x.png"; sourceTree = "<group>"; };
 		1CCE2BBD21F203250057122D /* img_profile_expand_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_expand_bg@3x.png"; sourceTree = "<group>"; };
 		1CCE2BC021F35A3E0057122D /* UserProfileSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileSectionHeaderCell.swift; sourceTree = "<group>"; };
+		1CCE2BC221F37F700057122D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1CD3D99021E8980C00938293 /* Percent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Percent.entitlements; sourceTree = "<group>"; };
 		1CD3D99121E898E500938293 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecTableViewCell.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				1C858D9321C7733F00900481 /* LaunchScreen.storyboard */,
 				1C858D9621C7733F00900481 /* Info.plist */,
 				1C858DEB21C78D6200900481 /* Percent-Bridging-Header.h */,
+				1CCE2BC221F37F700057122D /* GoogleService-Info.plist */,
 			);
 			path = Percent;
 			sourceTree = "<group>";
@@ -1008,6 +1011,7 @@
 				1CE9653D21DC77D000334B4A /* img_mypage_3@3x.png in Resources */,
 				1C5AC84021E4D2490007827D /* img_login_background@2x.png in Resources */,
 				1CE9653B21DC77D000334B4A /* img_mypage_7@3x.png in Resources */,
+				1CCE2BC321F37F710057122D /* GoogleService-Info.plist in Resources */,
 				1CE69AB421D8EEC100B9FE4A /* img_profile_1@3x.png in Resources */,
 				1CCE2BBF21F203250057122D /* img_profile_expand_bg@3x.png in Resources */,
 				1CA5879521E6FDD8002B60F2 /* img_validation_unchecked@3x.png in Resources */,

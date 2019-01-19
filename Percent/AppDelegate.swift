@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Firebase
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -31,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         QHttpClient.addCommonHeaderValue("application/json", for: "Content-Type")
         
 //        SurveyManager.shared.clearSurveyAnswer()
+        
+        FirebaseApp.configure()
         
         let viewController = IntroViewController()
         self.window?.rootViewController = viewController
