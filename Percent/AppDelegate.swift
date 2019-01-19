@@ -67,12 +67,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func changeRootViewController(_ viewController: UIViewController, animated: Bool = true) {
         self.window?.setRootViewController(viewController, transition: animated ? rootTransition : nil)
     }
+    
+    func updateFCMToken() {
+        guard MyData.shared.auth_key != nil, let fcmToken = QDataManager.shared.fcmToken else { return }
+        
+        var params = [String:Any]()
+        params["fcm_key"] = fcmToken
+        
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Notification.UpdateToken + "\(MyData.shared.mem_idx)", method: .patch, headerValues: nil, params: params, completion: nil)
+    }
 }
 
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         QDataManager.shared.fcmToken = fcmToken
         QDataManager.shared.commit()
+        
+        updateFCMToken()
     }
 }
 

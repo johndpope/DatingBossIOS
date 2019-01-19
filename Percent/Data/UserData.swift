@@ -6,7 +6,7 @@
 //  Copyright © 2018 연애대장. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum SignupStatus: String {
     case unknown = ""
@@ -26,6 +26,8 @@ class MyData: UserData {
         
         if auth_key != nil {
             QHttpClient.addCommonHeaderValue(self.auth_key!, for: "auth_key")
+            
+            UIApplication.appDelegate().updateFCMToken()
         } else {
             _ = QHttpClient.removeCommonHeaderValue(for: "auth_key")
         }
