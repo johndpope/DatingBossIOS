@@ -83,7 +83,7 @@ class BoardExpandedTableViewCell: BoardTableViewCell {
         didSet {
             super.data = data
             
-            labelContent.text = data.text
+            labelContent.text = data.text?.replacingOccurrences(of: "<br>", with: "\n").replacingOccurrences(of: "<BR>", with: "\n").replacingOccurrences(of: "&nbsp;", with: "\t")
             labelContent.sizeToFit()
             self.layoutIfNeeded()
         }

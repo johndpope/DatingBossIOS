@@ -21,7 +21,7 @@ class BaseViewController: UIViewController {
     var leftNavigationItemView: UIButton?
     var cherriesButton = CherryButton()
     
-    internal var navigationTintColor = #colorLiteral(red: 0.4274509804, green: 0.4274509804, blue: 0.4274509804, alpha: 1)
+    internal var navigationTintColor = #colorLiteral(red: 0.168627451, green: 0.168627451, blue: 0.168627451, alpha: 1)
     private var navigationViewHidden = false
     var isNavigationViewHidden: Bool {
         return navigationViewHidden

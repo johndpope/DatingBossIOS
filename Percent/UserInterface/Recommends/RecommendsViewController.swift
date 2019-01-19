@@ -11,9 +11,9 @@ import UIKit
 class RecommendsViewController: BaseMainViewController {
     private let collectionView: UICollectionView
     
-    private let buttonBuyCherries = UIButton(type: .custom)
-    private let buttonPremium = UIButton(type: .custom)
-    private let buttonEvents = UIButton(type: .custom)
+    private let buttonGuide = UIButton(type: .custom)
+    private let buttonPrefer = UIButton(type: .custom)
+    private let buttonAvoidKnowns = UIButton(type: .custom)
     
     private var collectionData = [RecommendData]()
     
@@ -63,62 +63,77 @@ class RecommendsViewController: BaseMainViewController {
         collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: RecommendsCollectionViewCell.itemSize.height).isActive = true
         
-        buttonBuyCherries.translatesAutoresizingMaskIntoConstraints = false
-        buttonBuyCherries.clipsToBounds = true
-        buttonBuyCherries.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .normal)
-        buttonBuyCherries.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1)), for: .highlighted)
-        buttonBuyCherries.setTitle("이용 방법", for: .normal)
-        buttonBuyCherries.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        buttonBuyCherries.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
-        buttonBuyCherries.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-        buttonBuyCherries.layer.cornerRadius = 24 * QUtils.optimizeRatio()
-        buttonBuyCherries.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
-        buttonBuyCherries.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8 * QUtils.optimizeRatio(), bottom: 0, right: 0)
-        buttonBuyCherries.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8 * QUtils.optimizeRatio())
-        self.view.addSubview(buttonBuyCherries)
+        buttonGuide.translatesAutoresizingMaskIntoConstraints = false
+        buttonGuide.clipsToBounds = true
+        buttonGuide.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .normal)
+        buttonGuide.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1)), for: .highlighted)
+        buttonGuide.setTitle("이용 방법", for: .normal)
+        buttonGuide.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        buttonGuide.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
+        buttonGuide.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
+        buttonGuide.layer.cornerRadius = 24 * QUtils.optimizeRatio()
+        buttonGuide.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
+        buttonGuide.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8 * QUtils.optimizeRatio(), bottom: 0, right: 0)
+        buttonGuide.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8 * QUtils.optimizeRatio())
+        self.view.addSubview(buttonGuide)
         
-        buttonBuyCherries.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 14 * QUtils.optimizeRatio()).isActive = true
-        buttonBuyCherries.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
-        buttonBuyCherries.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
-        buttonBuyCherries.heightAnchor.constraint(equalToConstant: buttonBuyCherries.layer.cornerRadius * 2).isActive = true
+        buttonGuide.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 14 * QUtils.optimizeRatio()).isActive = true
+        buttonGuide.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+        buttonGuide.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
+        buttonGuide.heightAnchor.constraint(equalToConstant: buttonGuide.layer.cornerRadius * 2).isActive = true
         
-        buttonPremium.translatesAutoresizingMaskIntoConstraints = false
-        buttonPremium.clipsToBounds = true
-        buttonPremium.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1)), for: .normal)
-        buttonPremium.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .highlighted)
-        buttonPremium.setTitle("이상형 설정", for: .normal)
-        buttonPremium.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        buttonPremium.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
-        buttonPremium.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-        buttonPremium.layer.cornerRadius = 24 * QUtils.optimizeRatio()
-        buttonPremium.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
-        self.view.addSubview(buttonPremium)
+        buttonPrefer.translatesAutoresizingMaskIntoConstraints = false
+        buttonPrefer.clipsToBounds = true
+        buttonPrefer.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1)), for: .normal)
+        buttonPrefer.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)), for: .highlighted)
+        buttonPrefer.setTitle("이상형 설정", for: .normal)
+        buttonPrefer.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        buttonPrefer.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
+        buttonPrefer.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
+        buttonPrefer.layer.cornerRadius = 24 * QUtils.optimizeRatio()
+        buttonPrefer.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
+        self.view.addSubview(buttonPrefer)
         
-        buttonPremium.topAnchor.constraint(equalTo: buttonBuyCherries.bottomAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
-        buttonPremium.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
-        buttonPremium.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor, constant: -4 * QUtils.optimizeRatio()).isActive = true
-        buttonPremium.heightAnchor.constraint(equalToConstant: buttonPremium.layer.cornerRadius * 2).isActive = true
+        buttonPrefer.topAnchor.constraint(equalTo: buttonGuide.bottomAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        buttonPrefer.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+        buttonPrefer.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor, constant: -4 * QUtils.optimizeRatio()).isActive = true
+        buttonPrefer.heightAnchor.constraint(equalToConstant: buttonPrefer.layer.cornerRadius * 2).isActive = true
         
-        buttonEvents.translatesAutoresizingMaskIntoConstraints = false
-        buttonEvents.clipsToBounds = true
-        buttonEvents.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.9764705882, green: 0.3921568627, blue: 0.4352941176, alpha: 1)), for: .normal)
-        buttonEvents.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1)), for: .highlighted)
-        buttonEvents.setTitle("지인 만나지 않기", for: .normal)
-        buttonEvents.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        buttonEvents.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
-        buttonEvents.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-        buttonEvents.layer.cornerRadius = buttonPremium.layer.cornerRadius
-        buttonEvents.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
-        self.view.addSubview(buttonEvents)
+        buttonAvoidKnowns.translatesAutoresizingMaskIntoConstraints = false
+        buttonAvoidKnowns.clipsToBounds = true
+        buttonAvoidKnowns.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.9764705882, green: 0.3921568627, blue: 0.4352941176, alpha: 1)), for: .normal)
+        buttonAvoidKnowns.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.6862745098, green: 0.1843137255, blue: 0.2156862745, alpha: 1)), for: .highlighted)
+        buttonAvoidKnowns.setTitle("지인 만나지 않기", for: .normal)
+        buttonAvoidKnowns.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        buttonAvoidKnowns.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
+        buttonAvoidKnowns.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
+        buttonAvoidKnowns.layer.cornerRadius = buttonPrefer.layer.cornerRadius
+        buttonAvoidKnowns.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
+        self.view.addSubview(buttonAvoidKnowns)
         
-        buttonEvents.centerYAnchor.constraint(equalTo: buttonPremium.centerYAnchor).isActive = true
-        buttonEvents.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor, constant: 4 * QUtils.optimizeRatio()).isActive = true
-        buttonEvents.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
-        buttonEvents.heightAnchor.constraint(equalTo: buttonPremium.heightAnchor).isActive = true
+        buttonAvoidKnowns.centerYAnchor.constraint(equalTo: buttonPrefer.centerYAnchor).isActive = true
+        buttonAvoidKnowns.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor, constant: 4 * QUtils.optimizeRatio()).isActive = true
+        buttonAvoidKnowns.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
+        buttonAvoidKnowns.heightAnchor.constraint(equalTo: buttonPrefer.heightAnchor).isActive = true
         
         self.view.layoutIfNeeded()
         
         reloadData()
+    }
+    
+    override func pressedButton(_ sender: UIButton) {
+        super.pressedButton(sender)
+        
+        switch sender {
+        case buttonGuide:
+            let viewController = BoardViewController(type: .notice)
+            let navController = UINavigationController(rootViewController: viewController)
+            self.present(navController, animated: true, completion: nil)
+            break
+            
+        default:
+            break
+        }
     }
     
     private func reloadData() {

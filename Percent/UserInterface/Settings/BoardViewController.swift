@@ -9,9 +9,9 @@
 import UIKit
 
 enum BoardType {
-    case Notice
-    case FAQ
-    case Event
+    case notice
+    case faq
+    case event
 }
 
 class BoardViewController: BaseViewController {
@@ -53,17 +53,17 @@ class BoardViewController: BaseViewController {
         var board_type: String?
         
         switch type {
-        case .Notice:
+        case .notice:
             self.title = "공지사항"
             board_type = "notice"
             break
             
-        case .FAQ:
+        case .faq:
             self.title = "FAQ"
             board_type = "fnq"
             break
             
-        case .Event:
+        case .event:
             self.title = "이벤트"
             board_type = "event"
             break

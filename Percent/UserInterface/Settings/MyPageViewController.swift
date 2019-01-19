@@ -74,7 +74,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             break
             
         case .Notice, .Supports:
-            let viewController = BoardViewController(type: data.type == .Supports ? .FAQ : .Notice)
+            let viewController = BoardViewController(type: data.type == .Supports ? .faq : .notice)
             self.navigationController?.pushViewController(viewController, animated: true)
             break
             

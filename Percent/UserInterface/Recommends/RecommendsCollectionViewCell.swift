@@ -159,7 +159,7 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
         labelRegion.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         labelRegion.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         
-        var seperator = UIView()
+        let seperator = UIView()
         seperator.translatesAutoresizingMaskIntoConstraints = false
         seperator.backgroundColor = #colorLiteral(red: 0.8784313725, green: 0.8745098039, blue: 0.8666666667, alpha: 1)
         contentView.addSubview(seperator)
