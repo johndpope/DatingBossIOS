@@ -321,7 +321,7 @@ class UserProfileViewController: BaseViewController {
         job += "입니다."
         
         tableData.append(UserProfileTableData(iconName: "img_profile_3", content: job, isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "")체형 입니다.", isApproved: nil))
+        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "") 체형입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_5", content: "종교는 \(data.religion ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_6", content: "취미는 \(data.hobby ?? "")입니다.", isApproved: nil))
         tableData.append(UserProfileTableData(iconName: "img_profile_7", content: data.drinking ?? "", isApproved: nil))
