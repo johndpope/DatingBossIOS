@@ -117,6 +117,10 @@ class RecommendsViewController: BaseMainViewController {
         buttonAvoidKnowns.heightAnchor.constraint(equalTo: buttonPrefer.heightAnchor).isActive = true
         
         self.view.layoutIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         reloadData()
     }
@@ -148,7 +152,7 @@ class RecommendsViewController: BaseMainViewController {
         }
     }
     
-    private func reloadData() {
+    func reloadData() {
         loadingQueue.sync {
             self.collectionView.reloadData()
             

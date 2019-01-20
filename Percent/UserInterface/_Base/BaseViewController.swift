@@ -29,6 +29,11 @@ class BaseViewController: UIViewController {
     
     internal var navigationViewBottmAnchor: NSLayoutConstraint!
     
+    private var viewAppeared = false
+    var initialized: Bool {
+        return viewAppeared
+    }
+    
     internal var showCherriesOnNavigation: Bool = false {
         didSet {
             cherriesButton.isHidden = !showCherriesOnNavigation
@@ -144,6 +149,12 @@ class BaseViewController: UIViewController {
         titleLabel.heightAnchor.constraint(equalToConstant: kHeightNavigationView).isActive = true
         
         navigationView.layoutIfNeeded()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewAppeared = true
     }
     
     @objc internal func pressedButton(_ sender: UIButton) {
