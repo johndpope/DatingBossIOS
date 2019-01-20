@@ -65,39 +65,60 @@ class CategoryViewController: BaseMainViewController {
 
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.row < tableData.count else { return }
-        
-        LoadingIndicatorManager.shared.showIndicatorView()
-        
-        let data = tableData[indexPath.row]
-        
-        var params = [String:Any]()
-        params["category_idx"] = data.category_idx
+        let requesting = {() -> Void in
+            guard indexPath.row < self.tableData.count else { return }
+            
+            LoadingIndicatorManager.shared.showIndicatorView()
+            
+            let data = self.tableData[indexPath.row]
+            
+            var params = [String:Any]()
+            params["category_idx"] = data.category_idx
+            
+            let httpClient = QHttpClient()
+            httpClient.request(to: RequestUrl.Category.GetList + "\(MyData.shared.mem_idx)", params: params) { (isSucceed, errMessage, response) in
+                guard isSucceed, let responseData = response as? [String:Any], let mem_idx = responseData["mem_idx"] as? Int else {
+                    LoadingIndicatorManager.shared.hideIndicatorView()
+                    
+                    let alertController = UIAlertController(title: "카테고리", message: "추천 상대를 찾을 수 없습니다.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: kStringConfirm, style: .cancel, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                    return
+                }
+                
+                if let cherry_quantity = responseData["cherry_quantity"] as? Int {
+                    MyData.shared.cherry_quantity = cherry_quantity
+                    NotificationCenter.default.post(name: NotificationName.Cherry.Changed, object: cherry_quantity)
+                }
+                
+                let userData = UserData()
+                userData.mem_idx = mem_idx
+                userData.reloadData { (isSucceed) in
+                    LoadingIndicatorManager.shared.hideIndicatorView()
+                    
+                    let viewController = UserProfileViewController(data: userData)
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
+        }
         
         let httpClient = QHttpClient()
-        httpClient.request(to: RequestUrl.Category.GetList + "\(MyData.shared.mem_idx)", params: params) { (isSucceed, errMessage, response) in
-            guard isSucceed, let responseData = response as? [String:Any], let mem_idx = responseData["mem_idx"] as? Int else {
-                LoadingIndicatorManager.shared.hideIndicatorView()
-                
-                let alertController = UIAlertController(title: "카테고리", message: "추천 상대를 찾을 수 없습니다.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: kStringConfirm, style: .cancel, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+        httpClient.request(to: RequestUrl.Service.Free + "\(MyData.shared.mem_idx)", method: .get, headerValues: nil, params: nil) { (isSucceed, errMessage, response) in
+            guard let responseData = response as? [String:Any], (responseData["category"] as? Int ?? 0) > 0 else {
+                requesting()
                 return
             }
             
-            if let cherry_quantity = responseData["cherry_quantity"] as? Int {
-                MyData.shared.cherry_quantity = cherry_quantity
-                NotificationCenter.default.post(name: NotificationName.Cherry.Changed, object: cherry_quantity)
-            }
-            
-            let userData = UserData()
-            userData.mem_idx = mem_idx
-            userData.reloadData { (isSucceed) in
-                LoadingIndicatorManager.shared.hideIndicatorView()
-                
-                let viewController = UserProfileViewController(data: userData)
-                self.navigationController?.pushViewController(viewController, animated: true)
-            }
+            let alertController = AlertPopupViewController(withTitle: "무료 카테고리", message: "1일 1뢰 무료 카테고리를 사용합니다.")
+            alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+            alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
+            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
+                requesting()
+            }))
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
+            self.addChild(alertController)
+            alertController.show()
         }
     }
     

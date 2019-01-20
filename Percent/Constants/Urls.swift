@@ -28,6 +28,7 @@ struct RequestUrl {
         public static let Settings = "http://www.lovecenthome.com/ios/setup/"
         public static let Notice = "http://www.lovecenthome.com/ios/board/"
         public static let Board = "http://www.lovecenthome.com/ios/board/"
+        public static let Free = "http://www.lovecenthome.com/ios/free/"
     }
     
     public static let Survey = "http://www.lovecenthome.com/ios/survey/"
