@@ -76,14 +76,6 @@ class MyData: UserData {
         }
     }
     
-    var picture_name: String? {
-        get {
-            return rawData["picture_name"] as? String
-        } set {
-            rawData["picture_name"] = newValue
-        }
-    }
-    
     var auth_key: String? {
         get {
             return rawData["auth_key"] as? String
@@ -373,6 +365,14 @@ class UserData: BaseData {
             return rawData["hobby"] as? String
         } set {
             rawData["hobby"] = newValue
+        }
+    }
+    
+    var picture_name: String? {
+        get {
+            return rawData["picture_name"] as? String
+        } set {
+            rawData["picture_name"] = newValue
         }
     }
     

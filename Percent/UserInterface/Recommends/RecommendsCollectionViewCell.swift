@@ -109,8 +109,8 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
         borderView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(borderView)
         
-        borderView.widthAnchor.constraint(equalTo: imageView.widthAnchor, constant: 2).isActive = true
-        borderView.heightAnchor.constraint(equalTo: imageView.heightAnchor, constant: 2).isActive = true
+        borderView.widthAnchor.constraint(equalTo: imageView.widthAnchor, constant: 4).isActive = true
+        borderView.heightAnchor.constraint(equalTo: imageView.heightAnchor, constant: 4).isActive = true
         borderView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
         borderView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
         

@@ -40,6 +40,7 @@ struct RequestUrl {
     
     public struct Main {
         public static let Recommends = "http://www.lovecenthome.com/ios/recom/"
+        public static let Favourite  = "http://www.lovecenthome.com/ios/gather/"
     }
     
     public struct Notification {

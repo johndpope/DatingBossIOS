@@ -57,5 +57,9 @@ class MainViewController: UITabBarController {
 extension MainViewController: MainTabbarViewDelegate {
     func mainTabbarView(_ tabbarView: MainTabbarView, didSelected index: Int) {
         self.selectedIndex = index
+        
+        if index == 4 {
+            favouriteViewController.reloadData()
+        }
     }
 }
