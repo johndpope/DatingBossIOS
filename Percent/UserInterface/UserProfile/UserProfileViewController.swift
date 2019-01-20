@@ -42,8 +42,6 @@ class UserProfileViewController: BaseViewController {
     
     private var isProposalButtonShown = true
     
-    private var initialized = false
-    
     private var statsData = [String:[ChartValueData]]()
     
     private var showRadarChart = false
@@ -225,8 +223,6 @@ class UserProfileViewController: BaseViewController {
         tableHeaderView.frame = frame
         tableHeaderView.isUserInteractionEnabled = false
         theTableView.tableHeaderView = tableHeaderView
-        
-        initialized = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
