@@ -114,46 +114,99 @@ class FavouriteViewController: BaseMainViewController {
             InstanceMessageManager.shared.showMessage("선택된 항목이 없습니다.", margin: self.view.safeAreaInsets.bottom)
             return
         }
-//        
-//        var read = [Int](), request = [Int](), response = [Int]()
-//        for i in 0 ..< self.selectedIndexPaths.count {
-//            let item = self.selectedIndexPaths[i]
-//            
-//            if item.section == 0 {
-//                read.append(item.row)
-//            } else if item.section == 1 {
-//                request.append(item.row)
-//            } else if item.section == 2 {
-//                response.append(item.row)
-//            }
-//        }
-//        
-//        let completion = {() -> Void in
-//            var dataArray = self.collectionData[.read] ?? []
-//            for i in 0 ..< dataArray.count {
-//                guard read.firstIndex(of: i) != nil else { continue }
-//                _ = dataArray.remove(at: i)
-//            }
-//            self.collectionData[.read] = dataArray
-//
-//            dataArray = self.collectionData[.request] ?? []
-//            for i in 0 ..< dataArray.count {
-//                guard request.firstIndex(of: i) != nil else { continue }
-//                _ = dataArray.remove(at: i)
-//            }
-//            self.collectionData[.request] = dataArray
-//
-//            dataArray = self.collectionData[.response] ?? []
-//            for i in 0 ..< dataArray.count {
-//                guard response.firstIndex(of: i) != nil else { continue }
-//                _ = dataArray.remove(at: i)
-//            }
-//            self.collectionData[.response] = dataArray
-//
-//            self.theCollectionView.reloadData()
-//        }
-//
-//        var params = [String:Any]()
+        
+        let alertController = AlertPopupViewController(withTitle: "안내", message: "삭제하시겠습니까?\n삭제된 내용은 복구할 수 없습니다.")
+        alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+        alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+        alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
+        alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), title: "확인", colour: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: { (action) in
+            
+            var read = [Int](), request = [Int](), response = [Int]()
+            for i in 0 ..< self.selectedIndexPaths.count {
+                let item = self.selectedIndexPaths[i]
+                
+                if item.section == 0 {
+                    read.append(item.row)
+                } else if item.section == 1 {
+                    request.append(item.row)
+                } else if item.section == 2 {
+                    response.append(item.row)
+                }
+            }
+            
+            if read.count > 0, let dataArray = self.collectionData[.read] {
+                var opposite_mem_idx = ""
+                for index in read {
+                    if opposite_mem_idx.count > 0 {
+                        opposite_mem_idx += ","
+                    }
+                    opposite_mem_idx += "\(dataArray[index].mem_idx)"
+                }
+                var params = [String:Any]()
+                params["opposite_mem_idx"] = opposite_mem_idx
+                
+                let httpClient = QHttpClient()
+                httpClient.request(to: RequestUrl.Main.Favourite + "read/\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params, completion: nil)
+            }
+            
+            if request.count > 0, let dataArray = self.collectionData[.request] {
+                var opposite_mem_idx = ""
+                for index in request {
+                    if opposite_mem_idx.count > 0 {
+                        opposite_mem_idx += ","
+                    }
+                    opposite_mem_idx += "\(dataArray[index].mem_idx)"
+                }
+                var params = [String:Any]()
+                params["opposite_mem_idx"] = opposite_mem_idx
+                
+                let httpClient = QHttpClient()
+                httpClient.request(to: RequestUrl.Main.Favourite + "likereq/\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params, completion: nil)
+            }
+            
+            if response.count > 0, let dataArray = self.collectionData[.response] {
+                var opposite_mem_idx = ""
+                for index in response {
+                    if opposite_mem_idx.count > 0 {
+                        opposite_mem_idx += ","
+                    }
+                    opposite_mem_idx += "\(dataArray[index].mem_idx)"
+                }
+                var params = [String:Any]()
+                params["opposite_mem_idx"] = opposite_mem_idx
+                
+                let httpClient = QHttpClient()
+                httpClient.request(to: RequestUrl.Main.Favourite + "likeres/\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params, completion: nil)
+            }
+            
+            var dataArray = self.collectionData[.read] ?? []
+            for i in 0 ..< dataArray.count {
+                guard read.firstIndex(of: i) != nil else { continue }
+                _ = dataArray.remove(at: i)
+            }
+            self.collectionData[.read] = dataArray
+            
+            dataArray = self.collectionData[.request] ?? []
+            for i in 0 ..< dataArray.count {
+                guard request.firstIndex(of: i) != nil else { continue }
+                _ = dataArray.remove(at: i)
+            }
+            self.collectionData[.request] = dataArray
+            
+            dataArray = self.collectionData[.response] ?? []
+            for i in 0 ..< dataArray.count {
+                guard response.firstIndex(of: i) != nil else { continue }
+                _ = dataArray.remove(at: i)
+            }
+            self.collectionData[.response] = dataArray
+            
+            self.editMode = false
+            self.selectedIndexPaths.removeAll()
+            self.theCollectionView.reloadData()
+        }))
+        UIApplication.appDelegate().window?.addSubview(alertController.view)
+        self.addChild(alertController)
+        alertController.show()
     }
     
     @objc func selectCell(_ sender: UIButton) {
