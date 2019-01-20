@@ -9,13 +9,16 @@
 import UIKit
 
 enum MyPageType: String {
-    case Profile = "img_mypage_2"
-    case Settings = "img_mypage_3"
-    case Purchase = "img_mypage_4"
-    case Notice = "img_mypage_5"
-    case Supports = "img_mypage_6"
-    case Terms = "img_mypage_7"
-    case Logout = ""
+    case profile = "img_mypage_2"
+    case settings = "img_mypage_3"
+    case purchase = "img_mypage_4"
+    case notice = "img_mypage_5"
+    case supports = "img_mypage_6"
+    case terms = "img_mypage_7"
+    case preferLooks = "img_mypage_8"
+    case avoidKnowns = "img_mypage_9"
+    case events = "img_mypage_10"
+    case logout = ""
 }
 
 struct MyPageData {
@@ -51,13 +54,16 @@ class MyPageViewController: BaseViewController {
     private func reloadData() {
         tableData.removeAll()
         
-        tableData.append(MyPageData(type: .Profile, title: "프로필"))
-        tableData.append(MyPageData(type: .Settings, title: "설정"))
-        tableData.append(MyPageData(type: .Purchase, title: "퍼센트 충전"))
-        tableData.append(MyPageData(type: .Notice, title: "공지사항"))
-        tableData.append(MyPageData(type: .Supports, title: "고객센터"))
-        tableData.append(MyPageData(type: .Terms, title: "이용약관 / 법적고지"))
-        tableData.append(MyPageData(type: .Logout, title: "로그아웃"))
+        tableData.append(MyPageData(type: .avoidKnowns, title: "지인 만나지 않기"))
+        tableData.append(MyPageData(type: .preferLooks, title: "이상형 설정"))
+        tableData.append(MyPageData(type: .profile, title: "프로필"))
+        tableData.append(MyPageData(type: .settings, title: "설정"))
+        tableData.append(MyPageData(type: .purchase, title: "체리 충전"))
+        tableData.append(MyPageData(type: .notice, title: "공지사항"))
+        tableData.append(MyPageData(type: .events, title: "이벤트"))
+        tableData.append(MyPageData(type: .supports, title: "고객센터"))
+        tableData.append(MyPageData(type: .terms, title: "이용약관 / 개인정보 취급 방침"))
+        tableData.append(MyPageData(type: .logout, title: "로그아웃"))
         
         theTableView.reloadData()
     }
@@ -68,17 +74,34 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let data = tableData[indexPath.row]
         
         switch data.type {
-        case .Settings:
+        case .avoidKnowns:
+            let viewController = AvoidKnownsSettingViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
+            break
+            
+        case .preferLooks:
+            let viewController = PreferLooksSettingViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
+            break
+            
+        case .settings:
             let viewController = SettingsViewController()
             self.navigationController?.pushViewController(viewController, animated: true)
             break
             
-        case .Notice, .Supports:
-            let viewController = BoardViewController(type: data.type == .Supports ? .faq : .notice)
+        case .notice/*, .supports*/, .events:
+            var type = BoardType.notice
+            if data.type == .supports {
+                type = .faq
+            } else if data.type == .events {
+                type = .event
+            }
+            
+            let viewController = BoardViewController(type: type)
             self.navigationController?.pushViewController(viewController, animated: true)
             break
             
-        case .Logout:
+        case .logout:
             QDataManager.shared.password = nil
             QDataManager.shared.commit()
             

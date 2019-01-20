@@ -31,6 +31,8 @@
 	<string>프로필 사진 촬영을 위해 카메라를 사용합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>프로필 사진을 업로드하기 위해 사진을 사용합니다.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>지인 만나지 않기 기능을 사용하기 위해 연락처를 활용합니다. 수집한 번호는 [지인 만나지 않기] 기능 외에 다른 용도로 쓰이지 않습니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

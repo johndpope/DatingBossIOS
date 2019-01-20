@@ -22,5 +22,6 @@ class ChoiceViewController: BaseMainViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "검색"
     }
 }

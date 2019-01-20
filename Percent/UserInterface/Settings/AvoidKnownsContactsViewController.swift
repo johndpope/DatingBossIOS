@@ -9,3 +9,7 @@
 import UIKit
 
 import Contacts
+
+class AvoidKnownsContactsViewController: UIViewController {
+    
+}

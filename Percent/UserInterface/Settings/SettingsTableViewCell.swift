@@ -36,14 +36,14 @@ class SettingsTableViewCell: UITableViewCell {
         imageViewIcon.contentMode = .scaleAspectFit
         self.contentView.addSubview(imageViewIcon)
         
-        imageViewIcon.widthAnchor.constraint(equalToConstant: 16 * QUtils.optimizeRatio()).isActive = true
-        imageViewIcon.heightAnchor.constraint(equalToConstant: 16 * QUtils.optimizeRatio()).isActive = true
+        imageViewIcon.widthAnchor.constraint(equalToConstant: 32 * QUtils.optimizeRatio()).isActive = true
+        imageViewIcon.heightAnchor.constraint(equalToConstant: 32 * QUtils.optimizeRatio()).isActive = true
         imageViewIcon.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 29 * QUtils.optimizeRatio()).isActive = true
         imageViewIcon.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
         
         labelTitle.translatesAutoresizingMaskIntoConstraints = false
         labelTitle.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        labelTitle.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        labelTitle.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .regular)
         self.contentView.addSubview(labelTitle)
         
         labelTitle.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true

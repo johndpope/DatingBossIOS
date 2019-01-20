@@ -36,18 +36,28 @@ class MyPageTableViewCell: UITableViewCell {
         imageViewIcon.contentMode = .scaleAspectFit
         self.contentView.addSubview(imageViewIcon)
         
-        imageViewIcon.widthAnchor.constraint(equalToConstant: 24 * QUtils.optimizeRatio()).isActive = true
-        imageViewIcon.heightAnchor.constraint(equalToConstant: 24 * QUtils.optimizeRatio()).isActive = true
+        imageViewIcon.widthAnchor.constraint(equalToConstant: 32 * QUtils.optimizeRatio()).isActive = true
+        imageViewIcon.heightAnchor.constraint(equalToConstant: 32 * QUtils.optimizeRatio()).isActive = true
         imageViewIcon.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24 * QUtils.optimizeRatio()).isActive = true
         imageViewIcon.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
         
         labelTitle.translatesAutoresizingMaskIntoConstraints = false
         labelTitle.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        labelTitle.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        labelTitle.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .regular)
         self.contentView.addSubview(labelTitle)
         
         labelTitle.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
         labelTitle.leadingAnchor.constraint(equalTo: imageViewIcon.trailingAnchor, constant: 24 * QUtils.optimizeRatio()).isActive = true
+        
+        let seperator = UIView()
+        seperator.translatesAutoresizingMaskIntoConstraints = false
+        seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
+        self.contentView.addSubview(seperator)
+        
+        seperator.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
+        seperator.leadingAnchor.constraint(equalTo: labelTitle.leadingAnchor).isActive = true
+        seperator.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

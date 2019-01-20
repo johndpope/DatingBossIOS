@@ -18,4 +18,10 @@ class FavouriteViewController: BaseMainViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "모아보기"
+    }
 }

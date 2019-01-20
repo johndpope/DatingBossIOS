@@ -103,14 +103,31 @@ class SettingsViewController: BaseViewController {
             self.tableData.removeAll()
             self.backupData.removeAll()
             
-            self.keys.append("aKey")
+            var aDataArray = [SettingsData](), bDataArray = [SettingsData]()
             
-            var dataArray = [SettingsData]()
-            dataArray.append(contentsOf: responseData.map({ (item) -> SettingsData in
-                return SettingsData(with: item)
-            }))
-            self.tableData["aKey"] = dataArray
-            self.backupData["aKey"] = dataArray
+            for i in 0 ..< responseData.count {
+                let item = SettingsData(with: responseData[i])
+                guard let setup_code = item.setup_code else { continue }
+                switch setup_code {
+                case "060", "070", "080":
+                    bDataArray.append(item)
+                    break
+                    
+                default:
+                    aDataArray.append(item)
+                    break
+                }
+            }
+            
+            var key = "푸시 알림"
+            self.keys.append(key)
+            self.tableData[key] = aDataArray
+            self.backupData[key] = aDataArray
+            
+            key = "회원 관리"
+            self.keys.append(key)
+            self.tableData[key] = bDataArray
+            self.backupData[key] = bDataArray
             
             self.theTableView.reloadData()
         }
@@ -177,28 +194,44 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return keys.count
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 46 * QUtils.optimizeRatio()
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        var frame = CGRect.zero
-//        frame.size.width = tableView.frame.size.width
-//        frame.size.height = 46 * QUtils.optimizeRatio()
-//        let headerView = UIView(frame: frame)
-//
-//        let labelTitle = UILabel()
-//        labelTitle.translatesAutoresizingMaskIntoConstraints = false
-//        labelTitle.text = keys[section]
-//        labelTitle.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-//        labelTitle.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
-//        headerView.addSubview(labelTitle)
-//
-//        labelTitle.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
-//        labelTitle.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-//
-//        return headerView
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 46 * QUtils.optimizeRatio()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 8 * QUtils.optimizeRatio()
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var frame = CGRect.zero
+        frame.size.width = tableView.frame.size.width
+        frame.size.height = 46 * QUtils.optimizeRatio()
+        let headerView = UIView(frame: frame)
+        
+        headerView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
+
+        let labelTitle = UILabel()
+        labelTitle.translatesAutoresizingMaskIntoConstraints = false
+        labelTitle.text = keys[section]
+        labelTitle.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+        labelTitle.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
+        headerView.addSubview(labelTitle)
+
+        labelTitle.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
+        labelTitle.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        var frame = CGRect.zero
+        frame.size.width = tableView.frame.size.width
+        frame.size.height = 8 * QUtils.optimizeRatio()
+        let footerView = UIView(frame: frame)
+        footerView.backgroundColor = .clear
+        
+        return footerView
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let key = keys[section]

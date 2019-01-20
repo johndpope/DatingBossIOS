@@ -17,7 +17,8 @@ class BaseMainViewController: BaseViewController {
         switch sender {
         case buttonProfile:
             let viewController = MyPageViewController()
-            self.navigationController?.pushViewController(viewController, animated: true)
+            let navController = UINavigationController(rootViewController: viewController)
+            self.present(navController, animated: true, completion: nil)
             break
             
         default:
