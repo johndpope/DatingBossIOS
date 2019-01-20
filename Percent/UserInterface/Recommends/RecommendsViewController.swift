@@ -153,18 +153,16 @@ class RecommendsViewController: BaseMainViewController {
     }
     
     func reloadData() {
-        loadingQueue.sync {
-            self.collectionView.reloadData()
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Main.Recommends + "\(MyData.shared.mem_idx)", method: .get, params: nil) { (isSucceed, errMessage, response) in
+            guard let responseData = response as? [[String:Any]] else { return }
             
-            let httpClient = QHttpClient()
-            httpClient.request(to: RequestUrl.Main.Recommends + "\(MyData.shared.mem_idx)", method: .get, params: nil) { (isSucceed, errMessage, response) in
-                guard let responseData = response as? [[String:Any]] else { return }
-                
-                self.collectionData.append(contentsOf: responseData.map({ (item) -> RecommendData in
-                    return RecommendData(with: item)
-                }))
-                self.collectionView.reloadData()
-            }
+            self.collectionData.removeAll()
+            
+            self.collectionData.append(contentsOf: responseData.map({ (item) -> RecommendData in
+                return RecommendData(with: item)
+            }))
+            self.collectionView.reloadData()
         }
     }
 }
