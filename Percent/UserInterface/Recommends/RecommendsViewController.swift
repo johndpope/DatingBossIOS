@@ -131,6 +131,18 @@ class RecommendsViewController: BaseMainViewController {
             self.present(navController, animated: true, completion: nil)
             break
             
+        case buttonPrefer:
+            let viewController = PreferLooksSettingViewController()
+            let navController = UINavigationController(rootViewController: viewController)
+            self.present(navController, animated: true, completion: nil)
+            break
+            
+        case buttonAvoidKnowns:
+            let viewController = AvoidKnownsSettingViewController()
+            let navController = UINavigationController(rootViewController: viewController)
+            self.present(navController, animated: true, completion: nil)
+            break
+            
         default:
             break
         }

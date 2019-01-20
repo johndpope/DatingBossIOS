@@ -36,6 +36,9 @@ class QDataManager: NSObject {
     var deviceToken: Data?
     var fcmToken: String?
     
+    var preferSettingCount = 0
+    var preferSettingDate: Double?
+    
     required override init() {
         super.init()
         self.clear()
@@ -57,6 +60,8 @@ class QDataManager: NSObject {
         self.signupData = aDecoder.decodeObject(forKey: "signupData") as? [String:Any] ?? [:]
         self.deviceToken  =  aDecoder.decodeObject(forKey: "deviceToken") as? Data
         self.fcmToken  =  aDecoder.decodeObject(forKey: "fcmToken") as? String
+        self.preferSettingCount  = (aDecoder.decodeObject(forKey: "preferSettingCount") as? NSNumber)?.intValue ?? 0
+        self.preferSettingDate  =  (aDecoder.decodeObject(forKey: "preferSettingDate") as? NSNumber)?.doubleValue
     }
     
     func commit() {
@@ -83,6 +88,8 @@ class QDataManager: NSObject {
         signupData.removeAll()
         deviceToken = nil
         fcmToken = nil
+        preferSettingCount = 0
+        preferSettingDate = nil
         
         commit()
     }
@@ -166,5 +173,7 @@ extension QDataManager: NSCopying, NSCoding {
         aCoder.encode(signupData, forKey: "signupData")
         aCoder.encode(deviceToken, forKey: "deviceToken")
         aCoder.encode(fcmToken, forKey: "fcmToken")
+        aCoder.encode(NSNumber(value: preferSettingCount), forKey: "preferSettingCount")
+        aCoder.encode(preferSettingDate != nil ? NSNumber(value: preferSettingDate!) : nil, forKey: "preferSettingDate")
     }
 }

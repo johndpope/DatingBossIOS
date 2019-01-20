@@ -61,7 +61,7 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
             timer = nil
             
             guard let target = data?.sim_sum else { return }
-            timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true, block: { (aTimer) in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.008, repeats: true, block: { (aTimer) in
                 self.percent += 1
                 guard self.percent <= target else {
                     self.timer?.invalidate()

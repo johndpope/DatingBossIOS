@@ -140,6 +140,11 @@
 		1CCE2BD521F387240057122D /* img_main_tab_3_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BCB21F387240057122D /* img_main_tab_3_sel@3x.png */; };
 		1CCE2BD621F387240057122D /* img_main_tab_1_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BCC21F387240057122D /* img_main_tab_1_sel@3x.png */; };
 		1CCE2BD721F387240057122D /* img_main_tab_4_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2BCD21F387240057122D /* img_main_tab_4_nor@3x.png */; };
+		1CCE2BDB21F39AD20057122D /* PreferLooksSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BDA21F39AD20057122D /* PreferLooksSettingViewController.swift */; };
+		1CCE2BDD21F40AB40057122D /* PreferLooksNoDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BDC21F40AB40057122D /* PreferLooksNoDataViewController.swift */; };
+		1CCE2BDF21F4118B0057122D /* AvoidKnownsSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BDE21F4118B0057122D /* AvoidKnownsSettingViewController.swift */; };
+		1CCE2BE121F4129E0057122D /* AvoidKnownsNoDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BE021F4129E0057122D /* AvoidKnownsNoDataViewController.swift */; };
+		1CCE2BE321F418340057122D /* AvoidKnownsContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2BE221F418330057122D /* AvoidKnownsContactsViewController.swift */; };
 		1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD3D99121E898E500938293 /* StoreKit.framework */; };
 		1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */; };
 		1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */; };
@@ -342,6 +347,11 @@
 		1CCE2BCB21F387240057122D /* img_main_tab_3_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_main_tab_3_sel@3x.png"; sourceTree = "<group>"; };
 		1CCE2BCC21F387240057122D /* img_main_tab_1_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_main_tab_1_sel@3x.png"; sourceTree = "<group>"; };
 		1CCE2BCD21F387240057122D /* img_main_tab_4_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_main_tab_4_nor@3x.png"; sourceTree = "<group>"; };
+		1CCE2BDA21F39AD20057122D /* PreferLooksSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferLooksSettingViewController.swift; sourceTree = "<group>"; };
+		1CCE2BDC21F40AB40057122D /* PreferLooksNoDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferLooksNoDataViewController.swift; sourceTree = "<group>"; };
+		1CCE2BDE21F4118B0057122D /* AvoidKnownsSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoidKnownsSettingViewController.swift; sourceTree = "<group>"; };
+		1CCE2BE021F4129E0057122D /* AvoidKnownsNoDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoidKnownsNoDataViewController.swift; sourceTree = "<group>"; };
+		1CCE2BE221F418330057122D /* AvoidKnownsContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoidKnownsContactsViewController.swift; sourceTree = "<group>"; };
 		1CD3D99021E8980C00938293 /* Percent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Percent.entitlements; sourceTree = "<group>"; };
 		1CD3D99121E898E500938293 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecTableViewCell.swift; sourceTree = "<group>"; };
@@ -780,9 +790,9 @@
 		1CB5430321DF472A00B37EAE /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				1CB5430A21DF473200B37EAE /* Extensions */,
 				1CB5430421DF472A00B37EAE /* Strings.swift */,
 				1CB5430521DF472A00B37EAE /* Defines.swift */,
-				1CB5430A21DF473200B37EAE /* Extensions */,
 				1CB5430621DF472A00B37EAE /* Urls.swift */,
 			);
 			path = Constants;
@@ -857,6 +867,11 @@
 				1C5AC81621E35D900007827D /* SettingsTableViewCell.swift */,
 				1C5AC81B21E39C4B0007827D /* BoardViewController.swift */,
 				1C5AC81F21E3A3EB0007827D /* BoardTableViewCell.swift */,
+				1CCE2BDA21F39AD20057122D /* PreferLooksSettingViewController.swift */,
+				1CCE2BDC21F40AB40057122D /* PreferLooksNoDataViewController.swift */,
+				1CCE2BDE21F4118B0057122D /* AvoidKnownsSettingViewController.swift */,
+				1CCE2BE021F4129E0057122D /* AvoidKnownsNoDataViewController.swift */,
+				1CCE2BE221F418330057122D /* AvoidKnownsContactsViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1089,6 +1104,7 @@
 				1C03842021D1EBE70024C3B3 /* UserPictureCollectionViewCell.swift in Sources */,
 				1CE69AAA21D896D600B9FE4A /* UserProfileStatsView.swift in Sources */,
 				1CA5877721E5EDB1002B60F2 /* SignupTermsViewController.swift in Sources */,
+				1CCE2BDD21F40AB40057122D /* PreferLooksNoDataViewController.swift in Sources */,
 				1CE69AF021DA458F00B9FE4A /* RecommendsCollectionViewCell.swift in Sources */,
 				1CD3D9AE21EA5E3200938293 /* SignupFinalizeViewController.swift in Sources */,
 				1CE69AE321DA43B900B9FE4A /* CategoryViewController.swift in Sources */,
@@ -1107,9 +1123,11 @@
 				1CAC5A8B21E718C2002A0A4E /* SignupProfileSpecsViewController.swift in Sources */,
 				1C5AC81921E37B7D0007827D /* SettingsData.swift in Sources */,
 				1CB5433921DF473B00B37EAE /* SBJsonStreamWriterState.m in Sources */,
+				1CCE2BDB21F39AD20057122D /* PreferLooksSettingViewController.swift in Sources */,
 				1CB5430121DF44E300B37EAE /* QUrlReachablility.swift in Sources */,
 				1CE69ACD21D9B8F100B9FE4A /* ChatViewController.swift in Sources */,
 				1CC9B60421DC6DD4008C22B8 /* BaseMainViewController.swift in Sources */,
+				1CCE2BE121F4129E0057122D /* AvoidKnownsNoDataViewController.swift in Sources */,
 				1C03841721D090F20024C3B3 /* RecommendData.swift in Sources */,
 				1CB5433821DF473B00B37EAE /* SBJsonStreamWriterAccumulator.m in Sources */,
 				1CCE2BB721F1CD9C0057122D /* RadarChartTestViewController.swift in Sources */,
@@ -1121,6 +1139,7 @@
 				1C03841121D002090024C3B3 /* BaseData.swift in Sources */,
 				1CA5877F21E5F801002B60F2 /* SignupTermsDetailViewController.swift in Sources */,
 				1CD3D99E21EA42FA00938293 /* SignupSelectFavorLooksViewController.swift in Sources */,
+				1CCE2BDF21F4118B0057122D /* AvoidKnownsSettingViewController.swift in Sources */,
 				1CE69AF121DA458F00B9FE4A /* RecommendsViewController.swift in Sources */,
 				1CAC5A9221E72344002A0A4E /* UserPayload.swift in Sources */,
 				1CA5877921E5EDF8002B60F2 /* SignupTermsTableViewCell.swift in Sources */,
@@ -1159,6 +1178,7 @@
 				1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */,
 				1CE69AFD21DBCBF300B9FE4A /* ChatListData.swift in Sources */,
 				1CB5431221DF473300B37EAE /* Application.swift in Sources */,
+				1CCE2BE321F418340057122D /* AvoidKnownsContactsViewController.swift in Sources */,
 				1CA5878121E5F9A5002B60F2 /* TermsData.swift in Sources */,
 				1CB5433A21DF473B00B37EAE /* SBJsonTokeniser.m in Sources */,
 				1C03841321D0025F0024C3B3 /* UserData.swift in Sources */,
