@@ -39,34 +39,37 @@ class FavouriteHeaderView: UICollectionReusableView {
         buttonDelete.setTitle("삭제하기", for: .normal)
         buttonDelete.setTitleColor(#colorLiteral(red: 0.7018831372, green: 0.7020055652, blue: 0.7018753886, alpha: 1), for: .normal)
         buttonDelete.titleLabel?.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
-        buttonDelete.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16 * QUtils.optimizeRatio(), bottom: 0, right: 16 * QUtils.optimizeRatio())
+        buttonDelete.sizeToFit()
         self.addSubview(buttonDelete)
         
         buttonDelete.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         buttonDelete.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         buttonDelete.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        buttonDelete.widthAnchor.constraint(equalToConstant: buttonDelete.frame.size.width + 32 * QUtils.optimizeRatio()).isActive = true
         
         buttonConfirm.translatesAutoresizingMaskIntoConstraints = false
         buttonConfirm.setTitle("삭제", for: .normal)
         buttonConfirm.setTitleColor(#colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), for: .normal)
         buttonConfirm.titleLabel?.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
-        buttonConfirm.contentEdgeInsets = UIEdgeInsets(top: 0, left: 8 * QUtils.optimizeRatio(), bottom: 0, right: 16 * QUtils.optimizeRatio())
+        buttonConfirm.sizeToFit()
         self.addSubview(buttonConfirm)
         
         buttonConfirm.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         buttonConfirm.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        buttonConfirm.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        buttonConfirm.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
+        buttonConfirm.widthAnchor.constraint(equalToConstant: buttonConfirm.frame.size.width + 16 * QUtils.optimizeRatio()).isActive = true
         
         buttonCancel.translatesAutoresizingMaskIntoConstraints = false
         buttonCancel.setTitle("취소", for: .normal)
         buttonCancel.setTitleColor(#colorLiteral(red: 0.7018831372, green: 0.7020055652, blue: 0.7018753886, alpha: 1), for: .normal)
         buttonCancel.titleLabel?.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
-        buttonCancel.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16 * QUtils.optimizeRatio(), bottom: 0, right: 8 * QUtils.optimizeRatio())
+        buttonCancel.sizeToFit()
         self.addSubview(buttonCancel)
         
         buttonCancel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         buttonCancel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         buttonCancel.trailingAnchor.constraint(equalTo: buttonConfirm.leadingAnchor).isActive = true
+        buttonCancel.widthAnchor.constraint(equalToConstant: buttonCancel.frame.size.width + 16 * QUtils.optimizeRatio()).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
