@@ -57,13 +57,5 @@ class MainViewController: UITabBarController {
 extension MainViewController: MainTabbarViewDelegate {
     func mainTabbarView(_ tabbarView: MainTabbarView, didSelected index: Int) {
         self.selectedIndex = index
-        
-        if index == 0, recommendsViewController.initialized {
-            recommendsViewController.reloadData()
-        } else if index == 2, categoryViewController.initialized {
-            categoryViewController.reloadData()
-        } else if index == 4, favouriteViewController.initialized {
-            favouriteViewController.reloadData()
-        }
     }
 }
