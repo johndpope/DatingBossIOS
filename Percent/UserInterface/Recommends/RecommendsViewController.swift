@@ -131,6 +131,7 @@ class RecommendsViewController: BaseMainViewController {
         switch sender {
         case buttonGuide:
             let viewController = BoardViewController(type: .notice)
+            viewController.showGuide = true
             let navController = UINavigationController(rootViewController: viewController)
             self.present(navController, animated: true, completion: nil)
             break

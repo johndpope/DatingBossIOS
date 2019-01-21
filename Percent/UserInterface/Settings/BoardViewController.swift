@@ -30,6 +30,8 @@ class BoardViewController: BaseViewController {
     
     private var tableData = [BoardData]()
     
+    var showGuide = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,8 +80,14 @@ class BoardViewController: BaseViewController {
             
             self.tableData.removeAll()
             self.tableData.append(contentsOf: responseData.map({ (item) -> BoardData in
-                return BoardData(with: item)
+                let newItem = BoardData(with: item)
+                if self.showGuide, newItem.board_idx == 1 {
+                    newItem.isExpanded = true
+                }
+                return newItem
             }))
+            
+            self.showGuide = false
             
             self.theTableView.reloadData()
         }

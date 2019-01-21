@@ -9,12 +9,6 @@
 import Foundation
 
 class AppData: BaseData {
-    convenience init(withCode aCode: String?, name: String?) {
-        self.init(with: [:])
-        
-        code = aCode
-        code_name = name
-    }
     
     var code: String? {
         get {

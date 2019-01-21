@@ -39,6 +39,8 @@ struct RequestUrl {
         public static let AddTag = "http://www.lovecenthome.com/ios/looks/"
     }
     
+    public static let Search = "http://www.lovecenthome.com/search/"
+    
     public struct Main {
         public static let Recommends = "http://www.lovecenthome.com/ios/recom/"
         public static let Favourite  = "http://www.lovecenthome.com/ios/gather/"
