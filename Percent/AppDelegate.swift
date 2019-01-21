@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Messaging.messaging().delegate = self
         
+        
         let viewController = IntroViewController()
         self.window?.rootViewController = viewController
         self.window!.makeKeyAndVisible()

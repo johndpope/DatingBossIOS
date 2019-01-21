@@ -20,21 +20,21 @@ class UserProfileHeaderView: UIView {
     let buttonLike = UIButton(type: .custom)
     let buttonEdit = UIButton(type: .custom)
     
-    let data: UserData
+    var data: UserData
     
     var showProfile: Bool = true
     
     var constraintValue: CGFloat = 0 {
         didSet {
             constraintLeft.constant = 56 * QUtils.optimizeRatio() * constraintValue
-            constraintRight.constant = -56 * QUtils.optimizeRatio() * constraintValue
+            constraintRight?.constant = -56 * QUtils.optimizeRatio() * constraintValue
             
             self.layoutIfNeeded()
         }
     }
     
     private var constraintLeft: NSLayoutConstraint!
-    private var constraintRight: NSLayoutConstraint!
+    private var constraintRight: NSLayoutConstraint?
     
     init(frame: CGRect = CGRect.zero, data uData: UserData) {
         data = uData
@@ -53,7 +53,6 @@ class UserProfileHeaderView: UIView {
         imageView.heightAnchor.constraint(equalToConstant: imageView.layer.cornerRadius * 2).isActive = true
         
         labelName.translatesAutoresizingMaskIntoConstraints = false
-        labelName.text = data.nickname
         labelName.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         labelName.font = UIFont.systemFont(ofSize: 18 * QUtils.optimizeRatio(), weight: .heavy)
         self.addSubview(labelName)
@@ -62,7 +61,6 @@ class UserProfileHeaderView: UIView {
         labelName.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
         
         labelAge.translatesAutoresizingMaskIntoConstraints = false
-        labelAge.text =  "\(data.age)세"
         labelAge.textColor = #colorLiteral(red: 0.4156862745, green: 0.4117647059, blue: 0.4156862745, alpha: 1)
         labelAge.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold)
         self.addSubview(labelAge)
@@ -71,7 +69,6 @@ class UserProfileHeaderView: UIView {
         labelAge.leadingAnchor.constraint(equalTo: labelName.trailingAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
         
         labelRegion.translatesAutoresizingMaskIntoConstraints = false
-        labelRegion.text = data.area
         labelRegion.textColor = #colorLiteral(red: 0.4156862745, green: 0.4117647059, blue: 0.4156862745, alpha: 1)
         labelRegion.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold)
         self.addSubview(labelRegion)
@@ -90,7 +87,6 @@ class UserProfileHeaderView: UIView {
         seperator.widthAnchor.constraint(equalToConstant: 1).isActive = true
         
         labelJobTitle.translatesAutoresizingMaskIntoConstraints = false
-        labelJobTitle.text = data.job
         labelJobTitle.textColor = #colorLiteral(red: 0.4156862745, green: 0.4117647059, blue: 0.4156862745, alpha: 1)
         labelJobTitle.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold)
         self.addSubview(labelJobTitle)
@@ -107,8 +103,7 @@ class UserProfileHeaderView: UIView {
             buttonEdit.widthAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
             buttonEdit.heightAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
             buttonEdit.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-            constraintRight = buttonEdit.leadingAnchor.constraint(equalTo: self.trailingAnchor)
-            constraintRight.isActive = true
+            buttonEdit.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
         } else {
             buttonLike.translatesAutoresizingMaskIntoConstraints = false
             buttonLike.setImage(UIImage(named: "img_heart")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 32 * QUtils.optimizeRatio()), for: .normal)
@@ -118,7 +113,7 @@ class UserProfileHeaderView: UIView {
             buttonLike.heightAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
             buttonLike.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             constraintRight = buttonLike.leadingAnchor.constraint(equalTo: self.trailingAnchor)
-            constraintRight.isActive = true
+            constraintRight?.isActive = true
         }
         
 //        buttonFavourite.translatesAutoresizingMaskIntoConstraints = false
@@ -146,5 +141,12 @@ class UserProfileHeaderView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError()
+    }
+    
+    func reloadData() {
+        labelName.text = data.nickname
+        labelAge.text =  "\(data.age)세"
+        labelRegion.text = data.area
+        labelJobTitle.text = data.job
     }
 }

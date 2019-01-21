@@ -329,6 +329,8 @@ class LoginViewController: BaseViewController {
                 
                 MyData.shared.setMyInfo(with: responseData)
                 
+                AppDataManager.shared.reloadData()
+                
                 QDataManager.shared.userId = self.textFieldEmail.text
                 QDataManager.shared.password = self.textFieldPassword.text
                 QDataManager.shared.commit()

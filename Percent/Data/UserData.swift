@@ -21,6 +21,10 @@ enum SignupStatus: String {
 class MyData: UserData {
     static let shared = MyData()
     
+    var income_cd: String? {
+        return rawData["income_cd"] as? String
+    }
+    
     func setMyInfo(with dict: [String:Any], reset: Bool = false) {
         super.updateData(with: dict, reset: reset)
         

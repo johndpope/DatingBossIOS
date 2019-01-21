@@ -173,6 +173,8 @@
 		1CCE2C2121F597CD0057122D /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C2021F597CD0057122D /* TermsViewController.swift */; };
 		1CCE2C2721F59BF70057122D /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C2621F59BF70057122D /* TermsTableViewCell.swift */; };
 		1CCE2C2921F59D260057122D /* TermsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C2821F59D260057122D /* TermsDetailViewController.swift */; };
+		1CCE2C2B21F5ABB00057122D /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C2A21F5ABB00057122D /* EditProfileViewController.swift */; };
+		1CCE2C2D21F5ADAA0057122D /* BaseEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C2C21F5ADAA0057122D /* BaseEditProfileViewController.swift */; };
 		1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD3D99121E898E500938293 /* StoreKit.framework */; };
 		1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */; };
 		1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */; };
@@ -408,6 +410,8 @@
 		1CCE2C2021F597CD0057122D /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		1CCE2C2621F59BF70057122D /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
 		1CCE2C2821F59D260057122D /* TermsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsDetailViewController.swift; sourceTree = "<group>"; };
+		1CCE2C2A21F5ABB00057122D /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		1CCE2C2C21F5ADAA0057122D /* BaseEditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEditProfileViewController.swift; sourceTree = "<group>"; };
 		1CD3D99021E8980C00938293 /* Percent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Percent.entitlements; sourceTree = "<group>"; };
 		1CD3D99121E898E500938293 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecTableViewCell.swift; sourceTree = "<group>"; };
@@ -813,6 +817,7 @@
 			children = (
 				1CA5877421E5EAED002B60F2 /* BaseSignupViewController.swift */,
 				1CA5878E21E6FAFA002B60F2 /* BaseSignupStepsViewController.swift */,
+				1CCE2C2C21F5ADAA0057122D /* BaseEditProfileViewController.swift */,
 				1CA5878A21E63775002B60F2 /* SignupNavigationViewController.swift */,
 				1CA5878C21E6DB79002B60F2 /* SignupNavigationBarView.swift */,
 				1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */,
@@ -953,6 +958,7 @@
 				1CCE2BE021F4129E0057122D /* AvoidKnownsNoDataViewController.swift */,
 				1CCE2BE221F418330057122D /* AvoidKnownsContactsViewController.swift */,
 				1CCE2C1A21F5933B0057122D /* MyProfileViewController.swift */,
+				1CCE2C2A21F5ABB00057122D /* EditProfileViewController.swift */,
 				1CCE2C2021F597CD0057122D /* TermsViewController.swift */,
 				1CCE2C2621F59BF70057122D /* TermsTableViewCell.swift */,
 				1CCE2C2821F59D260057122D /* TermsDetailViewController.swift */,
@@ -1249,6 +1255,7 @@
 				1C03841121D002090024C3B3 /* BaseData.swift in Sources */,
 				1CA5877F21E5F801002B60F2 /* SignupTermsDetailViewController.swift in Sources */,
 				1CD3D99E21EA42FA00938293 /* SignupSelectFavorLooksViewController.swift in Sources */,
+				1CCE2C2D21F5ADAA0057122D /* BaseEditProfileViewController.swift in Sources */,
 				1CCE2BDF21F4118B0057122D /* AvoidKnownsSettingViewController.swift in Sources */,
 				1CE69AF121DA458F00B9FE4A /* RecommendsViewController.swift in Sources */,
 				1CAC5A9221E72344002A0A4E /* UserPayload.swift in Sources */,
@@ -1267,6 +1274,7 @@
 				1C03841921D09B220024C3B3 /* CircleIndicatorView.swift in Sources */,
 				1CA5878F21E6FAFA002B60F2 /* BaseSignupStepsViewController.swift in Sources */,
 				1C03841C21D1CDE80024C3B3 /* UserProfileViewController.swift in Sources */,
+				1CCE2C2B21F5ABB00057122D /* EditProfileViewController.swift in Sources */,
 				1CC9B5F221DC52B8008C22B8 /* MyPageViewController.swift in Sources */,
 				1CA5878921E63594002B60F2 /* SignupProfileViewController.swift in Sources */,
 				1C5AC83121E497BA0007827D /* IntroViewController.swift in Sources */,

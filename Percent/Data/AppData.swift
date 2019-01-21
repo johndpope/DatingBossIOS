@@ -9,19 +9,42 @@
 import Foundation
 
 class AppData: BaseData {
+    convenience init(withCode aCode: String?, name: String?) {
+        self.init(with: [:])
+        
+        code = aCode
+        code_name = name
+    }
+    
     var code: String? {
-        return rawData["code"] as? String
+        get {
+            return rawData["code"] as? String
+        } set {
+            rawData["code"] = newValue
+        }
     }
     
     var code_type_name: String? {
-        return rawData["code_type_name"] as? String
+        get {
+            return rawData["code_type_name"] as? String
+        } set {
+            rawData["code_type_name"] = newValue
+        }
     }
     
     var code_name: String? {
-        return rawData["code_name"] as? String
+        get {
+            return rawData["code_name"] as? String
+        } set {
+            rawData["code_name"] = newValue
+        }
     }
     
     var code_type: String? {
-        return rawData["code_type"] as? String
+        get {
+            return rawData["code_type"] as? String
+        } set {
+            rawData["code_type"] = newValue
+        }
     }
 }

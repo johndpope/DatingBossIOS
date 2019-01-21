@@ -130,6 +130,8 @@ class IntroViewController: BaseViewController {
                         
                         MyData.shared.setMyInfo(with: responseData)
 
+                        AppDataManager.shared.reloadData()
+                        
                         guard ApplicationOptions.Build.Level.rawValue > BuildLevel.DEVELOP.rawValue else {
                             let viewController = SignupProfileViewController()
                             let navController = SignupNavigationViewController(rootViewController: viewController)

@@ -136,6 +136,101 @@ class UserPayload: NSObject {
         evaluatedCount = signupData["evaluatedCount"] as? Int ?? 0
     }
     
+    func loadFromMyData(_ completion: (() -> Void)? = nil) {
+        UserPayload.shared.clear()
+        
+        height = MyData.shared.height
+        
+        var key = MyData.shared.sex == .male ? "maleform" : "femaleform"
+        if let code = MyData.shared.form_cd, let dataArray = AppDataManager.shared.data[key] {
+            for data in dataArray {
+                guard data.code == code else { continue }
+                shape = data
+                break
+            }
+        }
+        
+        blood = MyData.shared.blood_type?.rawValue.uppercased()
+        
+        key = "area"
+        if let code = MyData.shared.area_cd, let dataArray = AppDataManager.shared.data[key] {
+            for data in dataArray {
+                guard data.code == code else { continue }
+                region = data
+                break
+            }
+        }
+        
+        key = "edu"
+        if let code = MyData.shared.edu_cd, let dataArray = AppDataManager.shared.data[key] {
+            for data in dataArray {
+                guard data.code == code else { continue }
+                education = data
+                break
+            }
+        }
+        
+        educationDetail = MyData.shared.school
+        
+        key = "job"
+        if let code = MyData.shared.job_cd, let dataArray = AppDataManager.shared.data[key] {
+            for data in dataArray {
+                guard data.code == code else { continue }
+                job = data
+                break
+            }
+        }
+        
+        jobDetail = MyData.shared.job_etc
+        
+        key = "income"
+        if let code = MyData.shared.income_cd, let dataArray = AppDataManager.shared.data[key] {
+            for data in dataArray {
+                guard data.code == code else { continue }
+                wage = data
+                break
+            }
+        }
+        
+        key = "religion"
+        if let code = MyData.shared.religion_cd, let dataArray = AppDataManager.shared.data[key] {
+            for data in dataArray {
+                guard data.code == code else { continue }
+                religion = data
+                break
+            }
+        }
+        
+        key = "hobby"
+        if let codes = MyData.shared.hobby_cd?.components(separatedBy: ","), let dataArray = AppDataManager.shared.data[key] {
+            for data in dataArray {
+                guard codes.firstIndex(of: data.code ?? "") != nil else { continue }
+                hobby.append(data)
+                break
+            }
+        }
+        
+        key = "smoking"
+        if let code = MyData.shared.smoking_cd, let dataArray = AppDataManager.shared.data[key] {
+            for data in dataArray {
+                guard data.code == code else { continue }
+                smoking = data
+                break
+            }
+        }
+        
+        key = "drinking"
+        if let code = MyData.shared.drinking_cd, let dataArray = AppDataManager.shared.data[key] {
+            for data in dataArray {
+                guard data.code == code else { continue }
+                drinking = data
+                break
+            }
+        }
+        
+        completion?()
+    }
+    
     func commit() {
         var dataDict = [String:Any]()
         

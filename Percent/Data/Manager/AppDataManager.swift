@@ -11,6 +11,7 @@ import Foundation
 class AppDataManager: NSObject {
     static let shared = AppDataManager()
     
+    private var codeDict = [String:String]()
     private var dataDict = [String:[AppData]]()
     var data: [String:[AppData]] {
         return dataDict

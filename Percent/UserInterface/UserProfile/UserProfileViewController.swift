@@ -19,34 +19,34 @@ class UserProfileViewController: BaseViewController {
         return .lightContent
     }
     
-    let data: UserData
+    var data: UserData
     
-    private let buttonReport = UIButton(type: .custom)
+    internal let buttonReport = UIButton(type: .custom)
     
-    private let theTableView =  UITableView()
-    private let theCollectionView: UICollectionView!
-    private let coverView = UIView()
-    private let pageControl = UIPageControl()
+    internal let theTableView =  UITableView()
+    internal let theCollectionView: UICollectionView!
+    internal let coverView = UIView()
+    internal let pageControl = UIPageControl()
     
-    private let headerView: UserProfileHeaderView
-    private let statsView: UserProfileStatsView
+    internal let headerView: UserProfileHeaderView
+    internal let statsView: UserProfileStatsView
     
-    private var collectionData = [PictureData]()
+    internal var collectionData = [PictureData]()
     
-    private var tableData = [UserProfileTableData]()
+    internal var tableData = [UserProfileTableData]()
     
-    private var constraintHeaderMoving: NSLayoutConstraint!
-    private var constraintHeaderStick: NSLayoutConstraint!
+    internal var constraintHeaderMoving: NSLayoutConstraint!
+    internal var constraintHeaderStick: NSLayoutConstraint!
     
-    private let buttonProposal = UIButton(type: .custom)
+    internal let buttonProposal = UIButton(type: .custom)
     
-    private var isProposalButtonShown = true
+    internal var isProposalButtonShown = true
     
-    private var statsData = [String:[ChartValueData]]()
+    internal var statsData = [String:[ChartValueData]]()
     
-    private var showRadarChart = false
+    internal var showRadarChart = false
     
-    private let isMine: Bool
+    internal let isMine: Bool
     
     init(navigationViewEffect effect: UIVisualEffect? = nil, data uData: UserData) {
         data = uData
@@ -138,9 +138,13 @@ class UserProfileViewController: BaseViewController {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 //        headerView.showProfile(false, animated: false)
+        headerView.reloadData()
         theTableView.addSubview(headerView)
         
         headerView.buttonLike.isHidden = data.report_fl
+        
+        headerView.buttonLike.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
+        headerView.buttonEdit.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
         
         constraintHeaderMoving = headerView.topAnchor.constraint(equalTo: theCollectionView.bottomAnchor)
         constraintHeaderMoving.isActive = true
@@ -159,9 +163,6 @@ class UserProfileViewController: BaseViewController {
             statsView.leadingAnchor.constraint(equalTo: theCollectionView.leadingAnchor).isActive = true
             statsView.trailingAnchor.constraint(equalTo: theCollectionView.trailingAnchor).isActive = true
         }
-        
-        reloadImages()
-        reloadData()
         
         let tableFooterView = UIView()
         
@@ -204,6 +205,7 @@ class UserProfileViewController: BaseViewController {
         self.view.addSubview(buttonProposal)
         
         buttonProposal.isEnabled = !data.report_fl
+        buttonProposal.isHidden = isMine
         
         buttonProposal.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
         buttonProposal.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
@@ -212,9 +214,35 @@ class UserProfileViewController: BaseViewController {
         
         theTableView.contentInset = UIEdgeInsets(top: 72 * QUtils.optimizeRatio(), left: 0, bottom: 0, right: 0)
         
-        self.view.layoutIfNeeded()
+        reloadImages()
+        reloadData()
         
         reloadStats()
+        
+        self.view.layoutIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if initialized, isMine {
+            LoadingIndicatorManager.shared.showIndicatorView()
+            
+            MyData.shared.reloadData { (isSucceed) in
+                self.data = MyData.shared
+                self.headerView.data = MyData.shared
+                self.headerView.reloadData()
+                
+                self.reloadImages()
+                self.reloadData()
+                
+                self.reloadStats()
+                
+                LoadingIndicatorManager.shared.hideIndicatorView()
+                
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -240,6 +268,16 @@ class UserProfileViewController: BaseViewController {
         super.pressedButton(sender)
         
         switch sender {
+        case headerView.buttonLike:
+            break
+            
+        case headerView.buttonEdit:
+            UserPayload.shared.loadFromMyData {
+                let viewController = EditProfileViewController()
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+            break
+            
         case buttonReport:
             guard data.report_fl == false else {
                 InstanceMessageManager.shared.showMessage("이미 신고한 사용자입니다.")
@@ -305,6 +343,8 @@ class UserProfileViewController: BaseViewController {
     }
     
     func reloadData() {
+        tableData.removeAll()
+        
         tableData.append(UserProfileTableData(iconName: "img_profile_1", content: "\(data.area ?? "")에 사는 \(data.age)세 \((data.blood_type ?? .A).rawValue.uppercased())형 \(data.sex == .female ? "여자" : "남자")입니다.", isApproved: nil))
         
         var education = "학력은 \(data.edu ?? "")"
