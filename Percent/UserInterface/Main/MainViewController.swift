@@ -56,6 +56,12 @@ class MainViewController: UITabBarController {
 
 extension MainViewController: MainTabbarViewDelegate {
     func mainTabbarView(_ tabbarView: MainTabbarView, didSelected index: Int) {
+        guard self.selectedIndex != index else { return }
+        
         self.selectedIndex = index
+        
+        if index == 2 {
+            self.categoryViewController.navigationController?.popToRootViewController(animated: false)
+        }
     }
 }
