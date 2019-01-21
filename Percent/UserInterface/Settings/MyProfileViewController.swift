@@ -8,6 +8,4 @@
 
 import UIKit
 
-class MyProfileViewController: UserProfileViewController {
-    
-}
+class MyProfileViewController: UserProfileViewController {}

@@ -63,7 +63,7 @@ class MyPageViewController: BaseViewController {
         tableData.append(MyPageData(type: .events, title: "이벤트"))
         tableData.append(MyPageData(type: .supports, title: "고객센터"))
         tableData.append(MyPageData(type: .terms, title: "이용약관 / 개인정보 취급 방침"))
-        tableData.append(MyPageData(type: .logout, title: "로그아웃"))
+//        tableData.append(MyPageData(type: .logout, title: "로그아웃"))
         
         theTableView.reloadData()
     }
@@ -92,6 +92,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 let viewController = MyProfileViewController(data: MyData.shared)
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
+            break
+            
+        case .terms:
+            let viewController = TermsViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
             break
             
         case .settings:

@@ -7,16 +7,6 @@
 //
 
 import UIKit
-//img_settings_1@3x.png
-//img_settings_2@3x.png
-//img_settings_3@3x.png
-//img_settings_4@3x.png
-//img_settings_5@3x.png
-//img_settings_6@3x.png
-//img_settings_7@3x.png
-//img_settings_8@3x.png
-//img_settings_9@3x.png
-
 
 class SettingsViewController: BaseViewController {
     private let theTableView = UITableView()
@@ -155,7 +145,7 @@ class SettingsViewController: BaseViewController {
         
         var params = [String:Any]()
         params["setup_code"] = data.setup_code
-        params["setup_value"] = data.value ? "y" : "n"
+        params["setup_value"] = value ? "y" : "n"
         
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Service.Settings + "\(MyData.shared.mem_idx)", params: params) { (isSucceed, errMessage, response) in
