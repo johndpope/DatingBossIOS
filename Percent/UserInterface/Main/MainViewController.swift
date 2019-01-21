@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UITabBarController {
     let recommendsViewController = RecommendsViewController()
-    let choiceViewController = ChoiceViewController()
+    let searchViewController = SearchViewController()
     let chatListViewController = ChatListViewController()
     let categoryViewController = CategoryViewController()
     let favouriteViewController = FavouriteViewController()
@@ -26,7 +26,7 @@ class MainViewController: UITabBarController {
         var vcs = [UIViewController]()
         var navController = BaseNavigationController(rootViewController: recommendsViewController)
         vcs.append(navController)
-        navController = BaseNavigationController(rootViewController: choiceViewController)
+        navController = BaseNavigationController(rootViewController: searchViewController)
         vcs.append(navController)
         navController = BaseNavigationController(rootViewController: categoryViewController)
         vcs.append(navController)

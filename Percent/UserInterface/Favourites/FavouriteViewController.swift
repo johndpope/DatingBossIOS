@@ -59,7 +59,13 @@ class FavouriteViewController: BaseMainViewController {
         theCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         theCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         theCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        self.editMode = false
+        self.needToReload = true
         reloadData()
     }
     
@@ -135,75 +141,103 @@ class FavouriteViewController: BaseMainViewController {
                 }
             }
             
-            if read.count > 0, let dataArray = self.collectionData[.read] {
-                var opposite_mem_idx = ""
-                for index in read {
-                    if opposite_mem_idx.count > 0 {
-                        opposite_mem_idx += ","
+            let requestRead = {(completion: (() -> Void)?) -> Void in
+                if read.count > 0, let dataArray = self.collectionData[.read] {
+                    var opposite_mem_idx = ""
+                    for index in read {
+                        if opposite_mem_idx.count > 0 {
+                            opposite_mem_idx += ","
+                        }
+                        opposite_mem_idx += "\(dataArray[index].mem_idx)"
                     }
-                    opposite_mem_idx += "\(dataArray[index].mem_idx)"
+                    var params = [String:Any]()
+                    params["opposite_mem_idx"] = opposite_mem_idx
+                    
+                    let httpClient = QHttpClient()
+                    httpClient.request(to: RequestUrl.Main.Favourite + "read/\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params, completion: { (isSucceed, errMessage, response) in
+                        completion?()
+                    })
+                } else {
+                    completion?()
                 }
-                var params = [String:Any]()
-                params["opposite_mem_idx"] = opposite_mem_idx
-                
-                let httpClient = QHttpClient()
-                httpClient.request(to: RequestUrl.Main.Favourite + "read/\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params, completion: nil)
             }
             
-            if request.count > 0, let dataArray = self.collectionData[.request] {
-                var opposite_mem_idx = ""
-                for index in request {
-                    if opposite_mem_idx.count > 0 {
-                        opposite_mem_idx += ","
+            let requestReq = {(completion: (() -> Void)?) -> Void in
+                if request.count > 0, let dataArray = self.collectionData[.request] {
+                    var opposite_mem_idx = ""
+                    for index in request {
+                        if opposite_mem_idx.count > 0 {
+                            opposite_mem_idx += ","
+                        }
+                        opposite_mem_idx += "\(dataArray[index].mem_idx)"
                     }
-                    opposite_mem_idx += "\(dataArray[index].mem_idx)"
+                    var params = [String:Any]()
+                    params["opposite_mem_idx"] = opposite_mem_idx
+                    
+                    let httpClient = QHttpClient()
+                    httpClient.request(to: RequestUrl.Main.Favourite + "likereq/\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params, completion: { (isSucceed, errMessage, response) in
+                        completion?()
+                    })
+                } else {
+                    completion?()
                 }
-                var params = [String:Any]()
-                params["opposite_mem_idx"] = opposite_mem_idx
-                
-                let httpClient = QHttpClient()
-                httpClient.request(to: RequestUrl.Main.Favourite + "likereq/\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params, completion: nil)
             }
             
-            if response.count > 0, let dataArray = self.collectionData[.response] {
-                var opposite_mem_idx = ""
-                for index in response {
-                    if opposite_mem_idx.count > 0 {
-                        opposite_mem_idx += ","
+            let requestRes = {(completion: (() -> Void)?) -> Void in
+                if response.count > 0, let dataArray = self.collectionData[.response] {
+                    var opposite_mem_idx = ""
+                    for index in response {
+                        if opposite_mem_idx.count > 0 {
+                            opposite_mem_idx += ","
+                        }
+                        opposite_mem_idx += "\(dataArray[index].mem_idx)"
                     }
-                    opposite_mem_idx += "\(dataArray[index].mem_idx)"
+                    var params = [String:Any]()
+                    params["opposite_mem_idx"] = opposite_mem_idx
+                    
+                    let httpClient = QHttpClient()
+                    httpClient.request(to: RequestUrl.Main.Favourite + "likeres/\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params, completion: { (isSucceed, errMessage, response) in
+                        completion?()
+                    })
+                } else {
+                    completion?()
                 }
-                var params = [String:Any]()
-                params["opposite_mem_idx"] = opposite_mem_idx
-                
-                let httpClient = QHttpClient()
-                httpClient.request(to: RequestUrl.Main.Favourite + "likeres/\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params, completion: nil)
             }
             
-            var dataArray = self.collectionData[.read] ?? []
-            for i in 0 ..< dataArray.count {
-                guard read.firstIndex(of: i) != nil else { continue }
-                _ = dataArray.remove(at: i)
-            }
-            self.collectionData[.read] = dataArray
+            requestRead({() -> Void in
+                requestReq({() -> Void in
+                    requestRes({() -> Void in
+                        self.editMode = false
+                        self.needToReload = true
+                        self.reloadData()
+                    })
+                })
+            })
             
-            dataArray = self.collectionData[.request] ?? []
-            for i in 0 ..< dataArray.count {
-                guard request.firstIndex(of: i) != nil else { continue }
-                _ = dataArray.remove(at: i)
-            }
-            self.collectionData[.request] = dataArray
-            
-            dataArray = self.collectionData[.response] ?? []
-            for i in 0 ..< dataArray.count {
-                guard response.firstIndex(of: i) != nil else { continue }
-                _ = dataArray.remove(at: i)
-            }
-            self.collectionData[.response] = dataArray
-            
-            self.editMode = false
-            self.selectedIndexPaths.removeAll()
-            self.theCollectionView.reloadData()
+//            var dataArray = self.collectionData[.read] ?? []
+//            for i in 0 ..< dataArray.count {
+//                guard read.firstIndex(of: i) != nil else { continue }
+//                _ = dataArray.remove(at: i)
+//            }
+//            self.collectionData[.read] = dataArray
+//
+//            dataArray = self.collectionData[.request] ?? []
+//            for i in 0 ..< dataArray.count {
+//                guard request.firstIndex(of: i) != nil else { continue }
+//                _ = dataArray.remove(at: i)
+//            }
+//            self.collectionData[.request] = dataArray
+//
+//            dataArray = self.collectionData[.response] ?? []
+//            for i in 0 ..< dataArray.count {
+//                guard response.firstIndex(of: i) != nil else { continue }
+//                _ = dataArray.remove(at: i)
+//            }
+//            self.collectionData[.response] = dataArray
+//            
+//            self.editMode = false
+//            self.selectedIndexPaths.removeAll()
+//            self.theCollectionView.reloadData()
         }))
         UIApplication.appDelegate().window?.addSubview(alertController.view)
         self.addChild(alertController)
