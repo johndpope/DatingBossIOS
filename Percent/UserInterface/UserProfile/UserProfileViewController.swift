@@ -46,8 +46,11 @@ class UserProfileViewController: BaseViewController {
     
     private var showRadarChart = false
     
+    private let isMine: Bool
+    
     init(navigationViewEffect effect: UIVisualEffect? = nil, data uData: UserData) {
         data = uData
+        isMine = data.mem_idx == MyData.shared.mem_idx
         
         headerView = UserProfileHeaderView(data: data)
         statsView  = UserProfileStatsView(data: data)
@@ -147,13 +150,15 @@ class UserProfileViewController: BaseViewController {
         headerView.trailingAnchor.constraint(equalTo: theCollectionView.trailingAnchor).isActive = true
         headerView.heightAnchor.constraint(equalToConstant: 72 * QUtils.optimizeRatio()).isActive = true
         
-        statsView.translatesAutoresizingMaskIntoConstraints = false
-        statsView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        theTableView.addSubview(statsView)
-        
-        statsView.topAnchor.constraint(equalTo: theCollectionView.bottomAnchor, constant:  72 * QUtils.optimizeRatio()).isActive = true
-        statsView.leadingAnchor.constraint(equalTo: theCollectionView.leadingAnchor).isActive = true
-        statsView.trailingAnchor.constraint(equalTo: theCollectionView.trailingAnchor).isActive = true
+        if isMine == false {
+            statsView.translatesAutoresizingMaskIntoConstraints = false
+            statsView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            theTableView.addSubview(statsView)
+            
+            statsView.topAnchor.constraint(equalTo: theCollectionView.bottomAnchor, constant:  72 * QUtils.optimizeRatio()).isActive = true
+            statsView.leadingAnchor.constraint(equalTo: theCollectionView.leadingAnchor).isActive = true
+            statsView.trailingAnchor.constraint(equalTo: theCollectionView.trailingAnchor).isActive = true
+        }
         
         reloadImages()
         reloadData()
@@ -217,7 +222,7 @@ class UserProfileViewController: BaseViewController {
         
         var frame = CGRect.zero
         frame.size.width = theTableView.frame.size.width
-        frame.size.height = theCollectionView.frame.size.height + statsView.frame.size.height - kHeightNavigationView + 16 * QUtils.optimizeRatio()
+        frame.size.height = theCollectionView.frame.size.height + (isMine == false ? statsView.frame.size.height : 0) - kHeightNavigationView + 16 * QUtils.optimizeRatio()
         
         let tableHeaderView = UIView()
         tableHeaderView.frame = frame
@@ -328,6 +333,8 @@ class UserProfileViewController: BaseViewController {
     
     override func loadNavigationItems() {
         super.loadNavigationItems()
+        
+        guard isMine == false else { return }
         
         buttonReport.translatesAutoresizingMaskIntoConstraints = false
         buttonReport.setImage(UIImage(named: "img_report")?.resize(maxWidth: 28), for: .normal)

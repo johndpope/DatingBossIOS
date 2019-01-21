@@ -167,6 +167,9 @@
 		1CCE2C0F21F48DBD0057122D /* FavouriteMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C0E21F48DBD0057122D /* FavouriteMoreView.swift */; };
 		1CCE2C1221F491AD0057122D /* img_done_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2C1021F491AD0057122D /* img_done_nor@3x.png */; };
 		1CCE2C1321F491AD0057122D /* img_done_high@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2C1121F491AD0057122D /* img_done_high@3x.png */; };
+		1CCE2C1B21F5933C0057122D /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C1A21F5933B0057122D /* MyProfileViewController.swift */; };
+		1CCE2C1E21F596780057122D /* img_profile_edit_high@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2C1C21F596780057122D /* img_profile_edit_high@3x.png */; };
+		1CCE2C1F21F596780057122D /* img_profile_edit_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2C1D21F596780057122D /* img_profile_edit_nor@3x.png */; };
 		1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD3D99121E898E500938293 /* StoreKit.framework */; };
 		1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */; };
 		1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */; };
@@ -396,6 +399,9 @@
 		1CCE2C0E21F48DBD0057122D /* FavouriteMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteMoreView.swift; sourceTree = "<group>"; };
 		1CCE2C1021F491AD0057122D /* img_done_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_done_nor@3x.png"; sourceTree = "<group>"; };
 		1CCE2C1121F491AD0057122D /* img_done_high@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_done_high@3x.png"; sourceTree = "<group>"; };
+		1CCE2C1A21F5933B0057122D /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		1CCE2C1C21F596780057122D /* img_profile_edit_high@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_edit_high@3x.png"; sourceTree = "<group>"; };
+		1CCE2C1D21F596780057122D /* img_profile_edit_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_profile_edit_nor@3x.png"; sourceTree = "<group>"; };
 		1CD3D99021E8980C00938293 /* Percent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Percent.entitlements; sourceTree = "<group>"; };
 		1CD3D99121E898E500938293 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecTableViewCell.swift; sourceTree = "<group>"; };
@@ -663,6 +669,8 @@
 				1CE69AB021D8EEC000B9FE4A /* img_profile_6@3x.png */,
 				1C61C4D021EF824900087D8A /* img_profile_7@3x.png */,
 				1C61C4CF21EF824900087D8A /* img_profile_8@3x.png */,
+				1CCE2C1C21F596780057122D /* img_profile_edit_high@3x.png */,
+				1CCE2C1D21F596780057122D /* img_profile_edit_nor@3x.png */,
 				1CCE2BBC21F203240057122D /* img_profile_collapsed@3x.png */,
 				1CCE2BBD21F203250057122D /* img_profile_expand_bg@3x.png */,
 				1CAC5A9821E7B0D3002A0A4E /* img_profile_expand@3x.png */,
@@ -938,6 +946,7 @@
 				1CCE2BDE21F4118B0057122D /* AvoidKnownsSettingViewController.swift */,
 				1CCE2BE021F4129E0057122D /* AvoidKnownsNoDataViewController.swift */,
 				1CCE2BE221F418330057122D /* AvoidKnownsContactsViewController.swift */,
+				1CCE2C1A21F5933B0057122D /* MyProfileViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1054,6 +1063,8 @@
 				1C03842521D28A050024C3B3 /* img_heart@3x.png in Resources */,
 				1C5AC80E21E35D750007827D /* img_settings_3@3x.png in Resources */,
 				1C858D9521C7733F00900481 /* LaunchScreen.storyboard in Resources */,
+				1CCE2C1E21F596780057122D /* img_profile_edit_high@3x.png in Resources */,
+				1CCE2C1F21F596780057122D /* img_profile_edit_nor@3x.png in Resources */,
 				1C5AC83621E49BC50007827D /* img_intro_percent@3x.png in Resources */,
 				1C5AC81521E35D750007827D /* img_settings_9@3x.png in Resources */,
 				1CCE2C0821F45D4F0057122D /* img_category_9@3x.png in Resources */,
@@ -1289,6 +1300,7 @@
 				1CB5433321DF473B00B37EAE /* SBJsonStreamParserState.m in Sources */,
 				1CA5879121E6FCD8002B60F2 /* SignupProfileEntryView.swift in Sources */,
 				1CA5876E21E5D8BD002B60F2 /* AlertPopupViewController.swift in Sources */,
+				1CCE2C1B21F5933C0057122D /* MyProfileViewController.swift in Sources */,
 				1CE69AB821D91C6A00B9FE4A /* UserProfileTableViewCell.swift in Sources */,
 				1CE69AA021D5AF6200B9FE4A /* BarIndicatorView.swift in Sources */,
 				1CB5431121DF473300B37EAE /* Image.swift in Sources */,

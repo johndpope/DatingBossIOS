@@ -84,6 +84,16 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(viewController, animated: true)
             break
             
+        case .profile:
+            LoadingIndicatorManager.shared.showIndicatorView()
+            
+            MyData.shared.reloadData { (isSucceed) in
+                LoadingIndicatorManager.shared.hideIndicatorView()
+                let viewController = MyProfileViewController(data: MyData.shared)
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+            break
+            
         case .settings:
             let viewController = SettingsViewController()
             self.navigationController?.pushViewController(viewController, animated: true)

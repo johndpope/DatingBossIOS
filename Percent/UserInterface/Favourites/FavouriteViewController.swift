@@ -20,6 +20,8 @@ class FavouriteViewController: BaseMainViewController {
     
     private var selectedIndexPaths = [IndexPath]()
     
+    var needToReload = true
+    
     override init(navigationViewEffect effect: UIVisualEffect? = nil) {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = FavouriteCollectionViewCell.sectionInset
@@ -57,15 +59,14 @@ class FavouriteViewController: BaseMainViewController {
         theCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         theCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         theCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         reloadData()
     }
     
     func reloadData() {
+        guard needToReload else { return }
+        needToReload = false
+        
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Main.Favourite + "\(MyData.shared.mem_idx)", method: .get, headerValues: nil, params: nil) { (isSucceed, errMessage, response) in
             guard let responseData = response as? [[String:Any]] else { return }
@@ -298,7 +299,7 @@ extension FavouriteViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         let key = keys[section]
-        guard let dataArray = collectionData[key], dataArray.count > 0 else { return CGSize.zero }
+        guard let dataArray = collectionData[key], dataArray.count > 6 else { return CGSize.zero }
         
         return CGSize(width: UIScreen.main.bounds.size.width, height: 44 *  QUtils.optimizeRatio())
     }
@@ -306,7 +307,7 @@ extension FavouriteViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let key = keys[indexPath.section]
         let defaultCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "UICollectionReusableView", for: indexPath)
-        guard let dataArray = collectionData[key], dataArray.count > 0 else { return defaultCell }
+        guard let dataArray = collectionData[key], dataArray.count > 6 else { return defaultCell }
         
         if kind ==  UICollectionView.elementKindSectionHeader {
             guard let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FavouriteHeaderView", for: indexPath) as? FavouriteHeaderView else { return defaultCell }

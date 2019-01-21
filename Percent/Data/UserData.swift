@@ -34,7 +34,22 @@ class MyData: UserData {
     }
     
     override func reloadData(_ completion: ((Bool) -> Void)? = nil) {
+        guard MyData.shared.mem_idx != -1 else {
+            completion?(false)
+            return
+        }
         
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Account.GetInfo + "\(MyData.shared.mem_idx)", method: .get, params: nil) {[weak self] (isSucceed, message, response) in
+            guard isSucceed, let responseData = response as? [String:Any] else {
+                completion?(false)
+                return
+            }
+            
+            self?.setMyInfo(with: responseData, reset: false)
+            
+            completion?(true)
+        }
     }
     
     func clear() {

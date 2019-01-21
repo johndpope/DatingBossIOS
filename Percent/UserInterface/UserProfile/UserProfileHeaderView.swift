@@ -18,6 +18,7 @@ class UserProfileHeaderView: UIView {
     
 //    let buttonFavourite = UIButton(type: .custom)
     let buttonLike = UIButton(type: .custom)
+    let buttonEdit = UIButton(type: .custom)
     
     let data: UserData
     
@@ -97,15 +98,28 @@ class UserProfileHeaderView: UIView {
         labelJobTitle.topAnchor.constraint(equalTo: labelRegion.topAnchor).isActive = true
         labelJobTitle.leadingAnchor.constraint(equalTo: seperator.trailingAnchor, constant: 7 * QUtils.optimizeRatio()).isActive = true
         
-        buttonLike.translatesAutoresizingMaskIntoConstraints = false
-        buttonLike.setImage(UIImage(named: "img_heart")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 32 * QUtils.optimizeRatio()), for: .normal)
-        self.addSubview(buttonLike)
-        
-        buttonLike.widthAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
-        buttonLike.heightAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
-        buttonLike.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        constraintRight = buttonLike.leadingAnchor.constraint(equalTo: self.trailingAnchor)
-        constraintRight.isActive = true
+        if data.mem_idx == MyData.shared.mem_idx {
+            buttonEdit.translatesAutoresizingMaskIntoConstraints = false
+            buttonEdit.setImage(UIImage(named: "img_profile_edit_nor"), for: .normal)
+            buttonEdit.setImage(UIImage(named: "img_profile_edit_high"), for: .highlighted)
+            self.addSubview(buttonEdit)
+            
+            buttonEdit.widthAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
+            buttonEdit.heightAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
+            buttonEdit.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            constraintRight = buttonEdit.leadingAnchor.constraint(equalTo: self.trailingAnchor)
+            constraintRight.isActive = true
+        } else {
+            buttonLike.translatesAutoresizingMaskIntoConstraints = false
+            buttonLike.setImage(UIImage(named: "img_heart")?.recolour(with: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)).resize(maxWidth: 32 * QUtils.optimizeRatio()), for: .normal)
+            self.addSubview(buttonLike)
+            
+            buttonLike.widthAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
+            buttonLike.heightAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
+            buttonLike.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            constraintRight = buttonLike.leadingAnchor.constraint(equalTo: self.trailingAnchor)
+            constraintRight.isActive = true
+        }
         
 //        buttonFavourite.translatesAutoresizingMaskIntoConstraints = false
 //        buttonFavourite.setImage(UIImage(named: "img_star")?.recolour(with: #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)).resize(maxWidth: 24 * QUtils.optimizeRatio()), for: .normal)
