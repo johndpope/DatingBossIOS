@@ -36,7 +36,6 @@ class EditProfileViewController: BaseEditProfileViewController {
         case buttonConfirm:
             uploadProfile { (isSucceed) in
                 guard isSucceed else { return }
-                
                 self.navigationController?.popViewController(animated: true)
             }
             break

@@ -166,31 +166,7 @@ class UserProfileViewController: BaseViewController {
             statsView.trailingAnchor.constraint(equalTo: theCollectionView.trailingAnchor).isActive = true
         }
         
-        let tableFooterView = UIView()
-        
-        let labelContent = UILabel()
-        labelContent.text = data.introduction
-        labelContent.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        labelContent.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
-        labelContent.numberOfLines = 0
-        labelContent.lineBreakMode = .byWordWrapping
-        
-        var frame = labelContent.frame
-        frame.origin.x = 16 * QUtils.optimizeRatio()
-        frame.origin.y = 16 * QUtils.optimizeRatio()
-        frame.size.width = UIScreen.main.bounds.size.width - frame.origin.x * 2
-        labelContent.frame = frame
-        
-        labelContent.sizeToFit()
-        
-        frame = tableFooterView.frame
-        frame.size.width = UIScreen.main.bounds.size.width
-        frame.size.height = labelContent.frame.maxY + 40 * QUtils.optimizeRatio()
-        tableFooterView.frame = frame
-        
-        tableFooterView.addSubview(labelContent)
-        
-        theTableView.tableFooterView = tableFooterView
+        reloadTableFooterView()
         
         theTableView.bringSubviewToFront(headerView)
         
@@ -239,6 +215,8 @@ class UserProfileViewController: BaseViewController {
                 self.reloadData()
                 
                 self.reloadStats()
+                
+                self.reloadTableFooterView()
                 
                 LoadingIndicatorManager.shared.hideIndicatorView()
                 
@@ -311,6 +289,34 @@ class UserProfileViewController: BaseViewController {
         default:
             break
         }
+    }
+    
+    private func reloadTableFooterView() {
+        let tableFooterView = UIView()
+        
+        let labelContent = UILabel()
+        labelContent.text = data.introduction
+        labelContent.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+        labelContent.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        labelContent.numberOfLines = 0
+        labelContent.lineBreakMode = .byWordWrapping
+        
+        var frame = labelContent.frame
+        frame.origin.x = 16 * QUtils.optimizeRatio()
+        frame.origin.y = 16 * QUtils.optimizeRatio()
+        frame.size.width = UIScreen.main.bounds.size.width - frame.origin.x * 2
+        labelContent.frame = frame
+        
+        labelContent.sizeToFit()
+        
+        frame = tableFooterView.frame
+        frame.size.width = UIScreen.main.bounds.size.width
+        frame.size.height = labelContent.frame.maxY + 40 * QUtils.optimizeRatio()
+        tableFooterView.frame = frame
+        
+        tableFooterView.addSubview(labelContent)
+        
+        theTableView.tableFooterView = tableFooterView
     }
     
     private func reloadImages() {

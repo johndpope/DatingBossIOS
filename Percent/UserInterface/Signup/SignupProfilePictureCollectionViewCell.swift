@@ -10,7 +10,7 @@ import UIKit
 
 class SignupProfilePictureCollectionViewCell: UICollectionViewCell {
     class var sectionInset: UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 8 * QUtils.optimizeRatio(), bottom: 0, right: 8 * QUtils.optimizeRatio())
+        return UIEdgeInsets(top: 0, left: 4 * QUtils.optimizeRatio(), bottom: 0, right: 4 * QUtils.optimizeRatio())
     }
     
     class var minimumLineSpacing: CGFloat {
@@ -22,7 +22,7 @@ class SignupProfilePictureCollectionViewCell: UICollectionViewCell {
     }
     
     class var itemSize: CGSize {
-        return CGSize(width: 104 * QUtils.optimizeRatio(), height: 120 * QUtils.optimizeRatio())
+        return CGSize(width: 112 * QUtils.optimizeRatio(), height: 120 * QUtils.optimizeRatio())
     }
     
     private let imageViewPicture = UIImageView()

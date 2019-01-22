@@ -228,6 +228,8 @@ class UserPayload: NSObject {
             }
         }
         
+        introduction = MyData.shared.introduction
+        
         completion?()
     }
     
