@@ -441,7 +441,8 @@ class SearchViewController: BaseMainViewController {
                     let alertController = AlertPopupViewController(withTitle: "검색 결과", message: "조건에 맞는 회원을 찾았습니다." + (free ? " (무료)" : "\n체리 1개가 차감되었습니다."))
                     alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
                     alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
-                    alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "확인", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: {(action) -> Void in
+                    alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "확인", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
+                    alertController.defaultAction = {() -> Void in
                         LoadingIndicatorManager.shared.showIndicatorView()
                         
                         let userData = UserData()
@@ -455,7 +456,7 @@ class SearchViewController: BaseMainViewController {
                             viewController.searchParams = self.parameter
                             self.navigationController?.pushViewController(viewController, animated: true)
                         }
-                    }))
+                    }
                     UIApplication.appDelegate().window?.addSubview(alertController.view)
                     self.addChild(alertController)
                     alertController.show()

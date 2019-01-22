@@ -107,6 +107,9 @@ class BaseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        print(MyData.shared.cherry_quantity)
+        cherriesButton.amount = MyData.shared.cherry_quantity
+        
         if leftNavigationItemView == nil {
             let viewControllers = self.navigationController?.viewControllers ?? []
             

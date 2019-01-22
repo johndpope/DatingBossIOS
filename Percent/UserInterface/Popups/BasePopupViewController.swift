@@ -25,6 +25,8 @@ class BasePopupViewController: UIViewController {
     
     var delegate: BasePopupViewControllerDelegate?
     
+    var defaultAction: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,6 +98,8 @@ class BasePopupViewController: UIViewController {
     }
     
     func hide(_ completion: ((Bool) -> Void)? = nil) {
+        defaultAction?()
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.contentView.alpha = 0
             self.contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)

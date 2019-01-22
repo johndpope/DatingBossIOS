@@ -61,20 +61,24 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
             timer = nil
             
             guard let target = data?.sim_sum else { return }
-            timer = Timer.scheduledTimer(withTimeInterval: 0.008, repeats: true, block: { (aTimer) in
-                self.percent += 1
-                guard self.percent <= target else {
-                    self.timer?.invalidate()
-                    self.timer = nil
-                    return
-                }
-                
-                self.labelPercent.text = "\(self.percent)%"
-                
-                self.layoutIfNeeded()
-                
-                self.borderView.value = CGFloat(self.percent) / 100
-            })
+            
+            labelPercent.text = "\(target)%"
+            borderView.value = CGFloat(target) / 100
+            
+//            timer = Timer.scheduledTimer(withTimeInterval: 0.008, repeats: true, block: { (aTimer) in
+//                self.percent += 1
+//                guard self.percent <= target else {
+//                    self.timer?.invalidate()
+//                    self.timer = nil
+//                    return
+//                }
+//
+//                self.labelPercent.text = "\(self.percent)%"
+//
+//                self.layoutIfNeeded()
+//
+//                self.borderView.value = CGFloat(self.percent) / 100
+//            })
             
             self.layoutIfNeeded()
         }

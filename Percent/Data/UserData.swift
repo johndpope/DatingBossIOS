@@ -95,6 +95,19 @@ class MyData: UserData {
         }
     }
     
+    var isPremium: Bool {
+        get {
+            guard let end_ti = premium_end_dt else { return false }
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd"
+            let endDate = formatter.string(from: Date(timeIntervalSince1970: end_ti))
+            let today = formatter.string(from: Date())
+            
+            return today <= endDate
+        }
+    }
+    
     var auth_key: String? {
         get {
             return rawData["auth_key"] as? String
@@ -103,9 +116,9 @@ class MyData: UserData {
     
     var cherry_quantity: Int {
         get {
-            return Int(rawData["cherry_quantity"] as? String ?? "") ?? 0
+            return rawData["cherry_quantity"] as? Int ?? 0
         } set {
-            rawData["cherry_quantity"] = "\(newValue)"
+            rawData["cherry_quantity"] = newValue
         }
     }
     

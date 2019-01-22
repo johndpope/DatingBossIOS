@@ -11,6 +11,10 @@ import UIKit
 private let IMAGE_RESIZE_RATIO = CGFloat(0.7)
 
 class IntroViewController: BaseViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     private let imageViewTitle = UIImageView()
     private let imageViewIcon = UIImageView()
     private let imageViewHeart = UIImageView()
