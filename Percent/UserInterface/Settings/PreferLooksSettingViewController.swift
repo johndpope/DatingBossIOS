@@ -53,9 +53,13 @@ class PreferLooksSettingViewController: BaseViewController {
             let currentDateStr = formatter.string(from: Date())
             if latestDateStr != currentDateStr {
                 QDataManager.shared.preferSettingCount = 0
-                QDataManager.shared.commit()
             }
+        } else {
+            QDataManager.shared.preferSettingCount = 0
         }
+        
+        QDataManager.shared.preferSettingDate = Date().timeIntervalSince1970
+        QDataManager.shared.commit()
         
         currentPage = QDataManager.shared.preferSettingCount
     }

@@ -159,6 +159,10 @@ class AvoidKnownsContactsViewController: BaseViewController {
             }))
         }
         
+        for i in 0 ..< self.tableData.count {
+            selectedIndex.append(i)
+        }
+        
         LoadingIndicatorManager.shared.hideIndicatorView()
         
         theTableView.reloadData()

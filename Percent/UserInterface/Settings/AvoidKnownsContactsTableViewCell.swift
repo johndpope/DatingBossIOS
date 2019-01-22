@@ -47,8 +47,8 @@ class AvoidKnownsContactsTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         
         imageViewSelection.translatesAutoresizingMaskIntoConstraints = false
-        imageViewSelection.image = UIImage(named: "img_validation_checked")
-        imageViewSelection.highlightedImage = UIImage(named: "img_validation_unchecked")
+        imageViewSelection.image = UIImage(named: "img_validation_unchecked")
+        imageViewSelection.highlightedImage = UIImage(named: "img_validation_checked")
         self.contentView.addSubview(imageViewSelection)
 
         imageViewSelection.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
