@@ -79,7 +79,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
             httpClient.request(to: RequestUrl.Category.GetList + "\(MyData.shared.mem_idx)", params: params) { (isSucceed, errMessage, response) in
                 LoadingIndicatorManager.shared.hideIndicatorView()
                 guard isSucceed, let responseData = response as? [String:Any], let mem_idx = responseData["mem_idx"] as? Int else {
-                    let alertController = AlertPopupViewController(withTitle: "카테고리 결과", message: "카테고리에 맞는 회원이 없습니다.\n다른 카테고리를 선택하세요." + (free ? "" : "\n(체리 차감 안됨)"))
+                    let alertController = AlertPopupViewController(withTitle: "카테고리 결과", message: "카테고리에 맞는 회원이 없습니다.\n다른 카테고리를 선택하세요.\n(체리 차감 안됨)")
                     alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
                     alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
                     alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "확인", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
