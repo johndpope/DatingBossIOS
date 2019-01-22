@@ -10,7 +10,7 @@ import UIKit
 
 struct UserProfileTableData {
     let iconName: String
-    let content: String
+    let content: NSAttributedString
     let isApproved: Bool?
 }
 
@@ -45,6 +45,8 @@ class UserProfileViewController: BaseViewController {
     internal var statsData = [String:[ChartValueData]]()
     
     internal var showRadarChart = false
+    
+    var searchParams: SearchParameters?
     
     internal let isMine: Bool
     
@@ -345,28 +347,61 @@ class UserProfileViewController: BaseViewController {
     func reloadData() {
         tableData.removeAll()
         
-        tableData.append(UserProfileTableData(iconName: "img_profile_1", content: "\(data.area ?? "")에 사는 \(data.age)세 \((data.blood_type ?? .A).rawValue.uppercased())형 \(data.sex == .female ? "여자" : "남자")입니다.", isApproved: nil))
+        let norAttr = QTextAttributes(withForegroundColour: #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)).attributes
+        let highAttr = QTextAttributes(withForegroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)).attributes
         
-        var education = "학력은 \(data.edu ?? "")"
+        var attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: data.area ?? "", attributes: searchParams?.region != nil ? highAttr : norAttr))
+        attributedString.append(NSAttributedString(string: "에 사는 ", attributes: norAttr))
+        attributedString.append(NSAttributedString(string: "\(data.age)", attributes: (searchParams?.minAge != nil || searchParams?.maxAge != nil) ? highAttr : norAttr))
+        attributedString.append(NSAttributedString(string: "세 ", attributes: norAttr))
+        attributedString.append(NSAttributedString(string: "\((data.blood_type ?? .A).rawValue.uppercased())", attributes: searchParams?.blood != nil ? highAttr : norAttr))
+        attributedString.append(NSAttributedString(string: "형 \(data.sex == .female ? "여자" : "남자")입니다.", attributes: norAttr))
+        tableData.append(UserProfileTableData(iconName: "img_profile_1", content: attributedString, isApproved: nil))
+        
+        attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: "학력은 \(data.edu ?? "")", attributes: norAttr))
         if let school = data.school {
-            education += " (\(school)) "
+            attributedString.append(NSAttributedString(string: " (\(school)) ", attributes: norAttr))
         }
-        education += "입니다."
+        attributedString.append(NSAttributedString(string: "입니다", attributes: norAttr))
+        tableData.append(UserProfileTableData(iconName: "img_profile_2", content: attributedString, isApproved: nil))
         
-        tableData.append(UserProfileTableData(iconName: "img_profile_2", content: education, isApproved: nil))
-        
-        var job = "제 직업은 \(data.job ?? "")"
+        attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: "제 직업은 \(data.job ?? "")", attributes: norAttr))
         if let job_etc = data.job_etc {
-            job += " (\(job_etc)) "
+            attributedString.append(NSAttributedString(string: " (\(job_etc)) ", attributes: norAttr))
         }
-        job += "입니다."
+        attributedString.append(NSAttributedString(string: "입니다.", attributes: norAttr))
+        tableData.append(UserProfileTableData(iconName: "img_profile_3", content: attributedString, isApproved: nil))
         
-        tableData.append(UserProfileTableData(iconName: "img_profile_3", content: job, isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: "키는 \(data.height)cm이고 \(data.form ?? "") 체형입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_5", content: "종교는 \(data.religion ?? "")입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_6", content: "취미는 \(data.hobby ?? "")입니다.", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_7", content: data.drinking ?? "", isApproved: nil))
-        tableData.append(UserProfileTableData(iconName: "img_profile_8", content: data.smoking ?? "", isApproved: nil))
+        attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: "키는 ", attributes: norAttr))
+        attributedString.append(NSAttributedString(string: "\(data.height)", attributes: (searchParams?.minHeight != nil || searchParams?.maxHeight != nil) ? highAttr : norAttr))
+        attributedString.append(NSAttributedString(string: "cm이고 ", attributes: norAttr))
+        attributedString.append(NSAttributedString(string: data.form ?? "", attributes: searchParams?.shape != nil ? highAttr : norAttr))
+        attributedString.append(NSAttributedString(string: " 체형입니다.", attributes: norAttr))
+        tableData.append(UserProfileTableData(iconName: "img_profile_4", content: attributedString, isApproved: nil))
+        
+        attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: "종교는 ", attributes: norAttr))
+        attributedString.append(NSAttributedString(string: data.religion ?? "", attributes: searchParams?.religion != nil ? highAttr : norAttr))
+        attributedString.append(NSAttributedString(string: "입니다.", attributes: norAttr))
+        tableData.append(UserProfileTableData(iconName: "img_profile_5", content: attributedString, isApproved: nil))
+        
+        attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: "취미는 ", attributes: norAttr))
+        attributedString.append(NSAttributedString(string: data.hobby ?? "", attributes: searchParams?.hobby != nil ? highAttr : norAttr))
+        attributedString.append(NSAttributedString(string: "입니다.", attributes: norAttr))
+        tableData.append(UserProfileTableData(iconName: "img_profile_6", content: attributedString, isApproved: nil))
+        
+        attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: data.drinking ?? "", attributes: searchParams?.drinking != nil ? highAttr : norAttr))
+        tableData.append(UserProfileTableData(iconName: "img_profile_7", content: attributedString, isApproved: nil))
+        
+        attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: data.smoking ?? "", attributes: searchParams?.smoking != nil ? highAttr : norAttr))
+        tableData.append(UserProfileTableData(iconName: "img_profile_8", content: attributedString, isApproved: nil))
         
         theTableView.reloadData()
     }

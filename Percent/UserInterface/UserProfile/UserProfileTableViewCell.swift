@@ -16,7 +16,7 @@ class UserProfileTableViewCell: UITableViewCell {
     var data: UserProfileTableData! {
         didSet {
             imageViewIcon.image = UIImage(named: data.iconName)
-            labelContent.text = data.content
+            labelContent.attributedText = data.content
         }
     }
     
@@ -35,8 +35,6 @@ class UserProfileTableViewCell: UITableViewCell {
         imageViewIcon.heightAnchor.constraint(equalToConstant: 24 * QUtils.optimizeRatio()).isActive = true
         
         labelContent.translatesAutoresizingMaskIntoConstraints = false
-        labelContent.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        labelContent.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         self.addSubview(labelContent)
         
         labelContent.leadingAnchor.constraint(equalTo: imageViewIcon.trailingAnchor, constant: 24 * QUtils.optimizeRatio()).isActive = true

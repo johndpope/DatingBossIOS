@@ -406,6 +406,7 @@ class SearchViewController: BaseMainViewController {
             guard parameter.hasCondition else {
                 let alertController = AlertPopupViewController(withTitle: "안내", message: "최소 1개 이상의 조건을 설정해주세요.")
                 alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+                alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
                 alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "확인", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
                 UIApplication.appDelegate().window?.addSubview(alertController.view)
                 self.addChild(alertController)
@@ -451,6 +452,7 @@ class SearchViewController: BaseMainViewController {
                             (UIApplication.appDelegate().window?.rootViewController as? MainViewController)?.favouriteViewController.needToReload = true
                             
                             let viewController = UserProfileViewController(data: userData)
+                            viewController.searchParams = self.parameter
                             self.navigationController?.pushViewController(viewController, animated: true)
                         }
                     }))

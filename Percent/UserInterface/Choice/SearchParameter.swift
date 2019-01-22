@@ -33,12 +33,18 @@ class SearchParameters: NSObject {
             if let area_cd = region?.code {
                 dict["area_cd"] = area_cd
             }
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy"
+            let thisYear = Int(formatter.string(from: Date()))!
+            
             if let birth_min = minAge {
-                dict["birth_min"] = birth_min
+                dict["birth_min"] = thisYear - birth_min + 1
             }
             if let birth_max = maxAge {
-                dict["birth_max"] = birth_max
+                dict["birth_max"] = thisYear - birth_max + 1
             }
+            
             if let height_min = minHeight {
                 dict["height_min"] = height_min
             }
