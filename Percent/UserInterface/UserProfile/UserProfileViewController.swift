@@ -354,7 +354,7 @@ class UserProfileViewController: BaseViewController {
         tableData.removeAll()
         
         let norAttr = QTextAttributes(withForegroundColour: #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)).attributes
-        let highAttr = QTextAttributes(withForegroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)).attributes
+        let highAttr = QTextAttributes(withForegroundColour: #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold)).attributes
         
         var attributedString = NSMutableAttributedString()
         attributedString.append(NSAttributedString(string: data.area ?? "", attributes: searchParams?.region != nil ? highAttr : norAttr))
