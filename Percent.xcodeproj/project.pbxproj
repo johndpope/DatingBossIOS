@@ -179,6 +179,8 @@
 		1CCE2C3321F5C1DA0057122D /* img_close_small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCE2C3221F5C1DA0057122D /* img_close_small@3x.png */; };
 		1CCE2C4621F6E2A40057122D /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C4521F6E2A30057122D /* SearchParameter.swift */; };
 		1CCE2C4821F7760B0057122D /* AvoidKnownsContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C4721F7760B0057122D /* AvoidKnownsContactsTableViewCell.swift */; };
+		1CCE2C4A21F788340057122D /* RecommendCollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C4921F788340057122D /* RecommendCollectionHeaderReusableView.swift */; };
+		1CCE2C4C21F78C9C0057122D /* RecommendCollectionFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE2C4B21F78C9C0057122D /* RecommendCollectionFooterReusableView.swift */; };
 		1CD3D99221E898E500938293 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD3D99121E898E500938293 /* StoreKit.framework */; };
 		1CD3D99421E8ED6100938293 /* SignupProfileSpecTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */; };
 		1CD3D99621E8EF6000938293 /* img_profile_dialog_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3D99521E8EF6000938293 /* img_profile_dialog_check@3x.png */; };
@@ -419,6 +421,8 @@
 		1CCE2C3221F5C1DA0057122D /* img_close_small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_close_small@3x.png"; sourceTree = "<group>"; };
 		1CCE2C4521F6E2A30057122D /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
 		1CCE2C4721F7760B0057122D /* AvoidKnownsContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoidKnownsContactsTableViewCell.swift; sourceTree = "<group>"; };
+		1CCE2C4921F788340057122D /* RecommendCollectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCollectionHeaderReusableView.swift; sourceTree = "<group>"; };
+		1CCE2C4B21F78C9C0057122D /* RecommendCollectionFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCollectionFooterReusableView.swift; sourceTree = "<group>"; };
 		1CD3D99021E8980C00938293 /* Percent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Percent.entitlements; sourceTree = "<group>"; };
 		1CD3D99121E898E500938293 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1CD3D99321E8ED6100938293 /* SignupProfileSpecTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileSpecTableViewCell.swift; sourceTree = "<group>"; };
@@ -817,6 +821,8 @@
 			children = (
 				1CE69AEF21DA458F00B9FE4A /* RecommendsViewController.swift */,
 				1CE69AEE21DA458F00B9FE4A /* RecommendsCollectionViewCell.swift */,
+				1CCE2C4921F788340057122D /* RecommendCollectionHeaderReusableView.swift */,
+				1CCE2C4B21F78C9C0057122D /* RecommendCollectionFooterReusableView.swift */,
 			);
 			path = Recommends;
 			sourceTree = "<group>";
@@ -1266,6 +1272,7 @@
 				1CE69AF521DB5CBB00B9FE4A /* ChatListViewController.swift in Sources */,
 				1C03841121D002090024C3B3 /* BaseData.swift in Sources */,
 				1CA5877F21E5F801002B60F2 /* SignupTermsDetailViewController.swift in Sources */,
+				1CCE2C4A21F788340057122D /* RecommendCollectionHeaderReusableView.swift in Sources */,
 				1CD3D99E21EA42FA00938293 /* SignupSelectFavorLooksViewController.swift in Sources */,
 				1CCE2C2D21F5ADAA0057122D /* BaseEditProfileViewController.swift in Sources */,
 				1CE69AF121DA458F00B9FE4A /* RecommendsViewController.swift in Sources */,
@@ -1305,6 +1312,7 @@
 				1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */,
 				1CB5430F21DF473300B37EAE /* Date.swift in Sources */,
 				1C858E2C21C870F100900481 /* MainViewController.swift in Sources */,
+				1CCE2C4C21F78C9C0057122D /* RecommendCollectionFooterReusableView.swift in Sources */,
 				1CB542FD21DF44E300B37EAE /* QTextAttributes.swift in Sources */,
 				1CE69AFD21DBCBF300B9FE4A /* ChatListData.swift in Sources */,
 				1CB5431221DF473300B37EAE /* Application.swift in Sources */,

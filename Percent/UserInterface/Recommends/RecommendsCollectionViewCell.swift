@@ -23,7 +23,7 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
         get {
             var size = CGSize.zero
             size.width = ((UIScreen.main.bounds.size.width - RecommendsCollectionViewCell.sectionInset.left - RecommendsCollectionViewCell.sectionInset.right - RecommendsCollectionViewCell.minimumInteritemSpacing) / 2).rounded(.down)
-            size.height = size.width + 56 * QUtils.optimizeRatio()
+            size.height = size.width + 76 * QUtils.optimizeRatio()
             return size
         }
     }
@@ -87,13 +87,13 @@ class RecommendsCollectionViewCell: UICollectionViewCell {
         imageView.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = RecommendsCollectionViewCell.itemSize.width / 2
+        imageView.layer.cornerRadius = (RecommendsCollectionViewCell.itemSize.width - 10) / 2
         self.contentView.addSubview(imageView)
         
         imageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
-        imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 2).isActive = true
+        imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: imageView.layer.cornerRadius * 2).isActive = true
-        imageView.heightAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: imageView.layer.cornerRadius * 2).isActive = true
         
 //        let borderView = CircleIndicatorView()
 //        borderView.translatesAutoresizingMaskIntoConstraints = false
