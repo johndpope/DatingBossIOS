@@ -15,9 +15,6 @@ class SettingsViewController: BaseViewController {
     private var tableData = [String:[SettingsData]]()
     private var backupData = [String:[SettingsData]]()
     
-    private let buttonReset = UIButton(type: .custom)
-    private let buttonSave = UIButton(type: .custom)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,48 +33,7 @@ class SettingsViewController: BaseViewController {
         theTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         theTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
-        buttonReset.translatesAutoresizingMaskIntoConstraints = false
-        buttonReset.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.7019607843, green: 0.7019607843, blue: 0.7019607843, alpha: 1)), for: .normal)
-        buttonReset.setTitle("원래대로", for: .normal)
-        buttonReset.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        buttonReset.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
-        buttonReset.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-        self.view.addSubview(buttonReset)
-        
-//        buttonReset.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
-//        buttonReset.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * QUtils.optimizeRatio()).isActive = true
-//        buttonReset.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
-//        buttonReset.heightAnchor.constraint(equalToConstant: 48 * QUtils.optimizeRatio()).isActive = true
-//
-//        buttonSave.translatesAutoresizingMaskIntoConstraints = false
-//        buttonSave.setBackgroundImage(UIImage.withSolid(colour: #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)), for: .normal)
-//        buttonSave.setTitle("설정 저장", for: .normal)
-//        buttonSave.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-//        buttonSave.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .highlighted)
-//        buttonSave.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
-//        self.view.addSubview(buttonSave)
-//
-//        buttonSave.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
-//        buttonSave.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
-//        buttonSave.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
-//        buttonSave.heightAnchor.constraint(equalToConstant: 48 * QUtils.optimizeRatio()).isActive = true
-//
         reloadData()
-    }
-    
-    override func pressedButton(_ sender: UIButton) {
-        super.pressedButton(sender)
-        
-        switch sender {
-        case buttonReset:
-            reloadData()
-            break
-            
-        case buttonSave:
-            break
-            
-        default: break
-        }
     }
     
     func reloadData() {
@@ -127,6 +83,18 @@ class SettingsViewController: BaseViewController {
         guard let cell = sender.superview?.superview as? SettingsTableViewSwitchCell,
             let indexPath = cell.indexPath else { return }
         
+        if indexPath.section == 0 {
+            guard let dataArray = self.tableData[self.keys[1]] else { return }
+            
+            var liveAccount = false
+            for item in dataArray {
+                guard item.setup_code == "060" else { continue }
+                liveAccount = !item.value
+            }
+            
+            guard liveAccount else { return }
+        }
+        
         let key = keys[indexPath.section]
         guard var dataArray = tableData[key] else { return }
         
@@ -139,6 +107,20 @@ class SettingsViewController: BaseViewController {
             self.tableData[key] = dataArray
             
             cell.switchView.set(on: value, animated: true)
+            
+            guard data.setup_code == "060", var dataArray = self.tableData[self.keys[0]] else { return }
+            
+            for i in 0 ..< dataArray.count {
+                let data = dataArray[i]
+                data.value = !value
+                dataArray[i] = data
+            }
+            self.tableData[self.keys[0]] = dataArray
+            
+            for cell in self.theTableView.visibleCells {
+                guard let theCell = cell as? SettingsTableViewSwitchCell, theCell.indexPath?.section == 0 else { continue }
+                theCell.switchView.set(on: !value, animated: true)
+            }
         }
         
         LoadingIndicatorManager.shared.showIndicatorView()
