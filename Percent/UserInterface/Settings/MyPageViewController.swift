@@ -75,7 +75,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch data.type {
         case .avoidKnowns:
-            let viewController = AvoidKnownsSettingViewController()
+            let viewController = AvoidKnownsViewController()
             self.navigationController?.pushViewController(viewController, animated: true)
             break
             

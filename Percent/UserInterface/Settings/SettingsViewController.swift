@@ -15,6 +15,8 @@ class SettingsViewController: BaseViewController {
     private var tableData = [String:[SettingsData]]()
     private var backupData = [String:[SettingsData]]()
     
+    private weak var textfieldActive: UITextField?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -150,17 +152,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch sType {
         case SettingsType.ChangePassword:
-            let unitHeight = 56 * QUtils.optimizeRatio()
-            
-            let customView = UIView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: unitHeight * 3))
-            
-            let alertController = AlertPopupCustomViewController(withTitle: entryViewShape.labelTitle.text, View: tableView)
-            alertController.delegate = self
-            alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
-            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
-            UIApplication.appDelegate().window?.addSubview(alertController.view)
-            self.addChild(alertController)
-            alertController.show()
             break
             
         case SettingsType.Destroy:
@@ -254,3 +245,27 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         (cell as? SettingsTableViewCell)?.data = tableData[key]?[indexPath.row]
     }
 }
+
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textfieldActive = nil
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textfieldActive = textField
+    }
+}
+
+extension SettingsViewController: BasePopupViewControllerDelegate {
+    func popupViewController(canDismiss viewController: BasePopupViewController) -> Bool {
+        guard textfieldActive != nil else { return true }
+        _ = textfieldActive?.resignFirstResponder()
+        return false
+    }
+    
+    func popupViewController(dismissed viewController: BasePopupViewController) {
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParent()
+    }
+}
+

@@ -64,4 +64,6 @@ struct RequestUrl {
     public static let Like = "http://www.lovecenthome.com/ios/like/"
     
     public static let Report = "http://www.lovecenthome.com/ios/report/"
+    
+    public static let Avoid = "http://www.lovecenthome.com/avoid/"
 }

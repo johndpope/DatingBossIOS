@@ -143,7 +143,7 @@ class RecommendsViewController: BaseMainViewController {
             break
             
         case buttonAvoidKnowns:
-            let viewController = AvoidKnownsSettingViewController()
+            let viewController = AvoidKnownsViewController()
             let navController = UINavigationController(rootViewController: viewController)
             self.present(navController, animated: true, completion: nil)
             break

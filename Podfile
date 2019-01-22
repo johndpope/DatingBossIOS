@@ -15,4 +15,5 @@ target 'Percent' do
   pod 'Crashlytics'
   pod 'PINRemoteImage'
   pod 'Charts'
+  pod 'JSPhoneFormat'
 end
