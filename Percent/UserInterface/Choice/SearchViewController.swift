@@ -8,81 +8,6 @@
 
 import UIKit
 
-class SearchParameters: NSObject {
-    var region: AppData?
-    var minAge: Int?
-    var maxAge: Int?
-    var minHeight: Int?
-    var maxHeight: Int?
-    var shape: AppData?
-    var blood: BloodType?
-    var religion: AppData?
-    var hobby: AppData?
-    var drinking: AppData?
-    var smoking: AppData?
-    
-    var hasCondition: Bool {
-        get {
-            return (region != nil || minAge != nil || maxAge != nil || minHeight != nil || maxHeight != nil || shape != nil || blood != nil || religion != nil || hobby != nil || drinking != nil || smoking != nil)
-        }
-    }
-    
-    var params: [String:Any] {
-        get {
-            var dict = [String:Any]()
-            if let area_cd = region?.code {
-                dict["area_cd"] = area_cd
-            }
-            if let birth_min = minAge {
-                dict["birth_min"] = birth_min
-            }
-            if let birth_max = maxAge {
-                dict["birth_max"] = birth_max
-            }
-            if let height_min = minHeight {
-                dict["height_min"] = height_min
-            }
-            if let height_max = maxHeight {
-                dict["height_max"] = height_max
-            }
-            if let form_cd = shape?.code {
-                dict["form_cd"] = form_cd
-            }
-            if let blood_type = blood?.rawValue.lowercased() {
-                dict["blood_type"] = blood_type
-            }
-            if let religion_cd = religion?.code {
-                dict["religion_cd"] = religion_cd
-            }
-            if let hobby_cd = hobby?.code {
-                dict["hobby_cd"] = hobby_cd
-            }
-            if let drinking_cd = drinking?.code {
-                dict["drinking_cd"] = drinking_cd
-            }
-            if let smoking_cd = smoking?.code {
-                dict["smoking_cd"] = smoking_cd
-            }
-            
-            return dict
-        }
-    }
-    
-    func clear() {
-        region = nil
-        minAge = nil
-        maxAge = nil
-        minHeight = nil
-        maxHeight = nil
-        shape = nil
-        blood = nil
-        religion = nil
-        hobby = nil
-        drinking = nil
-        smoking = nil
-    }
-}
-
 class SearchViewController: BaseMainViewController {
     private let theScrollView = UIScrollView()
     
@@ -139,7 +64,7 @@ class SearchViewController: BaseMainViewController {
         
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "검색 조건을 설정해주세요."
+        label.text = "검색 조건을 설정하세요."
         label.textColor = #colorLiteral(red: 0.168627451, green: 0.168627451, blue: 0.168627451, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         contentView.addSubview(label)
@@ -152,7 +77,7 @@ class SearchViewController: BaseMainViewController {
         
         label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "*조건은 최소 3개에서 최대 7개까지 선택 가능합니다."
+        label.text = "*조건에 맞는 이성이 있으면 체리가 차감됩니다."
         label.textColor = #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 12 * QUtils.optimizeRatio(), weight: .regular)
         label.numberOfLines = 0
@@ -166,7 +91,7 @@ class SearchViewController: BaseMainViewController {
         
         label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "*조건에 맞는 이성이 나타날 때 까지 검색은 무제한 가능합니다."
+        label.text = "*하루에 한 명의 이성 검색은 무료로 제공됩니다."
         label.textColor = #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 12 * QUtils.optimizeRatio(), weight: .regular)
         label.numberOfLines = 0
@@ -180,7 +105,7 @@ class SearchViewController: BaseMainViewController {
         
         label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "*검색된 이성중에 매칭률이 가장 높은 한명의 이성을 소개합니다."
+        label.text = "*조건은 최소 1개에서 최대 5개까지 선택 가능합니다."
         label.textColor = #colorLiteral(red: 0.9411764706, green: 0.1921568627, blue: 0.2549019608, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 12 * QUtils.optimizeRatio(), weight: .regular)
         label.numberOfLines = 0
@@ -448,6 +373,9 @@ class SearchViewController: BaseMainViewController {
         
         self.view.layoutIfNeeded()
         
+        parameter.loadFromDatabase()
+        updateSelectedValues()
+        
         reloadSearchFilters()
     }
     
@@ -457,6 +385,12 @@ class SearchViewController: BaseMainViewController {
         var contentSize = theScrollView.contentSize
         contentSize.height = entryViewRegion.superview!.frame.size.height + buttonSearch.frame.size.height + 8 * QUtils.optimizeRatio()
         theScrollView.contentSize = contentSize
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        theScrollView.setContentOffset(CGPoint.zero, animated: false)
     }
     
     override func pressedButton(_ sender: UIButton) {
@@ -478,6 +412,8 @@ class SearchViewController: BaseMainViewController {
                 alertController.show()
                 break
             }
+            
+            parameter.commit()
             
             let requesting = {(free: Bool) -> Void in
                 LoadingIndicatorManager.shared.showIndicatorView()

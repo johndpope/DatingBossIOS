@@ -67,7 +67,7 @@ class SearchPopupEntryView: SearchEntryView {
         imageView.contentMode = .scaleAspectFit
         self.addSubview(imageView)
         
-        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32 * QUtils.optimizeRatio()).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -48 * QUtils.optimizeRatio()).isActive = true
         imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 15 * QUtils.optimizeRatio()).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 15 * QUtils.optimizeRatio()).isActive = true
@@ -82,7 +82,7 @@ class SearchPopupEntryView: SearchEntryView {
         labelValue.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         buttonClear.translatesAutoresizingMaskIntoConstraints = false
-        buttonClear.setImage(UIImage(named: "img_close_small"), for: .normal)
+        buttonClear.setImage(UIImage(named: "img_close_small")?.resize(maxWidth: 18 * QUtils.optimizeRatio()), for: .normal)
         buttonClear.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
         self.addSubview(buttonClear)
         
@@ -90,8 +90,8 @@ class SearchPopupEntryView: SearchEntryView {
         
         buttonClear.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         buttonClear.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        buttonClear.leadingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
-        buttonClear.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
+        buttonClear.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        buttonClear.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -184,7 +184,7 @@ class SearchPopupRangeEntryView: SearchEntryView {
         imageView.contentMode = .scaleAspectFit
         self.addSubview(imageView)
         
-        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32 * QUtils.optimizeRatio()).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -48 * QUtils.optimizeRatio()).isActive = true
         imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 15 * QUtils.optimizeRatio()).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 15 * QUtils.optimizeRatio()).isActive = true
@@ -207,7 +207,7 @@ class SearchPopupRangeEntryView: SearchEntryView {
         button2.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         buttonClear.translatesAutoresizingMaskIntoConstraints = false
-        buttonClear.setImage(UIImage(named: "img_close_small"), for: .normal)
+        buttonClear.setImage(UIImage(named: "img_close_small")?.resize(maxWidth: 18 * QUtils.optimizeRatio()), for: .normal)
         buttonClear.addTarget(self, action: #selector(self.pressedButton(_:)), for: .touchUpInside)
         self.addSubview(buttonClear)
         
@@ -215,8 +215,8 @@ class SearchPopupRangeEntryView: SearchEntryView {
         
         buttonClear.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         buttonClear.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        buttonClear.leadingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
-        buttonClear.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
+        buttonClear.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        buttonClear.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

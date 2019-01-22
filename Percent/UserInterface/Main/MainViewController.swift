@@ -60,7 +60,9 @@ extension MainViewController: MainTabbarViewDelegate {
         
         self.selectedIndex = index
         
-        if index == 2 {
+        if index == 1 {
+            self.searchViewController.navigationController?.popToRootViewController(animated: false)
+        } else if index == 2 {
             self.categoryViewController.navigationController?.popToRootViewController(animated: false)
         }
     }
