@@ -30,14 +30,14 @@ class BoardTableViewCell: UITableViewCell {
         
         self.selectionStyle = .none
         
-        let headerView = UIView()
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: BoardTableViewCell.heightCollapsed))
+//        headerView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(headerView)
         
-        headerView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
-        headerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
-        headerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: BoardTableViewCell.heightCollapsed).isActive = true
+//        headerView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+//        headerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+//        headerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+//        headerView.heightAnchor.constraint(equalToConstant: BoardTableViewCell.heightCollapsed).isActive = true
         
         imageViewIndicator.translatesAutoresizingMaskIntoConstraints = false
         imageViewIndicator.image = UIImage(named: "img_board_collapsed")
@@ -60,7 +60,7 @@ class BoardTableViewCell: UITableViewCell {
         
         let seperator = UIView()
         seperator.translatesAutoresizingMaskIntoConstraints = false
-        seperator.backgroundColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
         self.contentView.addSubview(seperator)
         
         seperator.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
@@ -77,14 +77,24 @@ class BoardTableViewCell: UITableViewCell {
 }
 
 class BoardExpandedTableViewCell: BoardTableViewCell {
-    internal let labelContent = UILabel()
+    let labelContent = UILabel()
+    
+    private var constraintContentHeight: NSLayoutConstraint!
     
     override var data: BoardData! {
         didSet {
-            super.data = data
+            labelTitle.text = data.title
             
-            labelContent.text = data.text?.replacingOccurrences(of: "<br>", with: "\n").replacingOccurrences(of: "<BR>", with: "\n").replacingOccurrences(of: "&nbsp;", with: "\t")
-            labelContent.sizeToFit()
+            let content = data.text?.replacingOccurrences(of: "<br>", with: "\n").replacingOccurrences(of: "<BR>", with: "\n").replacingOccurrences(of: "&nbsp;", with: "\t")
+            labelContent.text = content
+            
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width - 64 * QUtils.optimizeRatio(), height: 0))
+            label.text = content
+            label.font = labelContent.font
+            label.numberOfLines = 0
+            label.sizeToFit()
+            constraintContentHeight.constant = label.frame.size.height
+            
             self.layoutIfNeeded()
         }
     }
@@ -92,17 +102,22 @@ class BoardExpandedTableViewCell: BoardTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        labelTitle.superview?.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
+        
         imageViewIndicator.image = UIImage(named: "img_board_expanded")
         
         labelContent.translatesAutoresizingMaskIntoConstraints = false
         labelContent.textColor = #colorLiteral(red: 0.3529411765, green: 0.3725490196, blue: 0.3843137255, alpha: 1)
         labelContent.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
         labelContent.numberOfLines = 0
+        labelContent.lineBreakMode = .byWordWrapping
         self.contentView.addSubview(labelContent)
         
         labelContent.topAnchor.constraint(equalTo: labelTitle.superview!.bottomAnchor, constant: 12 * QUtils.optimizeRatio()).isActive = true
         labelContent.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 32 * QUtils.optimizeRatio()).isActive = true
         labelContent.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -32 * QUtils.optimizeRatio()).isActive = true
+        constraintContentHeight = labelContent.heightAnchor.constraint(equalToConstant: 0)
+        constraintContentHeight.isActive = true
         labelContent.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -24 * QUtils.optimizeRatio()).isActive = true
         
         self.layoutIfNeeded()

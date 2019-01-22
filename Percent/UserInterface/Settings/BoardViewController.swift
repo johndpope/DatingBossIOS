@@ -17,6 +17,8 @@ enum BoardType {
 class BoardViewController: BaseViewController {
     private let type: BoardType
     
+    var selectedIndex: Int?
+    
     init(navigationViewEffect effect: UIVisualEffect? = nil, type bType: BoardType) {
         type = bType
         super.init(navigationViewEffect: effect)
@@ -80,12 +82,21 @@ class BoardViewController: BaseViewController {
             
             self.tableData.removeAll()
             self.tableData.append(contentsOf: responseData.map({ (item) -> BoardData in
-                let newItem = BoardData(with: item)
-                if self.showGuide, newItem.board_idx == 1 {
-                    newItem.isExpanded = true
-                }
-                return newItem
+//                let newItem = BoardData(with: item)
+//                if self.showGuide, newItem.board_idx == 1 {
+//                    newItem.isExpanded = true
+//                }
+                return BoardData(with: item)
             }))
+            
+            if self.showGuide {
+                for i in 0 ..< self.tableData.count {
+                    let item = self.tableData[i]
+                    guard item.board_idx == 1 else { continue }
+                    self.selectedIndex = i
+                    break
+                }
+            }
             
             self.showGuide = false
             
@@ -96,13 +107,21 @@ class BoardViewController: BaseViewController {
 
 extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        theTableView.performBatchUpdates({
-            let data = self.tableData[indexPath.row]
-            data.isExpanded = !data.isExpanded
-            self.tableData[indexPath.row] = data
-            
-            self.theTableView.reloadRows(at: [indexPath], with: .fade)
-        }, completion: nil)
+//        theTableView.performBatchUpdates({
+//            let data = self.tableData[indexPath.row]
+//            data.isExpanded = !data.isExpanded
+//            self.tableData[indexPath.row] = data
+//
+//            self.theTableView.reloadRows(at: [indexPath], with: .fade)
+//        }, completion: nil)
+        
+        if selectedIndex == indexPath.row {
+            selectedIndex = nil
+        } else {
+            self.selectedIndex = indexPath.row
+        }
+        
+        theTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,14 +131,14 @@ extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let data = tableData[indexPath.row]
         
-        guard data.isExpanded, let cell = self.tableView(tableView, cellForRowAt: indexPath) as? BoardTableViewCell else { return BoardTableViewCell.heightCollapsed }
+        guard /*data.isExpanded, */let cell = self.tableView(tableView, cellForRowAt: indexPath) as? BoardExpandedTableViewCell, selectedIndex == indexPath.row else { return BoardTableViewCell.heightCollapsed }
         cell.data = data
-        return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
+        return cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = tableData[indexPath.row]
-        guard data.isExpanded else { return tableView.dequeueReusableCell(withIdentifier: "BoardTableViewCell") as? BoardTableViewCell ?? UITableViewCell() }
+//        let data = tableData[indexPath.row]
+        guard /*data.isExpanded */ selectedIndex == indexPath.row else { return tableView.dequeueReusableCell(withIdentifier: "BoardTableViewCell") as? BoardTableViewCell ?? UITableViewCell() }
         
         return tableView.dequeueReusableCell(withIdentifier: "BoardExpandedTableViewCell") as? BoardExpandedTableViewCell ?? UITableViewCell()
     }
