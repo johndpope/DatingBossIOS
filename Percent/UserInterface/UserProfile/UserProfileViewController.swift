@@ -252,7 +252,7 @@ class UserProfileViewController: BaseViewController {
         
         var frame = CGRect.zero
         frame.size.width = theTableView.frame.size.width
-        frame.size.height = theCollectionView.frame.size.height + (isMine == false ? statsView.frame.size.height : 0) - kHeightNavigationView + 16 * QUtils.optimizeRatio()
+        frame.size.height = theCollectionView.frame.size.height + (isMine == false ? statsView.frame.size.height + 16 * QUtils.optimizeRatio() : 0) - kHeightNavigationView
         
         let tableHeaderView = UIView()
         tableHeaderView.frame = frame
@@ -361,7 +361,7 @@ class UserProfileViewController: BaseViewController {
         
         attributedString = NSMutableAttributedString()
         attributedString.append(NSAttributedString(string: "학력은 \(data.edu ?? "")", attributes: norAttr))
-        if let school = data.school {
+        if let school = data.school, school.count > 0 {
             attributedString.append(NSAttributedString(string: " (\(school)) ", attributes: norAttr))
         }
         attributedString.append(NSAttributedString(string: "입니다", attributes: norAttr))
@@ -369,7 +369,7 @@ class UserProfileViewController: BaseViewController {
         
         attributedString = NSMutableAttributedString()
         attributedString.append(NSAttributedString(string: "제 직업은 \(data.job ?? "")", attributes: norAttr))
-        if let job_etc = data.job_etc {
+        if let job_etc = data.job_etc, job_etc.count > 0 {
             attributedString.append(NSAttributedString(string: " (\(job_etc)) ", attributes: norAttr))
         }
         attributedString.append(NSAttributedString(string: "입니다.", attributes: norAttr))
@@ -538,7 +538,7 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.section > 0 else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserRadarChartTableViewCell") as? UserRadarChartTableViewCell else { return UITableViewCell() }
-            cell.showLegend = indexPath.row == 0
+            cell.showLegend = indexPath.row == 0 && !isMine
             
             var titleString = "가치관"
             if indexPath.row == 1 {

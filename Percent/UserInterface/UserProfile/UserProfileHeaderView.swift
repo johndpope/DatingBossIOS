@@ -114,6 +114,16 @@ class UserProfileHeaderView: UIView {
             buttonLike.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             constraintRight = buttonLike.leadingAnchor.constraint(equalTo: self.trailingAnchor)
             constraintRight?.isActive = true
+            
+            seperator = UIView()
+            seperator.translatesAutoresizingMaskIntoConstraints = false
+            seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
+            self.addSubview(seperator)
+            
+            seperator.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            seperator.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            seperator.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+            seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         }
         
 //        buttonFavourite.translatesAutoresizingMaskIntoConstraints = false
@@ -125,16 +135,6 @@ class UserProfileHeaderView: UIView {
 //        buttonFavourite.heightAnchor.constraint(equalToConstant: 40 * QUtils.optimizeRatio()).isActive = true
 //        buttonFavourite.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
 //        buttonFavourite.trailingAnchor.constraint(equalTo: buttonLike.leadingAnchor).isActive = true
-        
-        seperator = UIView()
-        seperator.translatesAutoresizingMaskIntoConstraints = false
-        seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
-        self.addSubview(seperator)
-        
-        seperator.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        seperator.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        seperator.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
         constraintValue = 0
     }
