@@ -39,10 +39,10 @@ class SearchParameters: NSObject {
             let thisYear = Int(formatter.string(from: Date()))!
             
             if let birth_min = minAge {
-                dict["birth_min"] = thisYear - birth_min + 1
+                dict["birth_max"] = thisYear - birth_min + 1
             }
             if let birth_max = maxAge {
-                dict["birth_max"] = thisYear - birth_max + 1
+                dict["birth_min"] = thisYear - birth_max + 1
             }
             
             if let height_min = minHeight {

@@ -149,6 +149,20 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         guard data.toggle == false, let sType = data.type else { return }
         
         switch sType {
+        case SettingsType.ChangePassword:
+            let unitHeight = 56 * QUtils.optimizeRatio()
+            
+            let customView = UIView(frame: CGRect(x: 0, y: 0, width: kWidthPopupContentView, height: unitHeight * 3))
+            
+            let alertController = AlertPopupCustomViewController(withTitle: entryViewShape.labelTitle.text, View: tableView)
+            alertController.delegate = self
+            alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+            alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "취소", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
+            self.addChild(alertController)
+            alertController.show()
+            break
+            
         case SettingsType.Destroy:
             let alertController = UIAlertController(title: "설정", message: "정말 서비스 탈퇴를 하시겠습니까?", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
