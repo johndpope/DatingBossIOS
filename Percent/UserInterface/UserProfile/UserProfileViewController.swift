@@ -603,13 +603,14 @@ extension UserProfileViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "UserPictureCollectionViewCell", for: indexPath) as? UserPictureCollectionViewCell ?? UICollectionViewCell()
+        guard let theCell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserPictureCollectionViewCell", for: indexPath) as? UserPictureCollectionViewCell else { return UICollectionViewCell() }
+        theCell.url = collectionData[indexPath.row].imageUrl
+        return theCell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let theCell = cell as? UserPictureCollectionViewCell else { return }
-        theCell.url = collectionData[indexPath.row].imageUrl
-    }
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        guard let theCell = cell as? UserPictureCollectionViewCell else { return }
+//    }
 }
 
 extension UserProfileViewController: UIScrollViewDelegate {

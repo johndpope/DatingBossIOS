@@ -24,6 +24,7 @@ class UserPictureCollectionViewCell: UICollectionViewCell {
     
     var url: URL? {
         didSet {
+            imageView.image = nil
             imageView.pin_setImage(from: url)
         }
     }

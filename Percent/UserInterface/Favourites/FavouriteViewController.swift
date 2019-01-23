@@ -59,27 +59,32 @@ class FavouriteViewController: BaseMainViewController {
         theCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         theCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         theCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
+        self.needToReload = true
+        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.editMode = false
-        self.needToReload = true
-        reloadData()
+        self.theCollectionView.reloadData()
     }
     
     func reloadData() {
         guard needToReload else { return }
         needToReload = false
         
+        self.pagingData  = [0, 0, 0]
+        self.theCollectionView.reloadData()
+        
+        self.theCollectionView.setContentOffset(CGPoint.zero, animated: false)
+        
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Main.Favourite + "\(MyData.shared.mem_idx)", method: .get, headerValues: nil, params: nil) { (isSucceed, errMessage, response) in
             guard let responseData = response as? [[String:Any]] else { return }
             
             self.collectionData.removeAll()
-            
-            self.pagingData  = [0, 0, 0]
             
             for i in 0 ..< responseData.count {
                 let item = GatherData(with: responseData[i])
@@ -103,11 +108,31 @@ class FavouriteViewController: BaseMainViewController {
         guard 6 * paging < dataArray.count else {
             pagingData[section] = 0
             theCollectionView.reloadData()
+            
+            theCollectionView.setContentOffset(CGPoint.zero, animated: true)
             return
         }
         
-        pagingData[section] = paging
-        theCollectionView.reloadData()
+        
+        self.pagingData[section] = paging
+        
+        theCollectionView.performBatchUpdates({
+            self.pagingData[section] = paging
+            
+            let start = paging * 6
+            var end = (paging + 1) * 6
+            if end > dataArray.count {
+                end = dataArray.count
+            }
+            
+            var indexPaths = [IndexPath]()
+            for i in start ..< end {
+                indexPaths.append(IndexPath(row: i, section: section))
+            }
+            self.theCollectionView.insertItems(at: indexPaths)
+        }) { (complete) in
+            
+        }
     }
     
     @objc func toggleEditMode(_ sender: UIButton) {
@@ -341,10 +366,10 @@ extension FavouriteViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let key = keys[indexPath.section]
         let defaultCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "UICollectionReusableView", for: indexPath)
-        guard let dataArray = collectionData[key], dataArray.count > 6 else { return defaultCell }
+        guard let dataArray = collectionData[key] else { return defaultCell }
         
         if kind ==  UICollectionView.elementKindSectionHeader {
-            guard let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FavouriteHeaderView", for: indexPath) as? FavouriteHeaderView else { return defaultCell }
+            guard dataArray.count > 0, let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FavouriteHeaderView", for: indexPath) as? FavouriteHeaderView else { return defaultCell }
             var titleString = "내가 본 이성"
             
             if indexPath.section == 1 {
@@ -367,7 +392,7 @@ extension FavouriteViewController: UICollectionViewDelegate, UICollectionViewDat
             
             return reusableView
         } else if kind ==  UICollectionView.elementKindSectionFooter {
-            guard let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FavouriteMoreView", for: indexPath) as? FavouriteMoreView else { return defaultCell }
+            guard dataArray.count > 6, let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FavouriteMoreView", for: indexPath) as? FavouriteMoreView else { return defaultCell }
             var buttonTitle = "접기"
             
             let paging = pagingData[indexPath.section]
@@ -376,6 +401,8 @@ extension FavouriteViewController: UICollectionViewDelegate, UICollectionViewDat
             if maxCount < dataArray.count {
                 buttonTitle = "더 보기"
             }
+            
+            reusableView.tag = indexPath.section
             
             reusableView.button.setTitle(buttonTitle, for: .normal)
             reusableView.button.tag = indexPath.section

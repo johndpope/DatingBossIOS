@@ -52,6 +52,8 @@ class FavouriteCollectionViewCell: UICollectionViewCell {
     
     var data: GatherData? {
         didSet {
+            imageViewProfile.image = nil
+            
             if let memberIndex = data?.mem_idx, let imageName = data?.picture_name  {
                 imageViewProfile.pin_setImage(from: URL(string: RequestUrl.Image.File + "\(memberIndex)/\(imageName)"))
             } else {
@@ -72,6 +74,7 @@ class FavouriteCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         imageViewProfile.translatesAutoresizingMaskIntoConstraints = false
+        imageViewProfile.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
         imageViewProfile.clipsToBounds = true
         imageViewProfile.layer.cornerRadius = 44 * QUtils.optimizeRatio()
         self.contentView.addSubview(imageViewProfile)

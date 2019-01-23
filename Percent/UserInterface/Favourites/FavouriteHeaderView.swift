@@ -50,7 +50,7 @@ class FavouriteHeaderView: UICollectionReusableView {
         buttonConfirm.translatesAutoresizingMaskIntoConstraints = false
         buttonConfirm.setTitle("삭제", for: .normal)
         buttonConfirm.setTitleColor(#colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), for: .normal)
-        buttonConfirm.titleLabel?.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .regular)
+        buttonConfirm.titleLabel?.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .semibold)
         buttonConfirm.sizeToFit()
         self.addSubview(buttonConfirm)
         
