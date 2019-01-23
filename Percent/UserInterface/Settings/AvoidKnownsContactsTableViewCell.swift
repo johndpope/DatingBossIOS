@@ -25,8 +25,7 @@ class AvoidKnownsContactsTableViewCell: UITableViewCell {
             labelName.text = data?.name
             
             if let phone = data?.phone {
-                let phoneFormat = JSPhoneFormat(appenCharacter: "-")
-                labelPhone.text = phoneFormat.addCharacter(at: phone)
+                labelPhone.text = phone
             } else {
                 labelPhone.text = nil
             }

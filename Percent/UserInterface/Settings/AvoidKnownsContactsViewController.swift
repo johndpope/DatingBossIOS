@@ -77,6 +77,10 @@ class AvoidKnownsContactsViewController: BaseViewController {
         
         let tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: buttonCancel.layer.cornerRadius * 2 + 16 * QUtils.optimizeRatio()))
         theTableView.tableFooterView = tableFooterView
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         reloadData()
     }
@@ -123,49 +127,54 @@ class AvoidKnownsContactsViewController: BaseViewController {
     private func reloadData() {
         LoadingIndicatorManager.shared.showIndicatorView()
         
-        selectedIndex.removeAll()
-        tableData.removeAll()
-        
-        let status = CNContactStore.authorizationStatus(for: .contacts)
-        
-        if status == .denied { return }
-        let contactStore = CNContactStore()
-        
-        var keysToFetch = [CNKeyDescriptor]()
-        keysToFetch.append(CNContactFormatter.descriptorForRequiredKeys(for: .fullName))
-        keysToFetch.append(CNContactPhoneNumbersKey as CNKeyDescriptor)
-        
-        let request = CNContactFetchRequest(keysToFetch: keysToFetch)
-        
-        let formatter = CNContactFormatter()
-        formatter.style = .fullName
-        
-        var output = [LocalContact]()
-        
-        do {
-            try contactStore.enumerateContacts(with: request) { contact, stop in
-                if let name = formatter.string(from: contact), let phone = contact.phoneNumbers.first?.value.stringValue {
-                    let data = LocalContact(name: name, phone: phone)
-                    output.append(data)
+        DispatchQueue.main.async {
+            self.selectedIndex.removeAll()
+            self.tableData.removeAll()
+            
+            let status = CNContactStore.authorizationStatus(for: .contacts)
+            
+            if status == .denied { return }
+            let contactStore = CNContactStore()
+            
+            var keysToFetch = [CNKeyDescriptor]()
+            keysToFetch.append(CNContactFormatter.descriptorForRequiredKeys(for: .fullName))
+            keysToFetch.append(CNContactPhoneNumbersKey as CNKeyDescriptor)
+            
+            let request = CNContactFetchRequest(keysToFetch: keysToFetch)
+            
+            let formatter = CNContactFormatter()
+            formatter.style = .fullName
+            
+            var output = [LocalContact]()
+            
+            do {
+                try contactStore.enumerateContacts(with: request) { contact, stop in
+                    if let name = formatter.string(from: contact),
+                        let phone = contact.phoneNumbers.first?.value.stringValue,
+                        phone.hasPrefix("01"),
+                        phone.count == 11 {
+                        let data = LocalContact(name: name, phone: phone)
+                        output.append(data)
+                    }
                 }
+            } catch let fetchError {
+                print(fetchError)
             }
-        } catch let fetchError {
-            print(fetchError)
+            
+            if output.count > 0 {
+                self.tableData.append(contentsOf: output.sorted(by: { (a, b) -> Bool in
+                    return a.name < b.name
+                }))
+            }
+            
+            for i in 0 ..< self.tableData.count {
+                self.selectedIndex.append(i)
+            }
+            
+            LoadingIndicatorManager.shared.hideIndicatorView()
+            
+            self.theTableView.reloadData()
         }
-        
-        if output.count > 0 {
-            self.tableData.append(contentsOf: output.sorted(by: { (a, b) -> Bool in
-                return a.name < b.name
-            }))
-        }
-        
-        for i in 0 ..< self.tableData.count {
-            selectedIndex.append(i)
-        }
-        
-        LoadingIndicatorManager.shared.hideIndicatorView()
-        
-        theTableView.reloadData()
     }
 }
 

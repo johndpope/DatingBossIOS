@@ -105,8 +105,10 @@ class AvoidKnownsViewController: BaseViewController {
             store.requestAccess(for: .contacts) { (isSucceed, error) in
                 guard isSucceed else { return }
                 
-                let viewController = AvoidKnownsContactsViewController()
-                self.navigationController?.pushViewController(viewController, animated: true)
+                DispatchQueue.main.async {
+                    let viewController = AvoidKnownsContactsViewController()
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
             }
             break
             
