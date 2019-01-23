@@ -11,7 +11,7 @@ import UIKit
 class FavouriteViewController: BaseMainViewController {
     private let theCollectionView: UICollectionView!
     
-    private var keys: [GatheringType] = [.read, .request, .response]
+    private var keys: [GatheringType] = [.read, .response, .request]
     private var collectionData = [GatheringType:[GatherData]]()
     
     private var pagingData: [Int] = [0, 0, 0]
@@ -63,18 +63,22 @@ class FavouriteViewController: BaseMainViewController {
         theCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         self.needToReload = true
-        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.editMode = false
-        self.theCollectionView.reloadData()
+        
+        reloadData()
     }
     
     func reloadData() {
-        guard needToReload else { return }
+        guard needToReload else {
+            self.theCollectionView.reloadData()
+            return
+        }
+        
         needToReload = false
         
         self.pagingData  = [0, 0, 0]

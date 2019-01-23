@@ -106,8 +106,6 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
                     userData.reloadData { (isSucceed) in
                         LoadingIndicatorManager.shared.hideIndicatorView()
                         
-                        (UIApplication.appDelegate().window?.rootViewController as? MainViewController)?.favouriteViewController.needToReload = true
-                        
                         let viewController = UserProfileViewController(data: userData)
                         self.navigationController?.pushViewController(viewController, animated: true)
                     }

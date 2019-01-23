@@ -64,6 +64,9 @@ extension MainViewController: MainTabbarViewDelegate {
             self.searchViewController.navigationController?.popToRootViewController(animated: false)
         } else if index == 2 {
             self.categoryViewController.navigationController?.popToRootViewController(animated: false)
+        } else if index == 4 {
+            self.favouriteViewController.needToReload = true
+            self.favouriteViewController.reloadData()
         }
     }
 }
