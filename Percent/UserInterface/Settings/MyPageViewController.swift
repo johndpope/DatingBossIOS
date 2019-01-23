@@ -132,13 +132,13 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
-            mailComposer.setSubject("고객센터 문의 (\(MyData.shared.nickname ?? "") 님")
+            mailComposer.setSubject("고객센터 문의 (\(MyData.shared.nickname ?? "") 님)")
             mailComposer.setToRecipients([SUPPORT_EMAIL])
             
             var body = "\n\n\n*아래는 문제 해결을 위해 필요한 정보입니다. 지우지 말고 함께 보내주세요.\n\n"
             body += "AppInfo: iOS / " + UIDevice.current.systemVersion
-            body += "Device Info: " + UIDevice.modelName
-            body += "Device Display: \(UIScreen.main.bounds.size.width)x\(UIScreen.main.bounds.size.height)"
+            body += "\nDevice Info: " + UIDevice.modelName
+            body += "\nDevice Display: \(UIScreen.main.bounds.size.width)x\(UIScreen.main.bounds.size.height)"
             
             mailComposer.setMessageBody(body, isHTML: false)
             self.present(mailComposer, animated: true, completion: nil)
