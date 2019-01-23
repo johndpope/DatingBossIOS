@@ -55,6 +55,8 @@ class SignupProfileEntryView: UIView {
         
         labelTitle.leadingAnchor.constraint(equalTo: imageViewChecked.trailingAnchor, constant: 5 * QUtils.optimizeRatio()).isActive = true
         labelTitle.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        self.layoutIfNeeded()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -83,6 +85,8 @@ class SignupProfileTextEntryView: SignupProfileEntryView {
         textfield.leadingAnchor.constraint(equalTo: labelTitle.trailingAnchor, constant: 40 * QUtils.optimizeRatio()).isActive = true
         textfield.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -36 * QUtils.optimizeRatio()).isActive = true
         textfield.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        self.layoutIfNeeded()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -123,6 +127,8 @@ class SignupProfilePopupEntryView: SignupProfileEntryView {
         
         labelValue.trailingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: -16 * QUtils.optimizeRatio()).isActive = true
         labelValue.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        self.layoutIfNeeded()
     }
     
     required init?(coder aDecoder: NSCoder) {

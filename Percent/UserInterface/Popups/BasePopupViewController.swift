@@ -27,6 +27,9 @@ class BasePopupViewController: UIViewController {
     
     var defaultAction: (() -> Void)?
     
+    internal var constraintWidth: NSLayoutConstraint!
+    internal var constraintVertical: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,8 +54,10 @@ class BasePopupViewController: UIViewController {
         contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         
         contentView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalToConstant: kWidthPopupContentView).isActive = true
+        constraintVertical = contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        constraintVertical.isActive = true
+        constraintWidth = contentView.widthAnchor.constraint(equalToConstant: kWidthPopupContentView)
+        constraintWidth.isActive = true
         
         labelTitle.translatesAutoresizingMaskIntoConstraints = false
         labelTitle.textColor = titleColour

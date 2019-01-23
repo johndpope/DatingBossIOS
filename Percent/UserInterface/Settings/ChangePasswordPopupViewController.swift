@@ -18,6 +18,9 @@ class ChangePasswordPopupViewController: BasePopupViewController {
     
     private let labelMessage = UILabel()
     
+    private var constraintButton: NSLayoutConstraint!
+    private var constraintButtonNoError: NSLayoutConstraint!
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
@@ -31,12 +34,21 @@ class ChangePasswordPopupViewController: BasePopupViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelTitle.text = "서비스 탈퇴"
+        labelTitle.text = "비밀번호 변경"
+        
+        let width = 340 * QUtils.optimizeRatio()
+        
+        constraintWidth.constant = width
+        constraintVertical.isActive = false
+        contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -280).isActive = true
         
         entryViewPassword.translatesAutoresizingMaskIntoConstraints = false
         entryViewPassword.labelTitle.text = "기존 비밀번호"
+        entryViewPassword.textfield.delegate = self
         entryViewPassword.textfield.isSecureTextEntry = true
         entryViewPassword.hideCheckIndicator = true
+        entryViewPassword.textfield.addTarget(self, action: #selector(self.updateMessage), for: .editingChanged)
+        entryViewPassword.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         contentView.addSubview(entryViewPassword)
         
         entryViewPassword.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 24 * QUtils.optimizeRatio()).isActive = true
@@ -56,7 +68,10 @@ class ChangePasswordPopupViewController: BasePopupViewController {
         
         entryViewNewPassword.translatesAutoresizingMaskIntoConstraints = false
         entryViewNewPassword.labelTitle.text = "새 비밀번호"
+        entryViewNewPassword.textfield.delegate = self
         entryViewNewPassword.textfield.isSecureTextEntry = true
+        entryViewNewPassword.textfield.addTarget(self, action: #selector(self.updateMessage), for: .editingChanged)
+        entryViewNewPassword.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         contentView.addSubview(entryViewNewPassword)
         
         entryViewNewPassword.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -76,7 +91,10 @@ class ChangePasswordPopupViewController: BasePopupViewController {
         
         entryViewRepeatPassword.translatesAutoresizingMaskIntoConstraints = false
         entryViewRepeatPassword.labelTitle.text = "비밀번호 확인"
+        entryViewRepeatPassword.textfield.delegate = self
         entryViewRepeatPassword.textfield.isSecureTextEntry = true
+        entryViewRepeatPassword.textfield.addTarget(self, action: #selector(self.updateMessage), for: .editingChanged)
+        entryViewRepeatPassword.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         contentView.addSubview(entryViewRepeatPassword)
         
         entryViewRepeatPassword.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
@@ -84,10 +102,20 @@ class ChangePasswordPopupViewController: BasePopupViewController {
         entryViewRepeatPassword.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         entryViewRepeatPassword.heightAnchor.constraint(equalToConstant: 50 * QUtils.optimizeRatio()).isActive = true
         
+        seperator = UIView()
+        seperator.translatesAutoresizingMaskIntoConstraints = false
+        seperator.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
+        self.contentView.addSubview(seperator)
+        
+        seperator.topAnchor.constraint(equalTo: entryViewRepeatPassword.bottomAnchor).isActive = true
+        seperator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8 * QUtils.optimizeRatio()).isActive = true
+        seperator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8 * QUtils.optimizeRatio()).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
         labelMessage.translatesAutoresizingMaskIntoConstraints = false
         labelMessage.textColor = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
-        labelMessage.textAlignment = .center
-        labelMessage.font = UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .medium)
+        labelMessage.textAlignment = .left
+        labelMessage.font = UIFont.systemFont(ofSize: 12 * QUtils.optimizeRatio(), weight: .regular)
         labelMessage.numberOfLines = 0
         contentView.addSubview(labelMessage)
         
@@ -107,7 +135,11 @@ class ChangePasswordPopupViewController: BasePopupViewController {
         buttonCancel.titleLabel?.font = UIFont.systemFont(ofSize: 16 * QUtils.optimizeRatio(), weight: .bold)
         contentView.addSubview(buttonCancel)
         
-        buttonCancel.topAnchor.constraint(equalTo: labelMessage.bottomAnchor, constant: 24 * QUtils.optimizeRatio()).isActive = true
+        constraintButton = buttonCancel.topAnchor.constraint(equalTo: labelMessage.bottomAnchor, constant: 24 * QUtils.optimizeRatio())
+        constraintButton.isActive = true
+        constraintButtonNoError = buttonCancel.topAnchor.constraint(equalTo: entryViewRepeatPassword.bottomAnchor)
+        constraintButtonNoError.isActive = false
+
         buttonCancel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         buttonCancel.trailingAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         buttonCancel.heightAnchor.constraint(equalToConstant: 50 * QUtils.optimizeRatio()).isActive = true
@@ -130,6 +162,10 @@ class ChangePasswordPopupViewController: BasePopupViewController {
         buttonConfirm.heightAnchor.constraint(equalTo: buttonCancel.heightAnchor).isActive = true
         
         self.view.layoutIfNeeded()
+        
+        _ = entryViewPassword.textfield.becomeFirstResponder()
+        
+        updateMessage()
     }
     
     override func pressedButton(_ sender: UIButton) {
@@ -190,7 +226,11 @@ class ChangePasswordPopupViewController: BasePopupViewController {
         }
     }
     
-    private func updateMessage() {
+    @objc private func pressedEntryButton(_ sender: UIButton) {
+        _ = (sender.superview as? SignupProfileTextEntryView)?.textfield.becomeFirstResponder()
+    }
+    
+    @objc private func updateMessage() {
         var message: String?
         
         let password = entryViewNewPassword.textfield.text
@@ -205,15 +245,11 @@ class ChangePasswordPopupViewController: BasePopupViewController {
         let newValue = hasChars && hasDigits && hasEnoughLength
         entryViewNewPassword.checked = newValue
         
-        if entryViewNewPassword.checked {
-            entryViewNewPassword.checked = false
-        }
-        
         if entryViewNewPassword.checked == false {
             message = "※ 비밀번호는 영문 + 숫자 조합 6자리 이상으로 입력하세요."
         }
         
-        if entryViewRepeatPassword.textfield.text != password {
+        if password?.count == 0 || entryViewRepeatPassword.textfield.text != password {
             if message != nil {
                 message! += "\n"
             } else {
@@ -221,10 +257,31 @@ class ChangePasswordPopupViewController: BasePopupViewController {
             }
             
             message! += "※ 비밀번호가 일치하지 않습니다."
+            
+            entryViewRepeatPassword.checked = false
+        } else {
+            entryViewRepeatPassword.checked = true
         }
         
         labelMessage.text = message
         
+        constraintButton.isActive = (message ?? "").count > 0
+        constraintButtonNoError.isActive = !constraintButton.isActive
+        
         self.view.layoutIfNeeded()
+    }
+}
+
+extension ChangePasswordPopupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == entryViewPassword.textfield {
+            _ = entryViewNewPassword.textfield.becomeFirstResponder()
+        } else if textField == entryViewNewPassword.textfield {
+            _ = entryViewRepeatPassword.textfield.becomeFirstResponder()
+        } else if textField == entryViewRepeatPassword.textfield {
+            _ = textField.resignFirstResponder()
+        }
+        
+        return true
     }
 }

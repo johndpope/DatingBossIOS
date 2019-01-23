@@ -29,10 +29,18 @@ class SignoutPopupViewController: BasePopupViewController {
         
         labelTitle.text = "서비스 탈퇴"
         
+        let width = 340 * QUtils.optimizeRatio()
+        
+        constraintWidth.constant = width
+        constraintVertical.isActive = false
+        contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -280).isActive = true
+        
         entryViewPassword.translatesAutoresizingMaskIntoConstraints = false
         entryViewPassword.labelTitle.text = "비밀번호"
+        entryViewPassword.textfield.delegate = self
         entryViewPassword.textfield.isSecureTextEntry = true
         entryViewPassword.hideCheckIndicator = true
+        entryViewPassword.button.addTarget(self, action: #selector(self.pressedEntryButton(_:)), for: .touchUpInside)
         contentView.addSubview(entryViewPassword)
         
         entryViewPassword.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 24 * QUtils.optimizeRatio()).isActive = true
@@ -62,7 +70,6 @@ class SignoutPopupViewController: BasePopupViewController {
         labelMessage.topAnchor.constraint(equalTo: seperator.bottomAnchor, constant: 24 * QUtils.optimizeRatio()).isActive = true
         labelMessage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15 * QUtils.optimizeRatio()).isActive = true
         labelMessage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15 * QUtils.optimizeRatio()).isActive = true
-        
         
         buttonCancel.translatesAutoresizingMaskIntoConstraints = false
         buttonCancel.clipsToBounds = true
@@ -98,6 +105,8 @@ class SignoutPopupViewController: BasePopupViewController {
         buttonConfirm.heightAnchor.constraint(equalTo: buttonCancel.heightAnchor).isActive = true
         
         self.view.layoutIfNeeded()
+        
+        _ = entryViewPassword.textfield.becomeFirstResponder()
     }
     
     override func pressedButton(_ sender: UIButton) {
@@ -139,5 +148,16 @@ class SignoutPopupViewController: BasePopupViewController {
             
         default: break
         }
+    }
+    
+    @objc private func pressedEntryButton(_ sender: UIButton) {
+        _ = (sender.superview as? SignupProfileTextEntryView)?.textfield.becomeFirstResponder()
+    }
+}
+
+extension SignoutPopupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        _ = textField.resignFirstResponder()
+        return true
     }
 }
