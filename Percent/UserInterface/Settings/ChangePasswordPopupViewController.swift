@@ -149,18 +149,25 @@ class ChangePasswordPopupViewController: BasePopupViewController {
                 return
             }
             
+            if entryViewPassword.textfield.text?.sha256() != QDataManager.shared.password {
+                InstanceMessageManager.shared.showMessage("기존 비밀번호가 일치하지 않습니다.", margin: 260)
+                return
+            }
+            
             if entryViewNewPassword.checked == false {
                 InstanceMessageManager.shared.showMessage("비밀번호는 영문 + 숫자 조합 6자리 이상으로 입력하세요.", margin: 260)
                 return
             }
             
             if entryViewRepeatPassword.checked == false {
-                InstanceMessageManager.shared.showMessage("비밀번호가 일치하지 않습니다.", margin: 260)
+                InstanceMessageManager.shared.showMessage("새 비밀번호가 일치하지 않습니다.", margin: 260)
                 return
             }
             
+            let newPassword = entryViewNewPassword.textfield.text?.sha256()
+            
             var params = [String:Any]()
-            params["pw"] = entryViewNewPassword.textfield.text
+            params["pw"] = newPassword
             
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.Update + "\(MyData.shared.mem_idx)", method: .patch, headerValues: nil, params: params) { (isSucceed, errMessage, response) in
@@ -169,6 +176,8 @@ class ChangePasswordPopupViewController: BasePopupViewController {
                 if status == "Failed" {
                     InstanceMessageManager.shared.showMessage("기존 비밀번호가 일치하지 않습니다.", margin: 260)
                 }
+                
+                QDataManager.shared.password = newPassword
                 
                 self.hide { (complete) in
                     self.view.removeFromSuperview()
