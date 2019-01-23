@@ -69,6 +69,7 @@
 		1C938D6721F16664005D327C /* UserReportButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C938D6621F16664005D327C /* UserReportButton.swift */; };
 		1C94737A21F85DE5002158EA /* SignoutPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C94737921F85DE5002158EA /* SignoutPopupViewController.swift */; };
 		1C94737C21F8666C002158EA /* ChangePasswordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C94737B21F8666C002158EA /* ChangePasswordPopupViewController.swift */; };
+		1C94738021F877F1002158EA /* RecommandNoDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C94737F21F877F1002158EA /* RecommandNoDataCollectionViewCell.swift */; };
 		1CA5876E21E5D8BD002B60F2 /* AlertPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */; };
 		1CA5877121E5DCF4002B60F2 /* SignupGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */; };
 		1CA5877321E5DE1A002B60F2 /* SignupGuideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */; };
@@ -301,6 +302,7 @@
 		1C938D6621F16664005D327C /* UserReportButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReportButton.swift; sourceTree = "<group>"; };
 		1C94737921F85DE5002158EA /* SignoutPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutPopupViewController.swift; sourceTree = "<group>"; };
 		1C94737B21F8666C002158EA /* ChangePasswordPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPopupViewController.swift; sourceTree = "<group>"; };
+		1C94737F21F877F1002158EA /* RecommandNoDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandNoDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopupViewController.swift; sourceTree = "<group>"; };
 		1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGuideViewController.swift; sourceTree = "<group>"; };
 		1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGuideTableViewCell.swift; sourceTree = "<group>"; };
@@ -830,6 +832,7 @@
 				1CE69AEE21DA458F00B9FE4A /* RecommendsCollectionViewCell.swift */,
 				1CCE2C4921F788340057122D /* RecommendCollectionHeaderReusableView.swift */,
 				1CCE2C4B21F78C9C0057122D /* RecommendCollectionFooterReusableView.swift */,
+				1C94737F21F877F1002158EA /* RecommandNoDataCollectionViewCell.swift */,
 			);
 			path = Recommends;
 			sourceTree = "<group>";
@@ -1281,6 +1284,7 @@
 				1C5AC82021E3A3EB0007827D /* BoardTableViewCell.swift in Sources */,
 				1CD3D9B221EB4A1100938293 /* InstanceMessageManager.swift in Sources */,
 				1CE69AF521DB5CBB00B9FE4A /* ChatListViewController.swift in Sources */,
+				1C94738021F877F1002158EA /* RecommandNoDataCollectionViewCell.swift in Sources */,
 				1C03841121D002090024C3B3 /* BaseData.swift in Sources */,
 				1CA5877F21E5F801002B60F2 /* SignupTermsDetailViewController.swift in Sources */,
 				1CCE2C4A21F788340057122D /* RecommendCollectionHeaderReusableView.swift in Sources */,

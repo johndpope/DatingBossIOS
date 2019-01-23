@@ -18,9 +18,7 @@ class RecommendsViewController: BaseMainViewController {
     override init(navigationViewEffect effect: UIVisualEffect? = nil) {
         let flowLayout = UICollectionViewFlowLayout()
 //        flowLayout.scrollDirection = .horizontal
-        flowLayout.sectionInset = RecommendsCollectionViewCell.sectionInset
-        flowLayout.minimumInteritemSpacing = RecommendsCollectionViewCell.minimumInteritemSpacing
-        flowLayout.itemSize = RecommendsCollectionViewCell.itemSize
+        flowLayout.minimumLineSpacing = 0
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         
         super.init(navigationViewEffect: effect)
@@ -43,6 +41,7 @@ class RecommendsViewController: BaseMainViewController {
         collectionView.dataSource = self
         collectionView.register(RecommendCollectionHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "RecommendCollectionHeaderReusableView")
         collectionView.register(RecommendsCollectionViewCell.self, forCellWithReuseIdentifier: "RecommendsCollectionViewCell")
+        collectionView.register(RecommandNoDataCollectionViewCell.self, forCellWithReuseIdentifier: "RecommandNoDataCollectionViewCell")
         collectionView.register(RecommendCollectionFooterReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "RecommendCollectionFooterReusableView")
         self.view.addSubview(collectionView)
         
@@ -66,7 +65,7 @@ class RecommendsViewController: BaseMainViewController {
             guard let responseData = response as? [[String:Any]] else { return }
             
             self.collectionData.removeAll()
-            
+
             self.collectionData.append(contentsOf: responseData.map({ (item) -> RecommendData in
                 return RecommendData(with: item)
             }))
@@ -77,6 +76,8 @@ class RecommendsViewController: BaseMainViewController {
 
 extension RecommendsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard collectionData.count > 0 else { return }
+        
         let data = collectionData[indexPath.row]
         let mem_idx = data.mem_idx
         
@@ -96,10 +97,26 @@ extension RecommendsViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionData.count
+        return collectionData.count > 0 ? collectionData.count : 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return collectionData.count > 0 ? RecommendsCollectionViewCell.sectionInset : RecommandNoDataCollectionViewCell.sectionInset
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionData.count > 0 ? RecommendsCollectionViewCell.itemSize : RecommandNoDataCollectionViewCell.itemSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return collectionData.count > 0 ? RecommendsCollectionViewCell.minimumInteritemSpacing : RecommandNoDataCollectionViewCell.minimumInteritemSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard collectionData.count > 0 else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "RecommandNoDataCollectionViewCell", for: indexPath) as? RecommandNoDataCollectionViewCell ?? UICollectionViewCell()
+        }
+        
         return collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendsCollectionViewCell", for: indexPath) as? RecommendsCollectionViewCell ?? UICollectionViewCell()
     }
     
