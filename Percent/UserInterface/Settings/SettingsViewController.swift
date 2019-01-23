@@ -152,15 +152,17 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch sType {
         case SettingsType.ChangePassword:
+            let alertController = ChangePasswordPopupViewController()
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
+            self.addChild(alertController)
+            alertController.show()
             break
             
         case SettingsType.Destroy:
-            let alertController = UIAlertController(title: "설정", message: "정말 서비스 탈퇴를 하시겠습니까?", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
-            alertController.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { (action) -> Void in
-                
-            }))
-            self.present(alertController, animated: true, completion: nil)
+            let alertController = SignoutPopupViewController()
+            UIApplication.appDelegate().window?.addSubview(alertController.view)
+            self.addChild(alertController)
+            alertController.show()
             break
             
         default: break

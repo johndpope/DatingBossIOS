@@ -67,6 +67,8 @@
 		1C938D6321F0F227005D327C /* img_report@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C938D6221F0F226005D327C /* img_report@3x.png */; };
 		1C938D6521F0F4BD005D327C /* UserReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C938D6421F0F4BD005D327C /* UserReportViewController.swift */; };
 		1C938D6721F16664005D327C /* UserReportButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C938D6621F16664005D327C /* UserReportButton.swift */; };
+		1C94737A21F85DE5002158EA /* SignoutPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C94737921F85DE5002158EA /* SignoutPopupViewController.swift */; };
+		1C94737C21F8666C002158EA /* ChangePasswordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C94737B21F8666C002158EA /* ChangePasswordPopupViewController.swift */; };
 		1CA5876E21E5D8BD002B60F2 /* AlertPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */; };
 		1CA5877121E5DCF4002B60F2 /* SignupGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */; };
 		1CA5877321E5DE1A002B60F2 /* SignupGuideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */; };
@@ -297,6 +299,8 @@
 		1C938D6221F0F226005D327C /* img_report@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_report@3x.png"; sourceTree = "<group>"; };
 		1C938D6421F0F4BD005D327C /* UserReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReportViewController.swift; sourceTree = "<group>"; };
 		1C938D6621F16664005D327C /* UserReportButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReportButton.swift; sourceTree = "<group>"; };
+		1C94737921F85DE5002158EA /* SignoutPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutPopupViewController.swift; sourceTree = "<group>"; };
+		1C94737B21F8666C002158EA /* ChangePasswordPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPopupViewController.swift; sourceTree = "<group>"; };
 		1CA5876D21E5D8BD002B60F2 /* AlertPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopupViewController.swift; sourceTree = "<group>"; };
 		1CA5877021E5DCF4002B60F2 /* SignupGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGuideViewController.swift; sourceTree = "<group>"; };
 		1CA5877221E5DE1A002B60F2 /* SignupGuideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGuideTableViewCell.swift; sourceTree = "<group>"; };
@@ -968,6 +972,8 @@
 				1CC9B60121DC537F008C22B8 /* MyPageTableViewCell.swift */,
 				1C5AC80021E3568B0007827D /* SettingsViewController.swift */,
 				1C5AC81621E35D900007827D /* SettingsTableViewCell.swift */,
+				1C94737921F85DE5002158EA /* SignoutPopupViewController.swift */,
+				1C94737B21F8666C002158EA /* ChangePasswordPopupViewController.swift */,
 				1C5AC81B21E39C4B0007827D /* BoardViewController.swift */,
 				1C5AC81F21E3A3EB0007827D /* BoardTableViewCell.swift */,
 				1CCE2BDA21F39AD20057122D /* PreferLooksSettingViewController.swift */,
@@ -1260,6 +1266,7 @@
 				1CCE2C0B21F46CBC0057122D /* GatherData.swift in Sources */,
 				1CAC5A8B21E718C2002A0A4E /* SignupProfileSpecsViewController.swift in Sources */,
 				1C5AC81921E37B7D0007827D /* SettingsData.swift in Sources */,
+				1C94737C21F8666C002158EA /* ChangePasswordPopupViewController.swift in Sources */,
 				1CB5433921DF473B00B37EAE /* SBJsonStreamWriterState.m in Sources */,
 				1CCE2BDB21F39AD20057122D /* PreferLooksSettingViewController.swift in Sources */,
 				1CB5430121DF44E300B37EAE /* QUrlReachablility.swift in Sources */,
@@ -1313,6 +1320,7 @@
 				1CA5877121E5DCF4002B60F2 /* SignupGuideViewController.swift in Sources */,
 				1CCE2C2921F59D260057122D /* TermsDetailViewController.swift in Sources */,
 				1CAC5A8D21E71FC8002A0A4E /* SignupProfilePictureCollectionViewCell.swift in Sources */,
+				1C94737A21F85DE5002158EA /* SignoutPopupViewController.swift in Sources */,
 				1CB542FF21DF44E300B37EAE /* QImageMaker.swift in Sources */,
 				1CB5430F21DF473300B37EAE /* Date.swift in Sources */,
 				1C858E2C21C870F100900481 /* MainViewController.swift in Sources */,

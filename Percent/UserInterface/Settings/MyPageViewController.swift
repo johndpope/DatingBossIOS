@@ -8,6 +8,8 @@
 
 import UIKit
 
+import MessageUI
+
 enum MyPageType: String {
     case profile = "img_mypage_2"
     case settings = "img_mypage_3"
@@ -116,6 +118,32 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(viewController, animated: true)
             break
             
+        case .supports:
+            guard MFMailComposeViewController.canSendMail() else {
+                let alertController = AlertPopupViewController(withTitle: "고객센터", message: "기기에서 메일을 보낼 수 없습니다.\n기기에 메일 설정이 되어 있는지 확인해 주세요.")
+                alertController.titleColour = #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1)
+                alertController.messageColour = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+                alertController.addAction(action: AlertPopupAction(backgroundColour: #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1), title: "확인", colour: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), font: UIFont.systemFont(ofSize: 14 * QUtils.optimizeRatio(), weight: .bold), completion: nil))
+                self.view.addSubview(alertController.view)
+                self.addChild(alertController)
+                alertController.show()
+                return
+            }
+            
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = self
+            mailComposer.setSubject("고객센터 문의 (\(MyData.shared.nickname ?? "") 님")
+            mailComposer.setToRecipients([SUPPORT_EMAIL])
+            
+            var body = "\n\n\n*아래는 문제 해결을 위해 필요한 정보입니다. 지우지 말고 함께 보내주세요.\n\n"
+            body += "AppInfo: iOS / " + UIDevice.current.systemVersion
+            body += "Device Info: " + UIDevice.modelName
+            body += "Device Display: \(UIScreen.main.bounds.size.width)x\(UIScreen.main.bounds.size.height)"
+            
+            mailComposer.setMessageBody(body, isHTML: false)
+            self.present(mailComposer, animated: true, completion: nil)
+            break
+            
         case .logout:
             QDataManager.shared.password = nil
             QDataManager.shared.commit()
@@ -140,5 +168,17 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyPageTableViewCell") as? MyPageTableViewCell else { return UITableViewCell() }
         cell.data = tableData[indexPath.row]
         return cell
+    }
+}
+
+extension MyPageViewController: MFMessageComposeViewControllerDelegate {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension MyPageViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

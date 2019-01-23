@@ -45,3 +45,5 @@ public struct NotificationName {
         public static let Changed = NSNotification.Name(rawValue: "Cherry.Changed")
     }
 }
+
+public let SUPPORT_EMAIL = "help.percent@gmail.com"
