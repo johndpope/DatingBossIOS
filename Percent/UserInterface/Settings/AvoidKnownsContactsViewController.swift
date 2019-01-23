@@ -150,7 +150,7 @@ class AvoidKnownsContactsViewController: BaseViewController {
             do {
                 try contactStore.enumerateContacts(with: request) { contact, stop in
                     if let name = formatter.string(from: contact),
-                        let phone = contact.phoneNumbers.first?.value.stringValue,
+                        let phone = contact.phoneNumbers.first?.value.stringValue.replacingOccurrences(of: "-", with: ""),
                         phone.hasPrefix("01"),
                         phone.count == 11 {
                         let data = LocalContact(name: name, phone: phone)
