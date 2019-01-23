@@ -332,7 +332,7 @@ class LoginViewController: BaseViewController {
                 AppDataManager.shared.reloadData()
                 
                 QDataManager.shared.userId = self.textFieldEmail.text
-                QDataManager.shared.password = self.textFieldPassword.text
+                QDataManager.shared.password = self.textFieldPassword.text?.sha256()
                 QDataManager.shared.commit()
                 
                 if ApplicationOptions.Build.Level.rawValue < BuildLevel.CLIENT_TEST.rawValue {

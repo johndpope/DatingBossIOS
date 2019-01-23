@@ -304,7 +304,7 @@ class SignupProfileViewController: BaseSignupStepsViewController {
                     MyData.shared.setMyInfo(with: responseData)
 
                     QDataManager.shared.userId = UserPayload.shared.email
-                    QDataManager.shared.password = UserPayload.shared.password
+                    QDataManager.shared.password = UserPayload.shared.password?.sha256()
                     QDataManager.shared.commit()
 
                     var params = [String:Any]()

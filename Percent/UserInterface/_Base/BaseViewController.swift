@@ -144,7 +144,7 @@ class BaseViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = self.title
         titleLabel.textColor = navigationTintColor
-        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
         navigationView.contentView.addSubview(titleLabel)
         
         titleLabel.centerXAnchor.constraint(equalTo: navigationView.contentView.centerXAnchor).isActive = true

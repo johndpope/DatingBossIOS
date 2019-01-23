@@ -18,12 +18,12 @@ class CherryButton: UIButton {
     override init(frame: CGRect = CGRect.zero) {
         super.init(frame: frame)
         
-        let image = UIImage(named: MyData.shared.isPremium ? "img_cherry_premium" : "img_cherry")?.resize(maxWidth: 18)
+        let image = UIImage(named: MyData.shared.isPremium ? "img_cherry_premium" : "img_cherry")?.resize(maxWidth: 24)
         super.setImage(image, for: .normal)
         super.setImage(image, for: .highlighted)
         super.setTitleColor(MyData.shared.isPremium ? #colorLiteral(red: 0.9987900853, green: 0.7994759679, blue: 0.238984704, alpha: 1) : #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), for: .normal)
         super.setTitleColor(MyData.shared.isPremium ? #colorLiteral(red: 0.9987900853, green: 0.7994759679, blue: 0.238984704, alpha: 1) : #colorLiteral(red: 0.937254902, green: 0.2509803922, blue: 0.2941176471, alpha: 1), for: .highlighted)
-        titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         
         self.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         

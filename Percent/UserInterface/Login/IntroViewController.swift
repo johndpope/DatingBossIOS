@@ -116,7 +116,7 @@ class IntroViewController: BaseViewController {
                     
                     var params = [String:Any]()
                     params["id"] = userId
-                    params["pw"] = password.sha256()
+                    params["pw"] = password
                     params["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
                     params["os"] = "ios"
                     params["device_info"] = UIDevice.modelName
