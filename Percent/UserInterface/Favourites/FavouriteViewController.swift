@@ -46,6 +46,8 @@ class FavouriteViewController: BaseMainViewController {
         
         theCollectionView.translatesAutoresizingMaskIntoConstraints = false
         theCollectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        theCollectionView.allowsSelection = false
+        theCollectionView.allowsMultipleSelection = false
         theCollectionView.register(FavouriteCollectionViewCell.self, forCellWithReuseIdentifier: "FavouriteCollectionViewCell")
         theCollectionView.register(FavouriteHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FavouriteHeaderView")
         theCollectionView.register(FavouriteMoreView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "FavouriteMoreView")
@@ -131,7 +133,9 @@ class FavouriteViewController: BaseMainViewController {
             }
             self.theCollectionView.insertItems(at: indexPaths)
         }) { (complete) in
-            
+            for subcell in self.theCollectionView.visibleCells {
+                self.theCollectionView.bringSubviewToFront(subcell)
+            }
         }
     }
     
