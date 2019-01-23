@@ -397,7 +397,14 @@ class UserProfileViewController: BaseViewController {
         
         attributedString = NSMutableAttributedString()
         attributedString.append(NSAttributedString(string: "취미는 ", attributes: norAttr))
-        attributedString.append(NSAttributedString(string: data.hobby ?? "", attributes: searchParams?.hobby != nil ? highAttr : norAttr))
+        
+        let hobbyString = data.hobby ?? ""
+        let mutableString = NSMutableAttributedString(string: hobbyString, attributes: norAttr)
+        
+        if let searchHobby = searchParams?.hobby, let hobbyName = searchHobby.code_name, let range = hobbyString.nsRange(of: hobbyName) {
+            mutableString.addAttributes(highAttr, range: range)
+        }
+        attributedString.append(mutableString)
         attributedString.append(NSAttributedString(string: "입니다.", attributes: norAttr))
         tableData.append(UserProfileTableData(iconName: "img_profile_6", content: attributedString, isApproved: nil))
         
