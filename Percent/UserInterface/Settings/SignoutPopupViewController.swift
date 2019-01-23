@@ -33,7 +33,7 @@ class SignoutPopupViewController: BasePopupViewController {
         
         constraintWidth.constant = width
         constraintVertical.isActive = false
-        contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -280).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -280 - UIApplication.appDelegate().window!.safeAreaInsets.bottom).isActive = true
         
         entryViewPassword.translatesAutoresizingMaskIntoConstraints = false
         entryViewPassword.labelTitle.text = "비밀번호"
@@ -126,17 +126,17 @@ class SignoutPopupViewController: BasePopupViewController {
                 return
             }
             
+            guard password.sha256() == QDataManager.shared.password else {
+                InstanceMessageManager.shared.showMessage("비밀번호가 일치하지 않습니다.", margin: 260)
+                return
+            }
+            
             var params = [String:Any]()
-            params["pw"] = entryViewPassword.textfield.text
+            params["pw"] = password.sha256()
             
             let httpClient = QHttpClient()
             httpClient.request(to: RequestUrl.Account.Unregister + "\(MyData.shared.mem_idx)", method: .delete, headerValues: nil, params: params) { (isSucceed, errMessage, response) in
-                guard let status = (response as? [String:Any])?["Status"] as? String else { return }
-                
-                if status == "Failed" {
-                    InstanceMessageManager.shared.showMessage("비밀번호가 일치하지 않습니다.", margin: 260)
-                }
-                
+                guard let status = (response as? [String:Any])?["Status"] as? String, status != "Failed" else { return }
                 MyData.shared.clear()
                 QDataManager.shared.password = nil
                 QDataManager.shared.commit()

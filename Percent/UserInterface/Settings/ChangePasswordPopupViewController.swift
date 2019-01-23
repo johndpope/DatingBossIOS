@@ -40,7 +40,7 @@ class ChangePasswordPopupViewController: BasePopupViewController {
         
         constraintWidth.constant = width
         constraintVertical.isActive = false
-        contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -280).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -280 - UIApplication.appDelegate().window!.safeAreaInsets.bottom).isActive = true
         
         entryViewPassword.translatesAutoresizingMaskIntoConstraints = false
         entryViewPassword.labelTitle.text = "기존 비밀번호"

@@ -112,6 +112,8 @@ class SettingsViewController: BaseViewController {
             
             guard data.setup_code == "060", var dataArray = self.tableData[self.keys[0]] else { return }
             
+            MyData.shared.ghost_fl = value
+            
             for i in 0 ..< dataArray.count {
                 let data = dataArray[i]
                 data.value = !value

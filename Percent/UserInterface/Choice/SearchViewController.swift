@@ -383,7 +383,7 @@ class SearchViewController: BaseMainViewController {
         super.viewDidLayoutSubviews()
         
         var contentSize = theScrollView.contentSize
-        contentSize.height = entryViewRegion.superview!.frame.size.height + buttonSearch.frame.size.height + 8 * QUtils.optimizeRatio()
+        contentSize.height = (entryViewRegion.superview?.frame.size.height ?? 0) + buttonSearch.frame.size.height + 8 * QUtils.optimizeRatio()
         theScrollView.contentSize = contentSize
     }
     
@@ -489,6 +489,10 @@ class SearchViewController: BaseMainViewController {
         default:
             break
         }
+    }
+    
+    override func reloadData() {
+        super.reloadData()
     }
     
     @objc private func pressedEntryButton(_ sender: UIButton) {

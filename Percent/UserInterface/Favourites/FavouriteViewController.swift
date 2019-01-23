@@ -73,7 +73,9 @@ class FavouriteViewController: BaseMainViewController {
         reloadData()
     }
     
-    func reloadData() {
+    override func reloadData() {
+        super.reloadData()
+        
         guard needToReload else {
             self.theCollectionView.reloadData()
             return

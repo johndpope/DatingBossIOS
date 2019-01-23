@@ -47,7 +47,9 @@ class CategoryViewController: BaseMainViewController {
         reloadData()
     }
     
-    func reloadData() {
+    override func reloadData() {
+        super.reloadData()
+        
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Category.GetList + "\(MyData.shared.mem_idx)", method: .get, params: nil) { (isSucceed, errMessage, response) in
             self.tableData.removeAll()

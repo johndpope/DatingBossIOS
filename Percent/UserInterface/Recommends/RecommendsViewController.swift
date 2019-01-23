@@ -59,7 +59,9 @@ class RecommendsViewController: BaseMainViewController {
         reloadData()
     }
     
-    func reloadData() {
+    override func reloadData() {
+        super.reloadData()
+        
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Main.Recommends + "\(MyData.shared.mem_idx)", method: .get, params: nil) { (isSucceed, errMessage, response) in
             guard let responseData = response as? [[String:Any]] else { return }

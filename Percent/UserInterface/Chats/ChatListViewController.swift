@@ -54,7 +54,9 @@ class ChatListViewController: BaseMainViewController {
         reloadData()
     }
     
-    private func reloadData() {
+    override func reloadData() {
+        super.reloadData()
+        
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Chat + "\(MyData.shared.mem_idx)", method: .get, params: nil) { (isSucceed, errMessage, response) in
             self.tableData.removeAll()
