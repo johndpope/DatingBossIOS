@@ -30,8 +30,7 @@ class MyData: UserData {
         
         if auth_key != nil {
             QHttpClient.addCommonHeaderValue(self.auth_key!, for: "auth_key")
-            
-            UIApplication.appDelegate().updateFCMToken()
+//            UIApplication.appDelegate().updateFCMToken()
         } else {
             _ = QHttpClient.removeCommonHeaderValue(for: "auth_key")
         }
