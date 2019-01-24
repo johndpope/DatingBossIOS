@@ -390,7 +390,9 @@ extension FavouriteViewController: UICollectionViewDelegate, UICollectionViewDat
             
             reusableView.labelTitle.text = titleString
             
-            if indexPath.section == 0 {
+            if indexPath.section == 0 ||
+                ((collectionData[keys[0]] ?? []).count == 0 && indexPath.section == 1) ||
+                ((collectionData[keys[0]] ?? []).count == 0 && (collectionData[keys[1]] ?? []).count == 0 && indexPath.section == 2) {
                 reusableView.isEditMode = self.editMode
                 
                 reusableView.buttonConfirm.addTarget(self, action: #selector(self.requestDelete(_:)), for: .touchUpInside)
