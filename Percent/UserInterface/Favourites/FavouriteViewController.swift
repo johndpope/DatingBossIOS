@@ -108,6 +108,8 @@ class FavouriteViewController: BaseMainViewController {
     }
     
     @objc func loadMoreData(_ sender: UIButton) {
+        sender.superview?.backgroundColor = .blue
+        
         let section = sender.tag
         let key = keys[section]
         let paging = pagingData[section] + 1
@@ -139,8 +141,19 @@ class FavouriteViewController: BaseMainViewController {
             }
             self.theCollectionView.insertItems(at: indexPaths)
         }) { (complete) in
-            for subcell in self.theCollectionView.visibleCells {
-                self.theCollectionView.bringSubviewToFront(subcell)
+//            for subcell in self.theCollectionView.visibleCells {
+//                guard subcell as? FavouriteCollectionViewCell != nil else { continue }
+//                self.theCollectionView.bringSubviewToFront(subcell)
+//            }
+            
+            for subview in self.theCollectionView.subviews {
+                guard subview as? UICollectionViewCell != nil else {
+                    let reusableView = subview as? UICollectionReusableView
+                    guard reusableView?.reuseIdentifier == "UICollectionReusableView" else { continue }
+                    reusableView?.removeFromSuperview()
+                    continue
+                }
+                self.theCollectionView.bringSubviewToFront(subview)
             }
         }
     }
