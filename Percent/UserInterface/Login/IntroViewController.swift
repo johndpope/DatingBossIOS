@@ -20,6 +20,9 @@ class IntroViewController: BaseViewController {
     private let imageViewHeart = UIImageView()
     private let circleView = CircleIndicatorView(backgroundColour: .clear, indicatorColour: .white, lineWidth: 6)
     
+    private var nextStep: (() -> Void)?
+    private var isAnimatingDone = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,97 +107,102 @@ class IntroViewController: BaseViewController {
                 UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1.8, options: [], animations: {
                     self.imageViewHeart.transform = CGAffineTransform.identity
                 }, completion: { (complete) in
-                    let gotoLogin = {() -> Void in
-                        let viewController = LoginViewController()
-                        UIApplication.appDelegate().changeRootViewController(viewController)
-                    }
+                    self.isAnimatingDone = true
                     
-                    guard let userId = QDataManager.shared.userId, let password = QDataManager.shared.password else {
-                        gotoLogin()
-                        return
-                    }
-                    
-                    var params = [String:Any]()
-                    params["id"] = userId
-                    params["pw"] = password
-                    params["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
-                    params["os"] = "ios"
-                    params["device_info"] = UIDevice.modelName
-                    
-                    let httpClient = QHttpClient()
-                    httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
-                        LoadingIndicatorManager.shared.hideIndicatorView()
-                        guard isSucceed, let responseData = response as? [String:Any], responseData["mem_idx"] as? Int != nil else {
-                            QDataManager.shared.password = nil
-                            QDataManager.shared.commit()
-                            
-                            gotoLogin()
-                            return
-                        }
-                        
-                        MyData.shared.setMyInfo(with: responseData)
-
-                        AppDataManager.shared.reloadData()
-                        
-                        guard ApplicationOptions.Build.Level.rawValue > BuildLevel.DEVELOP.rawValue else {
-                            let viewController = SignupProfileViewController()
-                            let navController = SignupNavigationViewController(rootViewController: viewController)
-                            UIApplication.appDelegate().changeRootViewController(navController, animated: true)
-                            return
-                        }
-
-                        switch MyData.shared.signupStatus {
-                        case .complete:
-                            let viewController = MainViewController()
-                            viewController.recommendsViewController.reloadData({
-                                UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
-                            })
-                            break
-
-                        case .denied:
-                            gotoLogin()
-                            break
-
-                        case .profile:
-                            UserPayload.shared.loadFromDatabase()
-                        
-                            let viewController = SignupProfileSpecsViewController()
-                            viewController.showCurrentStep = true
-                            let navController = SignupNavigationViewController(rootViewController: viewController)
-                            UIApplication.appDelegate().changeRootViewController(navController, animated: true)
-                            break
-
-                        case .survey:
-                            UserPayload.shared.loadFromDatabase()
-
-                            let viewController = SignupSurveyViewController()
-                            viewController.showCurrentStep = true
-                            let navController = SignupNavigationViewController(rootViewController: viewController)
-                            UIApplication.appDelegate().changeRootViewController(navController, animated: true)
-                            break
-
-                        case .looks:
-                            UserPayload.shared.loadFromDatabase()
-
-                            let viewController = SignupSelectFavorLooksViewController()
-                            viewController.showCurrentStep = true
-                            let navController = SignupNavigationViewController(rootViewController: viewController)
-                            UIApplication.appDelegate().changeRootViewController(navController, animated: true)
-                            break
-
-                        case .pending:
-                            UserPayload.shared.loadFromDatabase()
-
-                            let viewController = SignupFinalizeViewController()
-                            UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
-                            break
-
-                        default: break
-                        }
+                    DispatchQueue.main.async {
+                        self.nextStep?()
                     }
                 })
             })
             
         })
+        
+        let gotoLogin = {() -> Void in
+            let viewController = LoginViewController()
+            UIApplication.appDelegate().changeRootViewController(viewController)
+        }
+        
+        guard let userId = QDataManager.shared.userId, let password = QDataManager.shared.password else {
+            gotoLogin()
+            return
+        }
+        
+        var params = [String:Any]()
+        params["id"] = userId
+        params["pw"] = password
+        params["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+        params["os"] = "ios"
+        params["device_info"] = UIDevice.modelName
+        
+        let httpClient = QHttpClient()
+        httpClient.request(to: RequestUrl.Account.Login, params: params) { (isSucceed, errMessage, response) in
+            LoadingIndicatorManager.shared.hideIndicatorView()
+            guard isSucceed, let responseData = response as? [String:Any], responseData["mem_idx"] as? Int != nil else {
+                QDataManager.shared.password = nil
+                QDataManager.shared.commit()
+                
+                gotoLogin()
+                return
+            }
+            
+            MyData.shared.setMyInfo(with: responseData)
+            UIApplication.appDelegate().updateFCMToken()
+            
+            AppDataManager.shared.reloadData()
+            
+            self.nextStep = {() -> Void in
+                switch MyData.shared.signupStatus {
+                case .complete:
+                    let viewController = MainViewController()
+                    viewController.recommendsViewController.reloadData({
+                        UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                    })
+                    break
+                    
+                case .denied:
+                    gotoLogin()
+                    break
+                    
+                case .profile:
+                    UserPayload.shared.loadFromDatabase()
+                    
+                    let viewController = SignupProfileSpecsViewController()
+                    viewController.showCurrentStep = true
+                    let navController = SignupNavigationViewController(rootViewController: viewController)
+                    UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                    break
+                    
+                case .survey:
+                    UserPayload.shared.loadFromDatabase()
+                    
+                    let viewController = SignupSurveyViewController()
+                    viewController.showCurrentStep = true
+                    let navController = SignupNavigationViewController(rootViewController: viewController)
+                    UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                    break
+                    
+                case .looks:
+                    UserPayload.shared.loadFromDatabase()
+                    
+                    let viewController = SignupSelectFavorLooksViewController()
+                    viewController.showCurrentStep = true
+                    let navController = SignupNavigationViewController(rootViewController: viewController)
+                    UIApplication.appDelegate().changeRootViewController(navController, animated: true)
+                    break
+                    
+                case .pending:
+                    UserPayload.shared.loadFromDatabase()
+                    
+                    let viewController = SignupFinalizeViewController()
+                    UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                    break
+                    
+                default: break
+                }
+            }
+            
+            guard self.isAnimatingDone else { return }
+            self.nextStep?()
+        }
     }
 }

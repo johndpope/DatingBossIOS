@@ -1158,6 +1158,8 @@ extension BaseEditProfileViewController: UICollectionViewDelegate, UICollectionV
         var data: UserPictureData?
         if indexPath.row > 0, indexPath.row < UserPayload.shared.pictures.count {
             data = UserPayload.shared.pictures[indexPath.row]
+            
+            guard data?.mod_fl != "n" else { return }
         }
         
         let accessableCamera = AVCaptureDevice.authorizationStatus(for: .video)
