@@ -84,6 +84,10 @@ class RecommendsViewController: BaseMainViewController {
             }))
             self.collectionView.reloadData()
             
+            if self.collectionData.count == 0 {
+                self.blockReloadOnAppear = false
+            }
+            
             completion?()
         }
     }

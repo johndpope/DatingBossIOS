@@ -108,8 +108,6 @@ class FavouriteViewController: BaseMainViewController {
     }
     
     @objc func loadMoreData(_ sender: UIButton) {
-        sender.superview?.backgroundColor = .blue
-        
         let section = sender.tag
         let key = keys[section]
         let paging = pagingData[section] + 1
@@ -183,9 +181,9 @@ class FavouriteViewController: BaseMainViewController {
                 if item.section == 0 {
                     read.append(item.row)
                 } else if item.section == 1 {
-                    request.append(item.row)
-                } else if item.section == 2 {
                     response.append(item.row)
+                } else if item.section == 2 {
+                    request.append(item.row)
                 }
             }
             

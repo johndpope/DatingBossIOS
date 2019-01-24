@@ -47,3 +47,5 @@ public struct NotificationName {
 }
 
 public let SUPPORT_EMAIL = "help.percent@gmail.com"
+
+//iloveubabo@gmail.com / love1234

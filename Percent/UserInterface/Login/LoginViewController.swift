@@ -341,7 +341,9 @@ class LoginViewController: BaseViewController {
                     UIApplication.appDelegate().changeRootViewController(navController, animated: true)
                 } else if MyData.shared.signupStatus == .complete {
                     let viewController = MainViewController()
-                    UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                    viewController.recommendsViewController.reloadData({
+                        UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                    })
                 } else if MyData.shared.signupStatus == .denied {
                     let viewController = LoginViewController()
                     UIApplication.appDelegate().changeRootViewController(viewController)
