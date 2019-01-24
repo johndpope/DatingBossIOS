@@ -19,6 +19,8 @@ class EditProfileViewController: BaseEditProfileViewController {
     }
     
     override func viewDidLoad() {
+        image_tmp_fl = "n"
+        
         super.viewDidLoad()
         
         self.navigationTintColor = #colorLiteral(red: 0.168627451, green: 0.168627451, blue: 0.168627451, alpha: 1)

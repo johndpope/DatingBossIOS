@@ -12,6 +12,7 @@ struct UserPictureData {
     let image: UIImage?
     let imageUrl: String?
     let picture_idx: String
+    let mod_fl: String
 }
 
 class UserPayload: NSObject {

@@ -331,11 +331,12 @@ class UserProfileViewController: BaseViewController {
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)", params: params) {[weak self] (isSucceed, message, response) in
             guard isSucceed, let responseData = response as? [[String:Any]] else { return }
-            self?.collectionData.append(contentsOf: responseData.map({ (item) -> PictureData in
-                let newData = PictureData(with: item)
-                newData.mem_idx = self?.data.mem_idx ?? -1
-                return newData
-            }))
+            for i in 0 ..< responseData.count {
+                let item = PictureData(with: responseData[i])
+                guard let mod_fl = item.mod_fl, mod_fl != "n" else { continue }
+                item.mem_idx = self?.data.mem_idx ?? -1
+                self?.collectionData.append(item)
+            }
             
             if let pData = self?.collectionData.first {
                 self?.headerView.imageView.pin_setImage(from: pData.imageUrl)

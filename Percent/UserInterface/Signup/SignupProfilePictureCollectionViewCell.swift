@@ -26,6 +26,7 @@ class SignupProfilePictureCollectionViewCell: UICollectionViewCell {
     }
     
     private let imageViewPicture = UIImageView()
+    private let pendingView = UILabel()
     
     var data: UserPictureData?
     
@@ -57,6 +58,22 @@ class SignupProfilePictureCollectionViewCell: UICollectionViewCell {
         imageViewPicture.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
         imageViewPicture.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
         imageViewPicture.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
+        
+        pendingView.translatesAutoresizingMaskIntoConstraints = false
+        pendingView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
+        pendingView.contentMode = .scaleAspectFill
+        pendingView.clipsToBounds = true
+        pendingView.layer.cornerRadius = imageView.layer.cornerRadius
+        pendingView.text = "심사 중"
+        pendingView.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        pendingView.textAlignment = .center
+        pendingView.font = UIFont.systemFont(ofSize: 21 * QUtils.optimizeRatio(), weight: .bold)
+        self.contentView.addSubview(pendingView)
+        
+        pendingView.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
+        pendingView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+        pendingView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
+        pendingView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,18 +84,22 @@ class SignupProfilePictureCollectionViewCell: UICollectionViewCell {
         guard data != nil else {
             imageViewPicture.backgroundColor = .clear
             imageViewPicture.image = nil
+            pendingView.isHidden = true
             return
         }
         
         if let image = data?.image {
             imageViewPicture.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
             imageViewPicture.image = image
+            pendingView.isHidden = data?.mod_fl != "n"
         } else if let imageUrl = data?.imageUrl {
             imageViewPicture.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
             imageViewPicture.pin_setImage(from: URL(string: RequestUrl.Image.File + "\(MyData.shared.mem_idx)/" + imageUrl))
+            pendingView.isHidden = data?.mod_fl != "n"
         } else {
             imageViewPicture.backgroundColor = .clear
             imageViewPicture.image = nil
+            pendingView.isHidden = true
         }
     }
 }

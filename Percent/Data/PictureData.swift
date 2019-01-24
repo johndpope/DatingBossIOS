@@ -13,8 +13,8 @@ class PictureData: BaseData {
         return rawData["picture_idx"] as? Int
     }
     
-    var mod_fl: Bool {
-        return (rawData["mod_fl"] as? String ?? "n") == "y"
+    var mod_fl: String? {
+        return rawData["mod_fl"] as? String
     }
     
     var picture_name: String? {

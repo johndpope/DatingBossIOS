@@ -61,6 +61,8 @@ class BaseEditProfileViewController: BaseSignupStepsViewController {
     
     internal var blockScrolling = false
     
+    internal var image_tmp_fl = "y"
+    
     override init(navigationViewEffect effect: UIVisualEffect? = nil) {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = SignupProfilePictureCollectionViewCell.sectionInset
@@ -605,7 +607,7 @@ class BaseEditProfileViewController: BaseSignupStepsViewController {
         
         var params = [String:Any]()
         params["opposite_mem_idx"] = MyData.shared.mem_idx
-        params["tmp_fl"] = "y"
+        params["tmp_fl"] = image_tmp_fl
         
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)", params: params) { (isSucceed, errMessage, response) in
@@ -614,9 +616,11 @@ class BaseEditProfileViewController: BaseSignupStepsViewController {
             for i in 0 ..< responseData.count {
                 let item = responseData[i]
                 guard let picture_idx = item["picture_idx"] as? Int,
-                    let urlString = item["picture_name"] as? String else { continue }
+                    let urlString = item["picture_name"] as? String,
+                    let mod_fl = item["mod_fl"] as? String,
+                    mod_fl != "o" else { continue }
                 
-                let newData = UserPictureData(image: nil, imageUrl: urlString, picture_idx: "\(picture_idx)")
+                let newData = UserPictureData(image: nil, imageUrl: urlString, picture_idx: "\(picture_idx)", mod_fl: mod_fl)
                 UserPayload.shared.pictures.append(newData)
             }
             
@@ -1151,6 +1155,11 @@ extension BaseEditProfileViewController: UICollectionViewDelegate, UICollectionV
             replaceIndex = indexPath.row
         }
         
+        var data: UserPictureData?
+        if indexPath.row > 0, indexPath.row < UserPayload.shared.pictures.count {
+            data = UserPayload.shared.pictures[indexPath.row]
+        }
+        
         let accessableCamera = AVCaptureDevice.authorizationStatus(for: .video)
         let accessablePhoto = PHPhotoLibrary.authorizationStatus()
         
@@ -1207,7 +1216,7 @@ extension BaseEditProfileViewController: UICollectionViewDelegate, UICollectionV
             pickerController.popoverPresentationController?.sourceView = self.view
             self.present(pickerController, animated: true, completion: nil)
         }))
-        if indexPath.row > 0, indexPath.row < UserPayload.shared.pictures.count {
+        if data != nil, data!.mod_fl == "y" {
             alertController.addAction(UIAlertAction(title: "대표사진 등록", style: .default, handler: { (action) in
                 LoadingIndicatorManager.shared.showIndicatorView()
                 
@@ -1237,6 +1246,43 @@ extension BaseEditProfileViewController: UICollectionViewDelegate, UICollectionV
                     self.collectionViewPictures.reloadData()
                 })
             }))
+            
+            var count = 0
+            for subdata in UserPayload.shared.pictures {
+                guard subdata.mod_fl == "y" else { continue }
+                count += 1
+            }
+            
+            if count > 3, indexPath.row > 0 {
+                alertController.addAction(UIAlertAction(title: "삭제하기", style: .default, handler: { (action) in
+                    LoadingIndicatorManager.shared.showIndicatorView()
+                    
+                    var pictureArray = UserPayload.shared.pictures
+                    _ = pictureArray.remove(at: indexPath.row)
+                    
+                    var pictureList = [[String:Any]]()
+                    for i in 0 ..< pictureArray.count {
+                        let item = pictureArray[i]
+                        
+                        var newData = [String:Any]()
+                        newData["picture_idx"] = item.picture_idx
+                        newData["picture_seq"] = i + 1
+                        pictureList.append(newData)
+                    }
+                    
+                    var params = [String:Any]()
+                    params["pictureList"] = pictureList
+                    
+                    let httpClient = QHttpClient()
+                    httpClient.request(to: RequestUrl.Image.Info + "\(MyData.shared.mem_idx)/\(data!.picture_idx)", method: .delete, headerValues: nil, params: params, completion: { (isSucceed, errMessgae, response) in
+                        LoadingIndicatorManager.shared.hideIndicatorView()
+                        
+                        UserPayload.shared.pictures = pictureArray
+                        
+                        self.collectionViewPictures.reloadData()
+                    })
+                }))
+            }
         }
         alertController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
@@ -1293,10 +1339,10 @@ extension BaseEditProfileViewController: UINavigationControllerDelegate, UIImage
         
         var params = [String:Any]()
         params["picture"] = image.jpegData(compressionQuality: 0.8)
-        params["tmp_fl"] = "y"
+        params["tmp_fl"] = image_tmp_fl
         
         let httpClient = QHttpClient()
-        httpClient.request(to: requestUrl + "\(index + 1)/y", params: params) { (isSucceed, errMessage, response) in
+        httpClient.request(to: requestUrl + "\(index + 1)/\(image_tmp_fl)", params: params) { (isSucceed, errMessage, response) in
             LoadingIndicatorManager.shared.hideIndicatorView()
             
             guard let responseData = response as? [String:Any], let picture_idx = responseData["picture_idx"] as? String else {
@@ -1306,7 +1352,7 @@ extension BaseEditProfileViewController: UINavigationControllerDelegate, UIImage
                 return
             }
             
-            let newData = UserPictureData(image: image, imageUrl: nil, picture_idx: picture_idx)
+            let newData = UserPictureData(image: image, imageUrl: nil, picture_idx: picture_idx, mod_fl: self.image_tmp_fl)
             
             if self.replaceIndex != nil, self.replaceIndex! < UserPayload.shared.pictures.count {
                 UserPayload.shared.pictures[self.replaceIndex!] = newData
