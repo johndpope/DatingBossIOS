@@ -30,6 +30,14 @@ class RecommandNoDataCollectionViewCell: UICollectionViewCell {
     
     private var timerBump: Timer!
     
+    var showSubViews: Bool = true {
+        didSet {
+            for subView in self.subviews {
+                subView.isHidden = !showSubViews
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

@@ -15,6 +15,8 @@ class RecommendsViewController: BaseMainViewController {
     
     private let loadingQueue = DispatchQueue(label: "RecommendsViewController.loading", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
     
+    private var isDataLoaded = false
+    
     override init(navigationViewEffect effect: UIVisualEffect? = nil) {
         let flowLayout = UICollectionViewFlowLayout()
 //        flowLayout.scrollDirection = .horizontal
@@ -66,6 +68,8 @@ class RecommendsViewController: BaseMainViewController {
         httpClient.request(to: RequestUrl.Main.Recommends + "\(MyData.shared.mem_idx)", method: .get, params: nil) { (isSucceed, errMessage, response) in
             guard let responseData = response as? [[String:Any]] else { return }
             
+            self.isDataLoaded = true
+            
             self.collectionData.removeAll()
 
             self.collectionData.append(contentsOf: responseData.map({ (item) -> RecommendData in
@@ -114,7 +118,10 @@ extension RecommendsViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard collectionData.count > 0 else {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "RecommandNoDataCollectionViewCell", for: indexPath) as? RecommandNoDataCollectionViewCell ?? UICollectionViewCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommandNoDataCollectionViewCell", for: indexPath) as? RecommandNoDataCollectionViewCell else { return UICollectionViewCell() }
+            
+            cell.showSubViews = isDataLoaded
+            return cell
         }
         
         return collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendsCollectionViewCell", for: indexPath) as? RecommendsCollectionViewCell ?? UICollectionViewCell()
