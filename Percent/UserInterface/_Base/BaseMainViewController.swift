@@ -130,7 +130,7 @@ class BaseMainViewController: BaseViewController {
         buttonProfile.heightAnchor.constraint(equalToConstant: kHeightNavigationView).isActive = true
     }
     
-    func reloadData() {
+    func reloadData(_ completion: (() -> Void)? = nil) {
         
     }
     

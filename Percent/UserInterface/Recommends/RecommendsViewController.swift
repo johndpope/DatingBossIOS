@@ -17,6 +17,8 @@ class RecommendsViewController: BaseMainViewController {
     
     private var isDataLoaded = false
     
+    var blockReloadOnAppear = true
+    
     override init(navigationViewEffect effect: UIVisualEffect? = nil) {
         let flowLayout = UICollectionViewFlowLayout()
 //        flowLayout.scrollDirection = .horizontal
@@ -58,10 +60,15 @@ class RecommendsViewController: BaseMainViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadData()
+        if blockReloadOnAppear == false {
+            blockReloadOnAppear = true
+            reloadData()
+        } else {
+            collectionView.reloadData()
+        }
     }
     
-    override func reloadData() {
+    override func reloadData(_ completion: (() -> Void)? = nil) {
         super.reloadData()
         
         let httpClient = QHttpClient()
@@ -76,6 +83,8 @@ class RecommendsViewController: BaseMainViewController {
                 return RecommendData(with: item)
             }))
             self.collectionView.reloadData()
+            
+            completion?()
         }
     }
 }

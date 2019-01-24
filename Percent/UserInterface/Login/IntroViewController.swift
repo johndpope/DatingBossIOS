@@ -146,7 +146,9 @@ class IntroViewController: BaseViewController {
                         switch MyData.shared.signupStatus {
                         case .complete:
                             let viewController = MainViewController()
-                            UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                            viewController.recommendsViewController.reloadData({
+                                UIApplication.appDelegate().changeRootViewController(viewController, animated: true)
+                            })
                             break
 
                         case .denied:

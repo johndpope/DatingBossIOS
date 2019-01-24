@@ -491,8 +491,8 @@ class SearchViewController: BaseMainViewController {
         }
     }
     
-    override func reloadData() {
-        super.reloadData()
+    override func reloadData(_ completion: (() -> Void)? = nil) {
+        super.reloadData(completion)
     }
     
     @objc private func pressedEntryButton(_ sender: UIButton) {

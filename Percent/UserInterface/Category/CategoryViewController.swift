@@ -47,8 +47,8 @@ class CategoryViewController: BaseMainViewController {
         reloadData()
     }
     
-    override func reloadData() {
-        super.reloadData()
+    override func reloadData(_ completion: (() -> Void)? = nil) {
+        super.reloadData(completion)
         
         let httpClient = QHttpClient()
         httpClient.request(to: RequestUrl.Category.GetList + "\(MyData.shared.mem_idx)", method: .get, params: nil) { (isSucceed, errMessage, response) in
